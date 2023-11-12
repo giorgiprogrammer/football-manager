@@ -1,0 +1,26 @@
+.symbol{
+    opacity: 0;
+    color: white;
+    transition: 1s;
+    scale: 0;
+    transform: rotate(0);
+    text-transform: capitalize;
+
+    animation-name: showAnimation;
+    animation-fill-mode: forwards;
+}
+
+@keyframes showAnimation {
+   from{
+    opacity: 0;
+    scale: 0;
+    transform: rotate(0);
+   }
+   to{
+     opacity: 1;
+     scale: 1;
+     transform: rotate(360deg);
+    }
+}
+
+
