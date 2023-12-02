@@ -1,31 +1,55 @@
 import style from "./style.module.css";
 
-import ball from "@/app/assets/images/ball.png";
+import messiImage from "../../../../../assets/images/messi.jpg";
+import versusImage from "../../../../../assets/images/versus.jpg";
+import simulatorImage from "../../../../../assets/images/simulator.jpg";
 
-export default function Card() {
+import Image from "next/image";
+import Link from "next/link";
+
+const cardOptions = {
+  masterLeague: {
+    backgroundImage: messiImage,
+    title: "Master League",
+  },
+  versus: {
+    backgroundImage: versusImage,
+    title: "Versus",
+  },
+  simulator: {
+    backgroundImage: simulatorImage,
+    title: "Simulator",
+  },
+};
+
+export default function Card({
+  mode,
+  animationDelay,
+  onClick,
+}: {
+  animationDelay?: number;
+  mode: "masterLeague" | "versus" | "simulator";
+  onClick: () => void;
+}) {
   return (
-    <div>
-      <a
-        href="https://www.theguardian.com/football/blog/2023/aug/17/time-wasting-in-football-is-ugly-maddening-and-absolutely-vital"
-        target="_blank"
+    <div onClick={onClick} className=" cursor-pointer">
+      <div
+        style={{ animationDelay: `${animationDelay}s` }}
+        className={style.card}
       >
-        <div className={style.card}>
-          <div className={style.wrapper}>
-            <img
-              src="https://pbs.twimg.com/media/DonL130W0AA_iA_.jpg:large"
-              className={style.coverImage}
-            />
-          </div>
-          {/* <img
-            src="https://support-leagueoflegends.riotgames.com/hc/article_attachments/4415908615571"
-            className={style.title}
-          /> */}
-          <img
-            src="https://support-leagueoflegends.riotgames.com/hc/article_attachments/4415908615571"
-            className={style.character}
-          />
-        </div>
-      </a>
+        <Image
+          className={style.wrapper}
+          alt=""
+          src={cardOptions[mode].backgroundImage}
+          width={0}
+          height={0}
+        />
+        <img
+          src="https://support-leagueoflegends.riotgames.com/hc/article_attachments/4415908615571"
+          className={style.character}
+        />
+        <h2 className={style.title}> {cardOptions[mode].title}</h2>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,81 @@
+.tatuka-background {
+  position: relative;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: black;
+
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+
+  margin-left: -0px;
+  margin-top: -0px;
+
+  border-radius: 100%;
+  box-shadow: 0 0px 3px 1px white;
+  opacity: 0;
+}
+
+.chaos {
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-name: chaosAnimation;
+
+  transition: all 0.3s ease-out;
+}
+
+.rain {
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-name: rainAnimation;
+
+  transition: all 0.3s ease-out;
+  opacity: 9;
+}
+
+@keyframes rainAnimation {
+  0% {
+    margin-left: 0px;
+    margin-top: -200px;
+  }
+  50% {
+    margin-left: 400px;
+    margin-top: 500px;
+  }
+  100% {
+    margin-left: 0px;
+    margin-top: -200px;
+  }
+}
+
+@keyframes chaosAnimation {
+  0% {
+    opacity: 0;
+    margin-left: -200px;
+    margin-top: -200px;
+  }
+  25% {
+    opacity: 0.2;
+    margin-left: 200px;
+    margin-top: -200px;
+  }
+  50% {
+    opacity: 0;
+    margin-left: 200px;
+    margin-top: 200px;
+  }
+  75% {
+    opacity: 0.2;
+    margin-left: -200px;
+    margin-top: 200px;
+  }
+  100% {
+    opacity: 0;
+    margin-left: -200px;
+    margin-top: -200px;
+  }
+}

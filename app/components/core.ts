@@ -22,7 +22,11 @@ export default class TextAnimationCore {
 
   getAnimationDelay(animationDelayIndex: number) {
     let animationDelay = 0;
-    if (this.options.style === "domino") {
+    if (
+      this.options.style === "domino" ||
+      this.options.style === "dance" ||
+      this.options.style === "loading"
+    ) {
       animationDelay = this.animationDelayTimes[animationDelayIndex];
     }
     if (this.options.style === "random") {

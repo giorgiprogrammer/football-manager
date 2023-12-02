@@ -6,10 +6,11 @@ import {
   TextAnimationProps,
   textAnimationDefaultProps,
 } from "../types/component-types";
-import { calculatePercentage, getRandomNumber } from "../utils/math";
 import Symbol from "./components/Symbol";
 import React from "react";
 import TextAnimationCore from "./core";
+import "./style.css";
+import clsx from "clsx";
 
 function TextAnimation({
   text,
@@ -25,6 +26,13 @@ function TextAnimation({
     ...customOptions,
   };
 
+  const animationNames = {
+    domino: "circle",
+    dance: "dance",
+    random: "circle",
+    loading: "loading",
+  };
+
   //check pharametres validation
   if (options.speed > 100 || options.speed < 0) {
     throw new Error(
@@ -38,7 +46,10 @@ function TextAnimation({
     let animationDelayIndex = 0;
 
     return text.split(" ").map((word, index) => (
-      <ul key={index} className="symbols-list flex">
+      <ul
+        key={index}
+        className={clsx("text-animation ", options.mirror && "mirror")}
+      >
         {word.split("").map((character) => {
           if (typeof window === "undefined") {
             return null;
@@ -53,10 +64,10 @@ function TextAnimation({
             <Symbol
               onAnimationEnd={(anim) => {
                 if (
-                  anim.currentTarget.style.animationDelay ===
-                  `${String(
-                    Math.max(...textAnimationCore.animationDelayTimes)
-                  )}s`
+                  Number(
+                    anim.currentTarget.style.animationDelay.replace("s", "")
+                  ).toFixed(2) ===
+                  Math.max(...textAnimationCore.animationDelayTimes).toFixed(2)
                 ) {
                   if (typeof onAnimationEnd === "function") {
                     onAnimationEnd();
@@ -67,6 +78,9 @@ function TextAnimation({
               key={`${index}_symbol_${animationDelay}_${String(Math.random())}`}
               fontSize={options.fontSize}
               symbol={character}
+              animationName={
+                animationNames[options.style as keyof typeof animationNames]
+              }
               animationDelay={animationDelay}
               animationDuration={options.symbolAnimationTime}
             />
