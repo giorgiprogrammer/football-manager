@@ -1,12 +1,19 @@
 import TextAnimation from "@/app/components/TextAnimation";
 import Card from "../card/Card";
 import useApp from "@/app/hooks/useApp";
+import TatukaButton from "@/app/components/button/TatukaButton";
+import UserInterface from "./components/userInterface/UserInterface";
 
 export default function HomeMenu() {
   const { appContext } = useApp();
 
   return (
     <>
+      {appContext.isLogin && (
+        <>
+          <UserInterface />
+        </>
+      )}
       <div className="w-screen absolute mt-8 flex justify-center opacity-80">
         <TextAnimation
           customOptions={{

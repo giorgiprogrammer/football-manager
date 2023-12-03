@@ -2,14 +2,11 @@
 
 import clsx from "clsx";
 import { useMemo, useState } from "react";
-import Card from "./components/card/Card";
 import { TextAnimationCustomProps } from "@/app/types/component-types";
 import TextAnimation from "@/app/components/TextAnimation";
 import useApp from "@/app/hooks/useApp";
 import HomeMenu from "./components/homeMenu/HomeMenu";
 import MasterLeague from "../masterLeague/MasterLeague";
-import Overlay from "@/app/components/overlay/Overlay";
-import Authentication from "@/app/components/authentication/Authentication";
 
 const textAnimationProps: TextAnimationCustomProps = {
   speed: 80,
@@ -23,7 +20,6 @@ const textAnimationProps: TextAnimationCustomProps = {
 
 export default function Intro() {
   const { appContext } = useApp();
-
   const [completeTitleAnimation, setCompleteTitleAnimation] = useState(false);
 
   const titleClass = clsx(

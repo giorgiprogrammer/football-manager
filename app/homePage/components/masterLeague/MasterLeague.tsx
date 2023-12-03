@@ -10,8 +10,13 @@ export default function MasterLeague() {
 
   return (
     <div className={style.masterLeague}>
-      {appContext.isLogin === false && <Overlay />}
-      <Authentication />
+      {appContext.isLogin === false && (
+        <>
+          <Overlay />
+          <Authentication />
+        </>
+      )}
+
       <div className="absolute left-6 top-6 z-50">
         <TatukaButton onclick={() => appContext.setGameMode("")} text="back" />
       </div>

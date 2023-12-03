@@ -6,6 +6,7 @@ export default function TatukaButton({
   paddingY,
   width,
   height,
+  textColor,
   fontSize,
   backgroundColor,
   onclick,
@@ -16,6 +17,7 @@ export default function TatukaButton({
   paddingY?: number;
   width?: number;
   height?: number;
+  textColor?: string;
   backgroundColor?: string;
   onclick: () => void;
 }) {
@@ -26,6 +28,7 @@ export default function TatukaButton({
         width: `${width && width}px`,
         height: `${height && height}px`,
         fontSize: `${fontSize && fontSize}px`,
+        color: `${textColor && textColor}`,
       }}
       className="tatuka-button"
       onClick={onclick}
