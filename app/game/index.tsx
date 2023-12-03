@@ -1,9 +1,10 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import "phaser";
+import style from "./style.module.css";
 
-import { Preload } from "./scenes/preload";
+import { useEffect, useState } from "react";
+import Spinner from "../components/spinner/Spinner";
 
 const IonPhaser = dynamic(
   () => import("@ion-phaser/react").then((mod) => mod.IonPhaser),
@@ -13,24 +14,44 @@ const IonPhaser = dynamic(
 );
 
 const Game = () => {
-  const state = {
-    initialize: true,
-    game: {
-      width: 1000,
-      height: 1000,
+  const [isRendered, setIsRendered] = useState(false);
+  const [state, setState] = useState<any>();
 
-      backgroundColor: "#4eb3e7",
-      type: Phaser.AUTO,
-      scene: [Preload],
-    },
-  };
+  useEffect(() => {
+    import("phaser").then(async (mod) => {
+      const Preload = await import("./scenes/preload").then((preload) => {
+        return preload.default;
+      });
+
+      const state = {
+        initialize: true,
+        game: {
+          width: window.innerWidth,
+          height: window.innerHeight,
+
+          backgroundColor: "rgb(238, 255, 236)",
+          type: mod.AUTO,
+          scene: [Preload],
+        },
+      };
+
+      setState(state);
+      setIsRendered(true);
+    });
+  }, []);
 
   return (
-    <IonPhaser
-      className=" w-screen h-screen"
-      game={state.game}
-      initialize={state.initialize}
-    />
+    <div className="">
+      <div className=" opacity-20"> {<Spinner />}</div>
+
+      {isRendered && (
+        <IonPhaser
+          className={style.canvasContainer}
+          game={state.game}
+          initialize={state.initialize}
+        />
+      )}
+    </div>
   );
 };
 
