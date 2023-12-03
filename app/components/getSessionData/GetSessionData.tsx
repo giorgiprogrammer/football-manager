@@ -14,9 +14,10 @@ export default function GetSessionData() {
       } else {
         getUserData(res.data.session.user.email!).then(
           (res: any) => {
-            console.log(res.data);
-            appContext.setIsLogin(true);
-            appContext.setUserData(res.data[0]);
+            if (res.status !== 401) {
+              appContext.setIsLogin(true);
+              appContext.setUserData(res.data[0]);
+            }
           },
           (err) => console.log(err)
         );

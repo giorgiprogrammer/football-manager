@@ -2,12 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import style from "./style.module.css";
-import {
-  getSession,
-  getUserData,
-  login,
-  registration,
-} from "@/app/services/supabase/user";
+import { login, registration } from "@/app/services/supabase/user";
 import Spinner from "../spinner/Spinner";
 import useApp from "@/app/hooks/useApp";
 

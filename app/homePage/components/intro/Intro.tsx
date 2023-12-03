@@ -7,6 +7,7 @@ import TextAnimation from "@/app/components/TextAnimation";
 import useApp from "@/app/hooks/useApp";
 import HomeMenu from "./components/homeMenu/HomeMenu";
 import MasterLeague from "../masterLeague/MasterLeague";
+import Simulator from "../simulator/Simulator";
 
 const textAnimationProps: TextAnimationCustomProps = {
   speed: 80,
@@ -47,6 +48,7 @@ export default function Intro() {
       <div className={titleClass}>{TextAnimationMemo}</div>
       {completeTitleAnimation && appContext.gameMode === "" && <HomeMenu />}
       {appContext.gameMode === "masterLeague" && <MasterLeague />}
+      {appContext.gameMode === "simulator" && <Simulator />}
     </div>
   );
 }

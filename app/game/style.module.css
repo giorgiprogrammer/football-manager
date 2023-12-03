@@ -1,0 +1,58 @@
+.canvasContainer {
+  overflow: hidden;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgb(19, 9, 21);
+
+  opacity: 0;
+  animation-name: canvasContainerAnim;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-delay: 2s;
+}
+
+@keyframes canvasContainerAnim {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.orientationWarning {
+  z-index: 1000 !important;
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgb(21, 21, 21);
+  text-align: center;
+}
+
+.orientationWarning h1 {
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgb(21, 21, 21);
+
+  position: absolute;
+  margin-top: auto;
+  margin-bottom: auto;
+  top: 0;
+  bottom: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+
+  font-size: 20px;
+
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
