@@ -13,17 +13,16 @@ export async function registration(username: string, password: string) {
     return error;
   }
 
+  const databaseResponse = await initUserNametoDatabase(username);
+
   return login(username, password);
 }
 
 export async function login(username: string, password: string) {
-  const authResponse = await supabase.auth.signInWithPassword({
+  return await supabase.auth.signInWithPassword({
     email: generateCorrectFormatOfUsername(username),
     password: password,
   });
-
-  const databaseResponse = await instertUserNametoDatabase(username);
-  return { authResponse, databaseResponse };
 }
 
 export async function logout() {
@@ -34,7 +33,7 @@ export async function getSession() {
   return await supabase.auth.getSession();
 }
 
-export async function instertUserNametoDatabase(username: string) {
+export async function initUserNametoDatabase(username: string) {
   return await supabase
     .from("UsersData")
     .insert({

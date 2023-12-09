@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import style from "./style.module.css";
-import { login, registration } from "@/app/services/supabase/user";
+import { getUserData, login, registration } from "@/app/services/supabase/user";
 import Spinner from "../spinner/Spinner";
 import useApp from "@/app/hooks/useApp";
 
@@ -65,14 +65,19 @@ const Authentication = () => {
 
     login(formData.current.userName, formData.current.password).then(
       (res: any) => {
-        if (res.authResponse.error?.status === 400) {
+        if (res.error?.status === 400) {
           setWarningMessage("Wrong username or password");
           setDisabled(false);
           return;
         }
-        if (res.authResponse.error === null) {
-          appContext.setIsLogin(true);
-          appContext.setUserData(res.databaseResponse.data[0]);
+
+        if (res.error === null) {
+          getUserData(res.data.session.user.email).then((res: any) => {
+            if (res.status !== 401) {
+              appContext.setIsLogin(true);
+              appContext.setUserData(res.data[0]);
+            }
+          });
         }
 
         setDisabled(false);
