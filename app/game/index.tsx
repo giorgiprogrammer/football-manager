@@ -43,7 +43,6 @@ const Game = () => {
   return (
     <div className="">
       <div className=" opacity-20"> {<Spinner />}</div>
-
       {isRendered && (
         <IonPhaser
           className={style.canvasContainer}
