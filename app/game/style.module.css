@@ -6,11 +6,11 @@
 
   background-color: rgb(238, 255, 236);
 
-  opacity: 0;
-  animation-name: canvasContainerAnim;
+  opacity: 1;
+  /* animation-name: canvasContainerAnim;
   animation-duration: 2s;
   animation-fill-mode: forwards;
-  animation-delay: 2s;
+  animation-delay: 2s; */
 
   z-index: 100;
 }

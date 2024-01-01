@@ -45,10 +45,12 @@ export default function Intro() {
 
   return (
     <div className={introClass}>
-      <div className={titleClass}>{TextAnimationMemo}</div>
-      {completeTitleAnimation && appContext.gameMode === "" && <HomeMenu />}
+      {/* <div className={titleClass}>{TextAnimationMemo}</div> */}
+      {/* {completeTitleAnimation && appContext.gameMode === "" && <HomeMenu />}
       {appContext.gameMode === "masterLeague" && <MasterLeague />}
-      {appContext.gameMode === "simulator" && <Simulator />}
+      {appContext.gameMode === "simulator" && <Simulator />} */}
+
+      <Simulator />
     </div>
   );
 }

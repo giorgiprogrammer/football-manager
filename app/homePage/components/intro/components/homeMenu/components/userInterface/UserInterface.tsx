@@ -7,7 +7,7 @@ export default function UserInterface() {
 
   return (
     <>
-      <div className=" absolute z-30 right-6 bottom-6">
+      <div className="absolute z-30 right-6 bottom-6">
         <TatukaButton
           onclick={() => {
             logout().then((res) => {

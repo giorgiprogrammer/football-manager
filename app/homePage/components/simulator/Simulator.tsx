@@ -18,22 +18,23 @@ export default function Simulator() {
 
   return (
     <>
-      {showCanvas && <Game />}
+      <Game />
+      {/* {showCanvas && <Game />} */}
       <div
-        className={clsx(
-          style["simulator"],
-          showCanvas && style["simulutorHidden"]
-        )}
+      // className={clsx(
+      //   style["simulator"],
+      //   showCanvas && style["simulutorHidden"]
+      // )}
       >
-        {appContext.isLogin === false && (
+        {/* {appContext.isLogin === false && (
           <>
             <Overlay />
             <Authentication />
           </>
-        )}
+        )} */}
 
         {/* Video */}
-        <ReactPlayer
+        {/* <ReactPlayer
           playing={true}
           width={"198px"}
           height={"110px"}
@@ -49,17 +50,17 @@ export default function Simulator() {
           }}
           muted={true}
           url="https://www.youtube.com/watch?v=UMg70kgxhCA"
-        />
+        /> */}
 
         {/* Back Button */}
-        <div className="absolute left-6 top-6 z-50">
+        {/* <div className="absolute left-6 top-6 z-50">
           <TatukaButton
             onclick={() => appContext.setGameMode("")}
             text="back"
           />
-        </div>
+        </div> */}
 
-        <div className="absolute left-6 top-20">
+        {/* <div className="absolute left-6 top-20">
           <TextAnimation
             customOptions={{
               colors: ["#2D2E2B", "#08081C", "#081B1C"],
@@ -68,10 +69,10 @@ export default function Simulator() {
             }}
             text="Simulator"
           />
-        </div>
+        </div> */}
 
         {/* Content */}
-        <div className="absolute w-screen h-full flex justify-center items-center">
+        {/* <div className="absolute w-screen h-full flex justify-center items-center">
           <p className="max-w-[50%]">
             in this game mode, you have the freedom to choose any team, set data
             as you please, and then simply sit back to watch and relish the
@@ -85,7 +86,7 @@ export default function Simulator() {
               />
             </span>
           </p>
-        </div>
+        </div> */}
       </div>
     </>
   );
