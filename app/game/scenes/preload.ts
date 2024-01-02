@@ -30,6 +30,12 @@ export default class Preload extends Phaser.Scene {
 
     //GameObjects
     this.load.image("ball", "image/gameObjects/ball.png");
+    this.load.image("elipse", "image/gameObjects/elipse.png");
+    this.load.image("ground", "image/gameObjects/ground.jpg");
+    this.load.image(
+      "stadiumSurrounding",
+      "image/gameObjects/stadiumSurrounding.jpg"
+    );
   }
 
   create() {

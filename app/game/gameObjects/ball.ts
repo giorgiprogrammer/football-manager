@@ -13,8 +13,6 @@ export class Ball extends Phaser.Physics.Arcade.Image {
     this.setDepth(10);
 
     this.init();
-
-    this.firstKick();
   }
 
   init() {
@@ -51,7 +49,7 @@ export class Ball extends Phaser.Physics.Arcade.Image {
       this,
       getRandomNumber(-500, 500),
       getRandomNumber(-500, 500),
-      150
+      250
     );
     this.setAngularVelocity(this.anglurarVelocity);
   }
@@ -74,7 +72,7 @@ class Circle {
   radius!: number;
 
   constructor(public scene: Phaser.Scene, public ball: Ball) {
-    this.radius = calculatePercentage(5, Math.abs(ball.body!.velocity.x));
+    this.radius = calculatePercentage(2, Math.abs(ball.body!.velocity.x));
     let circle = scene.add.circle(ball.x, ball.y, this.radius, 0xb8eb1c, 0.5);
 
     scene.events.on("update", () => {

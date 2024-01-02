@@ -1,5 +1,6 @@
 import { calculatePercentage } from "@/app/utils/math";
 import { GoalPost } from "./goalPost";
+import { StadiumSurrounding } from "./stadiumSurrounding/stadiumSurrounding";
 
 export class Stadium extends Phaser.GameObjects.Container {
   graphics!: Phaser.GameObjects.Graphics;
@@ -17,7 +18,10 @@ export class Stadium extends Phaser.GameObjects.Container {
     x: number,
     y: number,
     public stadiumWidth: number,
-    public stadiumHeight: number
+    public stadiumHeight: number,
+    public leftFansChance: number,
+    public leftFansColor: number,
+    public righFanstColor: number
   ) {
     super(scene, x, y);
     scene.add.existing(this);
@@ -26,6 +30,7 @@ export class Stadium extends Phaser.GameObjects.Container {
   }
 
   init() {
+    this.addSurrouding();
     this.addPitch();
   }
 
@@ -54,7 +59,6 @@ export class Stadium extends Phaser.GameObjects.Container {
     const image = this.scene.add
       .image(0, 0, "grass")
       .setDisplaySize(this.stadiumWidth + 160, this.stadiumHeight + 50)
-
       .setOrigin(0.5);
     this.add(image);
   }
@@ -169,5 +173,18 @@ export class Stadium extends Phaser.GameObjects.Container {
 
     this.rightGoalPost = new GoalPost(this.scene, "right", this);
     this.add(this.rightGoalPost);
+  }
+
+  addSurrouding() {
+    const surrounding = new StadiumSurrounding(
+      this.scene,
+      0,
+      0,
+      this,
+      this.leftFansChance,
+      this.leftFansColor,
+      this.righFanstColor
+    ).setDepth(-10);
+    this.add(surrounding);
   }
 }

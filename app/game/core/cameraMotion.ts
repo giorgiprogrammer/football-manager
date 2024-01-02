@@ -3,7 +3,8 @@ import { Ball } from "../gameObjects/ball";
 import { Stadium } from "../gameObjects/stadium";
 
 export class CameraMotion {
-  camera_z_index = 1;
+  camera_z_index = 1.1;
+  isPlaying = false;
 
   constructor(
     public scene: Phaser.Scene,
@@ -20,6 +21,7 @@ export class CameraMotion {
     const centerX = this.ball.x;
 
     this.scene.events.on("update", () => {
+      if (!this.isPlaying) return;
       this.scene.cameras.main.setZoom(this.camera_z_index);
       if (
         this.ball.x >
@@ -28,13 +30,27 @@ export class CameraMotion {
           centerX + calculatePercentage(30, this.stadium.stadiumWidth)
       ) {
         if (this.camera_z_index > 1) {
-          this.camera_z_index -= 0.003;
+          this.camera_z_index -= 0.002;
         }
       } else {
         if (this.camera_z_index < 1.25) {
-          this.camera_z_index += 0.003;
+          this.camera_z_index += 0.002;
         }
       }
+    });
+
+    this.startAnimation();
+  }
+
+  startAnimation() {
+    this.scene.tweens.add({
+      targets: this.scene.cameras.main,
+      zoom: { from: 0.5, to: 1.1 },
+      duration: 7000,
+      ease: Phaser.Math.Easing.Cubic.In,
+      onComplete: () => {
+        this.scene.events.emit("cameraStartAnimationEnd");
+      },
     });
   }
 }

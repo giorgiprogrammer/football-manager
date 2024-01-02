@@ -18,7 +18,10 @@ export default class GamePlay extends Phaser.Scene {
       this.game.canvas.width / 2,
       this.game.canvas.height / 2,
       850,
-      400
+      400,
+      70,
+      0x2c1463,
+      0xdf1463
     );
 
     const ball = new Ball(
@@ -29,5 +32,9 @@ export default class GamePlay extends Phaser.Scene {
 
     new CollisionDetections(this, ball, stadium);
     const cameraMotion = new CameraMotion(this, stadium, ball);
+
+    this.events.on("cameraStartAnimationEnd", () => {
+      cameraMotion.isPlaying = true;
+    });
   }
 }
