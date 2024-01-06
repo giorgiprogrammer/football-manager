@@ -16,6 +16,7 @@ export default class Preload extends Phaser.Scene {
     this.load.image("menu-button", "image/ui/menu-button.png");
     this.load.image("default", "image/ui/default.png");
     this.load.image("grass", "image/ui/grass.jpg");
+    this.load.image("menuIcon", "image/ui/menu-icon.png");
 
     //Team Logos
     this.load.image("arsenal", "image/teamLogos/arsenal.png");
@@ -39,7 +40,7 @@ export default class Preload extends Phaser.Scene {
   }
 
   create() {
-    // this.scene.start("Menu");
-    this.scene.start("GamePlay");
+    this.scene.start("Menu");
+    // this.scene.start("GamePlay");
   }
 }

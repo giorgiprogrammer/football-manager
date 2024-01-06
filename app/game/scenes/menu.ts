@@ -58,7 +58,11 @@ export default class Menu extends Phaser.Scene {
       200,
       75,
       "Tactics"
-    );
+    )
+      .setInteractive()
+      .on(Phaser.Input.Events.POINTER_DOWN, () => {
+        this.scene.start("GamePlay");
+      });
   }
 
   addTeamsSelectors() {

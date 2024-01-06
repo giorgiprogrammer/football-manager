@@ -15,3 +15,16 @@ export function calculatePercentage(part: number, total: number): number {
 
   return (part * total) / 100;
 }
+
+export function interpolate(parameter: number, min: number, max: number) {
+  // Ensure the parameter is a number between 0 and 100
+  if (typeof parameter !== "number" || parameter < 0 || parameter > 100) {
+    throw new Error("Parameter must be a number between 0 and 100");
+  }
+
+  // Interpolate between min and max based on the parameter
+  const range = max - min;
+  const result = min + (parameter / 100) * range;
+
+  return result;
+}

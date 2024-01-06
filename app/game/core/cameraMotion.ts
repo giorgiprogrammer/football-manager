@@ -25,9 +25,9 @@ export class CameraMotion {
       this.scene.cameras.main.setZoom(this.camera_z_index);
       if (
         this.ball.x >
-          centerX - calculatePercentage(30, this.stadium.stadiumWidth) &&
+          centerX - calculatePercentage(25, this.stadium.stadiumWidth) &&
         this.ball.x <
-          centerX + calculatePercentage(30, this.stadium.stadiumWidth)
+          centerX + calculatePercentage(25, this.stadium.stadiumWidth)
       ) {
         if (this.camera_z_index > 1) {
           this.camera_z_index -= 0.002;
@@ -45,9 +45,9 @@ export class CameraMotion {
   startAnimation() {
     this.scene.tweens.add({
       targets: this.scene.cameras.main,
-      zoom: { from: 0.5, to: 1.1 },
-      duration: 7000,
-      ease: Phaser.Math.Easing.Cubic.In,
+      zoom: { from: 0.7, to: 1.1 },
+      duration: 5000,
+      ease: Phaser.Math.Easing.Quadratic.In,
       onComplete: () => {
         this.scene.events.emit("cameraStartAnimationEnd");
       },

@@ -1,11 +1,14 @@
 import { Ball } from "../gameObjects/ball";
 import { Stadium } from "../gameObjects/stadium";
+import { Footballer } from "../gameObjects/team/footballer";
+import { Match } from "./match";
 
 export class CollisionDetections {
   constructor(
     public scene: Phaser.Scene,
     public ball: Ball,
-    public stadium: Stadium
+    public stadium: Stadium,
+    public match: Match
   ) {
     this.init();
   }
@@ -28,5 +31,24 @@ export class CollisionDetections {
         this.ball.changeRotation();
       }
     );
+  }
+
+  addFootballersAndBallCollision(
+    Hostfootballers: Footballer[],
+    Guestfootballers: Footballer[]
+  ) {
+    this.scene.physics.add.overlap(this.ball, Hostfootballers, (a, b) => {
+      const footballer = b as Footballer;
+      footballer.setBall(this.ball);
+
+      this.match.catchBall("host", footballer);
+    });
+
+    this.scene.physics.add.overlap(this.ball, Guestfootballers, (a, b) => {
+      const footballer = b as Footballer;
+      footballer.setBall(this.ball);
+
+      this.match.catchBall("guest", footballer);
+    });
   }
 }

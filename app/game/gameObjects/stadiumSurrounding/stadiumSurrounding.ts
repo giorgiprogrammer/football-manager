@@ -39,10 +39,10 @@ export class StadiumSurrounding extends Phaser.GameObjects.Container {
   }
 
   addSpectators() {
-    const topLineNumber = 16;
-    const bottomLineNumber = 16;
-    const leftLineNumber = 20;
-    const rightLineNumber = 20;
+    const topLineNumber = 5;
+    const bottomLineNumber = 5;
+    const leftLineNumber = 7;
+    const rightLineNumber = 7;
 
     let backgroundPosYPercent = 64;
     let backgroundWidthPercent = 130;
@@ -200,8 +200,10 @@ export class StadiumSurrounding extends Phaser.GameObjects.Container {
 class SpectatoLine extends Phaser.GameObjects.Container {
   backgroundImage!: Phaser.GameObjects.Image;
 
-  leftFans: Phaser.GameObjects.Image[] = [];
-  rightFans: Phaser.GameObjects.Image[] = [];
+  //   leftFans: Phaser.GameObjects.Image[] = [];
+  //   rightFans: Phaser.GameObjects.Image[] = [];
+  leftFans: Phaser.GameObjects.Rectangle[] = [];
+  rightFans: Phaser.GameObjects.Rectangle[] = [];
 
   constructor(
     scene: Phaser.Scene,
@@ -226,6 +228,7 @@ class SpectatoLine extends Phaser.GameObjects.Container {
       this.backgroundImage = this.scene.add
         .image(0, 0, "default")
         .setOrigin(0.5)
+        .setAlpha(0)
         .setTint(0x03080d)
         .setDisplaySize(this.backgroundWidth, this.backgroundHeight);
 
@@ -237,6 +240,7 @@ class SpectatoLine extends Phaser.GameObjects.Container {
       this.backgroundImage = this.scene.add
         .image(0, 0, "default")
         .setOrigin(0.5)
+        .setAlpha(0)
         .setTint(0x03080d)
         .setDisplaySize(this.backgroundWidth, this.backgroundHeight);
 
@@ -259,11 +263,23 @@ class SpectatoLine extends Phaser.GameObjects.Container {
           ? this.leftFansColor
           : this.rightFansColor;
 
+      //   const spectator = this.scene.add
+      //     .image(0, posY + (spectatorWidth + padding) * i, "default")
+      //     .setOrigin(0.5)
+      //     .setTint(color)
+      //     .setDisplaySize(spectatorWidth, spectatorWidth);
+      //   this.add(spectator);
+
       const spectator = this.scene.add
-        .image(0, posY + (spectatorWidth + padding) * i, "default")
-        .setOrigin(0.5)
-        .setTint(color)
-        .setDisplaySize(spectatorWidth, spectatorWidth);
+        .rectangle(
+          0,
+          posY + (spectatorWidth + padding) * i,
+          spectatorWidth,
+          spectatorWidth,
+          color
+        )
+        .setAlpha(0.4)
+        .setOrigin(0.5);
       this.add(spectator);
 
       if (color === this.leftFansColor) {
@@ -287,11 +303,23 @@ class SpectatoLine extends Phaser.GameObjects.Container {
           ? this.leftFansColor
           : this.rightFansColor;
 
+      //   const spectator = this.scene.add
+      //     .image(posX + (spectatorWidth + padding) * i, 0, "default")
+      //     .setOrigin(0.5)
+      //     .setTint(color)
+      //     .setDisplaySize(spectatorWidth, spectatorWidth);
+      //   this.add(spectator);
+
       const spectator = this.scene.add
-        .image(posX + (spectatorWidth + padding) * i, 0, "default")
-        .setOrigin(0.5)
-        .setTint(color)
-        .setDisplaySize(spectatorWidth, spectatorWidth);
+        .rectangle(
+          posX + (spectatorWidth + padding) * i,
+          0,
+          spectatorWidth,
+          spectatorWidth,
+          color
+        )
+        .setAlpha(0.4)
+        .setOrigin(0.5);
       this.add(spectator);
 
       if (color === this.leftFansColor) {

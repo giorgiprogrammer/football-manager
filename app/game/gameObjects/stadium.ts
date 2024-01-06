@@ -9,6 +9,8 @@ export class Stadium extends Phaser.GameObjects.Container {
   leftGoalPost!: GoalPost;
   rightGoalPost!: GoalPost;
 
+  stadiumSurrounding!: StadiumSurrounding;
+
   //pharametres
   lineWidth = 3;
   lineColor = 0xf1ffff;
@@ -176,7 +178,7 @@ export class Stadium extends Phaser.GameObjects.Container {
   }
 
   addSurrouding() {
-    const surrounding = new StadiumSurrounding(
+    this.stadiumSurrounding = new StadiumSurrounding(
       this.scene,
       0,
       0,
@@ -185,6 +187,6 @@ export class Stadium extends Phaser.GameObjects.Container {
       this.leftFansColor,
       this.righFanstColor
     ).setDepth(-10);
-    this.add(surrounding);
+    this.add(this.stadiumSurrounding);
   }
 }

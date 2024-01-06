@@ -18,6 +18,11 @@ const Game = () => {
       const GamePlay = await import("./scenes/gameplay").then((gamePlay) => {
         return gamePlay.default;
       });
+      const MatchIndicators = await import("./scenes/matchIndicators").then(
+        (matchIndicators) => {
+          return matchIndicators.default;
+        }
+      );
 
       if (!canvasContainer.current) return;
 
@@ -38,9 +43,9 @@ const Game = () => {
           width: window.innerWidth,
           height: window.innerHeight,
         },
-        backgroundColor: 0x39383d,
-        // scene: [Preload, Menu, GamePlay],
-        scene: [Preload, GamePlay],
+        backgroundColor: 0x02070d,
+        scene: [Preload, Menu, GamePlay, MatchIndicators],
+        // scene: [Preload, GamePlay],
       });
 
       return () => game.destroy(true, false);
