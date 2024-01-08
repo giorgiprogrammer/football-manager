@@ -34,7 +34,7 @@ export class Column extends Phaser.GameObjects.Container {
   }
 
   reset() {
-    this.tween.destroy();
+    this.tween?.destroy();
     this.setPosition(this.x, 0);
   }
 
@@ -50,7 +50,8 @@ export class Column extends Phaser.GameObjects.Container {
         this.footballerKey,
         this.columnPosition,
         this.isHost,
-        this.stadium
+        this.stadium,
+        this.properties
       );
       this.add(footballer);
       this.footballers.push(footballer);

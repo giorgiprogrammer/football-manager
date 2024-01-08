@@ -1,6 +1,7 @@
 import { CameraMotion } from "../core/cameraMotion";
 import { CollisionDetections } from "../core/collisionDetections";
 import { Match } from "../core/match";
+import { teamsData } from "../data/teamsData";
 import { Ball } from "../gameObjects/ball";
 import { Stadium } from "../gameObjects/stadium";
 
@@ -39,57 +40,9 @@ export default class GamePlay extends Phaser.Scene {
       this.match.openStartText();
     });
 
-    const hostTeamData = {
-      name: "Arsenal",
-      key: "arsenal",
-      properties: {
-        speed: 50,
-        goalkeeperSpeed: 50,
-      },
-      tactics: {
-        defence: {
-          type: "attack",
-          side: "wide",
-          quntity: 3,
-        },
-        midfielder: {
-          type: "defend",
-          side: "center",
-          quntity: 3,
-        },
-        attacker: {
-          type: "normal",
-          side: "center",
-          quntity: 3,
-        },
-      },
-    };
+    const hostTeamData = teamsData.premierLeague.teams[5];
 
-    const guestTeamData = {
-      name: "Everton",
-      key: "everton",
-      properties: {
-        speed: 80,
-        goalkeeperSpeed: 50,
-      },
-      tactics: {
-        defence: {
-          type: "normal",
-          side: "center",
-          quntity: 4,
-        },
-        midfielder: {
-          type: "normal",
-          side: "center",
-          quntity: 4,
-        },
-        attacker: {
-          type: "defend",
-          side: "center",
-          quntity: 2,
-        },
-      },
-    };
+    const guestTeamData = teamsData.premierLeague.teams[6];
 
     this.match = new Match(
       this,

@@ -263,13 +263,6 @@ class SpectatoLine extends Phaser.GameObjects.Container {
           ? this.leftFansColor
           : this.rightFansColor;
 
-      //   const spectator = this.scene.add
-      //     .image(0, posY + (spectatorWidth + padding) * i, "default")
-      //     .setOrigin(0.5)
-      //     .setTint(color)
-      //     .setDisplaySize(spectatorWidth, spectatorWidth);
-      //   this.add(spectator);
-
       const spectator = this.scene.add
         .rectangle(
           0,
@@ -302,13 +295,6 @@ class SpectatoLine extends Phaser.GameObjects.Container {
         getRandomNumber(0, 100) > this.leftFansChance
           ? this.leftFansColor
           : this.rightFansColor;
-
-      //   const spectator = this.scene.add
-      //     .image(posX + (spectatorWidth + padding) * i, 0, "default")
-      //     .setOrigin(0.5)
-      //     .setTint(color)
-      //     .setDisplaySize(spectatorWidth, spectatorWidth);
-      //   this.add(spectator);
 
       const spectator = this.scene.add
         .rectangle(
@@ -356,9 +342,11 @@ class SpectatoLine extends Phaser.GameObjects.Container {
 
   stopSelebrating() {
     this.leftFans.forEach((fan) => {
+      fan.setAlpha(0.4);
       this.scene.tweens.killTweensOf(fan);
     });
     this.rightFans.forEach((fan) => {
+      fan.setAlpha(0.4);
       this.scene.tweens.killTweensOf(fan);
     });
   }

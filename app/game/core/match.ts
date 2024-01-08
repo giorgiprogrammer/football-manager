@@ -18,7 +18,6 @@ export class Match {
   hostTeamScore = 0;
   guestTeamScore = 0;
 
-  isCatchBall = false;
   isGoal = false;
 
   isPlaying = false;
@@ -74,8 +73,10 @@ export class Match {
         ) as MatchIndicators;
         matchIndicatorsScene.setTimerText(this.timer);
 
-        this.resumeMatch("guest");
+        this.resumeMatch("host");
       });
+
+    this.isPlaying = false;
   }
 
   resetMatch(team: string) {
@@ -212,7 +213,7 @@ export class Match {
           align: "center",
         }
       )
-      .setDepth(600)
+      .setDepth(1200)
       .setOrigin(0.5)
       .setVisible(false);
 
@@ -306,8 +307,8 @@ export class Match {
 
   catchBall(team: string, footballer: Footballer) {
     if (this.isGoal) return;
-    if (this.isCatchBall) return;
-    this.isCatchBall = true;
+    if (footballer.controllBall) return;
+
     this.footballerWithBall = footballer;
 
     if (team === "host") {
@@ -346,12 +347,13 @@ export class Match {
     if (this.footballerWithBall.footballerPosition === "midfielder") {
       if (team === "host") {
         shortVariants.push(...this.hostTeam.attackerColumn.footballers);
+        longVariants.push(...this.hostTeam.attackerColumn.footballers);
       } else {
         shortVariants.push(...this.guestTeam.attackerColumn.footballers);
+        longVariants.push(...this.guestTeam.attackerColumn.footballers);
       }
     }
 
-    this.footballerWithBall.makeDesicion(shortVariants, longVariants);
-    this.isCatchBall = false;
+    this.footballerWithBall.makeDesicion(shortVariants, longVariants, this);
   }
 }

@@ -53,7 +53,8 @@ export class Team extends Phaser.GameObjects.Container {
       this.teamData.key,
       "goalkeeper",
       this.isHost,
-      this.stadium
+      this.stadium,
+      this.teamData.properties
     );
     this.add(this.goalKeeper);
     this.footballers.push(this.goalKeeper);

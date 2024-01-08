@@ -39,16 +39,16 @@ export class CollisionDetections {
   ) {
     this.scene.physics.add.overlap(this.ball, Hostfootballers, (a, b) => {
       const footballer = b as Footballer;
-      footballer.setBall(this.ball);
 
       this.match.catchBall("host", footballer);
+      footballer.setBall(this.ball);
     });
 
     this.scene.physics.add.overlap(this.ball, Guestfootballers, (a, b) => {
       const footballer = b as Footballer;
-      footballer.setBall(this.ball);
 
       this.match.catchBall("guest", footballer);
+      footballer.setBall(this.ball);
     });
   }
 }

@@ -1,5 +1,6 @@
 import { calculatePercentage } from "@/app/utils/math";
-import { teamsData } from "../data/teamsData";
+import { TeamData } from "../types/types";
+// import { teamsData } from "../data/teamsData";
 
 export class TeamsSelector extends Phaser.GameObjects.Container {
   topArrowButton!: Phaser.GameObjects.Image;
@@ -27,6 +28,8 @@ export class TeamsSelector extends Phaser.GameObjects.Container {
     y: number,
     public textToRight: boolean,
     public height: number,
+    public teamsData: Array<TeamData>,
+    public textYPosition: number,
     public speed?: number
   ) {
     super(scene, x, y);
@@ -58,7 +61,7 @@ export class TeamsSelector extends Phaser.GameObjects.Container {
       this.selectedTeamText.setPosition(
         this.scene.game.canvas.width / 2 +
           calculatePercentage(7, this.scene.game.canvas.width),
-        this.selectedTeamText.y
+        this.textYPosition
       );
     } else {
       this.selectedTeamText = this.scene.add
@@ -73,7 +76,7 @@ export class TeamsSelector extends Phaser.GameObjects.Container {
       this.selectedTeamText.setPosition(
         this.scene.game.canvas.width / 2 -
           calculatePercentage(7, this.scene.game.canvas.width),
-        this.selectedTeamText.y
+        this.textYPosition
       );
     }
   }
@@ -132,7 +135,7 @@ export class TeamsSelector extends Phaser.GameObjects.Container {
   addTeamLogos() {
     let scale = 0.15;
 
-    Object.values(teamsData).forEach((team, index) => {
+    Object.values(this.teamsData).forEach((team, index) => {
       if (index === 0) {
         const teamLogo = this.scene.add
           .image(
@@ -140,7 +143,7 @@ export class TeamsSelector extends Phaser.GameObjects.Container {
             -this.height / 2 +
               this.topArrowButton.getBounds().height / 2 -
               this.padding / 2,
-            team.logo
+            team.key
           )
           .setOrigin(0.5)
           .setScale(0);
@@ -165,7 +168,7 @@ export class TeamsSelector extends Phaser.GameObjects.Container {
         }
 
         const teamLogo = this.scene.add
-          .image(0, this.posy, team.logo)
+          .image(0, this.posy, team.key)
           .setOrigin(0.5)
           .setScale(scale);
         this.add(teamLogo);
@@ -178,7 +181,7 @@ export class TeamsSelector extends Phaser.GameObjects.Container {
         this.posy += this.padding;
       } else {
         const teamLogo = this.scene.add
-          .image(0, this.posy - this.padding / 2, team.logo)
+          .image(0, this.posy - this.padding / 2, team.key)
           .setOrigin(0.5)
           .setScale(0);
         this.add(teamLogo);
@@ -245,7 +248,8 @@ export class TeamsSelector extends Phaser.GameObjects.Container {
       this.teamsState[
         Math.floor(this.activeTeamsNumber / 2) + 1
       ].teamLogo.texture.key;
-    this.selectedTeamText.setText(this.selectedTeam);
+    const teamName = this.selectedTeam.replace("-", " ");
+    this.selectedTeamText.setText(teamName);
   }
 
   arrayRotate(arr: any, reverse?: boolean) {
