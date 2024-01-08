@@ -3,6 +3,7 @@ import { TeamsSelector } from "../ui/teamSelector";
 import { MenuButton } from "../ui/menuButton";
 import { TeamsData, teamsData } from "../data/teamsData";
 import { tournamentsData } from "../data/tournamentsData";
+import { TeamData } from "../types/types";
 
 export default class Menu extends Phaser.Scene {
   startButton!: MenuButton;
@@ -15,12 +16,59 @@ export default class Menu extends Phaser.Scene {
   leftTournamentSelector!: TeamsSelector;
   rightTournamentSelector!: TeamsSelector;
 
+  leftSelectorTeams = teamsData.premierLeague.teams;
+  rightSelectorTeams = teamsData.premierLeague.teams;
+
   constructor() {
     super("Menu");
   }
 
   create() {
     this.addUI();
+    this.addEventListeners();
+  }
+
+  addEventListeners() {
+    this.events.on("leftTournamentChanged", (team: string) => {
+      this.leftTeamsSelector.destroy();
+      this.leftTeamsSelector.selectedTeamText.destroy();
+      if (team === "rest-of-the-world") {
+        this.leftSelectorTeams = tournamentsData.restOfTheWorld.teams;
+      }
+      if (team === "georgian-league") {
+        this.leftSelectorTeams = tournamentsData.erovnuliLiga.teams;
+      }
+      if (team === "premier-league") {
+        this.leftSelectorTeams = tournamentsData.premierLeague.teams;
+      }
+      if (team === "seria-A") {
+        this.leftSelectorTeams = tournamentsData.seriaA.teams;
+      }
+      if (team === "seria-A") {
+        this.leftSelectorTeams = tournamentsData.seriaA.teams;
+      }
+
+      this.addTeamsSelectors();
+    });
+
+    this.events.on("rightTournamentChanged", (team: string) => {
+      this.rightTeamsSelector.destroy();
+      this.rightTeamsSelector.selectedTeamText.destroy();
+      if (team === "rest-of-the-world") {
+        this.rightSelectorTeams = tournamentsData.restOfTheWorld.teams;
+      }
+      if (team === "georgian-league") {
+        this.rightSelectorTeams = tournamentsData.erovnuliLiga.teams;
+      }
+      if (team === "premier-league") {
+        this.rightSelectorTeams = tournamentsData.premierLeague.teams;
+      }
+      if (team === "seria-A") {
+        this.rightSelectorTeams = tournamentsData.seriaA.teams;
+      }
+
+      this.addTeamsSelectors();
+    });
   }
 
   addUI() {
@@ -83,6 +131,7 @@ export default class Menu extends Phaser.Scene {
       calculatePercentage(53, this.game.canvas.height),
       tournamentsData as any,
       this.game.canvas.height / 2 - 100,
+      false,
       160
     );
 
@@ -100,6 +149,7 @@ export default class Menu extends Phaser.Scene {
       calculatePercentage(53, this.game.canvas.height),
       tournamentsData as any,
       this.game.canvas.height / 2 - 100,
+      false,
       160
     );
 
@@ -119,8 +169,9 @@ export default class Menu extends Phaser.Scene {
       0,
       false,
       calculatePercentage(60, this.game.canvas.height),
-      teamsData.premierLeague.teams,
+      this.leftSelectorTeams,
       this.game.canvas.height / 2,
+      true,
       160
     );
     this.leftTeamsSelector.setPosition(
@@ -136,8 +187,9 @@ export default class Menu extends Phaser.Scene {
       0,
       true,
       calculatePercentage(60, this.game.canvas.height),
-      teamsData.premierLeague.teams,
+      this.rightSelectorTeams,
       this.game.canvas.height / 2,
+      true,
       160
     );
     this.rightTeamsSelector.setPosition(

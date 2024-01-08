@@ -30,6 +30,7 @@ export class TeamsSelector extends Phaser.GameObjects.Container {
     public height: number,
     public teamsData: Array<TeamData>,
     public textYPosition: number,
+    public forTeams: boolean,
     public speed?: number
   ) {
     super(scene, x, y);
@@ -217,6 +218,14 @@ export class TeamsSelector extends Phaser.GameObjects.Container {
         Math.floor(this.activeTeamsNumber / 2) + 1
       ].teamLogo.texture.key;
     this.selectedTeamText.setText(this.selectedTeam);
+
+    if (this.forTeams === false) {
+      if (this.textToRight) {
+        this.scene.events.emit("rightTournamentChanged", this.selectedTeam);
+      } else {
+        this.scene.events.emit("leftTournamentChanged", this.selectedTeam);
+      }
+    }
   }
 
   clickDown() {
@@ -250,6 +259,14 @@ export class TeamsSelector extends Phaser.GameObjects.Container {
       ].teamLogo.texture.key;
     const teamName = this.selectedTeam.replace("-", " ");
     this.selectedTeamText.setText(teamName);
+
+    if (this.forTeams === false) {
+      if (this.textToRight) {
+        this.scene.events.emit("rightTournamentChanged", this.selectedTeam);
+      } else {
+        this.scene.events.emit("leftTournamentChanged", this.selectedTeam);
+      }
+    }
   }
 
   arrayRotate(arr: any, reverse?: boolean) {
