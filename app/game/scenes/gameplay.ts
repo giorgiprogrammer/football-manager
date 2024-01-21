@@ -1,6 +1,7 @@
 import { CameraMotion } from "../core/cameraMotion";
 import { CollisionDetections } from "../core/collisionDetections";
 import { Match } from "../core/match";
+import { matchData } from "../data/matchData";
 import { teamsData } from "../data/teamsData";
 import { Ball } from "../gameObjects/ball";
 import { Stadium } from "../gameObjects/stadium";
@@ -40,19 +41,8 @@ export default class GamePlay extends Phaser.Scene {
       this.match.openStartText();
     });
 
-    const hostTeamData = teamsData.premierLeague.teams[5];
+    matchData.stadium = stadium;
 
-    const guestTeamData = teamsData.premierLeague.teams[6];
-
-    this.match = new Match(
-      this,
-      {
-        stadium: stadium,
-        hostTeamData: hostTeamData,
-        guestTeamData: guestTeamData,
-      },
-      cameraMotion,
-      ball
-    );
+    this.match = new Match(this, matchData, cameraMotion, ball);
   }
 }

@@ -1,42 +1,42 @@
 import { teamsData } from "./teamsData";
 
 export const tournamentsData = {
-  premierLeague: {
+  premierleague: {
     key: "premier-league",
     name: "Premier League",
     teams: teamsData.premierLeague.teams,
   },
-  seriaA: {
+  seriaa: {
     key: "seria-A",
     name: "Seria A",
     teams: teamsData.premierLeague.teams,
   },
-  laLiga: {
+  laliga: {
     key: "la-liga",
     name: "La Liga",
     teams: teamsData.premierLeague.teams,
   },
-  othersEuropean: {
+  othereuropean: {
     key: "other-european",
     name: "Other European",
     teams: teamsData.premierLeague.teams,
   },
-  restOfTheWorld: {
+  restoftheworld: {
     key: "rest-of-the-world",
     name: "Rest Of The World",
     teams: teamsData.premierLeague.teams,
   },
-  europeanNations: {
+  europeannations: {
     key: "arsenal",
     name: "Nations",
     teams: teamsData.premierLeague.teams,
   },
-  otherNations: {
+  othernations: {
     key: "arsenal",
     name: "Other Nations",
     teams: teamsData.premierLeague.teams,
   },
-  erovnuliLiga: {
+  erovnuliliga: {
     key: "georgian-league",
     name: "Georgian Liga",
     teams: teamsData.premierLeague.teams,

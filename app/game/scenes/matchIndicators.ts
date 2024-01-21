@@ -1,6 +1,7 @@
 import { calculatePercentage } from "@/app/utils/math";
 import { clearInterval } from "timers";
 import GamePlay from "./gameplay";
+import { matchData } from "../data/matchData";
 
 export default class MatchIndicators extends Phaser.Scene {
   scoreText!: Phaser.GameObjects.Text;
@@ -33,14 +34,14 @@ export default class MatchIndicators extends Phaser.Scene {
       this.game.canvas.width / 2 -
         calculatePercentage(9, this.game.canvas.width),
       calculatePercentage(5, this.game.canvas.height),
-      "arsenal"
+      matchData.hostTeamData!.key
     );
 
     const guestTeam = this.add.image(
       this.game.canvas.width / 2 +
         calculatePercentage(9, this.game.canvas.width),
       calculatePercentage(5, this.game.canvas.height),
-      "arsenal"
+      matchData.guestTeamData!.key
     );
 
     const menuIcon = this.add

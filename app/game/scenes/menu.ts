@@ -4,12 +4,16 @@ import { MenuButton } from "../ui/menuButton";
 import { TeamsData, teamsData } from "../data/teamsData";
 import { tournamentsData } from "../data/tournamentsData";
 import { TeamData } from "../types/types";
+import { TacticsModal } from "../ui/tacticsModal";
+import { matchData } from "../data/matchData";
 
 export default class Menu extends Phaser.Scene {
   startButton!: MenuButton;
 
   leftTeamsSelector!: TeamsSelector;
   rightTeamsSelector!: TeamsSelector;
+
+  tacticsModal!: TacticsModal;
 
   tournament = "premierLeague";
 
@@ -28,46 +32,57 @@ export default class Menu extends Phaser.Scene {
     this.addEventListeners();
   }
 
+  openTacticModals() {
+    this.tacticsModal = new TacticsModal(
+      this,
+      this.game.canvas.width / 2,
+      this.game.canvas.height / 2,
+      this.leftTeamsSelector.selectedTeamText.text,
+      this.rightTeamsSelector.selectedTeamText.text,
+      this.leftTournamentSelector.selectedTeamText.text,
+      this.rightTournamentSelector.selectedTeamText.text
+    );
+  }
+
   addEventListeners() {
     this.events.on("leftTournamentChanged", (team: string) => {
       this.leftTeamsSelector.destroy();
+
       this.leftTeamsSelector.selectedTeamText.destroy();
       if (team === "rest-of-the-world") {
-        this.leftSelectorTeams = tournamentsData.restOfTheWorld.teams;
+        this.leftSelectorTeams = tournamentsData.restoftheworld.teams;
       }
       if (team === "georgian-league") {
-        this.leftSelectorTeams = tournamentsData.erovnuliLiga.teams;
+        this.leftSelectorTeams = tournamentsData.erovnuliliga.teams;
       }
       if (team === "premier-league") {
-        this.leftSelectorTeams = tournamentsData.premierLeague.teams;
+        this.leftSelectorTeams = tournamentsData.premierleague.teams;
       }
       if (team === "seria-A") {
-        this.leftSelectorTeams = tournamentsData.seriaA.teams;
-      }
-      if (team === "seria-A") {
-        this.leftSelectorTeams = tournamentsData.seriaA.teams;
+        this.leftSelectorTeams = tournamentsData.seriaa.teams;
       }
 
-      this.addTeamsSelectors();
+      this.addLeftTeamSelector();
     });
 
     this.events.on("rightTournamentChanged", (team: string) => {
       this.rightTeamsSelector.destroy();
+
       this.rightTeamsSelector.selectedTeamText.destroy();
       if (team === "rest-of-the-world") {
-        this.rightSelectorTeams = tournamentsData.restOfTheWorld.teams;
+        this.rightSelectorTeams = tournamentsData.restoftheworld.teams;
       }
       if (team === "georgian-league") {
-        this.rightSelectorTeams = tournamentsData.erovnuliLiga.teams;
+        this.rightSelectorTeams = tournamentsData.erovnuliliga.teams;
       }
       if (team === "premier-league") {
-        this.rightSelectorTeams = tournamentsData.premierLeague.teams;
+        this.rightSelectorTeams = tournamentsData.premierleague.teams;
       }
       if (team === "seria-A") {
-        this.rightSelectorTeams = tournamentsData.seriaA.teams;
+        this.rightSelectorTeams = tournamentsData.seriaa.teams;
       }
 
-      this.addTeamsSelectors();
+      this.addRightTeamSelector();
     });
   }
 
@@ -93,7 +108,8 @@ export default class Menu extends Phaser.Scene {
       .setOrigin(0.5);
 
     this.addTouranmentSelectors();
-    this.addTeamsSelectors();
+    this.addRightTeamSelector();
+    this.addLeftTeamSelector();
 
     // Start Button
     this.startButton = new MenuButton(
@@ -106,6 +122,8 @@ export default class Menu extends Phaser.Scene {
     )
       .setInteractive()
       .on(Phaser.Input.Events.POINTER_DOWN, () => {
+        matchData.hostTeamData = this.leftTeamsSelector.selectedTeamData;
+        matchData.guestTeamData = this.rightTeamsSelector.selectedTeamData;
         this.scene.start("GamePlay");
       });
 
@@ -119,7 +137,9 @@ export default class Menu extends Phaser.Scene {
       "Tactics"
     )
       .setInteractive()
-      .on(Phaser.Input.Events.POINTER_DOWN, () => {});
+      .on(Phaser.Input.Events.POINTER_DOWN, () => {
+        this.openTacticModals();
+      });
   }
 
   addTouranmentSelectors() {
@@ -161,8 +181,7 @@ export default class Menu extends Phaser.Scene {
     );
   }
 
-  addTeamsSelectors() {
-    //Left Selector
+  addLeftTeamSelector() {
     this.leftTeamsSelector = new TeamsSelector(
       this,
       0,
@@ -179,8 +198,9 @@ export default class Menu extends Phaser.Scene {
         calculatePercentage(9, this.game.canvas.width),
       this.game.canvas.height / 2
     );
+  }
 
-    //Right Selector
+  addRightTeamSelector() {
     this.rightTeamsSelector = new TeamsSelector(
       this,
       0,

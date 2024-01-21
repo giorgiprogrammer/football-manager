@@ -15,8 +15,10 @@ export default class Preload extends Phaser.Scene {
     this.load.image("neon-arrow", "image/ui/neon-arrow.png");
     this.load.image("menu-button", "image/ui/menu-button.png");
     this.load.image("default", "image/ui/default.png");
+    this.load.image("circle", "image/ui/circle.png");
     this.load.image("grass", "image/ui/grass.jpg");
     this.load.image("menuIcon", "image/ui/menu-icon.png");
+    this.load.image("stadiumFitch", "image/ui/fitch.png");
 
     //Team Logos
 

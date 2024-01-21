@@ -8,6 +8,7 @@ export class TeamsSelector extends Phaser.GameObjects.Container {
 
   activeTeamsNumber = 5;
   selectedTeam = "";
+  selectedTeamData!: TeamData;
   selectedTeamText!: Phaser.GameObjects.Text;
   posy = 0;
   padding = 0;
@@ -17,6 +18,8 @@ export class TeamsSelector extends Phaser.GameObjects.Container {
 
   teamsLogos: Phaser.GameObjects.Image[] = [];
   teamsState: Array<{
+    team: TeamData;
+    name: string;
     scale: number;
     teamLogo: Phaser.GameObjects.Image;
     y: number;
@@ -151,6 +154,8 @@ export class TeamsSelector extends Phaser.GameObjects.Container {
         this.add(teamLogo);
         this.teamsLogos.push(teamLogo);
         this.teamsState.push({
+          team: team,
+          name: team.name,
           teamLogo: teamLogo,
           y: teamLogo.y,
           scale: teamLogo.scale,
@@ -166,6 +171,7 @@ export class TeamsSelector extends Phaser.GameObjects.Container {
 
         if (Math.floor(this.activeTeamsNumber / 2) + 1 === index) {
           this.selectedTeam = team.name;
+          this.selectedTeamData = team;
         }
 
         const teamLogo = this.scene.add
@@ -175,6 +181,8 @@ export class TeamsSelector extends Phaser.GameObjects.Container {
         this.add(teamLogo);
         this.teamsLogos.push(teamLogo);
         this.teamsState.push({
+          team: team,
+          name: team.name,
           teamLogo: teamLogo,
           y: teamLogo.y,
           scale: teamLogo.scale,
@@ -188,6 +196,8 @@ export class TeamsSelector extends Phaser.GameObjects.Container {
         this.add(teamLogo);
         this.teamsLogos.push(teamLogo);
         this.teamsState.push({
+          team: team,
+          name: team.name,
           teamLogo: teamLogo,
           y: teamLogo.y,
           scale: teamLogo.scale,
@@ -214,10 +224,11 @@ export class TeamsSelector extends Phaser.GameObjects.Container {
     this.arrowClickIsPossible = false;
 
     this.selectedTeam =
-      this.teamsState[
-        Math.floor(this.activeTeamsNumber / 2) + 1
-      ].teamLogo.texture.key;
+      this.teamsState[Math.floor(this.activeTeamsNumber / 2) + 1].name;
+
     this.selectedTeamText.setText(this.selectedTeam);
+    this.selectedTeamData =
+      this.teamsState[Math.floor(this.activeTeamsNumber / 2) + 1].team;
 
     if (this.forTeams === false) {
       if (this.textToRight) {
@@ -254,11 +265,11 @@ export class TeamsSelector extends Phaser.GameObjects.Container {
     this.arrowClickIsPossible = false;
 
     this.selectedTeam =
-      this.teamsState[
-        Math.floor(this.activeTeamsNumber / 2) + 1
-      ].teamLogo.texture.key;
-    const teamName = this.selectedTeam.replace("-", " ");
-    this.selectedTeamText.setText(teamName);
+      this.teamsState[Math.floor(this.activeTeamsNumber / 2) + 1].name;
+    this.selectedTeamData =
+      this.teamsState[Math.floor(this.activeTeamsNumber / 2) + 1].team;
+
+    this.selectedTeamText.setText(this.selectedTeam);
 
     if (this.forTeams === false) {
       if (this.textToRight) {

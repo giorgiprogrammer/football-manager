@@ -17,14 +17,16 @@ export function calculatePercentage(part: number, total: number): number {
 }
 
 export function interpolate(parameter: number, min: number, max: number) {
-  // Ensure the parameter is a number between 0 and 100
-  if (typeof parameter !== "number" || parameter < 0 || parameter > 100) {
-    throw new Error("Parameter must be a number between 0 and 100");
-  }
+  const normalizedPassDelay = (parameter - 1) / 99;
 
-  // Interpolate between min and max based on the parameter
+  // Calculate the interpolated value
+  const interpolatedValue = min + normalizedPassDelay * (max - min);
+
+  return interpolatedValue;
+}
+
+export function clamp(parameter: number, min: number, max: number) {
   const range = max - min;
-  const result = min + (parameter / 100) * range;
 
-  return result;
+  return Math.floor(((parameter - min) * 100) / range);
 }

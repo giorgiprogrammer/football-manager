@@ -7,6 +7,7 @@ export const teamsData = {
       {
         name: "Arsenal",
         key: "arsenal",
+        stength: 1874,
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
@@ -25,7 +26,7 @@ export const teamsData = {
           midfielder: {
             type: "defend",
             side: "center",
-            quntity: 3,
+            quntity: 4,
           },
           attacker: {
             type: "normal",
@@ -37,6 +38,7 @@ export const teamsData = {
       {
         name: "Aston Villa",
         key: "aston-villa",
+        stength: 1874,
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
@@ -67,6 +69,7 @@ export const teamsData = {
       {
         name: "Bournemouth",
         key: "bournemouth",
+        stength: 1874,
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
@@ -97,6 +100,7 @@ export const teamsData = {
       {
         name: "Brentford",
         key: "brentford",
+        stength: 1874,
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
@@ -127,6 +131,7 @@ export const teamsData = {
       {
         name: "Brighton",
         key: "brighton",
+        stength: 1874,
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
@@ -157,6 +162,7 @@ export const teamsData = {
       {
         name: "Burnley",
         key: "burnley",
+        stength: 1874,
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
@@ -186,7 +192,8 @@ export const teamsData = {
       },
       {
         name: "Chelsea",
-        key: "chelsea",
+        key: "tottenham",
+        stength: 1874,
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
@@ -200,23 +207,24 @@ export const teamsData = {
           defence: {
             type: "attack",
             side: "wide",
-            quntity: 3,
+            quntity: 4,
           },
           midfielder: {
             type: "defend",
             side: "center",
-            quntity: 3,
+            quntity: 4,
           },
           attacker: {
             type: "normal",
             side: "center",
-            quntity: 3,
+            quntity: 2,
           },
         },
       },
       {
         name: "Crystal Palace",
         key: "crystal-palace",
+        stength: 1874,
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
@@ -247,6 +255,7 @@ export const teamsData = {
       {
         name: "Everton",
         key: "everton",
+        stength: 1874,
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
@@ -277,6 +286,7 @@ export const teamsData = {
       {
         name: "Fulham",
         key: "fulham",
+        stength: 1874,
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
@@ -307,6 +317,7 @@ export const teamsData = {
       {
         name: "Liverpool",
         key: "liverpool",
+        stength: 1874,
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
@@ -337,6 +348,7 @@ export const teamsData = {
       {
         name: "Luton",
         key: "luton",
+        stength: 1874,
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
@@ -367,6 +379,7 @@ export const teamsData = {
       {
         name: "Manchester City",
         key: "manchester-city",
+        stength: 1874,
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
@@ -397,6 +410,7 @@ export const teamsData = {
       {
         name: "Manchester United",
         key: "manchester-united",
+        stength: 1874,
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
@@ -427,6 +441,7 @@ export const teamsData = {
       {
         name: "Newcastle",
         key: "newcastle",
+        stength: 1874,
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
@@ -457,6 +472,7 @@ export const teamsData = {
       {
         name: "Nottingham",
         key: "nottingham",
+        stength: 1874,
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
@@ -487,6 +503,7 @@ export const teamsData = {
       {
         name: "Sheffield",
         key: "sheffield",
+        stength: 1874,
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
@@ -517,6 +534,7 @@ export const teamsData = {
       {
         name: "Tottenham",
         key: "tottenham",
+        stength: 1874,
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
@@ -547,6 +565,7 @@ export const teamsData = {
       {
         name: "West Ham",
         key: "west-ham",
+        stength: 1874,
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
@@ -577,6 +596,7 @@ export const teamsData = {
       {
         name: "Wolves",
         key: "wolves",
+        stength: 1874,
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,

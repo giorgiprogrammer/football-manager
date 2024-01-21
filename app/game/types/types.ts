@@ -2,15 +2,16 @@ import { Stadium } from "../gameObjects/stadium";
 import { Team } from "../gameObjects/team/team";
 
 export type MatchData = {
-  stadium: Stadium;
-  hostTeamData: TeamData;
-  guestTeamData: TeamData;
+  stadium: Stadium | null;
+  hostTeamData: TeamData | null;
+  guestTeamData: TeamData | null;
 };
 
 export type TeamData = {
   name: string;
   key: string;
   properties: TeamProperties;
+  stength: number;
   tactics: {
     defence: {
       type: string;
