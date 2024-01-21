@@ -102,7 +102,7 @@ export class Match {
   }
 
   resumeMatch(team: string) {
-    this.matchData.stadium.stadiumSurrounding.stopSelebrating();
+    this.matchData.stadium!.stadiumSurrounding.stopSelebrating();
 
     const footballer =
       team === "host"
@@ -137,14 +137,14 @@ export class Match {
     // Guest Team Goal
     if (
       this.ball.getBounds().centerX <
-      this.matchData.stadium.leftGoalPost.getBounds().centerX
+      this.matchData.stadium!.leftGoalPost.getBounds().centerX
     ) {
       this.ball.setVelocity(0, 0);
       this.ball.setAngularVelocity(0);
       this.ball.startGoalAnimation();
       this.isGoal = true;
       this.isPlaying = false;
-      this.matchData.stadium.stadiumSurrounding.rightFansSelebrate();
+      this.matchData.stadium!.stadiumSurrounding.rightFansSelebrate();
       setTimeout(() => {
         this.resetMatch("guest");
       }, 2500);
@@ -153,14 +153,14 @@ export class Match {
     // Host Team Goal
     if (
       this.ball.getBounds().centerX >
-      this.matchData.stadium.rightGoalPost.getBounds().centerX
+      this.matchData.stadium!.rightGoalPost.getBounds().centerX
     ) {
       this.ball.setVelocity(0, 0);
       this.ball.setAngularVelocity(0);
       this.ball.startGoalAnimation();
       this.isGoal = true;
       this.isPlaying = false;
-      this.matchData.stadium.stadiumSurrounding.leftFansSelebrate();
+      this.matchData.stadium!.stadiumSurrounding.leftFansSelebrate();
       setTimeout(() => {
         this.resetMatch("host");
       }, 2500);
@@ -171,7 +171,7 @@ export class Match {
     this.collisionDetections = new CollisionDetections(
       this.scene,
       this.ball,
-      this.matchData.stadium,
+      this.matchData.stadium!,
       this
     );
 
@@ -233,18 +233,18 @@ export class Match {
       this.scene,
       this.scene.game.canvas.width / 2,
       this.scene.game.canvas.height / 2,
-      this.matchData.stadium,
+      this.matchData.stadium!,
       true,
-      this.matchData.hostTeamData
+      this.matchData.hostTeamData!
     );
 
     this.guestTeam = new Team(
       this.scene,
       this.scene.game.canvas.width / 2,
       this.scene.game.canvas.height / 2,
-      this.matchData.stadium,
+      this.matchData.stadium!,
       false,
-      this.matchData.guestTeamData
+      this.matchData.guestTeamData!
     );
   }
 
