@@ -45,8 +45,8 @@ export class CameraMotion {
   startAnimation() {
     this.scene.tweens.add({
       targets: this.scene.cameras.main,
-      zoom: { from: 0.7, to: this.camera_z_index },
-      duration: 4300,
+      zoom: { from: 2.2, to: this.camera_z_index },
+      duration: 5500,
       ease: Phaser.Math.Easing.Quadratic.In,
       onComplete: () => {
         this.scene.events.emit("cameraStartAnimationEnd");

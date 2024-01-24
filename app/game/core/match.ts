@@ -212,7 +212,7 @@ export class Match {
 
   createStartUI() {
     this.startText = this.scene.add
-      .text(this.scene.game.canvas.width / 2, 100, "Press To Start", {
+      .text(-900, 100, "Press To Start", {
         fontFamily: "Rubik Mono One",
         fontSize: 12,
         color: "#F2F2FF",
@@ -310,7 +310,7 @@ export class Match {
         "MatchIndicators"
       ) as MatchIndicators;
       matchIndicatorsScene.setTimerText(this.timer);
-    }, 2500);
+    }, 1300);
   }
 
   catchBall(team: string, footballer: Footballer) {

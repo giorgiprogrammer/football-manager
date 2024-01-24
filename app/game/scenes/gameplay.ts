@@ -20,9 +20,9 @@ export default class GamePlay extends Phaser.Scene {
       this.game.canvas.height / 2,
       850,
       400,
-      80,
-      0xf82116,
-      0x02dc0d
+      50,
+      0xfef9ed,
+      0xff1606
     );
 
     const ball = new Ball(
