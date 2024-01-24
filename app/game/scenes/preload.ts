@@ -22,6 +22,49 @@ export default class Preload extends Phaser.Scene {
 
     //Team Logos
 
+    //Other Europenas
+    this.load.image("ajax", "image/teamLogos/otherEuropeans/Ajax.png");
+    this.load.image(
+      "bayer-leverkusen",
+      "image/teamLogos/otherEuropeans/Bayer-Leverkusen.png"
+    );
+    this.load.image(
+      "bayern-munich",
+      "image/teamLogos/otherEuropeans/Bayern-Munich.png"
+    );
+    this.load.image("benfica", "image/teamLogos/otherEuropeans/Benfica.png");
+    this.load.image("dortmund", "image/teamLogos/otherEuropeans/Dortmund.png");
+    this.load.image(
+      "fenerbahce",
+      "image/teamLogos/otherEuropeans/Fenerbahce.png"
+    );
+    this.load.image("feynoord", "image/teamLogos/otherEuropeans/Feynoord.png");
+    this.load.image(
+      "galatasaray",
+      "image/teamLogos/otherEuropeans/Galatasaray.png"
+    );
+    this.load.image("lille", "image/teamLogos/otherEuropeans/Lille.png");
+    this.load.image("lyon", "image/teamLogos/otherEuropeans/Lyon.png");
+    this.load.image(
+      "marseille",
+      "image/teamLogos/otherEuropeans/Marseille.png"
+    );
+    this.load.image("monaco", "image/teamLogos/otherEuropeans/Monaco.png");
+    this.load.image("nice", "image/teamLogos/otherEuropeans/Nice.png");
+    this.load.image("porto", "image/teamLogos/otherEuropeans/Porto.png");
+    this.load.image("psg", "image/teamLogos/otherEuropeans/PSG.png");
+    this.load.image("psv", "image/teamLogos/otherEuropeans/PSV.png");
+    this.load.image(
+      "rb-leipzig",
+      "image/teamLogos/otherEuropeans/RB-Leipzig.png"
+    );
+    this.load.image("sporting", "image/teamLogos/otherEuropeans/Sporting.png");
+    this.load.image(
+      "stuttgart",
+      "image/teamLogos/otherEuropeans/Stuttgart.png"
+    );
+    this.load.image("twente", "image/teamLogos/otherEuropeans/Twente.png");
+
     //Rest Of The World
     this.load.image("al-hilal", "image/teamLogos/restOfTheWorld/Al-Hilal.png");
     this.load.image(

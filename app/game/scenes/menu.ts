@@ -52,6 +52,9 @@ export default class Menu extends Phaser.Scene {
       console.log("team name : " + team);
 
       this.leftTeamsSelector.selectedTeamText.destroy();
+      if (team === "Other European") {
+        this.leftSelectorTeams = tournamentsData.othereuropean.teams;
+      }
       if (team === "Rest Of The World") {
         this.leftSelectorTeams = tournamentsData.restoftheworld.teams;
       }
@@ -75,6 +78,9 @@ export default class Menu extends Phaser.Scene {
       this.rightTeamsSelector.destroy();
 
       this.rightTeamsSelector.selectedTeamText.destroy();
+      if (team === "Other European") {
+        this.rightSelectorTeams = tournamentsData.othereuropean.teams;
+      }
       if (team === "Rest Of The World") {
         this.rightSelectorTeams = tournamentsData.restoftheworld.teams;
       }

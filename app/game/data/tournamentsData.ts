@@ -19,7 +19,7 @@ export const tournamentsData = {
   othereuropean: {
     key: "other-european",
     name: "Other European",
-    teams: teamsData.premierLeague.teams,
+    teams: teamsData.otherEuropeans.teams,
   },
   restoftheworld: {
     key: "rest-of-the-world",

@@ -2599,6 +2599,631 @@ export const teamsData = {
       },
     ],
   },
+  otherEuropeans: {
+    logo: "otherEuropeans",
+    teams: [
+      {
+        name: "Ajax",
+        key: "ajax",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Bayer Leverkusen",
+        key: "bayer-leverkusen",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Bayern Munich",
+        key: "bayern-munich",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Benfica",
+        key: "benfica",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Borussia Dortmund",
+        key: "dortmund",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Fenerbahce",
+        key: "fenerbahce",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Feynoord",
+        key: "feynoord",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Galatasaray",
+        key: "galatasaray",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Lille",
+        key: "lille",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Lyon",
+        key: "lyon",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Marseille",
+        key: "marseille",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Monaco",
+        key: "monaco",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Nice",
+        key: "nice",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Porto",
+        key: "porto",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "PSG",
+        key: "psg",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "PSV",
+        key: "psv",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Leipzig",
+        key: "rb-leipzig",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Sporting",
+        key: "sporting",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Stuttgart",
+        key: "stuttgart",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Twente",
+        key: "twente",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+    ],
+  },
 };
 
 export type TeamsData = {
