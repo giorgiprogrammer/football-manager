@@ -22,6 +22,54 @@ export default class Preload extends Phaser.Scene {
 
     //Team Logos
 
+    //Rest Of The World
+    this.load.image("al-hilal", "image/teamLogos/restOfTheWorld/Al-Hilal.png");
+    this.load.image(
+      "al-ittihad",
+      "image/teamLogos/restOfTheWorld/Al-Ittihad.png"
+    );
+    this.load.image("al-nassr", "image/teamLogos/restOfTheWorld/Al-Nassr.png");
+    this.load.image(
+      "boca-juniors",
+      "image/teamLogos/restOfTheWorld/Boca-Juniors.png"
+    );
+    this.load.image("flamengo", "image/teamLogos/restOfTheWorld/Flamengo.png");
+    this.load.image(
+      "fluminense",
+      "image/teamLogos/restOfTheWorld/Fluminense.png"
+    );
+    this.load.image("gremio", "image/teamLogos/restOfTheWorld/Gremio.png");
+    this.load.image(
+      "inter-miami",
+      "image/teamLogos/restOfTheWorld/Inter-Miami.png"
+    );
+    this.load.image(
+      "la-galaxy",
+      "image/teamLogos/restOfTheWorld/LA-Galaxy.png"
+    );
+    this.load.image(
+      "new-york-city",
+      "image/teamLogos/restOfTheWorld/New-York-City.png"
+    );
+    this.load.image(
+      "palmeiras",
+      "image/teamLogos/restOfTheWorld/Palmeiras.png"
+    );
+    this.load.image("Racing", "image/teamLogos/restOfTheWorld/Racing.png");
+    this.load.image(
+      "river-plate",
+      "image/teamLogos/restOfTheWorld/River-Plate.png"
+    );
+    this.load.image("Santos", "image/teamLogos/restOfTheWorld/Santos.png");
+    this.load.image(
+      "sao-paulo",
+      "image/teamLogos/restOfTheWorld/Sao-Paulo.png"
+    );
+    this.load.image(
+      "changhai-port",
+      "image/teamLogos/restOfTheWorld/Shanghai-Port.png"
+    );
+
     // Erovnuli Liga
     this.load.image("bolnisi", "image/teamLogos/erovnuliLiga/Bolnisi.png");
     this.load.image("dila-gori", "image/teamLogos/erovnuliLiga/Dila-Gori.png");

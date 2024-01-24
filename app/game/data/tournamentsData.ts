@@ -24,7 +24,7 @@ export const tournamentsData = {
   restoftheworld: {
     key: "rest-of-the-world",
     name: "Rest Of The World",
-    teams: teamsData.premierLeague.teams,
+    teams: teamsData.restOfTheWorld.teams,
   },
   europeannations: {
     key: "arsenal",

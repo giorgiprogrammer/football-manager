@@ -2160,6 +2160,445 @@ export const teamsData = {
       },
     ],
   },
+  restOfTheWorld: {
+    logo: "restOfTheWorld",
+    teams: [
+      {
+        name: "Al Hilal",
+        key: "al-hilal",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Al Ittihad",
+        key: "al-ittihad",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Al Nassr",
+        key: "al-nassr",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Boca Juniors",
+        key: "boca-juniors",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Flamengo",
+        key: "flamengo",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Fluminense",
+        key: "fluminense",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Gremio",
+        key: "gremio",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Inter Miami",
+        key: "inter-miami",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "La Galaxy",
+        key: "la-galaxy",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "New York City",
+        key: "new-york-city",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Palmeiras",
+        key: "palmeiras",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "River Plate",
+        key: "river-plate",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Sao Paulo",
+        key: "sao-paulo",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Changhai Port",
+        key: "changhai-port",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+    ],
+  },
 };
 
 export type TeamsData = {

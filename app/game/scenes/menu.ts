@@ -52,7 +52,7 @@ export default class Menu extends Phaser.Scene {
       console.log("team name : " + team);
 
       this.leftTeamsSelector.selectedTeamText.destroy();
-      if (team === "rest-of-the-world") {
+      if (team === "Rest Of The World") {
         this.leftSelectorTeams = tournamentsData.restoftheworld.teams;
       }
       if (team === "Georgian Liga") {
@@ -75,7 +75,7 @@ export default class Menu extends Phaser.Scene {
       this.rightTeamsSelector.destroy();
 
       this.rightTeamsSelector.selectedTeamText.destroy();
-      if (team === "rest-of-the-world") {
+      if (team === "Rest Of The World") {
         this.rightSelectorTeams = tournamentsData.restoftheworld.teams;
       }
       if (team === "Georgian Liga") {
