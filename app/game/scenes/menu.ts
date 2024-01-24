@@ -55,14 +55,17 @@ export default class Menu extends Phaser.Scene {
       if (team === "rest-of-the-world") {
         this.leftSelectorTeams = tournamentsData.restoftheworld.teams;
       }
-      if (team === "georgian-league") {
-        this.leftSelectorTeams = tournamentsData.erovnuliliga.teams;
+      if (team === "Georgian Liga") {
+        this.leftSelectorTeams = tournamentsData.georgianliga.teams;
       }
-      if (team === "premier-league") {
+      if (team === "Premier League") {
         this.leftSelectorTeams = tournamentsData.premierleague.teams;
       }
       if (team === "Seria A") {
         this.leftSelectorTeams = tournamentsData.seriaa.teams;
+      }
+      if (team === "La Liga") {
+        this.leftSelectorTeams = tournamentsData.laliga.teams;
       }
 
       this.addLeftTeamSelector();
@@ -75,14 +78,17 @@ export default class Menu extends Phaser.Scene {
       if (team === "rest-of-the-world") {
         this.rightSelectorTeams = tournamentsData.restoftheworld.teams;
       }
-      if (team === "georgian-league") {
-        this.rightSelectorTeams = tournamentsData.erovnuliliga.teams;
+      if (team === "Georgian Liga") {
+        this.rightSelectorTeams = tournamentsData.georgianliga.teams;
       }
-      if (team === "premier-league") {
+      if (team === "Premier League") {
         this.rightSelectorTeams = tournamentsData.premierleague.teams;
       }
       if (team === "Seria A") {
         this.rightSelectorTeams = tournamentsData.seriaa.teams;
+      }
+      if (team === "La Liga") {
+        this.rightSelectorTeams = tournamentsData.laliga.teams;
       }
 
       this.addRightTeamSelector();

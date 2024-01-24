@@ -14,7 +14,7 @@ export const tournamentsData = {
   laliga: {
     key: "la-liga",
     name: "La Liga",
-    teams: teamsData.premierLeague.teams,
+    teams: teamsData.laLiga.teams,
   },
   othereuropean: {
     key: "other-european",
@@ -36,9 +36,9 @@ export const tournamentsData = {
     name: "Other Nations",
     teams: teamsData.premierLeague.teams,
   },
-  erovnuliliga: {
+  georgianliga: {
     key: "georgian-league",
     name: "Georgian Liga",
-    teams: teamsData.premierLeague.teams,
+    teams: teamsData.erovnuliLiga.teams,
   },
 };

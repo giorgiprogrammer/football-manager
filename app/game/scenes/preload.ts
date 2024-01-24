@@ -22,6 +22,60 @@ export default class Preload extends Phaser.Scene {
 
     //Team Logos
 
+    // Erovnuli Liga
+    this.load.image("bolnisi", "image/teamLogos/erovnuliLiga/Bolnisi.png");
+    this.load.image("dila-gori", "image/teamLogos/erovnuliLiga/Dila-Gori.png");
+    this.load.image(
+      "dinamo-tbilisi",
+      "image/teamLogos/erovnuliLiga/Dinamo-Tbilisi.png"
+    );
+    this.load.image("poti", "image/teamLogos/erovnuliLiga/Poti.png");
+    this.load.image("saburtalo", "image/teamLogos/erovnuliLiga/Saburtalo.png");
+    this.load.image("samgurali", "image/teamLogos/erovnuliLiga/Samgurali.png");
+    this.load.image("shukura", "image/teamLogos/erovnuliLiga/Shukura.png");
+    this.load.image(
+      "torpedo-kutaisi",
+      "image/teamLogos/erovnuliLiga/Torpedo-Kutaisi.png"
+    );
+    this.load.image(
+      "wit-georgia",
+      "image/teamLogos/erovnuliLiga/WIT-Georgia.png"
+    );
+
+    // La Liga
+    this.load.image("alaves", "image/teamLogos/laLiga/Alaves.png");
+    this.load.image("almeria", "image/teamLogos/laLiga/Almeria.png");
+    this.load.image(
+      "athletic-bilbao",
+      "image/teamLogos/laLiga/Athletic-Bilbao.png"
+    );
+    this.load.image(
+      "atletico-madrid",
+      "image/teamLogos/laLiga/Atletico-Madrid.png"
+    );
+    this.load.image("barcelona", "image/teamLogos/laLiga/Barcelona.png");
+    this.load.image("betis", "image/teamLogos/laLiga/Betis.png");
+    this.load.image("cadiz", "image/teamLogos/laLiga/Cadiz.png");
+    this.load.image("celta", "image/teamLogos/laLiga/Celta-Vigo.png");
+    this.load.image("getafe", "image/teamLogos/laLiga/Getafe.png");
+    this.load.image("girona", "image/teamLogos/laLiga/Girona.png");
+    this.load.image("granada", "image/teamLogos/laLiga/Granada.png");
+    this.load.image("las-palmas", "image/teamLogos/laLiga/Las-Palmas.png");
+    this.load.image("mallorca", "image/teamLogos/laLiga/Mallorca.png");
+    this.load.image("osasuna", "image/teamLogos/laLiga/Osasuna.png");
+    this.load.image(
+      "rayo-vallecano",
+      "image/teamLogos/laLiga/Rayo-Vallecano.png"
+    );
+    this.load.image("real-madrid", "image/teamLogos/laLiga/Real-Madrid.png");
+    this.load.image(
+      "real-sociedad",
+      "image/teamLogos/laLiga/Real-Sociedad.png"
+    );
+    this.load.image("sevilla", "image/teamLogos/laLiga/Sevilla.png");
+    this.load.image("valencia", "image/teamLogos/laLiga/Valencia.png");
+    this.load.image("villarreal", "image/teamLogos/laLiga/Villarreal.png");
+
     //Seria A
     this.load.image("atalanta", "image/teamLogos/seriaA/Atalanta.png");
     this.load.image("bologna", "image/teamLogos/seriaA/Bologna.png");
