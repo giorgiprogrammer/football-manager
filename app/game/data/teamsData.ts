@@ -192,7 +192,7 @@ export const teamsData = {
       },
       {
         name: "Chelsea",
-        key: "tottenham",
+        key: "chelsea",
         stength: 1874,
         properties: {
           speed: 50,
