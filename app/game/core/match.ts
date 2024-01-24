@@ -51,6 +51,8 @@ export class Match {
     this.ball.reset();
     this.hostTeam.reset();
     this.guestTeam.reset();
+    this.hostTeam.goalKeeperTween?.pause();
+    this.guestTeam.goalKeeperTween?.pause();
     this.isGoal = false;
 
     this.startText.setVisible(true);
@@ -81,8 +83,6 @@ export class Match {
 
   resetMatch(team: string) {
     this.ball.reset();
-    this.hostTeam.reset();
-    this.guestTeam.reset();
     this.isGoal = false;
 
     const matchIndicatorsScene = this.scene.scene.get(
@@ -103,6 +103,8 @@ export class Match {
 
   resumeMatch(team: string) {
     this.matchData.stadium!.stadiumSurrounding.stopSelebrating();
+    this.hostTeam.goalKeeperTween?.resume();
+    this.guestTeam.goalKeeperTween?.resume();
 
     const footballer =
       team === "host"
@@ -142,6 +144,10 @@ export class Match {
       this.ball.setVelocity(0, 0);
       this.ball.setAngularVelocity(0);
       this.ball.startGoalAnimation();
+      this.hostTeam.reset();
+      this.guestTeam.reset();
+      this.hostTeam.goalKeeperTween?.pause();
+      this.guestTeam.goalKeeperTween?.pause();
       this.isGoal = true;
       this.isPlaying = false;
       this.matchData.stadium!.stadiumSurrounding.rightFansSelebrate();
@@ -158,6 +164,10 @@ export class Match {
       this.ball.setVelocity(0, 0);
       this.ball.setAngularVelocity(0);
       this.ball.startGoalAnimation();
+      this.hostTeam.reset();
+      this.guestTeam.reset();
+      this.hostTeam.goalKeeperTween?.pause();
+      this.guestTeam.goalKeeperTween?.pause();
       this.isGoal = true;
       this.isPlaying = false;
       this.matchData.stadium!.stadiumSurrounding.leftFansSelebrate();
@@ -202,17 +212,12 @@ export class Match {
 
   createStartUI() {
     this.startText = this.scene.add
-      .text(
-        this.scene.game.canvas.width / 2,
-        this.scene.game.canvas.height / 2,
-        "Press To Start",
-        {
-          fontFamily: "Rubik Mono One",
-          fontSize: 44,
-          color: "#F2F2FF",
-          align: "center",
-        }
-      )
+      .text(this.scene.game.canvas.width / 2, 100, "Press To Start", {
+        fontFamily: "Rubik Mono One",
+        fontSize: 12,
+        color: "#F2F2FF",
+        align: "center",
+      })
       .setDepth(1200)
       .setOrigin(0.5)
       .setVisible(false);
@@ -252,6 +257,9 @@ export class Match {
     this.ball.reset();
     this.hostTeam.reset();
     this.guestTeam.reset();
+    this.hostTeam.goalKeeperTween?.stop();
+    this.guestTeam.goalKeeperTween?.stop();
+
     this.isGoal = false;
 
     this.isPlaying = false;

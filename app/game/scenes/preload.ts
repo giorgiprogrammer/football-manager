@@ -22,6 +22,28 @@ export default class Preload extends Phaser.Scene {
 
     //Team Logos
 
+    //Seria A
+    this.load.image("atalanta", "image/teamLogos/seriaA/Atalanta.png");
+    this.load.image("bologna", "image/teamLogos/seriaA/Bologna.png");
+    this.load.image("cagliari", "image/teamLogos/seriaA/Cagliari.png");
+    this.load.image("empoli", "image/teamLogos/seriaA/Empoli.png");
+    this.load.image("fiorentina", "image/teamLogos/seriaA/Fiorentina.png");
+    this.load.image("frosinone", "image/teamLogos/seriaA/Frosinone.png");
+    this.load.image("genoa", "image/teamLogos/seriaA/Genoa.png");
+    this.load.image("inter", "image/teamLogos/seriaA/Inter.png");
+    this.load.image("juventus", "image/teamLogos/seriaA/Juventus.png");
+    this.load.image("lazio", "image/teamLogos/seriaA/Lazio.png");
+    this.load.image("lecce", "image/teamLogos/seriaA/Lecce.png");
+    this.load.image("milan", "image/teamLogos/seriaA/Milan.png");
+    this.load.image("monza", "image/teamLogos/seriaA/Monza.png");
+    this.load.image("napoli", "image/teamLogos/seriaA/Napoli.png");
+    this.load.image("roma", "image/teamLogos/seriaA/Roma.png");
+    this.load.image("salernitana", "image/teamLogos/seriaA/Salernitana.png");
+    this.load.image("sassuolo", "image/teamLogos/seriaA/Sassuolo.png");
+    this.load.image("torino", "image/teamLogos/seriaA/Torino.png");
+    this.load.image("udinese", "image/teamLogos/seriaA/Udinese.png");
+    this.load.image("verona", "image/teamLogos/seriaA/Verona.png");
+
     //Premier League
     this.load.image("arsenal", "image/teamLogos/premierLeague/Arsenal.png");
     this.load.image(

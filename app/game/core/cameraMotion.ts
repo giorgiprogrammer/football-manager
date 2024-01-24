@@ -3,7 +3,7 @@ import { Ball } from "../gameObjects/ball";
 import { Stadium } from "../gameObjects/stadium";
 
 export class CameraMotion {
-  camera_z_index = 1.1;
+  camera_z_index = 0.95;
   isPlaying = false;
 
   constructor(
@@ -15,7 +15,7 @@ export class CameraMotion {
   }
 
   init() {
-    this.scene.cameras.main.startFollow(this.ball, false, 0.006);
+    // this.scene.cameras.main.startFollow(this.ball, false, 0.006);
     this.scene.cameras.main.setZoom(this.camera_z_index);
 
     const centerX = this.ball.x;
@@ -30,11 +30,11 @@ export class CameraMotion {
           centerX + calculatePercentage(25, this.stadium.stadiumWidth)
       ) {
         if (this.camera_z_index > 1) {
-          this.camera_z_index -= 0.002;
+          // this.camera_z_index -= 0.002;
         }
       } else {
         if (this.camera_z_index < 1.25) {
-          this.camera_z_index += 0.002;
+          // this.camera_z_index += 0.002;
         }
       }
     });
@@ -45,8 +45,8 @@ export class CameraMotion {
   startAnimation() {
     this.scene.tweens.add({
       targets: this.scene.cameras.main,
-      zoom: { from: 0.7, to: 1.1 },
-      duration: 5000,
+      zoom: { from: 0.7, to: this.camera_z_index },
+      duration: 4300,
       ease: Phaser.Math.Easing.Quadratic.In,
       onComplete: () => {
         this.scene.events.emit("cameraStartAnimationEnd");

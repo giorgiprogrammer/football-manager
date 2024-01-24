@@ -34,9 +34,13 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
       calculatePercentage(3, this.stadium.stadiumWidth),
       calculatePercentage(3, this.stadium.stadiumWidth)
     );
-    this.setAlpha(0.65);
+    if (this.footballerPosition !== "goalkeeper") this.setAlpha(0.45);
 
-    this.setCircle(this.displayWidth);
+    this.setCircle(
+      this.displayWidth + calculatePercentage(0.4, this.stadium.stadiumWidth),
+      calculatePercentage(0.3, this.stadium.stadiumWidth),
+      calculatePercentage(0.3, this.stadium.stadiumWidth)
+    );
   }
 
   setBall(ball: Ball) {
@@ -67,7 +71,8 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
       () => {
         if (match.isPlaying === false) {
           this.controllBall = false;
-          this.setAlpha(0.65);
+          if (this.footballerPosition !== "goalkeeper") this.setAlpha(0.45);
+
           return;
         }
         if (this.footballerPosition === "goalkeeper") {
@@ -105,7 +110,7 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
 
     setTimeout(() => {
       this.controllBall = false;
-      this.setAlpha(0.65);
+      if (this.footballerPosition !== "goalkeeper") this.setAlpha(0.45);
     }, 500);
   }
 
@@ -124,7 +129,7 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
     );
     setTimeout(() => {
       this.controllBall = false;
-      this.setAlpha(0.65);
+      if (this.footballerPosition !== "goalkeeper") this.setAlpha(0.45);
     }, 600);
   }
 

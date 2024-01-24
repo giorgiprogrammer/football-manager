@@ -154,11 +154,7 @@ export class Team extends Phaser.GameObjects.Container {
 
     this.goalKeeperTween = this.scene.tweens.add({
       targets: this.goalKeeper,
-      duration: interpolate(
-        this.teamData.properties.goalkeeperSpeed,
-        600,
-        1500
-      ),
+      duration: interpolate(this.teamData.properties.goalkeeperSpeed, 700, 300),
       y: {
         from: -this.stadium.leftGoalPost.getBounds().height / 2,
         to: this.stadium.leftGoalPost.getBounds().height / 2,

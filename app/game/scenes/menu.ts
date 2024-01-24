@@ -48,6 +48,9 @@ export default class Menu extends Phaser.Scene {
     this.events.on("leftTournamentChanged", (team: string) => {
       this.leftTeamsSelector.destroy();
 
+      // console.log("aq var : " + JSON.stringify(this.leftSelectorTeams));
+      console.log("team name : " + team);
+
       this.leftTeamsSelector.selectedTeamText.destroy();
       if (team === "rest-of-the-world") {
         this.leftSelectorTeams = tournamentsData.restoftheworld.teams;
@@ -58,7 +61,7 @@ export default class Menu extends Phaser.Scene {
       if (team === "premier-league") {
         this.leftSelectorTeams = tournamentsData.premierleague.teams;
       }
-      if (team === "seria-A") {
+      if (team === "Seria A") {
         this.leftSelectorTeams = tournamentsData.seriaa.teams;
       }
 
@@ -78,7 +81,7 @@ export default class Menu extends Phaser.Scene {
       if (team === "premier-league") {
         this.rightSelectorTeams = tournamentsData.premierleague.teams;
       }
-      if (team === "seria-A") {
+      if (team === "Seria A") {
         this.rightSelectorTeams = tournamentsData.seriaa.teams;
       }
 

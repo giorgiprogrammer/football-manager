@@ -9,7 +9,7 @@ export const tournamentsData = {
   seriaa: {
     key: "seria-A",
     name: "Seria A",
-    teams: teamsData.premierLeague.teams,
+    teams: teamsData.seriaA.teams,
   },
   laliga: {
     key: "la-liga",

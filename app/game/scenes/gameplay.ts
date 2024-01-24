@@ -1,3 +1,4 @@
+import { clamp, interpolate } from "@/app/utils/math";
 import { CameraMotion } from "../core/cameraMotion";
 import { CollisionDetections } from "../core/collisionDetections";
 import { Match } from "../core/match";
@@ -13,10 +14,6 @@ export default class GamePlay extends Phaser.Scene {
   }
 
   create() {
-    this.addStadium();
-  }
-
-  addStadium() {
     const stadium = new Stadium(
       this,
       this.game.canvas.width / 2,
@@ -43,6 +40,84 @@ export default class GamePlay extends Phaser.Scene {
 
     matchData.stadium = stadium;
 
+    this.calculateStartStrength();
+
     this.match = new Match(this, matchData, cameraMotion, ball);
+  }
+
+  calculateStartStrength() {
+    matchData.hostTeamData!.properties.goalkeeperSpeed = clamp(
+      matchData.hostTeamData!.stength,
+      800,
+      2300
+    );
+
+    matchData.hostTeamData!.properties.passAccuracy = clamp(
+      matchData.hostTeamData!.stength,
+      800,
+      2300
+    );
+
+    // matchData.hostTeamData!.properties.passDelay = clamp(
+    //   matchData.hostTeamData!.stength,
+    //   800,
+    //   2300
+    // );
+
+    matchData.hostTeamData!.properties.passSpeed = clamp(
+      matchData.hostTeamData!.stength,
+      800,
+      2300
+    );
+
+    matchData.hostTeamData!.properties.shootSpeed = clamp(
+      matchData.hostTeamData!.stength,
+      800,
+      2300
+    );
+
+    matchData.hostTeamData!.properties.speed = clamp(
+      matchData.hostTeamData!.stength,
+      800,
+      2300
+    );
+
+    // Guest Team
+
+    matchData.guestTeamData!.properties.goalkeeperSpeed = clamp(
+      matchData.guestTeamData!.stength,
+      800,
+      2300
+    );
+
+    matchData.guestTeamData!.properties.passAccuracy = clamp(
+      matchData.guestTeamData!.stength,
+      800,
+      2300
+    );
+
+    // matchData.guestTeamData!.properties.passDelay = clamp(
+    //   matchData.guestTeamData!.stength,
+    //   800,
+    //   2300
+    // );
+
+    matchData.guestTeamData!.properties.passSpeed = clamp(
+      matchData.guestTeamData!.stength,
+      800,
+      2300
+    );
+
+    matchData.guestTeamData!.properties.shootSpeed = clamp(
+      matchData.guestTeamData!.stength,
+      800,
+      2300
+    );
+
+    matchData.guestTeamData!.properties.speed = clamp(
+      matchData.guestTeamData!.stength,
+      800,
+      2300
+    );
   }
 }

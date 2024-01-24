@@ -11,7 +11,7 @@ export const teamsData = {
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
-          passDelay: 100,
+          passDelay: 40,
           passingStyle: "long",
           passAccuracy: 1,
           passSpeed: 100,
@@ -42,7 +42,7 @@ export const teamsData = {
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
-          passDelay: 100,
+          passDelay: 40,
           passingStyle: "long",
           passAccuracy: 1,
           passSpeed: 100,
@@ -52,7 +52,7 @@ export const teamsData = {
           defence: {
             type: "attack",
             side: "wide",
-            quntity: 3,
+            quntity: 4,
           },
           midfielder: {
             type: "defend",
@@ -73,7 +73,7 @@ export const teamsData = {
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
-          passDelay: 100,
+          passDelay: 40,
           passingStyle: "long",
           passAccuracy: 1,
           passSpeed: 100,
@@ -83,7 +83,7 @@ export const teamsData = {
           defence: {
             type: "attack",
             side: "wide",
-            quntity: 3,
+            quntity: 4,
           },
           midfielder: {
             type: "defend",
@@ -104,7 +104,7 @@ export const teamsData = {
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
-          passDelay: 100,
+          passDelay: 40,
           passingStyle: "long",
           passAccuracy: 1,
           passSpeed: 100,
@@ -114,7 +114,7 @@ export const teamsData = {
           defence: {
             type: "attack",
             side: "wide",
-            quntity: 3,
+            quntity: 4,
           },
           midfielder: {
             type: "defend",
@@ -135,7 +135,7 @@ export const teamsData = {
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
-          passDelay: 100,
+          passDelay: 40,
           passingStyle: "long",
           passAccuracy: 1,
           passSpeed: 100,
@@ -145,7 +145,7 @@ export const teamsData = {
           defence: {
             type: "attack",
             side: "wide",
-            quntity: 3,
+            quntity: 4,
           },
           midfielder: {
             type: "defend",
@@ -166,7 +166,7 @@ export const teamsData = {
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
-          passDelay: 100,
+          passDelay: 40,
           passingStyle: "long",
           passAccuracy: 1,
           passSpeed: 100,
@@ -176,7 +176,7 @@ export const teamsData = {
           defence: {
             type: "attack",
             side: "wide",
-            quntity: 3,
+            quntity: 4,
           },
           midfielder: {
             type: "defend",
@@ -197,7 +197,7 @@ export const teamsData = {
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
-          passDelay: 100,
+          passDelay: 40,
           passingStyle: "long",
           passAccuracy: 1,
           passSpeed: 100,
@@ -228,7 +228,7 @@ export const teamsData = {
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
-          passDelay: 100,
+          passDelay: 40,
           passingStyle: "long",
           passAccuracy: 1,
           passSpeed: 100,
@@ -238,7 +238,7 @@ export const teamsData = {
           defence: {
             type: "attack",
             side: "wide",
-            quntity: 3,
+            quntity: 4,
           },
           midfielder: {
             type: "defend",
@@ -259,7 +259,7 @@ export const teamsData = {
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
-          passDelay: 100,
+          passDelay: 40,
           passingStyle: "long",
           passAccuracy: 1,
           passSpeed: 100,
@@ -269,7 +269,7 @@ export const teamsData = {
           defence: {
             type: "attack",
             side: "wide",
-            quntity: 3,
+            quntity: 4,
           },
           midfielder: {
             type: "defend",
@@ -290,7 +290,7 @@ export const teamsData = {
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
-          passDelay: 100,
+          passDelay: 40,
           passingStyle: "long",
           passAccuracy: 1,
           passSpeed: 100,
@@ -300,7 +300,7 @@ export const teamsData = {
           defence: {
             type: "attack",
             side: "wide",
-            quntity: 3,
+            quntity: 4,
           },
           midfielder: {
             type: "defend",
@@ -321,7 +321,7 @@ export const teamsData = {
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
-          passDelay: 100,
+          passDelay: 40,
           passingStyle: "long",
           passAccuracy: 1,
           passSpeed: 100,
@@ -331,7 +331,7 @@ export const teamsData = {
           defence: {
             type: "attack",
             side: "wide",
-            quntity: 3,
+            quntity: 4,
           },
           midfielder: {
             type: "defend",
@@ -352,7 +352,7 @@ export const teamsData = {
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
-          passDelay: 100,
+          passDelay: 40,
           passingStyle: "long",
           passAccuracy: 1,
           passSpeed: 100,
@@ -362,7 +362,7 @@ export const teamsData = {
           defence: {
             type: "attack",
             side: "wide",
-            quntity: 3,
+            quntity: 4,
           },
           midfielder: {
             type: "defend",
@@ -383,7 +383,7 @@ export const teamsData = {
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
-          passDelay: 100,
+          passDelay: 40,
           passingStyle: "long",
           passAccuracy: 1,
           passSpeed: 100,
@@ -393,7 +393,7 @@ export const teamsData = {
           defence: {
             type: "attack",
             side: "wide",
-            quntity: 3,
+            quntity: 4,
           },
           midfielder: {
             type: "defend",
@@ -414,7 +414,7 @@ export const teamsData = {
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
-          passDelay: 100,
+          passDelay: 40,
           passingStyle: "long",
           passAccuracy: 1,
           passSpeed: 100,
@@ -424,7 +424,7 @@ export const teamsData = {
           defence: {
             type: "attack",
             side: "wide",
-            quntity: 3,
+            quntity: 4,
           },
           midfielder: {
             type: "defend",
@@ -445,7 +445,7 @@ export const teamsData = {
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
-          passDelay: 100,
+          passDelay: 40,
           passingStyle: "long",
           passAccuracy: 1,
           passSpeed: 100,
@@ -455,7 +455,7 @@ export const teamsData = {
           defence: {
             type: "attack",
             side: "wide",
-            quntity: 3,
+            quntity: 4,
           },
           midfielder: {
             type: "defend",
@@ -476,7 +476,7 @@ export const teamsData = {
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
-          passDelay: 100,
+          passDelay: 40,
           passingStyle: "long",
           passAccuracy: 1,
           passSpeed: 100,
@@ -486,7 +486,7 @@ export const teamsData = {
           defence: {
             type: "attack",
             side: "wide",
-            quntity: 3,
+            quntity: 4,
           },
           midfielder: {
             type: "defend",
@@ -507,7 +507,7 @@ export const teamsData = {
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
-          passDelay: 100,
+          passDelay: 40,
           passingStyle: "long",
           passAccuracy: 1,
           passSpeed: 100,
@@ -517,7 +517,7 @@ export const teamsData = {
           defence: {
             type: "attack",
             side: "wide",
-            quntity: 3,
+            quntity: 4,
           },
           midfielder: {
             type: "defend",
@@ -538,7 +538,7 @@ export const teamsData = {
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
-          passDelay: 100,
+          passDelay: 40,
           passingStyle: "long",
           passAccuracy: 1,
           passSpeed: 100,
@@ -548,7 +548,7 @@ export const teamsData = {
           defence: {
             type: "attack",
             side: "wide",
-            quntity: 3,
+            quntity: 4,
           },
           midfielder: {
             type: "defend",
@@ -569,7 +569,7 @@ export const teamsData = {
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
-          passDelay: 100,
+          passDelay: 40,
           passingStyle: "long",
           passAccuracy: 1,
           passSpeed: 100,
@@ -579,7 +579,7 @@ export const teamsData = {
           defence: {
             type: "attack",
             side: "wide",
-            quntity: 3,
+            quntity: 4,
           },
           midfielder: {
             type: "defend",
@@ -600,8 +600,44 @@ export const teamsData = {
         properties: {
           speed: 50,
           goalkeeperSpeed: 50,
-          passDelay: 100,
+          passDelay: 40,
           passingStyle: "long",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 4,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 3,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+    ],
+  },
+  seriaA: {
+    logo: "seriaA",
+    teams: [
+      {
+        name: "Atalanta",
+        key: "atalanta",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
           passAccuracy: 1,
           passSpeed: 100,
           shootSpeed: 100,
@@ -615,7 +651,596 @@ export const teamsData = {
           midfielder: {
             type: "defend",
             side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
             quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Bologna",
+        key: "bologna",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Cagliari",
+        key: "cagliari",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Empoli",
+        key: "empoli",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Fiorentina",
+        key: "fiorentina",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Frosinone",
+        key: "frosinone",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Genoa",
+        key: "genoa",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Inter",
+        key: "inter",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Juventus",
+        key: "juventus",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Lazio",
+        key: "lazio",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Lecce",
+        key: "lecce",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Milan",
+        key: "milan",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Monza",
+        key: "monza",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Napoli",
+        key: "napoli",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Roma",
+        key: "roma",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Salernitana",
+        key: "salernitana",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Sassuolo",
+        key: "sassuolo",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Torino",
+        key: "torino",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Udinese",
+        key: "udinese",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
+          },
+          attacker: {
+            type: "normal",
+            side: "center",
+            quntity: 3,
+          },
+        },
+      },
+      {
+        name: "Verona",
+        key: "verona",
+        stength: 1874,
+        properties: {
+          speed: 50,
+          goalkeeperSpeed: 50,
+          passDelay: 40,
+          passingStyle: "short",
+          passAccuracy: 1,
+          passSpeed: 100,
+          shootSpeed: 100,
+        },
+        tactics: {
+          defence: {
+            type: "attack",
+            side: "wide",
+            quntity: 3,
+          },
+          midfielder: {
+            type: "defend",
+            side: "center",
+            quntity: 4,
           },
           attacker: {
             type: "normal",
