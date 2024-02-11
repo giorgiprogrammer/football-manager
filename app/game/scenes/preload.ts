@@ -21,6 +21,68 @@ export default class Preload extends Phaser.Scene {
     this.load.image("stadiumFitch", "image/ui/fitch.png");
 
     //Team Logos
+    // Nations
+    this.load.image("algeria", "image/teamLogos/nations/Algeria.png");
+    this.load.image("argentina", "image/teamLogos/nations/Argentina.png");
+    this.load.image("australia", "image/teamLogos/nations/Australia.png");
+    this.load.image("brazil", "image/teamLogos/nations/Brazil.png");
+    this.load.image("cameroon", "image/teamLogos/nations/Cameroon.png");
+    this.load.image("canada", "image/teamLogos/nations/Canada.png");
+    this.load.image("chile", "image/teamLogos/nations/Chile.png");
+    this.load.image("china", "image/teamLogos/nations/China.png");
+    this.load.image("colombia", "image/teamLogos/nations/Colombia.png");
+    this.load.image("ecuador", "image/teamLogos/nations/Ecuador.png");
+    this.load.image("egypt", "image/teamLogos/nations/Egypt.png");
+    this.load.image("ghana", "image/teamLogos/nations/Ghana.png");
+    this.load.image("india", "image/teamLogos/nations/India.png");
+    this.load.image("japan", "image/teamLogos/nations/Japan.png");
+    this.load.image("mexico", "image/teamLogos/nations/Mexico.png");
+    this.load.image("morocco", "image/teamLogos/nations/Morocco.png");
+    this.load.image("nigeria", "image/teamLogos/nations/Nigeria.png");
+    this.load.image("paraguay", "image/teamLogos/nations/Paraguay.png");
+    this.load.image("peru", "image/teamLogos/nations/Peru.png");
+    this.load.image("senegal", "image/teamLogos/nations/Senegal.png");
+    this.load.image("south-africa", "image/teamLogos/nations/South-Africa.png");
+    this.load.image("south-korea", "image/teamLogos/nations/South-Korea.png");
+    this.load.image("uruguay", "image/teamLogos/nations/Uruguay.png");
+    this.load.image("usa", "image/teamLogos/nations/USA.png");
+    this.load.image("venezuela", "image/teamLogos/nations/Venezuela.png");
+
+    // European Nations
+    this.load.image("albania", "image/teamLogos/europeanNations/Albania.png");
+    this.load.image("austria", "image/teamLogos/europeanNations/Austria.png");
+    this.load.image("belgium", "image/teamLogos/europeanNations/Belgium.png");
+    this.load.image("croatia", "image/teamLogos/europeanNations/Croatia.png");
+    this.load.image(
+      "czech-republic",
+      "image/teamLogos/europeanNations/Czech-Republic.png"
+    );
+    this.load.image("denmark", "image/teamLogos/europeanNations/Denmark.png");
+    this.load.image("england", "image/teamLogos/europeanNations/England.png");
+    this.load.image("france", "image/teamLogos/europeanNations/France.png");
+    this.load.image("georgia", "image/teamLogos/europeanNations/Georgia.png");
+    this.load.image("germany", "image/teamLogos/europeanNations/Germany.png");
+    this.load.image("greece", "image/teamLogos/europeanNations/Greece.png");
+    this.load.image("hungary", "image/teamLogos/europeanNations/Hungary.png");
+    this.load.image("italy", "image/teamLogos/europeanNations/Italy.png");
+    this.load.image(
+      "netherlands",
+      "image/teamLogos/europeanNations/Netherlands.png"
+    );
+    this.load.image("norway", "image/teamLogos/europeanNations/Norway.png");
+    this.load.image("portugal", "image/teamLogos/europeanNations/Portugal.png");
+    this.load.image("romania", "image/teamLogos/europeanNations/Romania.png");
+    this.load.image("scotland", "image/teamLogos/europeanNations/Scotland.png");
+    this.load.image("serbia", "image/teamLogos/europeanNations/Serbia.png");
+    this.load.image("slovakia", "image/teamLogos/europeanNations/Slovakia.png");
+    this.load.image("slovenia", "image/teamLogos/europeanNations/Slovenia.png");
+    this.load.image("spain", "image/teamLogos/europeanNations/Spain.png");
+    this.load.image("sweden", "image/teamLogos/europeanNations/Sweden.png");
+    this.load.image(
+      "switzerland",
+      "image/teamLogos/europeanNations/Switzerland.png"
+    );
+    this.load.image("turkey", "image/teamLogos/europeanNations/Turkey.png");
 
     //Other Europenas
     this.load.image("ajax", "image/teamLogos/otherEuropeans/Ajax.png");

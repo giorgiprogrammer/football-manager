@@ -20,8 +20,8 @@ export default class Menu extends Phaser.Scene {
   leftTournamentSelector!: TeamsSelector;
   rightTournamentSelector!: TeamsSelector;
 
-  leftSelectorTeams = teamsData.premierLeague.teams;
-  rightSelectorTeams = teamsData.premierLeague.teams;
+  leftSelectorTeams = teamsData.otherEuropeans.teams;
+  rightSelectorTeams = teamsData.otherEuropeans.teams;
 
   constructor() {
     super("Menu");
@@ -48,10 +48,15 @@ export default class Menu extends Phaser.Scene {
     this.events.on("leftTournamentChanged", (team: string) => {
       this.leftTeamsSelector.destroy();
 
-      // console.log("aq var : " + JSON.stringify(this.leftSelectorTeams));
-      console.log("team name : " + team);
+      // console.log("team name : " + team);
 
       this.leftTeamsSelector.selectedTeamText.destroy();
+      if (team === "Nations") {
+        this.leftSelectorTeams = tournamentsData.nations.teams;
+      }
+      if (team === "Other Nations") {
+        this.leftSelectorTeams = tournamentsData.othernations.teams;
+      }
       if (team === "Other European") {
         this.leftSelectorTeams = tournamentsData.othereuropean.teams;
       }
@@ -78,6 +83,12 @@ export default class Menu extends Phaser.Scene {
       this.rightTeamsSelector.destroy();
 
       this.rightTeamsSelector.selectedTeamText.destroy();
+      if (team === "Nations") {
+        this.rightSelectorTeams = tournamentsData.nations.teams;
+      }
+      if (team === "Other Nations") {
+        this.rightSelectorTeams = tournamentsData.othernations.teams;
+      }
       if (team === "Other European") {
         this.rightSelectorTeams = tournamentsData.othereuropean.teams;
       }

@@ -50,6 +50,12 @@ export class TacticsModal extends Phaser.GameObjects.Container {
     this.rightTournamentName = this.rightTournamentName.toLocaleLowerCase();
     this.rightTournamentName = this.rightTournamentName.replaceAll(" ", "");
 
+    console.log("left tournament name : " + this.leftTournamentName);
+    console.log("right tournament name : " + this.rightTournamentName);
+
+    console.log("left team name : " + this.leftTeamName);
+    console.log("right team name : " + this.rightTeamName);
+
     //@ts-ignore
     tournamentsData[this.leftTournamentName].teams.forEach((team) => {
       if (team.name === this.leftTeamName) {

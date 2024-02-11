@@ -26,15 +26,15 @@ export const tournamentsData = {
     name: "Rest Of The World",
     teams: teamsData.restOfTheWorld.teams,
   },
-  europeannations: {
+  nations: {
     key: "arsenal",
     name: "Nations",
-    teams: teamsData.premierLeague.teams,
+    teams: teamsData.europeanNations.teams,
   },
   othernations: {
     key: "arsenal",
     name: "Other Nations",
-    teams: teamsData.premierLeague.teams,
+    teams: teamsData.nations.teams,
   },
   georgianliga: {
     key: "georgian-league",
