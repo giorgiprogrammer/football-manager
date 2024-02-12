@@ -308,6 +308,11 @@ export default class Preload extends Phaser.Scene {
       "other-european",
       "image/teamLogos/tournaments/Other-European.png"
     );
+    this.load.image("european", "image/teamLogos/tournaments/european.png");
+    this.load.image(
+      "other-european-nations",
+      "image/teamLogos/tournaments/other-european-nations.png"
+    );
     this.load.image(
       "premier-league",
       "image/teamLogos/tournaments/Premier-League.png"

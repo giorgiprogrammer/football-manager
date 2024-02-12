@@ -45,7 +45,6 @@ const Game = () => {
         },
         backgroundColor: 0x02070d,
         scene: [Preload, Menu, GamePlay, MatchIndicators],
-        // scene: [Preload, GamePlay],
       });
 
       return () => game.destroy(true, false);

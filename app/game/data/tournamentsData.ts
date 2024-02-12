@@ -27,12 +27,12 @@ export const tournamentsData = {
     teams: teamsData.restOfTheWorld.teams,
   },
   nations: {
-    key: "arsenal",
+    key: "european",
     name: "Nations",
     teams: teamsData.europeanNations.teams,
   },
   othernations: {
-    key: "arsenal",
+    key: "other-european-nations",
     name: "Other Nations",
     teams: teamsData.nations.teams,
   },
