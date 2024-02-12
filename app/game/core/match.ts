@@ -65,9 +65,11 @@ export class Match {
       loop: false,
     });
     this.fansSound = this.scene.sound.add("fansSound", {
-      volume: 0.3,
+      volume: 0.12,
       loop: true,
     });
+
+    this.fansSound.play();
   }
 
   stopHalfTime() {
@@ -281,6 +283,7 @@ export class Match {
   }
 
   finishMatch() {
+    this.fansSound.stop();
     this.refereeSound.play();
     this.ball.reset();
     this.hostTeam.reset();
@@ -296,7 +299,6 @@ export class Match {
   startGame() {
     this.refereeSound.play();
     this.passSound.play();
-    this.fansSound.play();
     this.cameraMotion.isPlaying = true;
 
     const footballer =
