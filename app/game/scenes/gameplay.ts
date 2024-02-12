@@ -1,9 +1,7 @@
-import { clamp, interpolate } from "@/app/utils/math";
+import { clamp } from "@/app/utils/math";
 import { CameraMotion } from "../core/cameraMotion";
-import { CollisionDetections } from "../core/collisionDetections";
 import { Match } from "../core/match";
 import { matchData } from "../data/matchData";
-import { teamsData } from "../data/teamsData";
 import { Ball } from "../gameObjects/ball";
 import { Stadium } from "../gameObjects/stadium";
 

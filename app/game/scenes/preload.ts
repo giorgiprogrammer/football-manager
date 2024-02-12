@@ -8,6 +8,13 @@ export default class Preload extends Phaser.Scene {
   preload() {
     this.load.setPath(`../../game/assets/`);
 
+    //sound Effects
+    this.load.audio("passSound", ["sounds/pass.mp3"]);
+    this.load.audio("shootSound", ["sounds/shoot.mp3"]);
+    this.load.audio("goalSelebrationSound", ["sounds/goalSelebration.mp3"]);
+    this.load.audio("refereeSound", ["sounds/referee.mp3"]);
+    this.load.audio("fansSound", ["sounds/fans.mp3"]);
+
     //Font
     this.load.addFile(new WebFontFile(this.load, "Rubik Mono One"));
 

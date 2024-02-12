@@ -53,7 +53,7 @@ export class Ball extends Phaser.Physics.Arcade.Image {
   }
 
   stopGoalAnimation() {
-    this.goalAnimation.pause();
+    this.goalAnimation?.pause();
   }
 
   firstKick(x: number, y: number) {

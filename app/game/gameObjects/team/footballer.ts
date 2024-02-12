@@ -11,6 +11,8 @@ import { Match } from "../../core/match";
 export class Footballer extends Phaser.Physics.Arcade.Image {
   ball!: Ball;
   controllBall = false;
+  passSound!: Phaser.Sound.BaseSound;
+  shootSound!: Phaser.Sound.BaseSound;
 
   constructor(
     scene: Phaser.Scene,
@@ -29,6 +31,15 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
   }
 
   init() {
+    this.passSound = this.scene.sound.add("passSound", {
+      volume: 1,
+      loop: false,
+    });
+    this.shootSound = this.scene.sound.add("shootSound", {
+      volume: 1,
+      loop: false,
+    });
+
     this.setOrigin(0.5);
     this.setDisplaySize(
       calculatePercentage(3, this.stadium.stadiumWidth),
@@ -102,6 +113,7 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
 
     const randomY = getRandomNumber(0, 1) === 0 ? y : -y;
 
+    this.passSound.play();
     this.ball.kick(
       interpolate(this.properties.passSpeed, 140, 260),
       footballer.getBounds().centerX,
@@ -115,6 +127,7 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
   }
 
   shoot() {
+    this.shootSound.play();
     this.ball.kick(
       interpolate(this.properties.passSpeed, 180, 320),
       this.isHost
@@ -134,6 +147,7 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
   }
 
   randomShoot() {
+    this.passSound.play();
     this.ball.kick(
       interpolate(this.properties.passSpeed, 180, 320),
       this.isHost

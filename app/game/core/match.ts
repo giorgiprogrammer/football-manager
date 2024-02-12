@@ -28,6 +28,11 @@ export class Match {
 
   timer = 0;
 
+  passSound!: Phaser.Sound.BaseSound;
+  goalSelebration!: Phaser.Sound.BaseSound;
+  refereeSound!: Phaser.Sound.BaseSound;
+  fansSound!: Phaser.Sound.BaseSound;
+
   constructor(
     public scene: Phaser.Scene,
     public matchData: MatchData,
@@ -44,6 +49,24 @@ export class Match {
 
     this.scene.events.on("update", () => {
       this.checkIfIsGoal();
+    });
+
+    // Add Sounds
+    this.passSound = this.scene.sound.add("passSound", {
+      volume: 1,
+      loop: false,
+    });
+    this.goalSelebration = this.scene.sound.add("goalSelebrationSound", {
+      volume: 1,
+      loop: false,
+    });
+    this.refereeSound = this.scene.sound.add("refereeSound", {
+      volume: 1,
+      loop: false,
+    });
+    this.fansSound = this.scene.sound.add("fansSound", {
+      volume: 0.3,
+      loop: true,
     });
   }
 
@@ -125,6 +148,8 @@ export class Match {
       ? this.hostTeam.startMotion()
       : this.guestTeam.startMotion();
 
+    this.refereeSound.play();
+    this.passSound.play();
     this.ball.firstKick(
       footballer.getBounds().centerX,
       footballer.getBounds().centerY
@@ -141,6 +166,7 @@ export class Match {
       this.ball.getBounds().centerX <
       this.matchData.stadium!.leftGoalPost.getBounds().centerX
     ) {
+      this.goalSelebration.play();
       this.ball.setVelocity(0, 0);
       this.ball.setAngularVelocity(0);
       this.ball.startGoalAnimation();
@@ -161,6 +187,7 @@ export class Match {
       this.ball.getBounds().centerX >
       this.matchData.stadium!.rightGoalPost.getBounds().centerX
     ) {
+      this.goalSelebration.play();
       this.ball.setVelocity(0, 0);
       this.ball.setAngularVelocity(0);
       this.ball.startGoalAnimation();
@@ -254,6 +281,7 @@ export class Match {
   }
 
   finishMatch() {
+    this.refereeSound.play();
     this.ball.reset();
     this.hostTeam.reset();
     this.guestTeam.reset();
@@ -266,6 +294,9 @@ export class Match {
   }
 
   startGame() {
+    this.refereeSound.play();
+    this.passSound.play();
+    this.fansSound.play();
     this.cameraMotion.isPlaying = true;
 
     const footballer =
