@@ -1,4 +1,5 @@
-import HomePage from "./homePage/HomePage";
+import PageLayout from "./components/layout";
+import HomePage from "./components/pages/homePage";
 
 import { Inter, Roboto } from "next/font/google";
 
@@ -10,7 +11,9 @@ const roboto = Roboto({
 export default function Home() {
   return (
     <main className={roboto.className}>
-      <HomePage />
+      <PageLayout>
+        <HomePage />
+      </PageLayout>
     </main>
   );
 }
