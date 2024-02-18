@@ -5,10 +5,10 @@ import {
   TextAnimationCustomProps,
   TextAnimationProps,
   textAnimationDefaultProps,
-} from "../types/component-types";
+} from "../../../types/component-types";
 import Symbol from "./components/Symbol";
 import React from "react";
-import TextAnimationCore from "./core";
+import TextAnimationCore from "../../core";
 import "./style.css";
 import clsx from "clsx";
 

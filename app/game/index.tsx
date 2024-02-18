@@ -1,10 +1,9 @@
 "use client";
 
 import style from "./style.module.css";
-import { useEffect, useRef, useState } from "react";
-import Spinner from "../components/spinner/Spinner";
+import { useEffect, useRef } from "react";
 
-const Game = () => {
+export const Game = () => {
   const canvasContainer = useRef(null);
 
   useEffect(() => {
@@ -53,7 +52,6 @@ const Game = () => {
 
   return (
     <div>
-      {/* <div className="opacity-20"> {<Spinner />}</div> */}
       <div ref={canvasContainer} className={style.canvasContainer}></div>
     </div>
   );
