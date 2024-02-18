@@ -1,4 +1,3 @@
-import { ScheduleApi } from "@/app/services/supabase/schedule";
 import Row from "./components/Row";
 
 export default async function Schedule({
@@ -6,21 +5,21 @@ export default async function Schedule({
 }: {
   division_id: number;
 }) {
-  const scheduleAPI = new ScheduleApi();
-  const response = await scheduleAPI.getSchedule();
+  // const scheduleAPI = new
+  // const response = await scheduleAPI.getSchedule();
 
   // @ts-ignore
-  const scheduleData: {
-    division_id: number;
-    team_name: string;
-    placement: number;
-    win: number;
-    draw: number;
-    lost: number;
-    played: number;
-    point: number;
-    strength: number;
-  }[] = response.data;
+  // const scheduleData: {
+  //   division_id: number;
+  //   team_name: string;
+  //   placement: number;
+  //   win: number;
+  //   draw: number;
+  //   lost: number;
+  //   played: number;
+  //   point: number;
+  //   strength: number;
+  // }[] = response.data;
 
   return (
     <div className="w-[90vw] relative flex flex-col items-center">
@@ -37,7 +36,7 @@ export default async function Schedule({
         points={"Pnts"}
         strength={"Strength"}
       />
-      {
+      {/* {
         // Schedule Data
         scheduleData?.map((teamData, index) => {
           if (teamData.division_id !== division_id) return null;
@@ -54,7 +53,7 @@ export default async function Schedule({
             />
           );
         })
-      }
+      } */}
     </div>
   );
 }

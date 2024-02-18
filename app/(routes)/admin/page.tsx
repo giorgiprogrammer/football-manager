@@ -1,10 +1,10 @@
 "use client";
 
-import { ScheduleApi } from "@/app/services/supabase/schedule";
+import { TournamenrsManager } from "@/app/core/tournamentsManager/tournametsManager";
 import { useState } from "react";
 
 export default function AdminPage() {
-  const scheduleAPI = new ScheduleApi();
+  const tournamensManager = new TournamenrsManager();
 
   const [apiText, setApiText] = useState("");
 
@@ -15,7 +15,7 @@ export default function AdminPage() {
       <button
         onClick={() => {
           setApiText("");
-          scheduleAPI.insertInitialData().then(
+          tournamensManager.initTournament().then(
             (res) => {
               setApiText(JSON.stringify(res));
               console.log(res);
@@ -34,7 +34,7 @@ export default function AdminPage() {
       <button
         onClick={() => {
           setApiText("");
-          scheduleAPI.clearSchedule().then(
+          tournamensManager.deleteTournament().then(
             (res) => {
               setApiText(JSON.stringify(res));
               console.log(res);
