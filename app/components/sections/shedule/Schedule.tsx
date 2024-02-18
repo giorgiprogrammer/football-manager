@@ -1,3 +1,4 @@
+import { tournamentManager } from "@/app/core/tournamentsManager/tournametsManager";
 import Row from "./components/Row";
 
 export default async function Schedule({
@@ -5,25 +6,27 @@ export default async function Schedule({
 }: {
   division_id: number;
 }) {
-  // const scheduleAPI = new
-  // const response = await scheduleAPI.getSchedule();
+  let division: any[] = [];
 
-  // @ts-ignore
-  // const scheduleData: {
-  //   division_id: number;
-  //   team_name: string;
-  //   placement: number;
-  //   win: number;
-  //   draw: number;
-  //   lost: number;
-  //   played: number;
-  //   point: number;
-  //   strength: number;
-  // }[] = response.data;
+  // Depending on division_id, select the appropriate division array
+  switch (division_id) {
+    case 1:
+      division = tournamentManager.division_1;
+      break;
+    case 2:
+      division = tournamentManager.division_2;
+      break;
+    case 3:
+      division = tournamentManager.division_3;
+      break;
+    default:
+      // Handle invalid division_id
+      break;
+  }
 
   return (
     <div className="w-[90vw] relative flex flex-col items-center">
-      <h1 className="custom-font-2 mb-4 font-semibold text-gray-500">
+      <h1 className="custom-font-2 text-2xl mb-4 font-semibold text-gray-500">
         Division {division_id} Schedule
       </h1>
       {/* Top Indicators */}
@@ -36,24 +39,20 @@ export default async function Schedule({
         points={"Pnts"}
         strength={"Strength"}
       />
-      {/* {
-        // Schedule Data
-        scheduleData?.map((teamData, index) => {
-          if (teamData.division_id !== division_id) return null;
-          return (
-            <Row
-              key={index}
-              teamName={teamData.team_name}
-              played={teamData.played}
-              won={teamData.win}
-              drawn={teamData.draw}
-              lost={teamData.lost}
-              points={teamData.point}
-              strength={teamData.strength}
-            />
-          );
-        })
-      } */}
+      {division.map((teamData, index) => {
+        return (
+          <Row
+            key={index}
+            teamName={teamData.team_name}
+            played={teamData.played}
+            won={teamData.win}
+            drawn={teamData.draw}
+            lost={teamData.lost}
+            points={teamData.point}
+            strength={teamData.strength}
+          />
+        );
+      })}
     </div>
   );
 }

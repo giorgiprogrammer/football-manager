@@ -1,5 +1,6 @@
 import { initialSheduleData } from "@/app/config/initialSheduleData";
 import { supabase } from "./config";
+import { getRandomNumber } from "@/app/utils/math";
 
 export class TournamentAPI {
   async insertInitialData() {
@@ -16,13 +17,13 @@ export class TournamentAPI {
           initialTeamsData.push({
             division_id: divisionIndex + 1, // Division ID starts from 1
             team_name: team.teamName,
-            placement: teamIndex + 1, // Placement starts from 1
+            placement: 0, // Placement starts from 1
             win: team.won,
             draw: team.drawn,
             lost: team.lost,
             played: team.played,
-            point: team.points,
-            strength: team.strength,
+            point: team.points + getRandomNumber(10, 20), // just for testing,
+            strength: team.strength + getRandomNumber(10, 2000), // just for testing
           });
         }
       );
@@ -83,5 +84,12 @@ export class TournamentAPI {
       .select(
         "division_id, team_name, placement, win, draw, lost, played, point, strength"
       );
+  }
+
+  async getTourIndex() {
+    return await supabase
+      .from("TournamentsInfo")
+      .select("tour_index")
+      .eq("tournament_name", "Marble League");
   }
 }

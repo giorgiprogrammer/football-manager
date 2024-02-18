@@ -1,11 +1,9 @@
 "use client";
 
-import { TournamenrsManager } from "@/app/core/tournamentsManager/tournametsManager";
+import { tournamentManager } from "@/app/core/tournamentsManager/tournametsManager";
 import { useState } from "react";
 
 export default function AdminPage() {
-  const tournamensManager = new TournamenrsManager();
-
   const [apiText, setApiText] = useState("");
 
   return (
@@ -15,7 +13,7 @@ export default function AdminPage() {
       <button
         onClick={() => {
           setApiText("");
-          tournamensManager.initTournament().then(
+          tournamentManager.initTournament().then(
             (res) => {
               setApiText(JSON.stringify(res));
               console.log(res);
@@ -28,13 +26,13 @@ export default function AdminPage() {
         }}
         className=" px-3 py-2 bg-slate-800 text-white "
       >
-        Insert Initial Data
+        Start New Tournament
       </button>
 
       <button
         onClick={() => {
           setApiText("");
-          tournamensManager.deleteTournament().then(
+          tournamentManager.deleteTournament().then(
             (res) => {
               setApiText(JSON.stringify(res));
               console.log(res);
@@ -47,7 +45,7 @@ export default function AdminPage() {
         }}
         className="px-3 py-2 bg-slate-800 text-white "
       >
-        Clear Schedule
+        Delete Tournament
       </button>
     </div>
   );
