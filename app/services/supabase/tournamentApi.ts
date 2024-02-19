@@ -1,6 +1,7 @@
 import { initialSheduleData } from "@/app/config/initialSheduleData";
 import { supabase } from "./config";
 import { getRandomNumber } from "@/app/utils/math";
+import { fixturesType } from "@/app/core/tournamentsManager/tournametsManager";
 
 export class TournamentAPI {
   async insertInitialData() {
@@ -41,7 +42,7 @@ export class TournamentAPI {
       const { data: tournamentInfoData, error: tournamentInfoError } =
         await supabase
           .from("TournamentsInfo")
-          .insert([{ tournament_name: "Marble League", tour_index: 0 }]);
+          .insert([{ tournament_name: "Marble League", tour_index: 1 }]);
 
       if (tournamentInfoError) throw tournamentInfoError;
       // if no error return data
@@ -70,6 +71,13 @@ export class TournamentAPI {
 
       if (tournamentInfoError) throw tournamentInfoError;
 
+      const { data: fixutedData, error: fixturesError } = await supabase
+        .from("TournamentFixtures")
+        .delete()
+        .in("division", [1, 2, 3]);
+
+      if (fixturesError) throw fixturesError;
+
       // if no error return data
       return { scheduleData, tournamenrInfoData };
     } catch (error) {
@@ -91,5 +99,74 @@ export class TournamentAPI {
       .from("TournamentsInfo")
       .select("tour_index")
       .eq("tournament_name", "Marble League");
+  }
+
+  async getFixtures(division: number) {
+    return await supabase
+      .from("TournamentFixtures")
+      .select("*")
+      .eq("division", division);
+  }
+
+  async insertFixturesData(fixtures: fixturesType) {
+    const fixturesData: {
+      hostTeamScore: string;
+      guestTeamScore: string;
+      hostTeamName: string;
+      guestTeamName: string;
+      division: number;
+      week: number;
+    }[] = [];
+
+    // Prepare data for insertion
+    fixtures.division_1.forEach((fixture, index) => {
+      fixture.forEach((match) => {
+        fixturesData.push({
+          hostTeamScore: "-1",
+          guestTeamScore: "-1",
+          hostTeamName: match[0],
+          guestTeamName: match[1],
+          division: 1,
+          week: index,
+        });
+      });
+    });
+
+    fixtures.division_2.forEach((fixture, index) => {
+      fixture.forEach((match) => {
+        fixturesData.push({
+          hostTeamScore: "-1",
+          guestTeamScore: "-1",
+          hostTeamName: match[0],
+          guestTeamName: match[1],
+          division: 2,
+          week: index,
+        });
+      });
+    });
+
+    fixtures.division_3.forEach((fixture, index) => {
+      fixture.forEach((match) => {
+        fixturesData.push({
+          hostTeamScore: "-1",
+          guestTeamScore: "-1",
+          hostTeamName: match[0],
+          guestTeamName: match[1],
+          division: 3,
+          week: index,
+        });
+      });
+    });
+
+    try {
+      const { data, error } = await supabase
+        .from("TournamentFixtures")
+        .insert(fixturesData);
+      if (error) throw error;
+      return data;
+    } catch (error) {
+      console.log("Error inserting fixtures data", error);
+      return error;
+    }
   }
 }

@@ -8,6 +8,8 @@ export default async function Schedule({
 }) {
   let division: any[] = [];
 
+  await tournamentManager.init();
+
   // Depending on division_id, select the appropriate division array
   switch (division_id) {
     case 1:
