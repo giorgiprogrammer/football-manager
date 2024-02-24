@@ -12,14 +12,14 @@ export default function Hero() {
             <strong className=" text-orange-600"> Marble Arena</strong> the
             ultimate destination for Marble League enthusiasts! Step into the
             world of competitive marble sports and immerse yourself in the
-            excitement of the Marble League. Here, you'll find everything you
+            excitement of the Marble League. Here, you will find everything you
             need to stay on top of the action.
           </p>
           <br></br>
           <br></br>
           <p className=" text-balance  ">
-            Our dedication to providing comprehensive coverage means you'll
-            never miss a beat. Whether you're tracking your favorite teams'
+            Our dedication to providing comprehensive coverage means you will
+            never miss a beat. Whether you're tracking your favorite teams
             progress or scouting out the competition, our website is your go-to
             source for all things Marble League.
           </p>
@@ -40,9 +40,9 @@ export default function Hero() {
         {/* Text Content */}
         <div className=" md:order-2 text-xl md:text-base">
           <p className=" text-balance  ">
-            But we're not just about keeping score - we're about building a
+            But we are not just about keeping score - we are about building a
             community of passionate fans who share our love for marble sports.
-            That's why we're more than just a website; we're a vision for the
+            That's why we are more than just a website; we are a vision for the
             future of competitive gaming.
           </p>
           <br></br>
@@ -68,8 +68,8 @@ export default function Hero() {
       </div>
       <h2 className=" text-center text-balance mt-16 text-3xl">
         So, join us on this journey as we strive to turn our vision into
-        reality. Together, we'll shape the future of marble sports and redefine
-        what it means to be a fan. Welcome to Marble League -
+        reality. Together, we will shape the future of marble sports and
+        redefine what it means to be a fan. Welcome to Marble League -
         <strong className="text-orange-600 font-semibold">
           where the game is just beginning!
         </strong>
