@@ -8,8 +8,8 @@ export default function Hero() {
         {/* Text Content */}
         <div>
           <p className=" text-balance  ">
-            Welcome to{" "}
-            <strong className=" text-orange-600">Marble Arena</strong> the
+            Welcome to
+            <strong className=" text-orange-600"> Marble Arena</strong> the
             ultimate destination for Marble League enthusiasts! Step into the
             world of competitive marble sports and immerse yourself in the
             excitement of the Marble League. Here, you'll find everything you
@@ -40,7 +40,7 @@ export default function Hero() {
         {/* Text Content */}
         <div className=" md:order-2 text-xl md:text-base">
           <p className=" text-balance  ">
-            But we're not just about keeping score – we're about building a
+            But we're not just about keeping score - we're about building a
             community of passionate fans who share our love for marble sports.
             That's why we're more than just a website; we're a vision for the
             future of competitive gaming.
@@ -69,10 +69,9 @@ export default function Hero() {
       <h2 className=" text-center text-balance mt-16 text-3xl">
         So, join us on this journey as we strive to turn our vision into
         reality. Together, we'll shape the future of marble sports and redefine
-        what it means to be a fan. Welcome to Marble League –{" "}
+        what it means to be a fan. Welcome to Marble League -
         <strong className="text-orange-600 font-semibold">
-          {" "}
-          where the game is just beginning!{" "}
+          where the game is just beginning!
         </strong>
       </h2>
     </div>
