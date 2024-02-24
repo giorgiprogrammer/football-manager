@@ -19,7 +19,7 @@ export default function Hero() {
           <br></br>
           <p className=" text-balance  ">
             Our dedication to providing comprehensive coverage means you will
-            never miss a beat. Whether you're tracking your favorite teams
+            never miss a beat. Whether you are tracking your favorite teams
             progress or scouting out the competition, our website is your go-to
             source for all things Marble League.
           </p>
@@ -42,7 +42,7 @@ export default function Hero() {
           <p className=" text-balance  ">
             But we are not just about keeping score - we are about building a
             community of passionate fans who share our love for marble sports.
-            That's why we are more than just a website; we are a vision for the
+            That is why we are more than just a website; we are a vision for the
             future of competitive gaming.
           </p>
           <br></br>
