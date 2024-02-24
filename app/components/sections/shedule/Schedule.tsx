@@ -29,9 +29,11 @@ export default async function Schedule({
   return (
     <div className="w-[95vw] relative flex flex-col items-center">
       <h1 className="custom-font-2 text-2xl mb-4 font-semibold text-gray-500">
-        Division {division_id} Schedule
+        {division_id === 1 && "Best League"}
+        {division_id === 2 && "Good League"}
+        {division_id === 3 && "It's ok League"}
       </h1>
-      <div className="overflow-x-scroll w-full">
+      <div className="overflow-x-scroll lg:overflow-hidden w-full">
         {/* Top Indicators */}
         <Row
           teamName="TeamName"

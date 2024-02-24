@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Faster+One&family=Rubik+Doodle+Shadow&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Workbench&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Workbench&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -8,6 +9,7 @@
 * {
   margin: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -20,4 +22,12 @@ body {
 
 .custom-font-2 {
   font-family: "Workbench", sans-serif;
+}
+
+.custom-font-3 {
+  font-family: "Arvo", serif;
+}
+
+.box-shadow {
+  box-shadow: 8px 8px 0 0 rgb(170, 170, 170);
 }
