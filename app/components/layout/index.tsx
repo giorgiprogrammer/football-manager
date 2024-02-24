@@ -1,3 +1,4 @@
+import Footer from "./footer";
 import Header from "./header/header";
 
 export default function PageLayout({
@@ -6,9 +7,10 @@ export default function PageLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative min-h-screen ">
+    <main className="relative mt-24 min-h-screen mt ">
       <Header />
       {children}
-    </div>
+      <Footer />
+    </main>
   );
 }

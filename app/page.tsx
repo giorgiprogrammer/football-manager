@@ -1,4 +1,5 @@
 import PageLayout from "./components/layout";
+import Header from "./components/layout/header/header";
 import HomePage from "./components/pages/homePage";
 
 import { Inter, Roboto } from "next/font/google";

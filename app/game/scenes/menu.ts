@@ -48,8 +48,6 @@ export default class Menu extends Phaser.Scene {
     this.events.on("leftTournamentChanged", (team: string) => {
       this.leftTeamsSelector.destroy();
 
-      // console.log("team name : " + team);
-
       this.leftTeamsSelector.selectedTeamText.destroy();
       if (team === "Nations") {
         this.leftSelectorTeams = tournamentsData.nations.teams;

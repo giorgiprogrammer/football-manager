@@ -40,3 +40,46 @@ export function filterDivisionData(
 
   return teams;
 }
+
+export function generateMatchSchedule(teams: string[]) {
+  if (teams.length % 2 !== 0) {
+    teams.push("Bye"); // Add a bye if the number of teams is odd
+  }
+
+  const numberOfRounds = teams.length - 1;
+  const matchesPerRound = teams.length / 2;
+
+  const matchSchedule = [];
+
+  // Generate the initial round-robin schedule
+  for (let round = 0; round < numberOfRounds; round++) {
+    const roundMatches = [];
+    for (let match = 0; match < matchesPerRound; match++) {
+      const home = (round + match) % (teams.length - 1);
+      const away = (teams.length - 1 - match + round) % (teams.length - 1);
+      // Change this condition to handle the case when 'Bye' is involved
+      if (away === teams.length - 1) {
+        roundMatches.push([teams[home], teams[away]]);
+      } else {
+        roundMatches.push([teams[home], teams[away]]);
+      }
+    }
+    matchSchedule.push(roundMatches);
+  }
+
+  // Generate the final schedule with reversed matches
+  const finalSchedule = [];
+  for (let round = 0; round < numberOfRounds; round++) {
+    const roundMatches = [];
+    for (let match = 0; match < matchesPerRound; match++) {
+      if (match === 0) {
+        roundMatches.push([teams[teams.length - 1], teams[round]]);
+      } else {
+        roundMatches.push(matchSchedule[round][matchesPerRound - match]);
+      }
+    }
+    finalSchedule.push(roundMatches);
+  }
+
+  return finalSchedule;
+}
