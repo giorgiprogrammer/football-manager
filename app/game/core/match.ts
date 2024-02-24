@@ -7,6 +7,8 @@ import { CollisionDetections } from "./collisionDetections";
 import { Footballer } from "../gameObjects/team/footballer";
 import { getRandomNumber } from "@/app/utils/math";
 import MatchIndicators from "../scenes/matchIndicators";
+import { insertMatchResult } from "@/app/services/supabase/tournamentApi";
+import { initialGameConfig } from "../config/gameInitialConfig";
 
 export class Match {
   startText!: Phaser.GameObjects.Text;
@@ -283,7 +285,11 @@ export class Match {
   }
 
   finishMatch() {
-    this.fansSound.stop();
+    // stop ufter 5 seconds
+    setTimeout(() => {
+      this.fansSound.stop();
+    }, 5000);
+
     this.refereeSound.play();
     this.ball.reset();
     this.hostTeam.reset();
@@ -294,6 +300,22 @@ export class Match {
     this.isGoal = false;
 
     this.isPlaying = false;
+
+    insertMatchResult(
+      initialGameConfig.guestTeam,
+      initialGameConfig.hostTeam,
+      this.hostTeamScore,
+      this.guestTeamScore,
+      initialGameConfig.division,
+      initialGameConfig.week
+    ).then(
+      (res) => {
+        console.log(res);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   startGame() {

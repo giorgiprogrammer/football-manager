@@ -1,4 +1,5 @@
 import { tournamentManager } from "@/app/core/tournamentsManager/tournametsManager";
+import Link from "next/link";
 import { Fragment } from "react";
 
 export async function Division({ id }: { id: number }) {
@@ -32,8 +33,24 @@ export async function Division({ id }: { id: number }) {
                         <p>{fixture.hostTeamName}</p>
                         <b>VS</b>
                         <p>{fixture.guestTeamName}</p>
-                        <button className=" bg-orange-700 px-5 py-2 hover:bg-black hover:text-white ">
+                        <Link
+                          href={
+                            "/simulator?h=" +
+                            fixture.hostTeamName +
+                            "&g=" +
+                            fixture.guestTeamName +
+                            "&week=" +
+                            week +
+                            "&division=" +
+                            id +
+                            "&type=division"
+                          }
+                          className=" bg-orange-700 px-5 py-2 hover:bg-black hover:text-white "
+                        >
                           Play
+                        </Link>
+                        <button className=" bg-slate-500 px-5 py-2 hover:bg-black hover:text-white ">
+                          Reset
                         </button>
                       </li>
                     </ul>

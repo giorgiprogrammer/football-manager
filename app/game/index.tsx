@@ -1,9 +1,21 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import style from "./style.module.css";
 import { useEffect, useRef } from "react";
+import { initialGameConfig } from "./config/gameInitialConfig";
 
 export const Game = () => {
+  const searchParams = useSearchParams();
+
+  initialGameConfig.hostTeam = searchParams.get("h")!;
+  initialGameConfig.guestTeam = searchParams.get("g")!;
+  initialGameConfig.guestTeam = searchParams.get("g")!;
+  initialGameConfig.week = parseInt(searchParams.get("week")!);
+  initialGameConfig.division = parseInt(searchParams.get("division")!);
+
+  console.log(initialGameConfig);
+
   const canvasContainer = useRef(null);
 
   useEffect(() => {

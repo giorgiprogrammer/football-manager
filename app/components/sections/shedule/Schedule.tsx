@@ -27,34 +27,38 @@ export default async function Schedule({
   }
 
   return (
-    <div className="w-[90vw] relative flex flex-col items-center">
+    <div className="w-[95vw] relative flex flex-col items-center">
       <h1 className="custom-font-2 text-2xl mb-4 font-semibold text-gray-500">
         Division {division_id} Schedule
       </h1>
-      {/* Top Indicators */}
-      <Row
-        teamName="TeamName"
-        played={"Played"}
-        won={"W"}
-        drawn={"D"}
-        lost={"L"}
-        points={"Pnts"}
-        strength={"Strength"}
-      />
-      {division.map((teamData, index) => {
-        return (
-          <Row
-            key={index}
-            teamName={teamData.team_name}
-            played={teamData.played}
-            won={teamData.win}
-            drawn={teamData.draw}
-            lost={teamData.lost}
-            points={teamData.point}
-            strength={teamData.strength}
-          />
-        );
-      })}
+      <div className="overflow-x-scroll w-full">
+        {/* Top Indicators */}
+        <Row
+          teamName="TeamName"
+          played={"P"}
+          won={"W"}
+          drawn={"D"}
+          lost={"L"}
+          points={"PTS"}
+          strength={"Strength"}
+          isIndicator={true}
+        />
+        {division.map((teamData, index) => {
+          return (
+            <Row
+              key={index}
+              teamName={teamData.team_name}
+              played={teamData.played}
+              won={teamData.win}
+              drawn={teamData.draw}
+              lost={teamData.lost}
+              points={teamData.point}
+              strength={teamData.strength}
+              numerator={index + 1}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
