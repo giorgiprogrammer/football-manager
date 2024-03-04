@@ -28,6 +28,7 @@ export default class Menu extends Phaser.Scene {
   }
 
   create() {
+    console.log("Menu Scene");
     this.addUI();
     this.addEventListeners();
   }

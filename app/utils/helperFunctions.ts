@@ -83,3 +83,5 @@ export function generateMatchSchedule(teams: string[]) {
 
   return finalSchedule;
 }
+
+export const isClient = () => typeof window !== "undefined";
