@@ -1,9 +1,9 @@
-import { teamNames } from "./teamNames";
+import { teamNames } from "./enums/teamNames";
 
 export const initialSheduleData = {
   division_1: [
     {
-      teamName: teamNames.team_1,
+      teamName: teamNames.Arsenal,
       played: 0,
       won: 0,
       drawn: 0,
@@ -12,7 +12,7 @@ export const initialSheduleData = {
       strength: 0,
     },
     {
-      teamName: teamNames.team_2,
+      teamName: teamNames.AtleticoMadrid,
       played: 0,
       won: 0,
       drawn: 0,
@@ -21,7 +21,7 @@ export const initialSheduleData = {
       strength: 0,
     },
     {
-      teamName: teamNames.team_3,
+      teamName: teamNames.Barcelona,
       played: 0,
       won: 0,
       drawn: 0,
@@ -30,7 +30,7 @@ export const initialSheduleData = {
       strength: 0,
     },
     {
-      teamName: teamNames.team_4,
+      teamName: teamNames.BayernMunich,
       played: 0,
       won: 0,
       drawn: 0,
@@ -39,7 +39,7 @@ export const initialSheduleData = {
       strength: 0,
     },
     {
-      teamName: teamNames.team_5,
+      teamName: teamNames.BorussiaDortmund,
       played: 0,
       won: 0,
       drawn: 0,
@@ -48,7 +48,7 @@ export const initialSheduleData = {
       strength: 0,
     },
     {
-      teamName: teamNames.team_6,
+      teamName: teamNames.Chelsea,
       played: 0,
       won: 0,
       drawn: 0,
@@ -57,7 +57,7 @@ export const initialSheduleData = {
       strength: 0,
     },
     {
-      teamName: teamNames.team_7,
+      teamName: teamNames.InterMilan,
       played: 0,
       won: 0,
       drawn: 0,
@@ -66,7 +66,7 @@ export const initialSheduleData = {
       strength: 0,
     },
     {
-      teamName: teamNames.team_8,
+      teamName: teamNames.Juventus,
       played: 0,
       won: 0,
       drawn: 0,
@@ -75,7 +75,7 @@ export const initialSheduleData = {
       strength: 0,
     },
     {
-      teamName: teamNames.team_9,
+      teamName: teamNames.Liverpool,
       played: 0,
       won: 0,
       drawn: 0,
@@ -84,7 +84,7 @@ export const initialSheduleData = {
       strength: 0,
     },
     {
-      teamName: teamNames.team_10,
+      teamName: teamNames.ManchesterCity,
       played: 0,
       won: 0,
       drawn: 0,
@@ -95,7 +95,7 @@ export const initialSheduleData = {
   ],
   division_2: [
     {
-      teamName: teamNames.team_11,
+      teamName: teamNames.ManchesterUnited,
       played: 0,
       won: 0,
       drawn: 0,
@@ -104,7 +104,7 @@ export const initialSheduleData = {
       strength: 0,
     },
     {
-      teamName: teamNames.team_12,
+      teamName: teamNames.Milan,
       played: 0,
       won: 0,
       drawn: 0,
@@ -113,7 +113,7 @@ export const initialSheduleData = {
       strength: 0,
     },
     {
-      teamName: teamNames.team_13,
+      teamName: teamNames.PSG,
       played: 0,
       won: 0,
       drawn: 0,
@@ -122,7 +122,7 @@ export const initialSheduleData = {
       strength: 0,
     },
     {
-      teamName: teamNames.team_14,
+      teamName: teamNames.RealMadrid,
       played: 0,
       won: 0,
       drawn: 0,
@@ -131,7 +131,7 @@ export const initialSheduleData = {
       strength: 0,
     },
     {
-      teamName: teamNames.team_15,
+      teamName: teamNames.TottenhamHotspur,
       played: 0,
       won: 0,
       drawn: 0,

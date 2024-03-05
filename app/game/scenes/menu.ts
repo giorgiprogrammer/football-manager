@@ -1,27 +1,29 @@
-import { calculatePercentage } from "@/app/utils/math";
-import { TeamsSelector } from "../ui/teamSelector";
 import { MenuButton } from "../ui/menuButton";
-import { TeamsData, teamsData } from "../data/teamsData";
+import { teamsData } from "../data/teamsData";
 import { tournamentsData } from "../data/tournamentsData";
-import { TeamData } from "../types/types";
 import { TacticsModal } from "../ui/tacticsModal";
 import { matchData } from "../data/matchData";
+import { Selector } from "../ui/selector";
+import { initialTeamsData } from "@/app/config/initialTeamsData";
+import { TeamLogos } from "@/app/config/enums/teamLogos";
 
 export default class Menu extends Phaser.Scene {
   startButton!: MenuButton;
 
-  leftTeamsSelector!: TeamsSelector;
-  rightTeamsSelector!: TeamsSelector;
+  leftTeamsSelector!: Selector;
+  rightTeamsSelector!: Selector;
 
   tacticsModal!: TacticsModal;
 
   tournament = "premierLeague";
 
-  leftTournamentSelector!: TeamsSelector;
-  rightTournamentSelector!: TeamsSelector;
+  leftTournamentSelector!: Selector;
+  rightTournamentSelector!: Selector;
 
   leftSelectorTeams = teamsData.otherEuropeans.teams;
   rightSelectorTeams = teamsData.otherEuropeans.teams;
+
+  teamLogos!: Phaser.GameObjects.Group;
 
   constructor() {
     super("Menu");
@@ -131,9 +133,26 @@ export default class Menu extends Phaser.Scene {
       })
       .setOrigin(0.5);
 
-    this.addTouranmentSelectors();
-    this.addRightTeamSelector();
-    this.addLeftTeamSelector();
+    this.teamLogos = this.add.group();
+
+    const teamsSelectorData = Object.entries(initialTeamsData).map(
+      ([name, data]) => {
+        return {
+          image: this.teamLogos.create(30, 20, data.logoKey, undefined, false),
+          name: name,
+        };
+      }
+    );
+    const selector = new Selector(this, 0, 0, teamsSelectorData);
+
+    const image = this.teamLogos.children
+      .entries[0] as Phaser.GameObjects.Image;
+
+    image.setPosition(200, 30);
+    this.add.existing(image);
+    // this.addTouranmentSelectors();
+    // this.addRightTeamSelector();
+    // this.addLeftTeamSelector();
 
     // Start Button
     this.startButton = new MenuButton(
@@ -167,80 +186,77 @@ export default class Menu extends Phaser.Scene {
   }
 
   addTouranmentSelectors() {
-    this.leftTournamentSelector = new TeamsSelector(
-      this,
-      0,
-      0,
-      false,
-      calculatePercentage(53, this.game.canvas.height),
-      tournamentsData as any,
-      this.game.canvas.height / 2 - 100,
-      false,
-      160
-    );
-
-    this.leftTournamentSelector.setPosition(
-      this.leftTournamentSelector.getBounds().width / 2 +
-        calculatePercentage(1.7, this.game.canvas.width),
-      this.game.canvas.height / 2
-    );
-
-    this.rightTournamentSelector = new TeamsSelector(
-      this,
-      0,
-      0,
-      true,
-      calculatePercentage(53, this.game.canvas.height),
-      tournamentsData as any,
-      this.game.canvas.height / 2 - 100,
-      false,
-      160
-    );
-
-    this.rightTournamentSelector.setPosition(
-      this.game.canvas.width -
-        this.rightTournamentSelector.getBounds().width / 2 -
-        calculatePercentage(1.7, this.game.canvas.width),
-      this.game.canvas.height / 2
-    );
+    // this.leftTournamentSelector = new TeamsSelector(
+    //   this,
+    //   0,
+    //   0,
+    //   false,
+    //   calculatePercentage(53, this.game.canvas.height),
+    //   tournamentsData as any,
+    //   this.game.canvas.height / 2 - 100,
+    //   false,
+    //   160
+    // );
+    // this.leftTournamentSelector.setPosition(
+    //   this.leftTournamentSelector.getBounds().width / 2 +
+    //     calculatePercentage(1.7, this.game.canvas.width),
+    //   this.game.canvas.height / 2
+    // );
+    // this.rightTournamentSelector = new TeamsSelector(
+    //   this,
+    //   0,
+    //   0,
+    //   true,
+    //   calculatePercentage(53, this.game.canvas.height),
+    //   tournamentsData as any,
+    //   this.game.canvas.height / 2 - 100,
+    //   false,
+    //   160
+    // );
+    // this.rightTournamentSelector.setPosition(
+    //   this.game.canvas.width -
+    //     this.rightTournamentSelector.getBounds().width / 2 -
+    //     calculatePercentage(1.7, this.game.canvas.width),
+    //   this.game.canvas.height / 2
+    // );
   }
 
   addLeftTeamSelector() {
-    this.leftTeamsSelector = new TeamsSelector(
-      this,
-      0,
-      0,
-      false,
-      calculatePercentage(60, this.game.canvas.height),
-      this.leftSelectorTeams,
-      this.game.canvas.height / 2,
-      true,
-      160
-    );
-    this.leftTeamsSelector.setPosition(
-      this.leftTeamsSelector.getBounds().width / 2 +
-        calculatePercentage(9, this.game.canvas.width),
-      this.game.canvas.height / 2
-    );
+    // this.leftTeamsSelector = new TeamsSelector(
+    //   this,
+    //   0,
+    //   0,
+    //   false,
+    //   calculatePercentage(60, this.game.canvas.height),
+    //   this.leftSelectorTeams,
+    //   this.game.canvas.height / 2,
+    //   true,
+    //   160
+    // );
+    // this.leftTeamsSelector.setPosition(
+    //   this.leftTeamsSelector.getBounds().width / 2 +
+    //     calculatePercentage(9, this.game.canvas.width),
+    //   this.game.canvas.height / 2
+    // );
   }
 
   addRightTeamSelector() {
-    this.rightTeamsSelector = new TeamsSelector(
-      this,
-      0,
-      0,
-      true,
-      calculatePercentage(60, this.game.canvas.height),
-      this.rightSelectorTeams,
-      this.game.canvas.height / 2,
-      true,
-      160
-    );
-    this.rightTeamsSelector.setPosition(
-      this.game.canvas.width -
-        this.rightTeamsSelector.getBounds().width / 2 -
-        calculatePercentage(9, this.game.canvas.width),
-      this.game.canvas.height / 2
-    );
+    // this.rightTeamsSelector = new TeamsSelector(
+    //   this,
+    //   0,
+    //   0,
+    //   true,
+    //   calculatePercentage(60, this.game.canvas.height),
+    //   this.rightSelectorTeams,
+    //   this.game.canvas.height / 2,
+    //   true,
+    //   160
+    // );
+    // this.rightTeamsSelector.setPosition(
+    //   this.game.canvas.width -
+    //     this.rightTeamsSelector.getBounds().width / 2 -
+    //     calculatePercentage(9, this.game.canvas.width),
+    //   this.game.canvas.height / 2
+    // );
   }
 }

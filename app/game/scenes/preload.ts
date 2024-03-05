@@ -1,4 +1,5 @@
 import { WebFontFile } from "../helper/webFontLoader";
+import Phaser from "phaser";
 
 export default class Preload extends Phaser.Scene {
   constructor() {

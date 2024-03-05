@@ -5,6 +5,11 @@ import style from "./style.module.css";
 import { useEffect, useRef } from "react";
 import { initialGameConfig } from "./config/gameInitialConfig";
 
+let Preload: any;
+let Menu: any;
+let GamePlay: any;
+let MatchIndicators: any;
+
 export const Game = () => {
   const searchParams = useSearchParams();
 
@@ -14,29 +19,20 @@ export const Game = () => {
   initialGameConfig.week = parseInt(searchParams.get("week")!);
   initialGameConfig.division = parseInt(searchParams.get("division")!);
 
-  console.log(initialGameConfig);
-
   const canvasContainer = useRef(null);
 
   useEffect(() => {
-    import("phaser").then(async (mod) => {
-      const Preload = await import("./scenes/preload").then((preload) => {
-        return preload.default;
-      });
-      const Menu = await import("./scenes/menu").then((menu) => {
-        return menu.default;
-      });
-      const GamePlay = await import("./scenes/gameplay").then((gamePlay) => {
-        return gamePlay.default;
-      });
-      const MatchIndicators = await import("./scenes/matchIndicators").then(
-        (matchIndicators) => {
-          return matchIndicators.default;
-        }
-      );
+    if (!canvasContainer.current) return;
 
-      if (!canvasContainer.current) return;
+    // Client-side-only code
+    if (typeof window !== "undefined") {
+      Preload = require("./scenes/preload").default;
+      Menu = require("./scenes/menu").default;
+      GamePlay = require("./scenes/gameplay").default;
+      MatchIndicators = require("./scenes/matchIndicators").default;
+    }
 
+    import("phaser").then((Phaser) => {
       const game = new Phaser.Game({
         dom: { createContainer: true },
         physics: {
@@ -45,7 +41,7 @@ export const Game = () => {
             debug: false,
           },
         },
-        parent: canvasContainer.current,
+        parent: canvasContainer.current!,
         fullscreenTarget: canvasContainer.current,
         type: Phaser.AUTO,
         scale: {
@@ -57,16 +53,11 @@ export const Game = () => {
         backgroundColor: 0x02070d,
         scene: [Preload, Menu, GamePlay, MatchIndicators],
       });
-
       return () => game.destroy(true, false);
     });
   }, []);
 
-  return (
-    <div>
-      <div ref={canvasContainer} className={style.canvasContainer}></div>
-    </div>
-  );
+  return <div ref={canvasContainer} className={style.canvasContainer}></div>;
 };
 
 export default Game;
