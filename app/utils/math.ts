@@ -30,3 +30,11 @@ export function clamp(parameter: number, min: number, max: number) {
 
   return Math.floor(((parameter - min) * 100) / range);
 }
+
+export function isInRange(value: number, min: number, max: number) {
+  return value >= min && value <= max;
+}
+
+export function makeNegative(number: number) {
+  return number >= 0 ? -number : number;
+}

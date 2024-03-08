@@ -20,7 +20,7 @@ export default class Preload extends Phaser.Scene {
     this.load.addFile(new WebFontFile(this.load, "Rubik Mono One"));
 
     //UI
-    this.load.image("neon-arrow", "image/ui/neon-arrow.png");
+    this.load.image("arrow", "image/ui/arrow.png");
     this.load.image("menu-button", "image/ui/menu-button.png");
     this.load.image("default", "image/ui/default.png");
     this.load.image("circle", "image/ui/circle.png");

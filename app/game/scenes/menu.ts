@@ -1,11 +1,9 @@
 import { MenuButton } from "../ui/menuButton";
 import { teamsData } from "../data/teamsData";
-import { tournamentsData } from "../data/tournamentsData";
 import { TacticsModal } from "../ui/tacticsModal";
 import { matchData } from "../data/matchData";
 import { Selector } from "../ui/selector";
 import { initialTeamsData } from "@/app/config/initialTeamsData";
-import { TeamLogos } from "@/app/config/enums/teamLogos";
 
 export default class Menu extends Phaser.Scene {
   startButton!: MenuButton;
@@ -23,15 +21,12 @@ export default class Menu extends Phaser.Scene {
   leftSelectorTeams = teamsData.otherEuropeans.teams;
   rightSelectorTeams = teamsData.otherEuropeans.teams;
 
-  teamLogos!: Phaser.GameObjects.Group;
-
   constructor() {
     super("Menu");
   }
 
   create() {
     this.addUI();
-    this.addEventListeners();
   }
 
   openTacticModals() {
@@ -46,114 +41,89 @@ export default class Menu extends Phaser.Scene {
     );
   }
 
-  addEventListeners() {
-    this.events.on("leftTournamentChanged", (team: string) => {
-      this.leftTeamsSelector.destroy();
-
-      this.leftTeamsSelector.selectedTeamText.destroy();
-      if (team === "Nations") {
-        this.leftSelectorTeams = tournamentsData.nations.teams;
-      }
-      if (team === "Other Nations") {
-        this.leftSelectorTeams = tournamentsData.othernations.teams;
-      }
-      if (team === "Other European") {
-        this.leftSelectorTeams = tournamentsData.othereuropean.teams;
-      }
-      if (team === "Rest Of The World") {
-        this.leftSelectorTeams = tournamentsData.restoftheworld.teams;
-      }
-      if (team === "Georgian Liga") {
-        this.leftSelectorTeams = tournamentsData.georgianliga.teams;
-      }
-      if (team === "Premier League") {
-        this.leftSelectorTeams = tournamentsData.premierleague.teams;
-      }
-      if (team === "Seria A") {
-        this.leftSelectorTeams = tournamentsData.seriaa.teams;
-      }
-      if (team === "La Liga") {
-        this.leftSelectorTeams = tournamentsData.laliga.teams;
-      }
-
-      this.addLeftTeamSelector();
-    });
-
-    this.events.on("rightTournamentChanged", (team: string) => {
-      this.rightTeamsSelector.destroy();
-
-      this.rightTeamsSelector.selectedTeamText.destroy();
-      if (team === "Nations") {
-        this.rightSelectorTeams = tournamentsData.nations.teams;
-      }
-      if (team === "Other Nations") {
-        this.rightSelectorTeams = tournamentsData.othernations.teams;
-      }
-      if (team === "Other European") {
-        this.rightSelectorTeams = tournamentsData.othereuropean.teams;
-      }
-      if (team === "Rest Of The World") {
-        this.rightSelectorTeams = tournamentsData.restoftheworld.teams;
-      }
-      if (team === "Georgian Liga") {
-        this.rightSelectorTeams = tournamentsData.georgianliga.teams;
-      }
-      if (team === "Premier League") {
-        this.rightSelectorTeams = tournamentsData.premierleague.teams;
-      }
-      if (team === "Seria A") {
-        this.rightSelectorTeams = tournamentsData.seriaa.teams;
-      }
-      if (team === "La Liga") {
-        this.rightSelectorTeams = tournamentsData.laliga.teams;
-      }
-
-      this.addRightTeamSelector();
-    });
+  addUI() {
+    this.addBackground();
+    this.addTexts();
+    // this.addButtons();
+    this.addTeamSelectors();
   }
 
-  addUI() {
-    //Background
+  addTeamSelectors() {
+    // Prepare Data
+    const leftTeamLogos = this.add.group();
+    const leftTeamsSelectorData = Object.entries(initialTeamsData).map(
+      ([name, data]) => {
+        return {
+          image: leftTeamLogos.get(0, 0, data.logoKey, undefined, false),
+          name: name,
+        };
+      }
+    );
+    const rightTeamLogos = this.add.group();
+    const rightTeamsSelectorData = Object.entries(initialTeamsData).map(
+      ([name, data]) => {
+        return {
+          image: rightTeamLogos.get(0, 0, data.logoKey, undefined, false),
+          name: name,
+        };
+      }
+    );
+    // Left Teams Selector
+    this.leftTeamsSelector = new Selector(
+      this,
+      0,
+      0,
+      leftTeamsSelectorData,
+      15,
+      "vertical"
+    );
+
+    this.leftTeamsSelector.setPosition(
+      60,
+      this.game.canvas.height / 2 -
+        this.leftTeamsSelector.getBounds().height / 2
+    );
+
+    // Right Teams Selector
+    this.rightTeamsSelector = new Selector(
+      this,
+      0,
+      0,
+      rightTeamsSelectorData,
+      15,
+      "vertical"
+    );
+    this.rightTeamsSelector.setPosition(
+      this.game.canvas.width - 60,
+      this.game.canvas.height / 2 -
+        this.leftTeamsSelector.getBounds().height / 2
+    );
+  }
+
+  addBackground() {
     this.add
       .rectangle(
         0,
         0,
         this.game.canvas.width,
         this.game.canvas.height,
-        0x201b26
+        0x140a1f
       )
       .setOrigin(0);
+  }
 
-    //VS text
+  addTexts() {
+    // VS text
     this.add
       .text(this.game.canvas.width / 2, this.game.canvas.height / 2, "VS", {
         fontFamily: "Rubik Mono One",
-        fontSize: 88,
+        fontSize: 50,
         color: "#DAF2E9",
       })
       .setOrigin(0.5);
+  }
 
-    this.teamLogos = this.add.group();
-
-    const teamsSelectorData = Object.entries(initialTeamsData).map(
-      ([name, data]) => {
-        return {
-          image: this.teamLogos.create(30, 20, data.logoKey, undefined, false),
-          name: name,
-        };
-      }
-    );
-    const selector = new Selector(this, 0, 0, teamsSelectorData);
-
-    const image = this.teamLogos.children
-      .entries[0] as Phaser.GameObjects.Image;
-
-    image.setPosition(200, 30);
-    this.add.existing(image);
-    // this.addTouranmentSelectors();
-    // this.addRightTeamSelector();
-    // this.addLeftTeamSelector();
-
+  addButtons() {
     // Start Button
     this.startButton = new MenuButton(
       this,
@@ -183,80 +153,5 @@ export default class Menu extends Phaser.Scene {
       .on(Phaser.Input.Events.POINTER_DOWN, () => {
         this.openTacticModals();
       });
-  }
-
-  addTouranmentSelectors() {
-    // this.leftTournamentSelector = new TeamsSelector(
-    //   this,
-    //   0,
-    //   0,
-    //   false,
-    //   calculatePercentage(53, this.game.canvas.height),
-    //   tournamentsData as any,
-    //   this.game.canvas.height / 2 - 100,
-    //   false,
-    //   160
-    // );
-    // this.leftTournamentSelector.setPosition(
-    //   this.leftTournamentSelector.getBounds().width / 2 +
-    //     calculatePercentage(1.7, this.game.canvas.width),
-    //   this.game.canvas.height / 2
-    // );
-    // this.rightTournamentSelector = new TeamsSelector(
-    //   this,
-    //   0,
-    //   0,
-    //   true,
-    //   calculatePercentage(53, this.game.canvas.height),
-    //   tournamentsData as any,
-    //   this.game.canvas.height / 2 - 100,
-    //   false,
-    //   160
-    // );
-    // this.rightTournamentSelector.setPosition(
-    //   this.game.canvas.width -
-    //     this.rightTournamentSelector.getBounds().width / 2 -
-    //     calculatePercentage(1.7, this.game.canvas.width),
-    //   this.game.canvas.height / 2
-    // );
-  }
-
-  addLeftTeamSelector() {
-    // this.leftTeamsSelector = new TeamsSelector(
-    //   this,
-    //   0,
-    //   0,
-    //   false,
-    //   calculatePercentage(60, this.game.canvas.height),
-    //   this.leftSelectorTeams,
-    //   this.game.canvas.height / 2,
-    //   true,
-    //   160
-    // );
-    // this.leftTeamsSelector.setPosition(
-    //   this.leftTeamsSelector.getBounds().width / 2 +
-    //     calculatePercentage(9, this.game.canvas.width),
-    //   this.game.canvas.height / 2
-    // );
-  }
-
-  addRightTeamSelector() {
-    // this.rightTeamsSelector = new TeamsSelector(
-    //   this,
-    //   0,
-    //   0,
-    //   true,
-    //   calculatePercentage(60, this.game.canvas.height),
-    //   this.rightSelectorTeams,
-    //   this.game.canvas.height / 2,
-    //   true,
-    //   160
-    // );
-    // this.rightTeamsSelector.setPosition(
-    //   this.game.canvas.width -
-    //     this.rightTeamsSelector.getBounds().width / 2 -
-    //     calculatePercentage(9, this.game.canvas.width),
-    //   this.game.canvas.height / 2
-    // );
   }
 }

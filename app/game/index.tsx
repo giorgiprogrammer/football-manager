@@ -50,10 +50,10 @@ export const Game = () => {
           width: window.innerWidth,
           height: window.innerHeight,
         },
-        backgroundColor: 0x02070d,
+        backgroundColor: 0x140a1f,
         scene: [Preload, Menu, GamePlay, MatchIndicators],
       });
-      return () => game.destroy(true, false);
+      // return () => game?.destroy(true, false);
     });
   }, []);
 
