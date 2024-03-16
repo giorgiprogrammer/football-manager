@@ -1,25 +1,29 @@
 import { MenuButton } from "../ui/menuButton";
-import { teamsData } from "../data/teamsData";
-import { TacticsModal } from "../ui/tacticsModal";
-import { matchData } from "../data/matchData";
 import { Selector } from "../ui/selector";
-import { initialTeamsData } from "@/app/config/initialTeamsData";
+import { TeamData, initialTeamsData } from "@/app/config/initialTeamsData";
+import { calculatePercentage } from "@/app/utils/math";
+import { SettingsModal } from "../ui/components/menuModal/settingsModal";
+import { TacticsModal } from "../ui/components/menuModal/tacticsModal";
 
 export default class Menu extends Phaser.Scene {
-  startButton!: MenuButton;
-
-  leftTeamsSelector!: Selector;
-  rightTeamsSelector!: Selector;
-
-  tacticsModal!: TacticsModal;
-
-  tournament = "premierLeague";
+  hostTeamsSelector!: Selector;
+  guestTeamsSelector!: Selector;
 
   leftTournamentSelector!: Selector;
   rightTournamentSelector!: Selector;
 
-  leftSelectorTeams = teamsData.otherEuropeans.teams;
-  rightSelectorTeams = teamsData.otherEuropeans.teams;
+  hostTeamText!: Phaser.GameObjects.Text;
+  guestTeamText!: Phaser.GameObjects.Text;
+
+  settingsModal!: SettingsModal;
+  tacticsModal!: TacticsModal;
+
+  settingsButton!: MenuButton;
+  startButton!: MenuButton;
+  tacticsButton!: MenuButton;
+
+  selectedHostTeam!: TeamData;
+  selectedGuestTeam!: TeamData;
 
   constructor() {
     super("Menu");
@@ -27,25 +31,47 @@ export default class Menu extends Phaser.Scene {
 
   create() {
     this.addUI();
+    this.updateSelectedTeams();
+
+    this.events.on("rotate", () => {
+      this.updateSelectedTeams();
+    });
   }
 
-  openTacticModals() {
-    this.tacticsModal = new TacticsModal(
-      this,
-      this.game.canvas.width / 2,
-      this.game.canvas.height / 2,
-      this.leftTeamsSelector.selectedTeamText.text,
-      this.rightTeamsSelector.selectedTeamText.text,
-      this.leftTournamentSelector.selectedTeamText.text,
-      this.rightTournamentSelector.selectedTeamText.text
+  updateSelectedTeams() {
+    this.selectedHostTeam =
+      initialTeamsData[this.hostTeamsSelector.selectedItem.name];
+    this.selectedGuestTeam =
+      initialTeamsData[this.guestTeamsSelector.selectedItem.name];
+
+    this.updateTeams(
+      this.hostTeamsSelector.selectedItem.name,
+      this.guestTeamsSelector.selectedItem.name
     );
   }
 
   addUI() {
     this.addBackground();
     this.addTexts();
-    // this.addButtons();
+    this.addChoachImages();
+    this.addButtons();
     this.addTeamSelectors();
+
+    this.settingsModal = new SettingsModal(
+      this,
+      this.game.canvas.width / 2,
+      this.game.canvas.height / 2
+    )
+      .setDepth(10)
+      .setVisible(false);
+
+    this.tacticsModal = new TacticsModal(
+      this,
+      this.game.canvas.width / 2,
+      this.game.canvas.height / 2
+    )
+      .setDepth(10)
+      .setVisible(false);
   }
 
   addTeamSelectors() {
@@ -68,35 +94,38 @@ export default class Menu extends Phaser.Scene {
         };
       }
     );
-    // Left Teams Selector
-    this.leftTeamsSelector = new Selector(
+    // Host Teams Selector
+    this.hostTeamsSelector = new Selector(
       this,
       0,
       0,
       leftTeamsSelectorData,
       15,
-      "vertical"
+      "vertical",
+      "Juventus"
     );
 
-    this.leftTeamsSelector.setPosition(
+    this.hostTeamsSelector.setPosition(
       60,
       this.game.canvas.height / 2 -
-        this.leftTeamsSelector.getBounds().height / 2
+        this.hostTeamsSelector.getBounds().height / 1.3
     );
 
     // Right Teams Selector
-    this.rightTeamsSelector = new Selector(
+    this.guestTeamsSelector = new Selector(
       this,
       0,
       0,
       rightTeamsSelectorData,
       15,
-      "vertical"
+      "vertical",
+      "Liverpool"
     );
-    this.rightTeamsSelector.setPosition(
+
+    this.guestTeamsSelector.setPosition(
       this.game.canvas.width - 60,
       this.game.canvas.height / 2 -
-        this.leftTeamsSelector.getBounds().height / 2
+        this.guestTeamsSelector.getBounds().height / 1.3
     );
   }
 
@@ -107,9 +136,46 @@ export default class Menu extends Phaser.Scene {
         0,
         this.game.canvas.width,
         this.game.canvas.height,
-        0x140a1f
+        0xffffff
       )
       .setOrigin(0);
+  }
+
+  addChoachImages() {
+    const hostTeamCoach = this.add
+      .image(
+        this.game.canvas.width / 2 -
+          calculatePercentage(4, this.game.canvas.width),
+        this.game.canvas.height / 2 +
+          calculatePercentage(17, this.game.canvas.height),
+        "guardiola-default"
+      )
+      .setDisplaySize(
+        calculatePercentage(11, this.game.canvas.width),
+        calculatePercentage(11, this.game.canvas.width)
+      )
+      .setTint(0xb3b0aa)
+      .setOrigin(1, 0.5);
+
+    const guestTeamCoach = this.add
+      .image(
+        this.game.canvas.width / 2 +
+          calculatePercentage(4, this.game.canvas.width),
+        this.game.canvas.height / 2 -
+          calculatePercentage(17, this.game.canvas.height),
+        "mourinho-default"
+      )
+      .setDisplaySize(
+        calculatePercentage(11, this.game.canvas.width),
+        calculatePercentage(11, this.game.canvas.width)
+      )
+      .setTint(0xb3b0aa)
+      .setOrigin(0, 0.5);
+  }
+
+  updateTeams(hostTeamName: string, guestTeamName: string) {
+    this.hostTeamText.setText(hostTeamName);
+    this.guestTeamText.setText(guestTeamName);
   }
 
   addTexts() {
@@ -117,10 +183,40 @@ export default class Menu extends Phaser.Scene {
     this.add
       .text(this.game.canvas.width / 2, this.game.canvas.height / 2, "VS", {
         fontFamily: "Rubik Mono One",
-        fontSize: 50,
-        color: "#DAF2E9",
+        fontSize: 40,
+        color: "#B5B2AC",
       })
       .setOrigin(0.5);
+
+    //Host team name
+    this.hostTeamText = this.add
+      .text(
+        this.game.canvas.width / 2 -
+          calculatePercentage(4, this.game.canvas.width),
+        this.game.canvas.height / 2,
+        "",
+        {
+          fontFamily: "Rubik Mono One",
+          fontSize: 20,
+          color: "#878580",
+        }
+      )
+      .setOrigin(1, 0.5);
+
+    //Guest team name
+    this.guestTeamText = this.add
+      .text(
+        this.game.canvas.width / 2 +
+          calculatePercentage(4, this.game.canvas.width),
+        this.game.canvas.height / 2,
+        "",
+        {
+          fontFamily: "Rubik Mono One",
+          fontSize: 20,
+          color: "#878580",
+        }
+      )
+      .setOrigin(0, 0.5);
   }
 
   addButtons() {
@@ -128,30 +224,62 @@ export default class Menu extends Phaser.Scene {
     this.startButton = new MenuButton(
       this,
       this.game.canvas.width / 2,
-      this.game.canvas.height - 60,
-      280,
-      75,
-      "Start Match"
+      this.game.canvas.height - 30,
+      260,
+      70,
+      "Start Match",
+      0x878580,
+      "#878580",
+      24
+    )
+      .setInteractive()
+      .on(Phaser.Input.Events.POINTER_DOWN, () => {});
+
+    // Tactic Button
+    this.tacticsButton = new MenuButton(
+      this,
+      this.game.canvas.width / 2 -
+        calculatePercentage(12, this.game.canvas.width),
+      this.game.canvas.height - 30,
+      170,
+      70,
+      "Tactics",
+      0x878580,
+      "#878580",
+      21
     )
       .setInteractive()
       .on(Phaser.Input.Events.POINTER_DOWN, () => {
-        matchData.hostTeamData = this.leftTeamsSelector.selectedTeamData;
-        matchData.guestTeamData = this.rightTeamsSelector.selectedTeamData;
-        this.scene.start("GamePlay");
+        this.tacticsModal.setVisible(true);
+        this.tacticsModal.setTeams(
+          this.selectedHostTeam,
+          this.selectedGuestTeam
+        );
+
+        this.settingsButton.setVisible(false);
+        this.startButton.setVisible(false);
+        this.tacticsButton.setVisible(false);
       });
 
-    //Tactics Button
-    this.startButton = new MenuButton(
+    //Settings Button
+    this.settingsButton = new MenuButton(
       this,
-      this.game.canvas.width / 2,
-      this.game.canvas.height - 130,
-      200,
-      75,
-      "Tactics"
+      this.game.canvas.width / 2 +
+        calculatePercentage(12, this.game.canvas.width),
+      this.game.canvas.height - 30,
+      170,
+      70,
+      "Settings",
+      0x878580,
+      "#878580",
+      21
     )
       .setInteractive()
       .on(Phaser.Input.Events.POINTER_DOWN, () => {
-        this.openTacticModals();
+        this.settingsModal.setVisible(true);
+        this.settingsButton.setVisible(false);
+        this.startButton.setVisible(false);
+        this.tacticsButton.setVisible(false);
       });
   }
 }

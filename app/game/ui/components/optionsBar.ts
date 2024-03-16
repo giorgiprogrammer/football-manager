@@ -1,5 +1,4 @@
-import { calculatePercentage, clamp, interpolate } from "@/app/utils/math";
-import { TeamData } from "../../types/types";
+import { calculatePercentage } from "@/app/utils/math";
 
 export class OptionsBar extends Phaser.GameObjects.Container {
   indicator!: Phaser.GameObjects.Image;
@@ -12,8 +11,7 @@ export class OptionsBar extends Phaser.GameObjects.Container {
     x: number,
     y: number,
     public width: number,
-    public opttionName: string,
-    public team: TeamData
+    public opttionName: string
   ) {
     super(scene, x, y);
     scene.add.existing(this);
@@ -29,11 +27,11 @@ export class OptionsBar extends Phaser.GameObjects.Container {
   }
 
   calculateStength() {
-    this.indicatorValue = clamp(this.team.stength, 800, 2300);
+    // this.indicatorValue = clamp(this.team!.stength, 800, 2300);
   }
 
   setChangedParameters() {
-    this.team.stength = interpolate(this.indicatorValue, 800, 2300);
+    // this.team!.stength = interpolate(this.indicatorValue, 800, 2300);
   }
 
   addTexts() {

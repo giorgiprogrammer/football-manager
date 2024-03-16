@@ -9,6 +9,10 @@ export default class Preload extends Phaser.Scene {
   preload() {
     this.load.setPath(`../../game/assets/`);
 
+    //Choacs
+    this.load.image("guardiola-default", "image/coachs/guardiola-default.jpg");
+    this.load.image("mourinho-default", "image/coachs/mourinho-default.jpg");
+
     //sound Effects
     this.load.audio("passSound", ["sounds/pass.mp3"]);
     this.load.audio("shootSound", ["sounds/shoot.mp3"]);
@@ -27,8 +31,9 @@ export default class Preload extends Phaser.Scene {
     this.load.image("grass", "image/ui/grass.jpg");
     this.load.image("menuIcon", "image/ui/menu-icon.png");
     this.load.image("stadiumFitch", "image/ui/fitch.png");
+    this.load.image("menu-close", "image/ui/menu-close.png");
+    this.load.image("tactics-stadium", "image/ui/tactics-stadium.png");
 
-    //Team Logos
     // Nations
     this.load.image("algeria", "image/teamLogos/nations/Algeria.png");
     this.load.image("argentina", "image/teamLogos/nations/Argentina.png");
