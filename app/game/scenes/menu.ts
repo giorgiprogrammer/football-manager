@@ -4,6 +4,8 @@ import { TeamData, initialTeamsData } from "@/app/config/initialTeamsData";
 import { calculatePercentage } from "@/app/utils/math";
 import { SettingsModal } from "../ui/components/menuModal/settingsModal";
 import { TacticsModal } from "../ui/components/menuModal/tacticsModal";
+import { deepCopy } from "@/app/utils/helperFunctions";
+import { matchData } from "@/app/config/matchData";
 
 export default class Menu extends Phaser.Scene {
   hostTeamsSelector!: Selector;
@@ -104,6 +106,7 @@ export default class Menu extends Phaser.Scene {
       "vertical",
       "Juventus"
     );
+    matchData.hostTeam = deepCopy<TeamData>(initialTeamsData["Juventus"]);
 
     this.hostTeamsSelector.setPosition(
       60,
@@ -121,6 +124,7 @@ export default class Menu extends Phaser.Scene {
       "vertical",
       "Liverpool"
     );
+    matchData.guestTeam = deepCopy<TeamData>(initialTeamsData["Liverpool"]);
 
     this.guestTeamsSelector.setPosition(
       this.game.canvas.width - 60,

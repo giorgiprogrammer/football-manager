@@ -39,13 +39,13 @@ export const initialTeamsData: TeamsData = {
     logoKey: TeamLogos.Arcenal,
     formation: "4-3-3",
     formationProperties: {
-      defence: "normal",
-      midfield: "center-attack",
+      defence: "wide-attack",
+      midfield: "normal",
       attack: "center-attack",
     },
     teamColor: "0x9C824A",
     teamSecondaryColor: "0x000000",
-    strength: 7,
+    strength: 1809,
     goalSoundKey: "arsenal_goal_sound",
     coach: {
       name: "Mikel Arteta",
@@ -81,7 +81,7 @@ export const initialTeamsData: TeamsData = {
     formationProperties: {
       defence: "normal",
       midfield: "center-attack",
-      attack: "center-attack",
+      attack: "normal",
     },
     teamColor: "0x9C824A",
     teamSecondaryColor: "0x000000",
@@ -125,7 +125,7 @@ export const initialTeamsData: TeamsData = {
     },
     teamColor: "0x9C824A",
     teamSecondaryColor: "0x000000",
-    strength: 7,
+    strength: 2003,
     goalSoundKey: "arsenal_goal_sound",
     coach: {
       name: "Mikel Arteta",
@@ -165,7 +165,7 @@ export const initialTeamsData: TeamsData = {
     },
     teamColor: "0x9C824A",
     teamSecondaryColor: "0x000000",
-    strength: 7,
+    strength: 1809,
     goalSoundKey: "arsenal_goal_sound",
     coach: {
       name: "Mikel Arteta",

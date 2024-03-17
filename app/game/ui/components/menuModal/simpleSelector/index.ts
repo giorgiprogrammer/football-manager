@@ -8,7 +8,10 @@ export class SimpleSelector extends Phaser.GameObjects.Container {
     scene: Phaser.Scene,
     x: number,
     y: number,
-    public values: string[]
+    public values: string[],
+    public defaultValie: string,
+    public changeValue?: (value: string) => void,
+    public title?: string
   ) {
     super(scene, x, y);
     scene.add.existing(this);
@@ -17,9 +20,28 @@ export class SimpleSelector extends Phaser.GameObjects.Container {
   }
 
   init() {
+    this.valueIndex = this.values.indexOf(this.defaultValie);
+
     this.addLeftArrow();
     this.addRightArrow();
     this.addValueText();
+
+    if (this.title) {
+      this.addTitle();
+    }
+  }
+
+  addTitle() {
+    const title = this.scene.add
+      .text(0, calculatePercentage(-80, this.getBounds().height), this.title!, {
+        align: "center",
+        color: "#A3A3A3",
+        fontSize: "14px",
+        fontFamily: "Rubik Mono One",
+      })
+      .setOrigin(0.5);
+
+    this.add(title);
   }
 
   addLeftArrow() {
@@ -31,6 +53,10 @@ export class SimpleSelector extends Phaser.GameObjects.Container {
         this.valueIndex =
           (this.valueIndex - 1 + this.values.length) % this.values.length;
         this.valueText.setText(this.values[this.valueIndex]);
+
+        if (this.changeValue) {
+          this.changeValue(this.values[this.valueIndex]);
+        }
       });
 
     this.add(leftArrow);
@@ -45,6 +71,10 @@ export class SimpleSelector extends Phaser.GameObjects.Container {
       .on("pointerdown", () => {
         this.valueIndex = (this.valueIndex + 1) % this.values.length;
         this.valueText.setText(this.values[this.valueIndex]);
+
+        if (this.changeValue) {
+          this.changeValue(this.values[this.valueIndex]);
+        }
       });
 
     this.add(rightArrow);
