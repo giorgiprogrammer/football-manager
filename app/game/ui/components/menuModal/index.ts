@@ -22,7 +22,10 @@ export default class MenuModal extends Phaser.GameObjects.Container {
         "menu-close"
       )
       .setOrigin(0.5)
-      .setDisplaySize(50, 50)
+      .setDisplaySize(
+        calculatePercentage(3, this.scene.game.canvas.width),
+        calculatePercentage(3, this.scene.game.canvas.width)
+      )
       .setInteractive({ cursor: "pointer" })
       .on("pointerdown", () => {
         this.setVisible(false);

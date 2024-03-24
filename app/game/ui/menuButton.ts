@@ -1,3 +1,5 @@
+import { calculatePercentage } from "@/app/utils/math";
+
 export class MenuButton extends Phaser.GameObjects.Container {
   backgroundImage!: Phaser.GameObjects.Image;
   innerText!: Phaser.GameObjects.Text;
@@ -7,7 +9,6 @@ export class MenuButton extends Phaser.GameObjects.Container {
     x: number,
     y: number,
     public width: number,
-    public height: number,
     public text: string,
     public backgroundColor: number,
     public textColor: string,
@@ -30,6 +31,7 @@ export class MenuButton extends Phaser.GameObjects.Container {
   addBackground() {
     this.backgroundImage = this.scene.add
       .image(0, 0, "default")
+
       .setOrigin(0.5)
       .setTint(this.backgroundColor)
       .setDisplaySize(this.width, 2);
@@ -38,12 +40,17 @@ export class MenuButton extends Phaser.GameObjects.Container {
 
   addText() {
     this.innerText = this.scene.add
-      .text(0, -25, this.text, {
-        fontFamily: "Rubik Mono One",
-        fontSize: this.fontSize,
-        color: this.textColor,
-        align: "center",
-      })
+      .text(
+        0,
+        -calculatePercentage(4, this.scene.game.canvas.height),
+        this.text,
+        {
+          fontFamily: "Silkscreen",
+          fontSize: this.fontSize,
+          color: this.textColor,
+          align: "center",
+        }
+      )
       .setOrigin(0.5);
     this.add(this.innerText);
   }
@@ -52,15 +59,15 @@ export class MenuButton extends Phaser.GameObjects.Container {
     this.setInteractive(
       new Phaser.Geom.Rectangle(
         0,
-        0,
+        -calculatePercentage(5, this.scene.game.canvas.height),
         this.getBounds().width,
         this.getBounds().height
       ),
       Phaser.Geom.Rectangle.Contains
     );
     this.on(Phaser.Input.Events.POINTER_OVER, () => {
-      this.backgroundImage.setTint(0x2c1042);
-      this.innerText.setColor("#2C1042");
+      this.backgroundImage.setTint(0xfa494b);
+      this.innerText.setColor("#FA494B");
     });
     this.on(Phaser.Input.Events.POINTER_OUT, () => {
       this.backgroundImage.setTint(this.backgroundColor);

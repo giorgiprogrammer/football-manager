@@ -95,11 +95,14 @@ export class SimpleModeWindow extends Phaser.GameObjects.Container {
         "tactics-stadium"
       )
       .setAlpha(0.5)
-      .setDisplaySize(350, 180);
+      .setDisplaySize(
+        calculatePercentage(35, this.scene.game.canvas.width),
+        calculatePercentage(30, this.scene.game.canvas.height)
+      );
     this.add(this.stadium);
   }
 
-  //i think i need better name for this fucking function
+  //i think that i need better name for this fucking function
   addFormationPropertiesChangeSelectors() {
     // Defence
     const defenceSelector = new SimpleSelector(
@@ -191,7 +194,7 @@ export class SimpleModeWindow extends Phaser.GameObjects.Container {
       this.scene,
       0,
       0,
-      calculatePercentage(25, this.scene.game.canvas.width),
+      calculatePercentage(30, this.scene.game.canvas.width),
       "Strength",
       this.side === "left" ? matchData.hostTeam : matchData.guestTeam
     );

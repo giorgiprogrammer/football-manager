@@ -27,17 +27,41 @@ export default class Menu extends Phaser.Scene {
   selectedHostTeam!: TeamData;
   selectedGuestTeam!: TeamData;
 
+  backgroundAniamtionEffectImage!: Phaser.GameObjects.Image;
+
   constructor() {
     super("Menu");
   }
 
   create() {
+    this.scale.on(Phaser.Scale.Events.RESIZE, () => {
+      this.scale.removeAllListeners();
+      setTimeout(() => {
+        this.scale.resize(this.game.canvas.width, this.game.canvas.height);
+        this.renderer.resize(this.game.canvas.width, this.game.canvas.height);
+
+        this.scene.restart();
+      }, 1000);
+    });
+
     this.addUI();
     this.updateSelectedTeams();
 
     this.events.on("rotate", () => {
       this.updateSelectedTeams();
     });
+
+    this.addAnimationEffectImage();
+  }
+
+  addAnimationEffectImage() {
+    this.backgroundAniamtionEffectImage = this.add
+      .image(0, 0, "default")
+      .setOrigin(0)
+      .setDisplaySize(this.game.canvas.width, this.game.canvas.height)
+      .setVisible(false)
+      .setAlpha(0)
+      .setDepth(100);
   }
 
   updateSelectedTeams() {
@@ -55,7 +79,6 @@ export default class Menu extends Phaser.Scene {
   addUI() {
     this.addBackground();
     this.addTexts();
-    this.addChoachImages();
     this.addButtons();
     this.addTeamSelectors();
 
@@ -102,7 +125,7 @@ export default class Menu extends Phaser.Scene {
       0,
       0,
       leftTeamsSelectorData,
-      15,
+      calculatePercentage(5, this.game.canvas.height),
       "vertical",
       "Juventus"
     );
@@ -120,7 +143,7 @@ export default class Menu extends Phaser.Scene {
       0,
       0,
       rightTeamsSelectorData,
-      15,
+      calculatePercentage(5, this.game.canvas.height),
       "vertical",
       "Liverpool"
     );
@@ -140,41 +163,9 @@ export default class Menu extends Phaser.Scene {
         0,
         this.game.canvas.width,
         this.game.canvas.height,
-        0xffffff
+        0x08170f
       )
       .setOrigin(0);
-  }
-
-  addChoachImages() {
-    const hostTeamCoach = this.add
-      .image(
-        this.game.canvas.width / 2 -
-          calculatePercentage(4, this.game.canvas.width),
-        this.game.canvas.height / 2 +
-          calculatePercentage(17, this.game.canvas.height),
-        "guardiola-default"
-      )
-      .setDisplaySize(
-        calculatePercentage(11, this.game.canvas.width),
-        calculatePercentage(11, this.game.canvas.width)
-      )
-      .setTint(0xb3b0aa)
-      .setOrigin(1, 0.5);
-
-    const guestTeamCoach = this.add
-      .image(
-        this.game.canvas.width / 2 +
-          calculatePercentage(4, this.game.canvas.width),
-        this.game.canvas.height / 2 -
-          calculatePercentage(17, this.game.canvas.height),
-        "mourinho-default"
-      )
-      .setDisplaySize(
-        calculatePercentage(11, this.game.canvas.width),
-        calculatePercentage(11, this.game.canvas.width)
-      )
-      .setTint(0xb3b0aa)
-      .setOrigin(0, 0.5);
   }
 
   updateTeams(hostTeamName: string, guestTeamName: string) {
@@ -186,9 +177,9 @@ export default class Menu extends Phaser.Scene {
     // VS text
     this.add
       .text(this.game.canvas.width / 2, this.game.canvas.height / 2, "VS", {
-        fontFamily: "Rubik Mono One",
-        fontSize: 40,
-        color: "#B5B2AC",
+        fontFamily: "Silkscreen",
+        fontSize: calculatePercentage(2.5, this.game.canvas.width),
+        color: "#6CFFFA",
       })
       .setOrigin(0.5);
 
@@ -200,9 +191,9 @@ export default class Menu extends Phaser.Scene {
         this.game.canvas.height / 2,
         "",
         {
-          fontFamily: "Rubik Mono One",
-          fontSize: 20,
-          color: "#878580",
+          fontFamily: "Silkscreen",
+          fontSize: calculatePercentage(1.6, this.game.canvas.width),
+          color: "#C0FFFA",
         }
       )
       .setOrigin(1, 0.5);
@@ -215,9 +206,9 @@ export default class Menu extends Phaser.Scene {
         this.game.canvas.height / 2,
         "",
         {
-          fontFamily: "Rubik Mono One",
-          fontSize: 20,
-          color: "#878580",
+          fontFamily: "Silkscreen",
+          fontSize: calculatePercentage(1.6, this.game.canvas.width),
+          color: "#C0FFFA",
         }
       )
       .setOrigin(0, 0.5);
@@ -229,15 +220,29 @@ export default class Menu extends Phaser.Scene {
       this,
       this.game.canvas.width / 2,
       this.game.canvas.height - 30,
-      260,
-      70,
+      calculatePercentage(20, this.game.canvas.width),
+
       "Start Match",
-      0x878580,
-      "#878580",
-      24
+      0x6cff81,
+      "#6CFF81",
+      calculatePercentage(2.2, this.game.canvas.width)
     )
       .setInteractive()
-      .on(Phaser.Input.Events.POINTER_DOWN, () => {});
+      .on(Phaser.Input.Events.POINTER_DOWN, () => {
+        this.backgroundAniamtionEffectImage.setVisible(true);
+        this.tacticsButton.setVisible(false);
+        this.settingsButton.setVisible(false);
+        this.startButton.setVisible(false);
+
+        this.add.tween({
+          targets: this.backgroundAniamtionEffectImage,
+          alpha: 1,
+          duration: 2500,
+          onComplete: () => {
+            this.scene.start("GamePlay");
+          },
+        });
+      });
 
     // Tactic Button
     this.tacticsButton = new MenuButton(
@@ -245,12 +250,11 @@ export default class Menu extends Phaser.Scene {
       this.game.canvas.width / 2 -
         calculatePercentage(12, this.game.canvas.width),
       this.game.canvas.height - 30,
-      170,
-      70,
+      calculatePercentage(10, this.game.canvas.width),
       "Tactics",
-      0x878580,
-      "#878580",
-      21
+      0xc0fffa,
+      "#C0FFFA",
+      calculatePercentage(1.8, this.game.canvas.width)
     )
       .setInteractive()
       .on(Phaser.Input.Events.POINTER_DOWN, () => {
@@ -271,12 +275,11 @@ export default class Menu extends Phaser.Scene {
       this.game.canvas.width / 2 +
         calculatePercentage(12, this.game.canvas.width),
       this.game.canvas.height - 30,
-      170,
-      70,
+      calculatePercentage(10, this.game.canvas.width),
       "Settings",
-      0x878580,
-      "#878580",
-      21
+      0xc0fffa,
+      "#C0FFFA",
+      calculatePercentage(1.8, this.game.canvas.width)
     )
       .setInteractive()
       .on(Phaser.Input.Events.POINTER_DOWN, () => {

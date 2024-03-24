@@ -21,7 +21,8 @@ export default class Preload extends Phaser.Scene {
     this.load.audio("fansSound", ["sounds/fans.mp3"]);
 
     //Font
-    this.load.addFile(new WebFontFile(this.load, "Rubik Mono One"));
+    // this.load.addFile(new WebFontFile(this.load, "Rubik Mono One"));
+    this.load.addFile(new WebFontFile(this.load, "Silkscreen"));
 
     //UI
     this.load.image("arrow", "image/ui/arrow.png");
@@ -33,6 +34,11 @@ export default class Preload extends Phaser.Scene {
     this.load.image("stadiumFitch", "image/ui/fitch.png");
     this.load.image("menu-close", "image/ui/menu-close.png");
     this.load.image("tactics-stadium", "image/ui/tactics-stadium.png");
+    this.load.image("fan", "image/ui/fan.png");
+    this.load.image("stadium-surrounding", "image/ui/stadium-surrounding.png");
+    this.load.image("triangle", "image/ui/triangle.png");
+    this.load.image("roof", "image/ui/roof.jpg");
+    this.load.image("city", "image/ui/city.jpg");
 
     // Nations
     this.load.image("algeria", "image/teamLogos/nations/Algeria.png");
@@ -340,6 +346,7 @@ export default class Preload extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start("Menu");
+    // this.scene.start("Menu");
+    this.scene.start("GamePlay");
   }
 }

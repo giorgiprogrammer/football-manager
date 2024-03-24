@@ -1,7 +1,6 @@
 import { TeamData } from "@/app/config/initialTeamsData";
 import {
   calculatePercentage,
-  clamp,
   interpolate,
   mapToPercentageInRange,
 } from "@/app/utils/math";

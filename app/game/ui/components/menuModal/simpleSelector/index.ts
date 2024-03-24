@@ -33,10 +33,10 @@ export class SimpleSelector extends Phaser.GameObjects.Container {
 
   addTitle() {
     const title = this.scene.add
-      .text(0, calculatePercentage(-80, this.getBounds().height), this.title!, {
+      .text(0, -calculatePercentage(80, this.getBounds().height), this.title!, {
         align: "center",
         color: "#A3A3A3",
-        fontSize: "14px",
+        fontSize: `${calculatePercentage(1.3, this.scene.game.canvas.width)}px`,
         fontFamily: "Rubik Mono One",
       })
       .setOrigin(0.5);
@@ -47,6 +47,7 @@ export class SimpleSelector extends Phaser.GameObjects.Container {
   addLeftArrow() {
     const leftArrow = this.scene.add
       .image(-calculatePercentage(10, this.scene.game.canvas.width), 0, "arrow")
+      .setScale(calculatePercentage(0.06, this.scene.game.canvas.width))
       .setOrigin(0.5)
       .setInteractive({ cursor: "pointer" })
       .on("pointerdown", () => {
@@ -65,6 +66,7 @@ export class SimpleSelector extends Phaser.GameObjects.Container {
   addRightArrow() {
     const rightArrow = this.scene.add
       .image(calculatePercentage(10, this.scene.game.canvas.width), 0, "arrow")
+      .setScale(calculatePercentage(0.06, this.scene.game.canvas.width))
       .setFlipX(true)
       .setOrigin(0.5)
       .setInteractive({ cursor: "pointer" })
@@ -85,7 +87,7 @@ export class SimpleSelector extends Phaser.GameObjects.Container {
       .text(0, 0, this.values[this.valueIndex], {
         align: "center",
         color: "#ffffff",
-        fontSize: "17px",
+        fontSize: `${calculatePercentage(1.7, this.scene.game.canvas.width)}px`,
         fontFamily: "Rubik Mono One",
       })
       .setOrigin(0.5);

@@ -174,7 +174,7 @@ export class Selector extends Phaser.GameObjects.Container {
         item.image.setAlpha(1 + makeNegative(minusOpacity));
 
         const minusScale = (Math.floor(this.items.length / 2) - index) / 5;
-        item.image.setScale(1 + makeNegative(minusScale));
+        item.image.setScale(item.image.scale + makeNegative(minusScale));
 
         //then make the image visible
         item.image.setTint(

@@ -41,7 +41,7 @@ export class TacticsWindow extends Phaser.GameObjects.Container {
       this.side === "left"
         ? calculatePercentage(-40, this.scene.game.canvas.width)
         : calculatePercentage(40, this.scene.game.canvas.width),
-      calculatePercentage(-5, this.scene.game.canvas.height),
+      calculatePercentage(-8, this.scene.game.canvas.height),
       100,
       50,
       "Simple Mode",
@@ -57,7 +57,7 @@ export class TacticsWindow extends Phaser.GameObjects.Container {
       this.side === "left"
         ? calculatePercentage(-40, this.scene.game.canvas.width)
         : calculatePercentage(40, this.scene.game.canvas.width),
-      calculatePercentage(5, this.scene.game.canvas.height),
+      calculatePercentage(8, this.scene.game.canvas.height),
       100,
       50,
       "Details Mode",
