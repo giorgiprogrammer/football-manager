@@ -68,7 +68,7 @@ export class Ball extends Phaser.Physics.Arcade.Image {
 
   makeTail() {
     this.scene.events.on("update", () => {
-      if (this.body?.velocity.x !== 0) new Circle(this.scene, this);
+      new Circle(this.scene, this);
     });
   }
 
@@ -79,18 +79,22 @@ export class Ball extends Phaser.Physics.Arcade.Image {
 }
 
 class Circle {
-  radius!: number;
-
   constructor(public scene: Phaser.Scene, public ball: Ball) {
-    this.radius = calculatePercentage(30, ball.displayWidth);
-    let circle = scene.add.circle(ball.x, ball.y, this.radius, 0xb8eb1c, 0.5);
-    scene.events.on("update", () => {
-      this.radius -= 0.4;
-      if (this.radius < 0) {
-        circle.destroy();
-      } else {
-        circle.setRadius(this.radius);
-      }
+    let circle = scene.add.circle(
+      ball.x,
+      ball.y,
+      calculatePercentage(30, ball.displayWidth),
+      0xe1ffff
+    );
+
+    scene.tweens.add({
+      targets: circle,
+      alpha: 0,
+      duration: 500,
+      radius: 0,
+      onComplete: () => {
+        circle.destroy(true);
+      },
     });
   }
 }

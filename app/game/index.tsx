@@ -3,21 +3,21 @@
 import { useSearchParams } from "next/navigation";
 import style from "./style.module.css";
 import { useEffect, useRef } from "react";
-import { initialGameConfig } from "./config/gameInitialConfig";
+import { tournamenrDataConfig } from "./config/tournamentDataConfig";
 
 let Preload: any;
 let Menu: any;
 let GamePlay: any;
-let MatchIndicators: any;
+let CanvasScene: any;
 
 export const Game = () => {
   const searchParams = useSearchParams();
 
-  initialGameConfig.hostTeam = searchParams.get("h")!;
-  initialGameConfig.guestTeam = searchParams.get("g")!;
-  initialGameConfig.guestTeam = searchParams.get("g")!;
-  initialGameConfig.week = parseInt(searchParams.get("week")!);
-  initialGameConfig.division = parseInt(searchParams.get("division")!);
+  // Get tournament data from URL
+  tournamenrDataConfig.hostTeam = searchParams.get("h")!;
+  tournamenrDataConfig.guestTeam = searchParams.get("g")!;
+  tournamenrDataConfig.week = parseInt(searchParams.get("week")!);
+  tournamenrDataConfig.division = parseInt(searchParams.get("division")!);
 
   const canvasContainer = useRef(null);
 
@@ -29,7 +29,7 @@ export const Game = () => {
       Preload = require("./scenes/preload").default;
       Menu = require("./scenes/menu").default;
       GamePlay = require("./scenes/gameplay").default;
-      MatchIndicators = require("./scenes/matchIndicators").default;
+      CanvasScene = require("./scenes/canvasScene").default;
     }
 
     import("phaser").then((Phaser) => {
@@ -51,7 +51,7 @@ export const Game = () => {
           height: window.innerHeight,
         },
         backgroundColor: 0x08170f,
-        scene: [Preload, Menu, GamePlay, MatchIndicators],
+        scene: [Preload, Menu, GamePlay, CanvasScene],
       });
       // return () => game?.destroy(true, false);
     });

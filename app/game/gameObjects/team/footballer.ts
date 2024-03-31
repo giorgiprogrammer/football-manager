@@ -5,8 +5,9 @@ import {
 } from "@/app/utils/math";
 import { Ball } from "../ball";
 import { Stadium } from "../stadium";
-import { TeamProperties } from "../../types/types";
 import { Match } from "../../core/match";
+import { TeamTechniqueProperties } from "@/app/config/initialTeamsData";
+import { matchData } from "@/app/config/matchData";
 
 export class Footballer extends Phaser.Physics.Arcade.Image {
   ball!: Ball;
@@ -14,15 +15,17 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
   passSound!: Phaser.Sound.BaseSound;
   shootSound!: Phaser.Sound.BaseSound;
 
+  shadow: any;
+
   constructor(
     scene: Phaser.Scene,
     x: number,
     y: number,
     public key: string,
-    public footballerPosition: string,
+    public type: string,
     public isHost: boolean,
     public stadium: Stadium,
-    public properties: TeamProperties
+    public properties: TeamTechniqueProperties
   ) {
     super(scene, x, y, key);
     scene.physics.add.existing(this);
@@ -45,7 +48,7 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
       calculatePercentage(3, this.stadium.stadiumWidth),
       calculatePercentage(3, this.stadium.stadiumWidth)
     );
-    if (this.footballerPosition !== "goalkeeper") this.setAlpha(0.75);
+    if (this.type !== "goalkeeper") this.setAlpha(0.75);
 
     this.setCircle(
       this.displayWidth + calculatePercentage(0.4, this.stadium.stadiumWidth),
@@ -71,9 +74,12 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
     match: Match
   ) {
     let randomFootballer!: Footballer;
-    if (this.footballerPosition !== "attacker") {
+    if (this.type !== "attacker") {
+      const shortPassChance = getRandomNumber(0, 100);
+
+      console.log(shortVariants.length, longVariants.length);
       randomFootballer =
-        this.properties.passingStyle === "short"
+        shortPassChance < this.properties.shortPassChance
           ? shortVariants[getRandomNumber(0, shortVariants.length - 1)]
           : longVariants[getRandomNumber(0, longVariants.length - 1)];
     }
@@ -82,24 +88,25 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
       () => {
         if (match.isPlaying === false) {
           this.controllBall = false;
-          if (this.footballerPosition !== "goalkeeper") this.setAlpha(0.75);
-
+          if (this.type !== "goalkeeper") this.setAlpha(0.75);
+          this.shadow.setInnerStrength(0);
+          this.shadow.setOuterStrength(0);
           return;
         }
-        if (this.footballerPosition === "goalkeeper") {
+        if (this.type === "goalkeeper") {
           this.makePass(randomFootballer, match);
         }
-        if (this.footballerPosition === "defender") {
+        if (this.type === "defender") {
           this.makePass(randomFootballer, match);
         }
-        if (this.footballerPosition === "midfielder") {
+        if (this.type === "midfielder") {
           this.makePass(randomFootballer, match);
         }
-        if (this.footballerPosition === "attacker") {
+        if (this.type === "attacker") {
           this.shoot();
         }
       },
-      this.footballerPosition === "goalkeeper"
+      this.type === "goalkeeper"
         ? 0
         : interpolate(this.properties.passDelay, 30, 1800)
     );
@@ -115,21 +122,21 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
 
     this.passSound.play();
     this.ball.kick(
-      interpolate(this.properties.passSpeed, 140, 260),
+      interpolate(this.properties.passSpeeed, 140, 260),
       footballer.getBounds().centerX,
       footballer.getBounds().centerY + randomY
     );
 
     setTimeout(() => {
       this.controllBall = false;
-      if (this.footballerPosition !== "goalkeeper") this.setAlpha(0.75);
+      if (this.type !== "goalkeeper") this.setAlpha(0.75);
     }, 500);
   }
 
   shoot() {
     this.shootSound.play();
     this.ball.kick(
-      interpolate(this.properties.passSpeed, 180, 320),
+      interpolate(this.properties.shootSpeed, 180, 320),
       this.isHost
         ? this.stadium.rightGoalPost.getBounds().centerX
         : this.stadium.leftGoalPost.getBounds().centerX,
@@ -142,14 +149,14 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
     );
     setTimeout(() => {
       this.controllBall = false;
-      if (this.footballerPosition !== "goalkeeper") this.setAlpha(0.75);
+      if (this.type !== "goalkeeper") this.setAlpha(0.75);
     }, 600);
   }
 
   randomShoot() {
     this.passSound.play();
     this.ball.kick(
-      interpolate(this.properties.passSpeed, 180, 320),
+      interpolate(this.properties.passSpeeed, 180, 320),
       this.isHost
         ? this.stadium.rightGoalPost.getBounds().centerX
         : this.stadium.leftGoalPost.getBounds().centerX,

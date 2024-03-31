@@ -14,7 +14,8 @@ export class SpectatorsLine extends Phaser.GameObjects.Container {
       hostFansChance: number;
     },
     public stadium: Stadium,
-    public direction: string
+    public direction: string,
+    public quanitity: number
   ) {
     super(scene, x, y);
 
@@ -39,15 +40,7 @@ export class SpectatorsLine extends Phaser.GameObjects.Container {
 
   addRightLine() {
     let posY = 4;
-    for (
-      let i = 0;
-      i <
-      Math.floor(
-        this.stadium.getBounds().height /
-          calculatePercentage(2, this.stadium.getBounds().width)
-      );
-      i++
-    ) {
+    for (let i = 0; i < this.quanitity; i++) {
       const color =
         getRandomNumber(0, 100) > this.colorProperties.hostFansChance
           ? this.colorProperties.guestFanstColor
@@ -69,15 +62,7 @@ export class SpectatorsLine extends Phaser.GameObjects.Container {
 
   addLeftLine() {
     let posY = 4;
-    for (
-      let i = 0;
-      i <
-      Math.floor(
-        this.stadium.getBounds().height /
-          calculatePercentage(2, this.stadium.getBounds().width)
-      );
-      i++
-    ) {
+    for (let i = 0; i < this.quanitity; i++) {
       const color =
         getRandomNumber(0, 100) > this.colorProperties.hostFansChance
           ? this.colorProperties.guestFanstColor
@@ -99,16 +84,7 @@ export class SpectatorsLine extends Phaser.GameObjects.Container {
 
   addBottomLine() {
     let posX = 0;
-    for (
-      let i = 0;
-      i <
-      Math.floor(
-        this.stadium.getBounds().width /
-          calculatePercentage(2, this.stadium.getBounds().width) +
-          1
-      );
-      i++
-    ) {
+    for (let i = 0; i < this.quanitity; i++) {
       const color =
         getRandomNumber(0, 100) > this.colorProperties.hostFansChance
           ? this.colorProperties.guestFanstColor
@@ -129,22 +105,12 @@ export class SpectatorsLine extends Phaser.GameObjects.Container {
 
   addTopLine() {
     let posX = 0;
-    for (
-      let i = 0;
-      i <
-      Math.floor(
-        this.stadium.getBounds().width /
-          calculatePercentage(2, this.stadium.getBounds().width) +
-          1
-      );
-      i++
-    ) {
+    for (let i = 0; i < this.quanitity; i++) {
       const color =
         getRandomNumber(0, 100) > this.colorProperties.hostFansChance
           ? this.colorProperties.guestFanstColor
           : this.colorProperties.hostFansColor;
       const image = this.imageGroup
-
         .get(posX, 0, "fan")
         .setDisplaySize(
           calculatePercentage(2, this.stadium.getBounds().width),

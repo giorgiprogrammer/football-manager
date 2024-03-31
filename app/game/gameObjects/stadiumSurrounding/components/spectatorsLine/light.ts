@@ -1,5 +1,10 @@
+import { Tweens } from "phaser";
+
 export class Light extends Phaser.GameObjects.Container {
   triangle!: Phaser.GameObjects.Image;
+
+  tween!: Phaser.Tweens.Tween;
+  triangleTween!: Phaser.Tweens.Tween;
 
   constructor(scene: Phaser.Scene, x: number, y: number, public pos: string) {
     super(scene, x, y);
@@ -23,6 +28,13 @@ export class Light extends Phaser.GameObjects.Container {
     }
 
     this.startAnimation();
+  }
+
+  pauseMotion() {
+    this.tween.pause();
+    this.triangleTween.pause();
+
+    this.triangle.setVisible(false);
   }
 
   addRightBottom() {
@@ -117,7 +129,7 @@ export class Light extends Phaser.GameObjects.Container {
       anglePharameters = { from: -45, to: 45 };
     }
 
-    this.scene.tweens.add({
+    this.tween = this.scene.tweens.add({
       targets: this,
       duration: 2500,
       angle: anglePharameters,
@@ -125,7 +137,7 @@ export class Light extends Phaser.GameObjects.Container {
       yoyo: true,
     });
 
-    this.scene.tweens.add({
+    this.triangleTween = this.scene.tweens.add({
       targets: this.triangle,
       duration: 400,
       alpha: 0,
@@ -134,5 +146,8 @@ export class Light extends Phaser.GameObjects.Container {
     });
   }
 
-  stopAnimation() {}
+  stopAnimation() {
+    this.tween.pause();
+    this.triangleTween.pause();
+  }
 }

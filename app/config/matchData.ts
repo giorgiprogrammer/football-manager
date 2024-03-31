@@ -1,3 +1,4 @@
+import { Stadium } from "../game/gameObjects/stadium";
 import { TeamData, initialTeamsData } from "./initialTeamsData";
 
 export const matchData: MatchData = {

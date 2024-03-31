@@ -22,7 +22,7 @@ export function interpolate(parameter: number, min: number, max: number) {
   // Calculate the interpolated value
   const interpolatedValue = min + normalizedPassDelay * (max - min);
 
-  return interpolatedValue;
+  return Math.floor(interpolatedValue);
 }
 
 export function mapToPercentageInRange(

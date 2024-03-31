@@ -21,9 +21,9 @@ export class Stadium extends Phaser.GameObjects.Container {
     y: number,
     public stadiumWidth: number,
     public stadiumHeight: number,
-    public leftFansChance: number,
-    public leftFansColor: number,
-    public righFanstColor: number
+    public hostFansChance: number,
+    public hostFansColor: number,
+    public guestFanstColor: number
   ) {
     super(scene, x, y);
     scene.add.existing(this);
@@ -204,10 +204,14 @@ export class Stadium extends Phaser.GameObjects.Container {
       0,
       0,
       this,
-      this.leftFansChance,
-      this.leftFansColor,
-      this.righFanstColor
+      this.hostFansChance,
+      this.hostFansColor,
+      this.guestFanstColor
     );
     this.add(this.stadiumSurrounding);
+  }
+
+  stopLightAnimations() {
+    this.stadiumSurrounding.stopLightAnimations();
   }
 }

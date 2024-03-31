@@ -197,8 +197,6 @@ export async function insertMatchResult(
     .eq("division", division)
     .eq("week", week);
 
-  console.log("tournamentResponse: ", tournamentData, tournamentError);
-
   let hostTeamPoints =
     hostTeamScore > guestTeamScore
       ? 3
@@ -260,5 +258,27 @@ export async function insertMatchResult(
     guestscheduleData,
     hostscheduleError,
     guestscheduleError,
+  };
+}
+
+export async function getTeamsPosition(
+  hostTeamName: string,
+  guestTeamName: string
+) {
+  const { data: hostData, error: hostError } = await supabase
+    .from("Schedule")
+    .select("placement")
+    .eq("team_name", hostTeamName);
+
+  const { data: guestData, error: guestError } = await supabase
+    .from("Schedule")
+    .select("placement")
+    .eq("team_name", guestTeamName);
+
+  return {
+    hostData,
+    hostError,
+    guestData,
+    guestError,
   };
 }

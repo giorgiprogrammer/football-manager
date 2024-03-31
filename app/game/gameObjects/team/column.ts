@@ -1,7 +1,14 @@
-import { calculatePercentage, interpolate } from "@/app/utils/math";
+import {
+  calculatePercentage,
+  clamp,
+  interpolate,
+  mapToPercentageInRange,
+} from "@/app/utils/math";
 import { Stadium } from "../stadium";
 import { Footballer } from "./footballer";
 import { TeamProperties } from "../../types/types";
+import { TeamData } from "@/app/config/initialTeamsData";
+import { matchData } from "@/app/config/matchData";
 
 export class Column extends Phaser.GameObjects.Container {
   footballers: Footballer[] = [];
@@ -15,12 +22,9 @@ export class Column extends Phaser.GameObjects.Container {
     y: number,
     public quantity: number,
     public stadium: Stadium,
-    public footballerKey: string,
-    public type: string,
-    public side: string,
+    public team: TeamData,
     public isHost: boolean,
-    public properties: TeamProperties,
-    public columnPosition: string
+    public type: string
   ) {
     super(scene, x, y);
     scene.add.existing(this);
@@ -30,7 +34,19 @@ export class Column extends Phaser.GameObjects.Container {
 
   init() {
     this.addFootballers();
-    this.makeArrangement();
+
+    // let postFxPlugin = this.scene.plugins.get("rexglowfilter2pipelineplugin")!;
+    // @ts-ignore
+    // this.shadow = postFxPlugin.add(this, {
+    //   distance: 3,
+    //   outerStrength: 3,
+    //   innerStrength: 0,
+    //   glowColor: Number(
+    //     this.isHost
+    //       ? matchData.hostTeam.teamColor
+    //       : matchData.guestTeam.teamColor
+    //   ),
+    // });
   }
 
   reset() {
@@ -43,15 +59,53 @@ export class Column extends Phaser.GameObjects.Container {
     let y = -this.stadium.stadiumHeight / 2 + padding;
 
     for (let i = 0; i < this.quantity; i++) {
+      let posX = 0;
+      if (this.type === "defender") {
+        if (this.team.formationProperties.defence === "wide-attack") {
+          if (i === 0 || i === this.quantity - 1) {
+            posX = calculatePercentage(2.8, this.stadium.stadiumWidth);
+          }
+        }
+      }
+      if (this.type === "midfielder") {
+        if (this.team.formationProperties.midfield === "wide-attack") {
+          if (i === 0 || i === this.quantity - 1) {
+            posX = calculatePercentage(2.8, this.stadium.stadiumWidth);
+          }
+        }
+        if (this.team.formationProperties.midfield === "center-attack") {
+          if (i !== 0 && i !== this.quantity - 1) {
+            posX = calculatePercentage(2.8, this.stadium.stadiumWidth);
+          }
+        }
+        if (this.team.formationProperties.midfield === "center-deffence") {
+          if (i !== 0 && i !== this.quantity - 1) {
+            posX = -calculatePercentage(2.8, this.stadium.stadiumWidth);
+          }
+        }
+        if (this.team.formationProperties.midfield === "wide-deffence") {
+          if (i === 0 || i === this.quantity - 1) {
+            posX = -calculatePercentage(2.8, this.stadium.stadiumWidth);
+          }
+        }
+      }
+      if (this.type === "attacker") {
+        if (this.team.formationProperties.attack === "center-attack") {
+          if (i !== 0 && i !== this.quantity - 1) {
+            posX = calculatePercentage(2.8, this.stadium.stadiumWidth);
+          }
+        }
+      }
+
       const footballer = new Footballer(
         this.scene,
-        0,
+        posX,
         y,
-        this.footballerKey,
-        this.columnPosition,
+        this.team.logoKey,
+        this.type,
         this.isHost,
         this.stadium,
-        this.properties
+        this.team.techniqueProperties
       );
       this.add(footballer);
       this.footballers.push(footballer);
@@ -63,251 +117,12 @@ export class Column extends Phaser.GameObjects.Container {
     }
   }
 
-  makeArrangement() {
-    if (this.type === "normal") return;
-    if (this.type === "attack") {
-      if (this.side === "center") {
-        if (this.quantity === 3) {
-          this.footballers[1].setPosition(
-            this.isHost
-              ? this.footballers[1].x +
-                  calculatePercentage(4, this.stadium.stadiumWidth)
-              : this.footballers[1].x -
-                  calculatePercentage(4, this.stadium.stadiumWidth),
-            this.footballers[1].y
-          );
-        }
-        if (this.quantity === 4) {
-          this.footballers[1].setPosition(
-            this.isHost
-              ? this.footballers[1].x +
-                  calculatePercentage(4, this.stadium.stadiumWidth)
-              : this.footballers[1].x -
-                  calculatePercentage(4, this.stadium.stadiumWidth),
-            this.footballers[1].y
-          );
-          this.footballers[2].setPosition(
-            this.isHost
-              ? this.footballers[2].x +
-                  calculatePercentage(4, this.stadium.stadiumWidth)
-              : this.footballers[2].x -
-                  calculatePercentage(4, this.stadium.stadiumWidth),
-            this.footballers[2].y
-          );
-        }
-        if (this.quantity === 5) {
-          this.footballers[1].setPosition(
-            this.isHost
-              ? this.footballers[1].x +
-                  calculatePercentage(4, this.stadium.stadiumWidth)
-              : this.footballers[1].x -
-                  calculatePercentage(4, this.stadium.stadiumWidth),
-            this.footballers[1].y
-          );
-          this.footballers[2].setPosition(
-            this.isHost
-              ? this.footballers[2].x +
-                  calculatePercentage(4, this.stadium.stadiumWidth)
-              : this.footballers[2].x -
-                  calculatePercentage(4, this.stadium.stadiumWidth),
-            this.footballers[2].y
-          );
-          this.footballers[3].setPosition(
-            this.isHost
-              ? this.footballers[3].x +
-                  calculatePercentage(4, this.stadium.stadiumWidth)
-              : this.footballers[3].x -
-                  calculatePercentage(4, this.stadium.stadiumWidth),
-            this.footballers[3].y
-          );
-        }
-      }
-
-      if (this.side === "wide") {
-        if (this.quantity === 3) {
-          this.footballers[0].setPosition(
-            this.isHost
-              ? this.footballers[0].x +
-                  calculatePercentage(4, this.stadium.stadiumWidth)
-              : this.footballers[0].x -
-                  calculatePercentage(4, this.stadium.stadiumWidth),
-            this.footballers[0].y
-          );
-
-          this.footballers[2].setPosition(
-            this.isHost
-              ? this.footballers[2].x +
-                  calculatePercentage(4, this.stadium.stadiumWidth)
-              : this.footballers[2].x -
-                  calculatePercentage(4, this.stadium.stadiumWidth),
-            this.footballers[2].y
-          );
-        }
-        if (this.quantity === 4) {
-          this.footballers[0].setPosition(
-            this.isHost
-              ? this.footballers[0].x +
-                  calculatePercentage(4, this.stadium.stadiumWidth)
-              : this.footballers[0].x -
-                  calculatePercentage(4, this.stadium.stadiumWidth),
-            this.footballers[0].y
-          );
-          this.footballers[3].setPosition(
-            this.isHost
-              ? this.footballers[3].x +
-                  calculatePercentage(4, this.stadium.stadiumWidth)
-              : this.footballers[3].x -
-                  calculatePercentage(4, this.stadium.stadiumWidth),
-            this.footballers[3].y
-          );
-        }
-        if (this.quantity === 5) {
-          this.footballers[0].setPosition(
-            this.isHost
-              ? this.footballers[0].x +
-                  calculatePercentage(4, this.stadium.stadiumWidth)
-              : this.footballers[0].x -
-                  calculatePercentage(4, this.stadium.stadiumWidth),
-            this.footballers[0].y
-          );
-
-          this.footballers[4].setPosition(
-            this.isHost
-              ? this.footballers[4].x +
-                  calculatePercentage(4, this.stadium.stadiumWidth)
-              : this.footballers[4].x -
-                  calculatePercentage(4, this.stadium.stadiumWidth),
-            this.footballers[4].y
-          );
-        }
-      }
-    }
-
-    if (this.type === "defend") {
-      if (this.side === "center") {
-        if (this.quantity === 3) {
-          this.footballers[1].setPosition(
-            this.isHost
-              ? this.footballers[1].x -
-                  calculatePercentage(4, this.stadium.stadiumWidth)
-              : this.footballers[1].x +
-                  calculatePercentage(4, this.stadium.stadiumWidth),
-            this.footballers[1].y
-          );
-        }
-        if (this.quantity === 4) {
-          this.footballers[1].setPosition(
-            this.isHost
-              ? this.footballers[1].x -
-                  calculatePercentage(4, this.stadium.stadiumWidth)
-              : this.footballers[1].x +
-                  calculatePercentage(4, this.stadium.stadiumWidth),
-            this.footballers[1].y
-          );
-          this.footballers[2].setPosition(
-            this.isHost
-              ? this.footballers[2].x -
-                  calculatePercentage(4, this.stadium.stadiumWidth)
-              : this.footballers[2].x +
-                  calculatePercentage(4, this.stadium.stadiumWidth),
-            this.footballers[2].y
-          );
-        }
-        if (this.quantity === 5) {
-          this.footballers[1].setPosition(
-            this.isHost
-              ? this.footballers[1].x -
-                  calculatePercentage(4, this.stadium.stadiumWidth)
-              : this.footballers[1].x +
-                  calculatePercentage(4, this.stadium.stadiumWidth),
-            this.footballers[1].y
-          );
-          this.footballers[2].setPosition(
-            this.isHost
-              ? this.footballers[2].x -
-                  calculatePercentage(4, this.stadium.stadiumWidth)
-              : this.footballers[2].x +
-                  calculatePercentage(4, this.stadium.stadiumWidth),
-            this.footballers[2].y
-          );
-          this.footballers[3].setPosition(
-            this.isHost
-              ? this.footballers[3].x -
-                  calculatePercentage(4, this.stadium.stadiumWidth)
-              : this.footballers[3].x +
-                  calculatePercentage(4, this.stadium.stadiumWidth),
-            this.footballers[3].y
-          );
-        }
-      }
-
-      if (this.side === "wide") {
-        if (this.quantity === 3) {
-          this.footballers[0].setPosition(
-            this.isHost
-              ? this.footballers[0].x -
-                  calculatePercentage(4, this.stadium.stadiumWidth)
-              : this.footballers[0].x +
-                  calculatePercentage(4, this.stadium.stadiumWidth),
-            this.footballers[0].y
-          );
-
-          this.footballers[2].setPosition(
-            this.isHost
-              ? this.footballers[2].x -
-                  calculatePercentage(4, this.stadium.stadiumWidth)
-              : this.footballers[2].x +
-                  calculatePercentage(4, this.stadium.stadiumWidth),
-            this.footballers[2].y
-          );
-        }
-        if (this.quantity === 4) {
-          this.footballers[0].setPosition(
-            this.isHost
-              ? this.footballers[0].x -
-                  calculatePercentage(4, this.stadium.stadiumWidth)
-              : this.footballers[0].x +
-                  calculatePercentage(4, this.stadium.stadiumWidth),
-            this.footballers[0].y
-          );
-
-          this.footballers[3].setPosition(
-            this.isHost
-              ? this.footballers[3].x -
-                  calculatePercentage(4, this.stadium.stadiumWidth)
-              : this.footballers[3].x +
-                  calculatePercentage(4, this.stadium.stadiumWidth),
-            this.footballers[3].y
-          );
-        }
-        if (this.quantity === 5) {
-          this.footballers[0].setPosition(
-            this.isHost
-              ? this.footballers[0].x -
-                  calculatePercentage(4, this.stadium.stadiumWidth)
-              : this.footballers[0].x +
-                  calculatePercentage(4, this.stadium.stadiumWidth),
-            this.footballers[0].y
-          );
-
-          this.footballers[4].setPosition(
-            this.isHost
-              ? this.footballers[4].x -
-                  calculatePercentage(4, this.stadium.stadiumWidth)
-              : this.footballers[4].x +
-                  calculatePercentage(4, this.stadium.stadiumWidth),
-            this.footballers[4].y
-          );
-        }
-      }
-    }
-  }
-
   startMotion(distance: number) {
-    const minSpeed = 1700;
-    const maxSpeed = 600;
-
-    const speed = interpolate(this.properties.speed, minSpeed, maxSpeed);
+    const speed = interpolate(
+      mapToPercentageInRange(this.team.strength, 800, 2130) + 1,
+      1800,
+      550
+    );
 
     if (this.tween) {
       if (this.tween.isDestroyed()) {
@@ -321,7 +136,7 @@ export class Column extends Phaser.GameObjects.Container {
           },
           duration: speed,
         });
-        this.tween.seek(500);
+        this.tween.seek(calculatePercentage(50, speed));
         return;
       } else {
         this.tween.resume();
@@ -339,7 +154,7 @@ export class Column extends Phaser.GameObjects.Container {
       },
       duration: speed,
     });
-    this.tween.seek(500);
+    this.tween.seek(calculatePercentage(50, speed));
   }
 
   stopMotion() {

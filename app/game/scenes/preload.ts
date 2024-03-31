@@ -8,7 +8,12 @@ export default class Preload extends Phaser.Scene {
 
   preload() {
     this.load.setPath(`../../game/assets/`);
-
+    // Plugins
+    this.load.plugin(
+      "rexglowfilter2pipelineplugin",
+      "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexglowfilter2pipelineplugin.min.js",
+      true
+    );
     //Choacs
     this.load.image("guardiola-default", "image/coachs/guardiola-default.jpg");
     this.load.image("mourinho-default", "image/coachs/mourinho-default.jpg");
@@ -39,6 +44,7 @@ export default class Preload extends Phaser.Scene {
     this.load.image("triangle", "image/ui/triangle.png");
     this.load.image("roof", "image/ui/roof.jpg");
     this.load.image("city", "image/ui/city.jpg");
+    this.load.image("start-button", "image/ui/start-button.png");
 
     // Nations
     this.load.image("algeria", "image/teamLogos/nations/Algeria.png");
@@ -346,7 +352,7 @@ export default class Preload extends Phaser.Scene {
   }
 
   create() {
-    // this.scene.start("Menu");
-    this.scene.start("GamePlay");
+    this.scene.start("Menu");
+    // this.scene.start("GamePlay");
   }
 }

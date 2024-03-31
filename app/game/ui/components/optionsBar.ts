@@ -127,6 +127,7 @@ export class OptionsBar extends Phaser.GameObjects.Container {
         this.indicatorValue = Math.floor(
           ((clampedX - minX) / (maxX - minX)) * 100 + 50
         );
+        if (this.indicatorValue < 0) this.indicatorValue = 0;
         this.indicatorTextObject.setText(this.indicatorValue.toString());
         this.setChangedParameters();
       }

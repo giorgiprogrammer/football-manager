@@ -6,6 +6,7 @@ import { SettingsModal } from "../ui/components/menuModal/settingsModal";
 import { TacticsModal } from "../ui/components/menuModal/tacticsModal";
 import { deepCopy } from "@/app/utils/helperFunctions";
 import { matchData } from "@/app/config/matchData";
+import { tournamenrDataConfig } from "../config/tournamentDataConfig";
 
 export default class Menu extends Phaser.Scene {
   hostTeamsSelector!: Selector;
@@ -52,7 +53,10 @@ export default class Menu extends Phaser.Scene {
     });
 
     this.addAnimationEffectImage();
+    this.getTeamPositionsDataFromTournament();
   }
+
+  getTeamPositionsDataFromTournament() {}
 
   addAnimationEffectImage() {
     this.backgroundAniamtionEffectImage = this.add
@@ -69,6 +73,9 @@ export default class Menu extends Phaser.Scene {
       initialTeamsData[this.hostTeamsSelector.selectedItem.name];
     this.selectedGuestTeam =
       initialTeamsData[this.guestTeamsSelector.selectedItem.name];
+
+    matchData.hostTeam = deepCopy<TeamData>(this.selectedHostTeam);
+    matchData.guestTeam = deepCopy<TeamData>(this.selectedGuestTeam);
 
     this.updateTeams(
       this.hostTeamsSelector.selectedItem.name,
@@ -127,7 +134,7 @@ export default class Menu extends Phaser.Scene {
       leftTeamsSelectorData,
       calculatePercentage(5, this.game.canvas.height),
       "vertical",
-      "Juventus"
+      tournamenrDataConfig.hostTeam
     );
     matchData.hostTeam = deepCopy<TeamData>(initialTeamsData["Juventus"]);
 
@@ -145,7 +152,7 @@ export default class Menu extends Phaser.Scene {
       rightTeamsSelectorData,
       calculatePercentage(5, this.game.canvas.height),
       "vertical",
-      "Liverpool"
+      tournamenrDataConfig.guestTeam
     );
     matchData.guestTeam = deepCopy<TeamData>(initialTeamsData["Liverpool"]);
 

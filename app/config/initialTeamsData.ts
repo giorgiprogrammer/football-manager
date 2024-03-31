@@ -10,6 +10,7 @@ export type TeamData = {
   logoKey: string;
   formation: string;
   formationProperties: FormationProperties;
+  techniqueProperties: TeamTechniqueProperties;
   teamColor: string;
   teamSecondaryColor: string;
   strength: number;
@@ -20,6 +21,18 @@ export type TeamData = {
     happyImage: string;
     sadImage: string;
   };
+};
+
+export type TeamTechniqueProperties = {
+  goalKeeperMotionSpeed: number;
+  goalKeeperPassSpeed: number;
+  passSpeeed: number;
+  passAccuracy: number;
+  shootSpeed: number;
+  shootAccuracy: number;
+  longPassChance: number;
+  shortPassChance: number;
+  passDelay: number;
 };
 
 type FormationProperties = {
@@ -43,9 +56,20 @@ export const initialTeamsData: TeamsData = {
       midfield: "normal",
       attack: "center-attack",
     },
+    techniqueProperties: {
+      goalKeeperMotionSpeed: 50,
+      goalKeeperPassSpeed: 50,
+      passSpeeed: 50,
+      passAccuracy: 50,
+      shootSpeed: 50,
+      shootAccuracy: 50,
+      longPassChance: 50,
+      shortPassChance: 50,
+      passDelay: 20,
+    },
     teamColor: "0x9C824A",
     teamSecondaryColor: "0x000000",
-    strength: 1809,
+    strength: 1400,
     goalSoundKey: "arsenal_goal_sound",
     coach: {
       name: "Mikel Arteta",
@@ -63,9 +87,20 @@ export const initialTeamsData: TeamsData = {
       midfield: "center-attack",
       attack: "center-attack",
     },
+    techniqueProperties: {
+      goalKeeperMotionSpeed: 50,
+      goalKeeperPassSpeed: 50,
+      passSpeeed: 50,
+      passAccuracy: 50,
+      shootSpeed: 50,
+      shootAccuracy: 50,
+      longPassChance: 50,
+      shortPassChance: 50,
+      passDelay: 20,
+    },
     teamColor: "0x9C824A",
     teamSecondaryColor: "0x000000",
-    strength: 7,
+    strength: 1400,
     goalSoundKey: "arsenal_goal_sound",
     coach: {
       name: "Mikel Arteta",
@@ -83,9 +118,20 @@ export const initialTeamsData: TeamsData = {
       midfield: "center-attack",
       attack: "normal",
     },
-    teamColor: "0x9C824A",
+    techniqueProperties: {
+      goalKeeperMotionSpeed: 50,
+      goalKeeperPassSpeed: 50,
+      passSpeeed: 50,
+      passAccuracy: 50,
+      shootSpeed: 50,
+      shootAccuracy: 50,
+      longPassChance: 50,
+      shortPassChance: 50,
+      passDelay: 20,
+    },
+    teamColor: "0xE833A0",
     teamSecondaryColor: "0x000000",
-    strength: 7,
+    strength: 900,
     goalSoundKey: "arsenal_goal_sound",
     coach: {
       name: "Mikel Arteta",
@@ -103,9 +149,20 @@ export const initialTeamsData: TeamsData = {
       midfield: "center-attack",
       attack: "center-attack",
     },
+    techniqueProperties: {
+      goalKeeperMotionSpeed: 50,
+      goalKeeperPassSpeed: 50,
+      passSpeeed: 50,
+      passAccuracy: 50,
+      shootSpeed: 50,
+      shootAccuracy: 50,
+      longPassChance: 50,
+      shortPassChance: 50,
+      passDelay: 20,
+    },
     teamColor: "0x9C824A",
     teamSecondaryColor: "0x000000",
-    strength: 7,
+    strength: 1400,
     goalSoundKey: "arsenal_goal_sound",
     coach: {
       name: "Mikel Arteta",
@@ -123,9 +180,20 @@ export const initialTeamsData: TeamsData = {
       midfield: "center-attack",
       attack: "center-attack",
     },
+    techniqueProperties: {
+      goalKeeperMotionSpeed: 50,
+      goalKeeperPassSpeed: 50,
+      passSpeeed: 50,
+      passAccuracy: 50,
+      shootSpeed: 50,
+      shootAccuracy: 50,
+      longPassChance: 50,
+      shortPassChance: 50,
+      passDelay: 20,
+    },
     teamColor: "0x9C824A",
     teamSecondaryColor: "0x000000",
-    strength: 2003,
+    strength: 1400,
     goalSoundKey: "arsenal_goal_sound",
     coach: {
       name: "Mikel Arteta",
@@ -143,9 +211,20 @@ export const initialTeamsData: TeamsData = {
       midfield: "center-attack",
       attack: "center-attack",
     },
+    techniqueProperties: {
+      goalKeeperMotionSpeed: 50,
+      goalKeeperPassSpeed: 50,
+      passSpeeed: 50,
+      passAccuracy: 50,
+      shootSpeed: 50,
+      shootAccuracy: 50,
+      longPassChance: 50,
+      shortPassChance: 50,
+      passDelay: 20,
+    },
     teamColor: "0x9C824A",
     teamSecondaryColor: "0x000000",
-    strength: 7,
+    strength: 1400,
     goalSoundKey: "arsenal_goal_sound",
     coach: {
       name: "Mikel Arteta",
@@ -163,7 +242,18 @@ export const initialTeamsData: TeamsData = {
       midfield: "center-attack",
       attack: "center-attack",
     },
-    teamColor: "0x9C824A",
+    techniqueProperties: {
+      goalKeeperMotionSpeed: 50,
+      goalKeeperPassSpeed: 50,
+      passSpeeed: 50,
+      passAccuracy: 50,
+      shootSpeed: 50,
+      shootAccuracy: 50,
+      longPassChance: 50,
+      shortPassChance: 50,
+      passDelay: 20,
+    },
+    teamColor: "0xFFF7FF",
     teamSecondaryColor: "0x000000",
     strength: 1809,
     goalSoundKey: "arsenal_goal_sound",
