@@ -1,4 +1,4 @@
-export const initialGameConfig = {
+export const tournamenrDataConfig = {
   hostTeam: "",
   guestTeam: "",
   week: 0,

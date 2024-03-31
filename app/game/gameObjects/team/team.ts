@@ -1,8 +1,8 @@
 import { calculatePercentage, interpolate } from "@/app/utils/math";
 import { Stadium } from "../stadium";
 import { Column } from "./column";
-import { TeamData } from "../../types/types";
 import { Footballer } from "./footballer";
+import { TeamData } from "@/app/config/initialTeamsData";
 
 export class Team extends Phaser.GameObjects.Container {
   defenceColumn!: Column;
@@ -50,11 +50,11 @@ export class Team extends Phaser.GameObjects.Container {
         ? -calculatePercentage(50, this.stadium.stadiumWidth)
         : calculatePercentage(50, this.stadium.stadiumWidth),
       0,
-      this.teamData.key,
+      this.teamData.logoKey,
       "goalkeeper",
       this.isHost,
       this.stadium,
-      this.teamData.properties
+      this.teamData.techniqueProperties
     );
     this.add(this.goalKeeper);
     this.footballers.push(this.goalKeeper);
@@ -67,13 +67,10 @@ export class Team extends Phaser.GameObjects.Container {
         ? -calculatePercentage(38, this.stadium.stadiumWidth)
         : calculatePercentage(38, this.stadium.stadiumWidth),
       0,
-      this.teamData.tactics.defence.quntity,
+      Number(this.teamData.formation.split("-")[0]),
       this.stadium,
-      this.teamData.key,
-      this.teamData.tactics.defence.type,
-      this.teamData.tactics.defence.side,
+      this.teamData,
       this.isHost,
-      this.teamData.properties,
       "defender"
     );
     this.add(this.defenceColumn);
@@ -85,13 +82,10 @@ export class Team extends Phaser.GameObjects.Container {
         ? -calculatePercentage(10, this.stadium.stadiumWidth)
         : calculatePercentage(10, this.stadium.stadiumWidth),
       0,
-      this.teamData.tactics.midfielder.quntity,
+      Number(this.teamData.formation.split("-")[1]),
       this.stadium,
-      this.teamData.key,
-      this.teamData.tactics.midfielder.type,
-      this.teamData.tactics.midfielder.side,
+      this.teamData,
       this.isHost,
-      this.teamData.properties,
       "midfielder"
     );
     this.add(this.midfielderColumn);
@@ -103,13 +97,10 @@ export class Team extends Phaser.GameObjects.Container {
         ? calculatePercentage(23, this.stadium.stadiumWidth)
         : -calculatePercentage(23, this.stadium.stadiumWidth),
       0,
-      this.teamData.tactics.attacker.quntity,
+      Number(this.teamData.formation.split("-")[2]),
       this.stadium,
-      this.teamData.key,
-      this.teamData.tactics.attacker.type,
-      this.teamData.tactics.attacker.side,
+      this.teamData,
       this.isHost,
-      this.teamData.properties,
       "attacker"
     );
     this.add(this.attackerColumn);
@@ -136,8 +127,6 @@ export class Team extends Phaser.GameObjects.Container {
     this.defenceColumn.startMotion(this.columnsMotionDistance);
     this.midfielderColumn.startMotion(this.columnsMotionDistance);
     this.attackerColumn.startMotion(this.columnsMotionDistance);
-
-    this.startGoalKeeperMotion();
   }
 
   stopMotion() {
@@ -154,7 +143,11 @@ export class Team extends Phaser.GameObjects.Container {
 
     this.goalKeeperTween = this.scene.tweens.add({
       targets: this.goalKeeper,
-      duration: interpolate(this.teamData.properties.goalkeeperSpeed, 700, 300),
+      duration: interpolate(
+        this.teamData.techniqueProperties.goalKeeperPassSpeed,
+        700,
+        300
+      ),
       y: {
         from: -this.stadium.leftGoalPost.getBounds().height / 2,
         to: this.stadium.leftGoalPost.getBounds().height / 2,

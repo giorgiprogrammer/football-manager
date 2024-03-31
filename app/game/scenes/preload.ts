@@ -8,6 +8,15 @@ export default class Preload extends Phaser.Scene {
 
   preload() {
     this.load.setPath(`../../game/assets/`);
+    // Plugins
+    this.load.plugin(
+      "rexglowfilter2pipelineplugin",
+      "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexglowfilter2pipelineplugin.min.js",
+      true
+    );
+    //Choacs
+    this.load.image("guardiola-default", "image/coachs/guardiola-default.jpg");
+    this.load.image("mourinho-default", "image/coachs/mourinho-default.jpg");
 
     //sound Effects
     this.load.audio("passSound", ["sounds/pass.mp3"]);
@@ -17,18 +26,26 @@ export default class Preload extends Phaser.Scene {
     this.load.audio("fansSound", ["sounds/fans.mp3"]);
 
     //Font
-    this.load.addFile(new WebFontFile(this.load, "Rubik Mono One"));
+    // this.load.addFile(new WebFontFile(this.load, "Rubik Mono One"));
+    this.load.addFile(new WebFontFile(this.load, "Silkscreen"));
 
     //UI
-    this.load.image("neon-arrow", "image/ui/neon-arrow.png");
+    this.load.image("arrow", "image/ui/arrow.png");
     this.load.image("menu-button", "image/ui/menu-button.png");
     this.load.image("default", "image/ui/default.png");
     this.load.image("circle", "image/ui/circle.png");
     this.load.image("grass", "image/ui/grass.jpg");
     this.load.image("menuIcon", "image/ui/menu-icon.png");
     this.load.image("stadiumFitch", "image/ui/fitch.png");
+    this.load.image("menu-close", "image/ui/menu-close.png");
+    this.load.image("tactics-stadium", "image/ui/tactics-stadium.png");
+    this.load.image("fan", "image/ui/fan.png");
+    this.load.image("stadium-surrounding", "image/ui/stadium-surrounding.png");
+    this.load.image("triangle", "image/ui/triangle.png");
+    this.load.image("roof", "image/ui/roof.jpg");
+    this.load.image("city", "image/ui/city.jpg");
+    this.load.image("start-button", "image/ui/start-button.png");
 
-    //Team Logos
     // Nations
     this.load.image("algeria", "image/teamLogos/nations/Algeria.png");
     this.load.image("argentina", "image/teamLogos/nations/Argentina.png");
@@ -336,5 +353,6 @@ export default class Preload extends Phaser.Scene {
 
   create() {
     this.scene.start("Menu");
+    // this.scene.start("GamePlay");
   }
 }
