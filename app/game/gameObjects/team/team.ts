@@ -3,6 +3,9 @@ import { Stadium } from "../stadium";
 import { Column } from "./column";
 import { Footballer } from "./footballer";
 import { TeamData } from "@/app/config/initialTeamsData";
+import { match } from "assert";
+import { Ball } from "../ball";
+import { matchData } from "@/app/config/matchData";
 
 export class Team extends Phaser.GameObjects.Container {
   defenceColumn!: Column;
@@ -15,13 +18,16 @@ export class Team extends Phaser.GameObjects.Container {
 
   footballers: Array<Footballer> = [];
 
+  hasBall = false;
+
   constructor(
     scene: Phaser.Scene,
     x: number,
     y: number,
     public stadium: Stadium,
     public isHost: boolean,
-    public teamData: TeamData
+    public teamData: TeamData,
+    public ball: Ball
   ) {
     super(scene, x, y);
     scene.add.existing(this);
@@ -35,6 +41,10 @@ export class Team extends Phaser.GameObjects.Container {
     this.calculateColumnsMotionDistance();
 
     this.setDepth(900);
+
+    if (matchData.mathMode === "experimental") {
+      this.TeamMotionManagement();
+    }
   }
 
   reset() {
@@ -133,6 +143,58 @@ export class Team extends Phaser.GameObjects.Container {
     this.defenceColumn.stopMotion();
     this.midfielderColumn.stopMotion();
     this.attackerColumn.stopMotion();
+  }
+
+  // For Experimental Mode
+  TeamMotionManagement() {
+    const thresholdDistance = calculatePercentage(
+      13,
+      this.stadium.getBounds().width
+    ); // Example threshold distance
+
+    this.scene.events.on("update", () => {
+      if (!this.hasBall) {
+        // for Defender Column
+        if (
+          Math.abs(
+            this.ball.getBounds().centerX -
+              this.defenceColumn.getBounds().centerX
+          ) > thresholdDistance
+        ) {
+          this.defenceColumn.stopMotion();
+        } else {
+          this.defenceColumn.startMotion(this.columnsMotionDistance);
+        }
+
+        // for Midfielder Column
+        if (
+          Math.abs(
+            this.ball.getBounds().centerX -
+              this.midfielderColumn.getBounds().centerX
+          ) > thresholdDistance
+        ) {
+          this.midfielderColumn.stopMotion();
+        } else {
+          this.midfielderColumn.startMotion(this.columnsMotionDistance);
+        }
+
+        // for Attacker Column
+        if (
+          Math.abs(
+            this.ball.getBounds().centerX -
+              this.attackerColumn.getBounds().centerX
+          ) > thresholdDistance
+        ) {
+          this.attackerColumn.stopMotion();
+        } else {
+          this.attackerColumn.startMotion(this.columnsMotionDistance);
+        }
+      } else {
+        this.defenceColumn.stopMotion();
+        this.midfielderColumn.stopMotion();
+        this.attackerColumn.stopMotion();
+      }
+    });
   }
 
   startGoalKeeperMotion() {

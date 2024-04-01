@@ -3,6 +3,7 @@ import { Match } from "../core/match";
 import { Stadium } from "../gameObjects/stadium";
 import { GameManager } from "../core/gameManager";
 import CavnasScene from "./canvasScene";
+import { calculatePercentage } from "@/app/utils/math";
 
 export default class GamePlay extends Phaser.Scene {
   match!: Match;
@@ -32,61 +33,57 @@ export default class GamePlay extends Phaser.Scene {
   }
 
   addBackground() {
-    // this.add
-    //   .image(this.game.canvas.width / 2, this.game.canvas.height / 2, "city")
-    //   .setScale(1.8)
-    //   .setTint(0x467572)
-    //   .setDepth(-90);
-
     this.add
       .image(this.game.canvas.width / 2, this.game.canvas.height / 2, "default")
       .setDisplaySize(
-        this.match.stadium.getBounds().width,
-        this.match.stadium.getBounds().height
+        this.match.stadium.getBounds().width +
+          calculatePercentage(10, this.match.stadium.getBounds().width),
+        this.match.stadium.getBounds().height +
+          calculatePercentage(10, this.match.stadium.getBounds().height)
       )
       .setTint(0x4d3916)
       .setDepth(-90);
 
-    const topBorder = this.add
-      .image(
-        this.game.canvas.width / 2,
-        this.game.canvas.height / 2 - this.match.stadium.getBounds().height / 2,
-        "roof"
-      )
-      .setOrigin(0.5, 1)
-      .setTint(0x9c762d)
-      .setDisplaySize(this.match.stadium.getBounds().width, 15);
+    // const topBorder = this.add
+    //   .image(
+    //     this.game.canvas.width / 2,
+    //     this.game.canvas.height / 2 - this.match.stadium.getBounds().height / 2,
+    //     "roof"
+    //   )
+    //   .setOrigin(0.5, 1)
+    //   .setTint(0x9c762d)
+    //   .setDisplaySize(this.match.stadium.getBounds().width, 15);
 
-    const bottomBorder = this.add
-      .image(
-        this.game.canvas.width / 2,
-        this.game.canvas.height / 2 + this.match.stadium.getBounds().height / 2,
-        "roof"
-      )
-      .setOrigin(0.5, 0)
-      .setTint(0x9c762d)
-      .setDisplaySize(this.match.stadium.getBounds().width, 15);
+    // const bottomBorder = this.add
+    //   .image(
+    //     this.game.canvas.width / 2,
+    //     this.game.canvas.height / 2 + this.match.stadium.getBounds().height / 2,
+    //     "roof"
+    //   )
+    //   .setOrigin(0.5, 0)
+    //   .setTint(0x9c762d)
+    //   .setDisplaySize(this.match.stadium.getBounds().width, 15);
 
-    const leftBorder = this.add
-      .image(
-        this.game.canvas.width / 2 - this.match.stadium.getBounds().width / 2,
-        this.game.canvas.height / 2,
-        "roof"
-      )
-      .setOrigin(0.5, 0)
-      .setTint(0x9c762d)
-      .setAngle(90)
-      .setDisplaySize(this.match.stadium.getBounds().height + 30, 15);
+    // const leftBorder = this.add
+    //   .image(
+    //     this.game.canvas.width / 2 - this.match.stadium.getBounds().width / 2,
+    //     this.game.canvas.height / 2,
+    //     "roof"
+    //   )
+    //   .setOrigin(0.5, 0)
+    //   .setTint(0x9c762d)
+    //   .setAngle(90)
+    //   .setDisplaySize(this.match.stadium.getBounds().height + 30, 15);
 
-    const rightBorder = this.add
-      .image(
-        this.game.canvas.width / 2 + this.match.stadium.getBounds().width / 2,
-        this.game.canvas.height / 2,
-        "roof"
-      )
-      .setOrigin(0.5, 1)
-      .setTint(0x9c762d)
-      .setAngle(90)
-      .setDisplaySize(this.match.stadium.getBounds().height + 30, 15);
+    // const rightBorder = this.add
+    //   .image(
+    //     this.game.canvas.width / 2 + this.match.stadium.getBounds().width / 2,
+    //     this.game.canvas.height / 2,
+    //     "roof"
+    //   )
+    //   .setOrigin(0.5, 1)
+    //   .setTint(0x9c762d)
+    //   .setAngle(90)
+    //   .setDisplaySize(this.match.stadium.getBounds().height + 30, 15);
   }
 }

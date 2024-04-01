@@ -39,12 +39,18 @@ export default class Preload extends Phaser.Scene {
     this.load.image("stadiumFitch", "image/ui/fitch.png");
     this.load.image("menu-close", "image/ui/menu-close.png");
     this.load.image("tactics-stadium", "image/ui/tactics-stadium.png");
-    this.load.image("fan", "image/ui/fan.png");
     this.load.image("stadium-surrounding", "image/ui/stadium-surrounding.png");
     this.load.image("triangle", "image/ui/triangle.png");
     this.load.image("roof", "image/ui/roof.jpg");
     this.load.image("city", "image/ui/city.jpg");
     this.load.image("start-button", "image/ui/start-button.png");
+
+    // Fans
+    this.load.image("fan", "image/ui/fan.png");
+    this.load.image("fanFromLeftSide", "image/ui/fanFromLeftSide.png");
+    this.load.image("fanFromBottomSide", "image/ui/fanFromBottomSide.png");
+    this.load.image("fanFromTopSide", "image/ui/fanFromTopSide.png");
+    this.load.image("fanFromRightSide", "image/ui/fanFromRightSide.png");
 
     // Nations
     this.load.image("algeria", "image/teamLogos/nations/Algeria.png");

@@ -2,6 +2,7 @@ import Menu from "@/app/game/scenes/menu";
 import MenuModal from "..";
 import { calculatePercentage } from "@/app/utils/math";
 import { SimpleSelector } from "../simpleSelector";
+import { matchData } from "@/app/config/matchData";
 
 export class SettingsModal extends MenuModal {
   constructor(scene: Menu, x: number, y: number) {
@@ -36,8 +37,11 @@ export class SettingsModal extends MenuModal {
       this.scene,
       0,
       calculatePercentage(20, this.scene.game.canvas.height),
-      ["Classic", "Experimental"],
-      "Classic"
+      ["classic", "experimental"],
+      "classic",
+      (value) => {
+        matchData.mathMode = value as "classic" | "experimental";
+      }
     );
     this.add(playStyleOptions);
   }

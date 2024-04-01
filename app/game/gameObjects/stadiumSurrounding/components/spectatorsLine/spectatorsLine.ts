@@ -2,7 +2,7 @@ import { calculatePercentage, getRandomNumber } from "@/app/utils/math";
 import { Stadium } from "../../../stadium";
 
 export class SpectatorsLine extends Phaser.GameObjects.Container {
-  imageGroup: Phaser.GameObjects.Group = this.scene.add.group();
+  blitter!: Phaser.GameObjects.Blitter;
 
   constructor(
     scene: Phaser.Scene,
@@ -24,16 +24,22 @@ export class SpectatorsLine extends Phaser.GameObjects.Container {
   }
 
   init() {
+    this.blitter = this.scene.add.blitter(0, 0, "undefined");
+
     if (this.direction === "topLine") {
+      this.blitter = this.scene.add.blitter(0, 0, "fanFromTopSide");
       this.addTopLine();
     }
     if (this.direction === "bottomLine") {
+      this.blitter = this.scene.add.blitter(0, 0, "fanFromBottomSide");
       this.addBottomLine();
     }
     if (this.direction === "leftLine") {
+      this.blitter = this.scene.add.blitter(0, 0, "fanFromRightSide");
       this.addLeftLine();
     }
     if (this.direction === "rightLine") {
+      this.blitter = this.scene.add.blitter(0, 0, "fanFromLeftSide");
       this.addRightLine();
     }
   }
@@ -45,16 +51,8 @@ export class SpectatorsLine extends Phaser.GameObjects.Container {
         getRandomNumber(0, 100) > this.colorProperties.hostFansChance
           ? this.colorProperties.guestFanstColor
           : this.colorProperties.hostFansColor;
-      const image = this.imageGroup
-        .get(0, posY, "fan")
-        .setDisplaySize(
-          calculatePercentage(2, this.stadium.getBounds().width),
-          calculatePercentage(2, this.stadium.getBounds().width)
-        )
-        .setRotation(-Phaser.Math.DegToRad(90))
-        .setTint(color)
-        .setOrigin(1, 0);
-      this.add(image);
+      this.blitter.create(0, posY).setTint(color);
+      this.add(this.blitter);
 
       posY += calculatePercentage(2, this.stadium.getBounds().width);
     }
@@ -67,16 +65,8 @@ export class SpectatorsLine extends Phaser.GameObjects.Container {
         getRandomNumber(0, 100) > this.colorProperties.hostFansChance
           ? this.colorProperties.guestFanstColor
           : this.colorProperties.hostFansColor;
-      const image = this.imageGroup
-        .get(0, posY, "fan")
-        .setDisplaySize(
-          calculatePercentage(2, this.stadium.getBounds().width),
-          calculatePercentage(2, this.stadium.getBounds().width)
-        )
-        .setRotation(Phaser.Math.DegToRad(90))
-        .setTint(color)
-        .setOrigin(0, 0);
-      this.add(image);
+      this.blitter.create(0, posY).setTint(color);
+      this.add(this.blitter);
 
       posY += calculatePercentage(2, this.stadium.getBounds().width);
     }
@@ -89,15 +79,8 @@ export class SpectatorsLine extends Phaser.GameObjects.Container {
         getRandomNumber(0, 100) > this.colorProperties.hostFansChance
           ? this.colorProperties.guestFanstColor
           : this.colorProperties.hostFansColor;
-      const image = this.imageGroup
-        .get(posX, 0, "fan")
-        .setDisplaySize(
-          calculatePercentage(2, this.stadium.getBounds().width),
-          calculatePercentage(2, this.stadium.getBounds().width)
-        )
-        .setTint(color)
-        .setOrigin(0, 0);
-      this.add(image);
+      this.blitter.create(posX, 0).setTint(color);
+      this.add(this.blitter);
 
       posX += calculatePercentage(2, this.stadium.getBounds().width);
     }
@@ -110,16 +93,8 @@ export class SpectatorsLine extends Phaser.GameObjects.Container {
         getRandomNumber(0, 100) > this.colorProperties.hostFansChance
           ? this.colorProperties.guestFanstColor
           : this.colorProperties.hostFansColor;
-      const image = this.imageGroup
-        .get(posX, 0, "fan")
-        .setDisplaySize(
-          calculatePercentage(2, this.stadium.getBounds().width),
-          calculatePercentage(2, this.stadium.getBounds().width)
-        )
-        .setTint(color)
-        .setOrigin(0, 1)
-        .setFlipY(true);
-      this.add(image);
+      this.blitter.create(posX, 0).setTint(color);
+      this.add(this.blitter);
 
       posX += calculatePercentage(2, this.stadium.getBounds().width);
     }

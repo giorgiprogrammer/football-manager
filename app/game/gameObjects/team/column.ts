@@ -38,8 +38,8 @@ export class Column extends Phaser.GameObjects.Container {
     // let postFxPlugin = this.scene.plugins.get("rexglowfilter2pipelineplugin")!;
     // @ts-ignore
     // this.shadow = postFxPlugin.add(this, {
-    //   distance: 3,
-    //   outerStrength: 3,
+    //   distance: 5,
+    //   outerStrength: 5,
     //   innerStrength: 0,
     //   glowColor: Number(
     //     this.isHost
