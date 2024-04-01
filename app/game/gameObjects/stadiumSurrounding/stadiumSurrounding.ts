@@ -170,10 +170,10 @@ export class StadiumSurrounding extends Phaser.GameObjects.Container {
   }
 
   addSpectators() {
-    this.addTopSpectatorLines(2);
-    this.addBottomLineSpectators(2);
-    this.addLeftSpectatorLines(2);
-    this.addRightSpectatorLines(2);
+    this.addTopSpectatorLines(9);
+    this.addBottomLineSpectators(9);
+    this.addLeftSpectatorLines(9);
+    this.addRightSpectatorLines(9);
   }
 
   addRightSpectatorLines(quantity: number) {
@@ -209,7 +209,9 @@ export class StadiumSurrounding extends Phaser.GameObjects.Container {
   }
 
   addLeftSpectatorLines(quantity: number) {
-    let posX = -calculatePercentage(50, this.stadium.getBounds().width);
+    let posX =
+      -calculatePercentage(50, this.stadium.getBounds().width) +
+      -calculatePercentage(2, this.stadium.getBounds().width);
     let posY = -this.stadium.getBounds().height / 2;
 
     let spectatorsQuanitity = Math.floor(
@@ -275,7 +277,9 @@ export class StadiumSurrounding extends Phaser.GameObjects.Container {
 
   addTopSpectatorLines(quantity: number) {
     let posX = -this.stadium.getBounds().width / 2;
-    let posY = -calculatePercentage(50, this.stadium.getBounds().height);
+    let posY =
+      -calculatePercentage(50, this.stadium.getBounds().height) +
+      -calculatePercentage(2, this.stadium.getBounds().width);
 
     let spectatorsQuanitity = Math.floor(
       this.stadium.getBounds().width /

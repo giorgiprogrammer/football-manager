@@ -199,9 +199,9 @@ export class Match {
             )
           ];
 
-    team === "host"
-      ? this.hostTeam.startMotion()
-      : this.guestTeam.startMotion();
+    // team === "host"
+    //   ? this.hostTeam.startMotion()
+    //   : this.guestTeam.startMotion();
 
     this.refereeSound.play();
     this.passSound.play();
@@ -280,7 +280,8 @@ export class Match {
       this.scene.game.canvas.height / 2,
       this.stadium,
       true,
-      this.matchData.hostTeam
+      this.matchData.hostTeam,
+      this.ball
     );
     this.guestTeam = new Team(
       this.scene,
@@ -288,7 +289,8 @@ export class Match {
       this.scene.game.canvas.height / 2,
       this.stadium,
       false,
-      this.matchData.guestTeam
+      this.matchData.guestTeam,
+      this.ball
     );
   }
 
@@ -383,9 +385,19 @@ export class Match {
     this.footballerWithBall = footballer;
 
     if (team === "host") {
+      // if mode is experimental
+      this.hostTeam.hasBall = true;
+      this.guestTeam.hasBall = false;
+
+      // if mode is classic
       this.hostTeam.stopMotion();
       this.guestTeam.startMotion();
     } else {
+      // if mode is experimental
+      this.hostTeam.hasBall = false;
+      this.guestTeam.hasBall = true;
+
+      // if mode is classic
       this.hostTeam.startMotion();
       this.guestTeam.stopMotion();
     }

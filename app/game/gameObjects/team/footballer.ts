@@ -62,6 +62,9 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
     this.controllBall = true;
 
     ball.setPosition(this.getBounds().centerX, this.getBounds().centerY);
+    setTimeout(() => {
+      ball.setPosition(this.getBounds().centerX, this.getBounds().centerY);
+    }, 100);
     ball.setVelocity(0, 0);
     ball.setAngularVelocity(0);
     this.ball = ball;
