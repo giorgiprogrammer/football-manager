@@ -159,24 +159,19 @@ export class Match {
     this.isPlaying = false;
   }
 
-  resetMatch(team: string) {
+  resetMatch() {
     this.ball.reset();
     this.isGoal = false;
+    this.isPlaying = false;
 
-    const matchIndicatorsScene = this.scene.scene.get(
-      "MatchIndicators"
-    ) as MatchIndicators;
-    if (team === "host") {
-      this.hostTeamScore++;
-      matchIndicatorsScene.setScore(this.hostTeamScore, this.guestTeamScore);
-    } else {
-      this.guestTeamScore++;
-      matchIndicatorsScene.setScore(this.hostTeamScore, this.guestTeamScore);
-    }
+    this.hostTeam.stopMotion();
+    this.guestTeam.stopMotion();
 
-    setTimeout(() => {
-      this.resumeMatch(team);
-    }, 1500);
+    this.hostTeam.stopGoalKeeper();
+    this.guestTeam.stopGoalKeeper();
+
+    this.hostTeam.hasBall = false;
+    this.guestTeam.hasBall = false;
   }
 
   resumeMatch(team: string) {
@@ -233,7 +228,7 @@ export class Match {
       this.isPlaying = false;
       // this.matchData.stadium!.stadiumSurrounding.rightFansSelebrate();
       setTimeout(() => {
-        this.resetMatch("guest");
+        // this.resetMatch("guest");
       }, 2500);
     }
 
@@ -254,7 +249,7 @@ export class Match {
       this.isPlaying = false;
       // this.matchData.stadium!.stadiumSurrounding.leftFansSelebrate();
       setTimeout(() => {
-        this.resetMatch("host");
+        // this.resetMatch("host");
       }, 2500);
     }
   }
@@ -281,7 +276,8 @@ export class Match {
       this.stadium,
       true,
       this.matchData.hostTeam,
-      this.ball
+      this.ball,
+      this
     );
     this.guestTeam = new Team(
       this.scene,
@@ -290,7 +286,8 @@ export class Match {
       this.stadium,
       false,
       this.matchData.guestTeam,
-      this.ball
+      this.ball,
+      this
     );
   }
 
@@ -328,56 +325,6 @@ export class Match {
     );
   }
 
-  // startGame() {
-  //   this.refereeSound.play();
-  //   this.passSound.play();
-  //   // this.cameraMotion.isPlaying = true;
-
-  //   const footballer =
-  //     this.hostTeam.midfielderColumn.footballers[
-  //       getRandomNumber(
-  //         0,
-  //         this.hostTeam.midfielderColumn.footballers.length - 1
-  //       )
-  //     ];
-
-  //   this.ball.firstKick(
-  //     footballer.getBounds().centerX,
-  //     footballer.getBounds().centerY
-  //   );
-
-  //   this.guestTeam.startMotion();
-
-  //   this.isPlaying = true;
-  //   this.timer++;
-  //   const matchIndicatorsScene = this.scene.scene.get(
-  //     "MatchIndicators"
-  //   ) as MatchIndicators;
-  //   matchIndicatorsScene.setTimerText(this.timer);
-
-  //   this.interval = setInterval(() => {
-  //     if (!this.isPlaying) return;
-  //     if (this.isGoal) return;
-
-  //     if (this.timer === 45) {
-  //       this.stopHalfTime();
-  //       return;
-  //     }
-
-  //     if (this.timer === 90) {
-  //       this.finishMatch();
-  //       return;
-  //     }
-
-  //     this.timer++;
-
-  //     const matchIndicatorsScene = this.scene.scene.get(
-  //       "MatchIndicators"
-  //     ) as MatchIndicators;
-  //     matchIndicatorsScene.setTimerText(this.timer);
-  //   }, 1300);
-  // }
-
   catchBall(team: string, footballer: Footballer) {
     if (this.isGoal) return;
     if (footballer.controllBall) return;
@@ -385,19 +332,19 @@ export class Match {
     this.footballerWithBall = footballer;
 
     if (team === "host") {
-      // if mode is experimental
+      // for experimental mode
       this.hostTeam.hasBall = true;
       this.guestTeam.hasBall = false;
 
-      // if mode is classic
+      // for classic mode
       this.hostTeam.stopMotion();
       this.guestTeam.startMotion();
     } else {
-      // if mode is experimental
+      // for experimental mode
       this.hostTeam.hasBall = false;
       this.guestTeam.hasBall = true;
 
-      // if mode is classic
+      // for classic mode
       this.hostTeam.startMotion();
       this.guestTeam.stopMotion();
     }

@@ -65,6 +65,7 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
     setTimeout(() => {
       ball.setPosition(this.getBounds().centerX, this.getBounds().centerY);
     }, 100);
+
     ball.setVelocity(0, 0);
     ball.setAngularVelocity(0);
     this.ball = ball;
@@ -80,7 +81,6 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
     if (this.type !== "attacker") {
       const shortPassChance = getRandomNumber(0, 100);
 
-      console.log(shortVariants.length, longVariants.length);
       randomFootballer =
         shortPassChance < this.properties.shortPassChance
           ? shortVariants[getRandomNumber(0, shortVariants.length - 1)]
@@ -92,8 +92,6 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
         if (match.isPlaying === false) {
           this.controllBall = false;
           if (this.type !== "goalkeeper") this.setAlpha(0.75);
-          this.shadow.setInnerStrength(0);
-          this.shadow.setOuterStrength(0);
           return;
         }
         if (this.type === "goalkeeper") {
