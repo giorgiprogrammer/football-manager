@@ -55,6 +55,15 @@ export class Team extends Phaser.GameObjects.Container {
     this.attackerColumn.reset();
   }
 
+  resetGoalKeeper() {
+    this.goalKeeper.setPosition(
+      this.isHost
+        ? -calculatePercentage(50, this.stadium.stadiumWidth)
+        : calculatePercentage(50, this.stadium.stadiumWidth),
+      0
+    );
+  }
+
   addGoalKeeper() {
     this.goalKeeper = new Footballer(
       this.scene,

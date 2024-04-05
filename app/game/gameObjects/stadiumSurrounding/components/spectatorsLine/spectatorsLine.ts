@@ -4,6 +4,9 @@ import { Stadium } from "../../../stadium";
 export class SpectatorsLine extends Phaser.GameObjects.Container {
   blitter!: Phaser.GameObjects.Blitter;
 
+  hostFans: Phaser.GameObjects.Bob[] = [];
+  guestFans: Phaser.GameObjects.Bob[] = [];
+
   constructor(
     scene: Phaser.Scene,
     x: number,
@@ -47,11 +50,17 @@ export class SpectatorsLine extends Phaser.GameObjects.Container {
   addRightLine() {
     let posY = 4;
     for (let i = 0; i < this.quanitity; i++) {
+      const randomNumber = getRandomNumber(0, 100);
+
       const color =
-        getRandomNumber(0, 100) > this.colorProperties.hostFansChance
+        randomNumber > this.colorProperties.hostFansChance
           ? this.colorProperties.guestFanstColor
           : this.colorProperties.hostFansColor;
-      this.blitter.create(0, posY).setTint(color);
+      const fan = this.blitter.create(0, posY).setTint(color);
+      randomNumber > this.colorProperties.hostFansChance
+        ? this.guestFans.push(fan)
+        : this.hostFans.push(fan);
+
       this.add(this.blitter);
 
       posY += calculatePercentage(2, this.stadium.getBounds().width);
@@ -61,12 +70,18 @@ export class SpectatorsLine extends Phaser.GameObjects.Container {
   addLeftLine() {
     let posY = 4;
     for (let i = 0; i < this.quanitity; i++) {
+      const randomNumber = getRandomNumber(0, 100);
+
       const color =
-        getRandomNumber(0, 100) > this.colorProperties.hostFansChance
+        randomNumber > this.colorProperties.hostFansChance
           ? this.colorProperties.guestFanstColor
           : this.colorProperties.hostFansColor;
-      this.blitter.create(0, posY).setTint(color);
+      const fan = this.blitter.create(0, posY).setTint(color);
       this.add(this.blitter);
+
+      randomNumber > this.colorProperties.hostFansChance
+        ? this.guestFans.push(fan)
+        : this.hostFans.push(fan);
 
       posY += calculatePercentage(2, this.stadium.getBounds().width);
     }
@@ -75,26 +90,38 @@ export class SpectatorsLine extends Phaser.GameObjects.Container {
   addBottomLine() {
     let posX = 0;
     for (let i = 0; i < this.quanitity; i++) {
+      const randomNumber = getRandomNumber(0, 100);
+
       const color =
-        getRandomNumber(0, 100) > this.colorProperties.hostFansChance
+        randomNumber > this.colorProperties.hostFansChance
           ? this.colorProperties.guestFanstColor
           : this.colorProperties.hostFansColor;
-      this.blitter.create(posX, 0).setTint(color);
+      const fan = this.blitter.create(posX, 0).setTint(color);
       this.add(this.blitter);
+
+      randomNumber > this.colorProperties.hostFansChance
+        ? this.guestFans.push(fan)
+        : this.hostFans.push(fan);
 
       posX += calculatePercentage(2, this.stadium.getBounds().width);
     }
   }
 
   addTopLine() {
+    const randomNumber = getRandomNumber(0, 100);
+
     let posX = 0;
     for (let i = 0; i < this.quanitity; i++) {
       const color =
         getRandomNumber(0, 100) > this.colorProperties.hostFansChance
           ? this.colorProperties.guestFanstColor
           : this.colorProperties.hostFansColor;
-      this.blitter.create(posX, 0).setTint(color);
+      const fan = this.blitter.create(posX, 0).setTint(color);
       this.add(this.blitter);
+
+      randomNumber > this.colorProperties.hostFansChance
+        ? this.guestFans.push(fan)
+        : this.hostFans.push(fan);
 
       posX += calculatePercentage(2, this.stadium.getBounds().width);
     }

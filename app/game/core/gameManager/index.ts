@@ -23,17 +23,51 @@ export class GameManager {
     });
 
     this.addMatchTimer();
+    this.addEventListeners();
+  }
+
+  addEventListeners() {
+    let teamWhoScored: "host" | "guest";
+
+    this.match.onGoal((team) => {
+      this.canvasScene.timerIsOnn = false;
+      teamWhoScored = team;
+      if (team === "host") {
+        this.canvasScene.hostScore++;
+        this.canvasScene.setScore(
+          this.canvasScene.hostScore,
+          this.canvasScene.guestScore
+        );
+      } else {
+        this.canvasScene.guestScore++;
+        this.canvasScene.setScore(
+          this.canvasScene.hostScore,
+          this.canvasScene.guestScore
+        );
+      }
+    });
+
+    this.match.ball.onFinishGoalAnimation(() => {
+      this.match.isPlaying = true;
+      this.match.resumeMatch(teamWhoScored === "guest" ? "host" : "guest");
+
+      setTimeout(() => {
+        this.canvasScene.timerIsOnn = true;
+      }, 3000);
+    });
   }
 
   addMatchTimer() {
     this.gamePlayScene.time.addEvent({
-      delay: 1000,
+      delay: 800,
       callback: () => {
         if (!this.canvasScene.timerIsOnn) return;
 
-        if (this.canvasScene.timer === 45 && this.halfTimerIsPassed === false) {
-          this.halfTimeEnd();
-          return;
+        if (this.canvasScene.timer >= 45 && this.halfTimerIsPassed === false) {
+          if (this.match.footballerWithBall.controllBall) {
+            this.halfTimeEnd();
+            return;
+          }
         }
 
         this.canvasScene.timer++;
@@ -55,6 +89,7 @@ export class GameManager {
     this.canvasScene.timerIsOnn = false;
     this.canvasScene.timer = 45;
     this.canvasScene.setTimerText(45);
+
     this.canvasScene.openMatchStatsModal({
       hostTeamStats: {
         shoots: 0,
@@ -86,6 +121,7 @@ export class GameManager {
   startSecondHalf() {
     this.canvasScene.timerIsOnn = true;
     this.canvasScene.matchStatsModal.destroy(true);
+    this.match.matchStatus = "secondHalf";
 
     this.match.isPlaying = true;
   }

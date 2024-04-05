@@ -7,7 +7,6 @@ import { Ball } from "../ball";
 import { Stadium } from "../stadium";
 import { Match } from "../../core/match";
 import { TeamTechniqueProperties } from "@/app/config/initialTeamsData";
-import { matchData } from "@/app/config/matchData";
 
 export class Footballer extends Phaser.Physics.Arcade.Image {
   ball!: Ball;

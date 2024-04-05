@@ -1,9 +1,12 @@
 import { calculatePercentage, getRandomNumber } from "@/app/utils/math";
 import { Stadium } from "./stadium";
+import EventEmitter from "events";
 
 export class Ball extends Phaser.Physics.Arcade.Image {
+  private eventEmitter: EventEmitter = new EventEmitter();
+
   goalAnimation!: Phaser.Tweens.Tween;
-  anglurarVelocity = 500;
+  anglurarVelocity = 800;
 
   constructor(scene: Phaser.Scene, x: number, y: number, stadium: Stadium) {
     super(scene, x, y, "ball");
@@ -38,7 +41,15 @@ export class Ball extends Phaser.Physics.Arcade.Image {
     this.stopGoalAnimation();
   }
 
+  isGoal() {
+    this.setAngularVelocity(0);
+    this.setVelocity(0, 0);
+    this.setPosition(this.x, this.y);
+    this.startGoalAnimation();
+  }
+
   startGoalAnimation() {
+    let count = 0;
     if (this.goalAnimation !== undefined) {
       this.goalAnimation.resume();
     } else {
@@ -47,9 +58,20 @@ export class Ball extends Phaser.Physics.Arcade.Image {
         alpha: 0.2,
         repeat: -1,
         yoyo: true,
-        duration: 400,
+        duration: 300,
+        onRepeat: () => {
+          count += 1;
+          if (count > 6) {
+            count = 0;
+            this.eventEmitter.emit("finishGoalAniamtion");
+          }
+        },
       });
     }
+  }
+
+  onFinishGoalAnimation(callback: () => void) {
+    this.eventEmitter.on("finishGoalAniamtion", callback);
   }
 
   stopGoalAnimation() {

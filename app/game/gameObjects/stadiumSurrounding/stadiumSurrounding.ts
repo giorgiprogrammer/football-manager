@@ -9,6 +9,12 @@ export class StadiumSurrounding extends Phaser.GameObjects.Container {
   bottomLeftLight!: Light;
   bottomRightLight!: Light;
 
+  hostFans: Phaser.GameObjects.Bob[] = [];
+  guestFans: Phaser.GameObjects.Bob[] = [];
+
+  hostFanTweens: Phaser.Tweens.Tween[] = [];
+  guestFanTweens: Phaser.Tweens.Tween[] = [];
+
   constructor(
     scene: Phaser.Scene,
     x: number,
@@ -200,6 +206,8 @@ export class StadiumSurrounding extends Phaser.GameObjects.Container {
         spectatorsQuanitity
       );
       this.add(spectatorsLine);
+      this.hostFans.push(...spectatorsLine.hostFans);
+      this.guestFans.push(...spectatorsLine.guestFans);
 
       posX += calculatePercentage(4.2, this.stadium.getBounds().height);
       posY -= calculatePercentage(1, this.stadium.getBounds().width);
@@ -235,6 +243,9 @@ export class StadiumSurrounding extends Phaser.GameObjects.Container {
       );
       this.add(spectatorsLine);
 
+      this.hostFans.push(...spectatorsLine.hostFans);
+      this.guestFans.push(...spectatorsLine.guestFans);
+
       posX -= calculatePercentage(4.2, this.stadium.getBounds().height);
       posY -= calculatePercentage(1, this.stadium.getBounds().width);
 
@@ -267,6 +278,9 @@ export class StadiumSurrounding extends Phaser.GameObjects.Container {
         spectatorsQuanitity
       );
       this.add(spectatorsLine);
+
+      this.hostFans.push(...spectatorsLine.hostFans);
+      this.guestFans.push(...spectatorsLine.guestFans);
 
       posY += calculatePercentage(3, this.stadium.getBounds().height);
       posX -= calculatePercentage(2, this.stadium.getBounds().width);
@@ -303,10 +317,85 @@ export class StadiumSurrounding extends Phaser.GameObjects.Container {
       );
       this.add(spectatorsLine);
 
+      this.hostFans.push(...spectatorsLine.hostFans);
+      this.guestFans.push(...spectatorsLine.guestFans);
+
       posY -= calculatePercentage(3, this.stadium.getBounds().height);
       posX -= calculatePercentage(2, this.stadium.getBounds().width);
 
       spectatorsQuanitity += 2;
+    }
+  }
+
+  startFansSelebration(fans: "host" | "guest") {
+    let tween: Phaser.Tweens.Tween;
+
+    this.topLeftLight.resumeMotion();
+    this.topRightLight.resumeMotion();
+    this.bottomLeftLight.resumeMotion();
+    this.bottomRightLight.resumeMotion();
+
+    if (fans === "host") {
+      if (this.hostFanTweens.length > 0) {
+        this.hostFanTweens.forEach((tween) => {
+          tween.resume();
+        });
+      }
+
+      this.hostFans.forEach((fan) => {
+        tween = this.scene.add.tween({
+          targets: fan,
+          alpha: 0.2,
+          duration: 100,
+          repeat: -1,
+          yoyo: true,
+        });
+
+        this.hostFanTweens.push(tween);
+      });
+    } else {
+      if (this.guestFanTweens.length > 0) {
+        this.guestFanTweens.forEach((tween) => {
+          tween.resume();
+        });
+      }
+
+      this.guestFans.forEach((fan) => {
+        tween = this.scene.add.tween({
+          targets: fan,
+          alpha: 0.2,
+          duration: 100,
+          repeat: -1,
+          yoyo: true,
+        });
+
+        this.guestFanTweens.push(tween);
+      });
+    }
+  }
+
+  stopFansSelebration(fans: "host" | "guest") {
+    this.topLeftLight.pauseMotion();
+    this.topRightLight.pauseMotion();
+    this.bottomLeftLight.pauseMotion();
+    this.bottomRightLight.pauseMotion();
+
+    if (fans === "host") {
+      this.hostFanTweens.forEach((tween) => {
+        tween.pause();
+      });
+
+      this.hostFans.forEach((fan) => {
+        fan.setAlpha(1);
+      });
+    } else {
+      this.guestFanTweens.forEach((tween) => {
+        tween.pause();
+      });
+
+      this.guestFans.forEach((fan) => {
+        fan.setAlpha(1);
+      });
     }
   }
 }
