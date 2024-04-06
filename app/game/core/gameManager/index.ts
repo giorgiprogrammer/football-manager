@@ -55,11 +55,18 @@ export class GameManager {
         this.canvasScene.timerIsOnn = true;
       }, 3000);
     });
+
+    this.match.onCorner(() => {
+      this.canvasScene.timerIsOnn = false;
+      setTimeout(() => {
+        this.canvasScene.showCornerTransition();
+      }, 300);
+    });
   }
 
   addMatchTimer() {
     this.gamePlayScene.time.addEvent({
-      delay: 800,
+      delay: 1200,
       callback: () => {
         if (!this.canvasScene.timerIsOnn) return;
 

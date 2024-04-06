@@ -33,6 +33,8 @@ export class Match {
 
   timer = 0;
 
+  ballGoesToCorner = false;
+
   passSound!: Phaser.Sound.BaseSound;
   goalSelebration!: Phaser.Sound.BaseSound;
   refereeSound!: Phaser.Sound.BaseSound;
@@ -118,10 +120,6 @@ export class Match {
       this.eventEmitter.emit("goal", "guest");
       this.stadium.stadiumSurrounding.startFansSelebration("guest");
     }
-  }
-
-  onGoal(callback: (team: "host" | "guest") => void) {
-    this.eventEmitter.on("goal", callback);
   }
 
   startMatch() {
@@ -230,40 +228,6 @@ export class Match {
     this.guestTeam.hasBall = false;
   }
 
-  // resumeMatch(team: string) {
-  //   this.stadium.stadiumSurrounding.stopLightAnimations();
-  //   this.hostTeam.goalKeeperTween?.resume();
-  //   this.guestTeam.goalKeeperTween?.resume();
-
-  //   const footballer =
-  //     team === "host"
-  //       ? this.guestTeam.midfielderColumn.footballers[
-  //           getRandomNumber(
-  //             0,
-  //             this.guestTeam.midfielderColumn.footballers.length - 1
-  //           )
-  //         ]
-  //       : this.hostTeam.midfielderColumn.footballers[
-  //           getRandomNumber(
-  //             0,
-  //             this.hostTeam.midfielderColumn.footballers.length - 1
-  //           )
-  //         ];
-
-  //   // team === "host"
-  //   //   ? this.hostTeam.startMotion()
-  //   //   : this.guestTeam.startMotion();
-
-  //   this.refereeSound.play();
-  //   this.passSound.play();
-  //   this.ball.firstKick(
-  //     footballer.getBounds().centerX,
-  //     footballer.getBounds().centerY
-  //   );
-
-  //   this.isPlaying = true;
-  // }
-
   createCollisionDetections() {
     this.collisionDetections = new CollisionDetections(
       this.scene,
@@ -335,9 +299,39 @@ export class Match {
     // );
   }
 
-  catchBall(team: string, footballer: Footballer) {
+  checkCornerPosibbility(
+    teamWithBallWas: "host" | "guest",
+    teamWithBall: "host" | "guest",
+    footballer: Footballer
+  ) {
+    if (teamWithBallWas !== teamWithBall) {
+      if (footballer.type === "defender") {
+        const random = getRandomNumber(0, 100);
+        if (random > 0) {
+          const side =
+            footballer.getBounds().x < this.stadium.getBounds().centerX
+              ? "left"
+              : "right";
+          this.ball.goToCorner(side, footballer);
+
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
+  catchBall(team: "host" | "guest", footballer: Footballer) {
     // if (this.isGoal) return;
     if (footballer.controllBall) return;
+
+    // check corner possibility
+    this.ballGoesToCorner = this.checkCornerPosibbility(
+      this.hostTeam.hasBall ? "host" : "guest",
+      team,
+      footballer
+    );
 
     this.footballerWithBall = footballer;
 
@@ -359,6 +353,7 @@ export class Match {
       this.guestTeam.stopMotion();
     }
 
+    if (this.ballGoesToCorner) return;
     this.nextOperation(team);
   }
 
@@ -395,5 +390,36 @@ export class Match {
     }
 
     this.footballerWithBall.makeDesicion(shortVariants, longVariants, this);
+  }
+
+  isCornerEvent(side: "left" | "right") {
+    if (!this.isPlaying) return;
+
+    this.hostTeam.stopMotion();
+    this.hostTeam.stopGoalKeeper();
+    this.guestTeam.stopMotion();
+    this.guestTeam.stopGoalKeeper();
+
+    this.ball.isCorner();
+    this.eventEmitter.emit("corner");
+
+    this.isPlaying = false;
+
+    setTimeout(() => {
+      this.makeCorner(side);
+    }, 3500);
+  }
+
+  makeCorner(side: "left" | "right") {
+    alert("corner");
+  }
+
+  // Create Event Listeners
+  onGoal(callback: (team: "host" | "guest") => void) {
+    this.eventEmitter.on("goal", callback);
+  }
+
+  onCorner(callback: () => void) {
+    this.eventEmitter.on("corner", callback);
   }
 }

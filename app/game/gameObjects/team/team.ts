@@ -223,8 +223,8 @@ export class Team extends Phaser.GameObjects.Container {
     this.goalKeeperTween = this.scene.tweens.add({
       targets: this.goalKeeper,
       duration: interpolate(
-        this.teamData.techniqueProperties.goalKeeperPassSpeed,
-        700,
+        this.teamData.techniqueProperties.goalKeeperMotionSpeed,
+        1200,
         300
       ),
       y: {

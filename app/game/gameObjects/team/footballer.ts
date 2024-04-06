@@ -61,9 +61,11 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
     this.controllBall = true;
 
     ball.setPosition(this.getBounds().centerX, this.getBounds().centerY);
-    setTimeout(() => {
-      ball.setPosition(this.getBounds().centerX, this.getBounds().centerY);
-    }, 100);
+    if (this.type !== "goalkeeper") {
+      setTimeout(() => {
+        ball.setPosition(this.getBounds().centerX, this.getBounds().centerY);
+      }, 100);
+    }
 
     ball.setVelocity(0, 0);
     ball.setAngularVelocity(0);
@@ -90,7 +92,7 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
       () => {
         if (match.isPlaying === false) {
           this.controllBall = false;
-          if (this.type !== "goalkeeper") this.setAlpha(0.75);
+          this.setAlpha(0.75);
           return;
         }
         if (this.type === "goalkeeper") {
@@ -113,9 +115,10 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
   }
 
   makePass(footballer: Footballer, match: Match) {
+    console.log(this.type, "passing to", footballer.type);
     const y = getRandomNumber(
-      0,
-      interpolate(this.properties.passAccuracy, 100, 1)
+      interpolate(this.properties.passAccuracy, 150, 0),
+      interpolate(this.properties.passAccuracy, 250, 2)
     );
 
     const randomY = getRandomNumber(0, 1) === 0 ? y : -y;
@@ -130,21 +133,21 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
     setTimeout(() => {
       this.controllBall = false;
       if (this.type !== "goalkeeper") this.setAlpha(0.75);
-    }, 500);
+    }, 300);
   }
 
   shoot() {
     this.shootSound.play();
     this.ball.kick(
-      interpolate(this.properties.shootSpeed, 180, 320),
+      interpolate(this.properties.shootSpeed, 140, 330),
       this.isHost
         ? this.stadium.rightGoalPost.getBounds().centerX
         : this.stadium.leftGoalPost.getBounds().centerX,
       getRandomNumber(
         this.stadium.leftGoalPost.getBounds().centerY -
-          calculatePercentage(20, this.stadium.stadiumHeight),
+          interpolate(this.properties.shootAccuracy, 200, 50),
         this.stadium.leftGoalPost.getBounds().centerY +
-          calculatePercentage(20, this.stadium.stadiumHeight)
+          interpolate(this.properties.shootAccuracy, 200, 50)
       )
     );
     setTimeout(() => {

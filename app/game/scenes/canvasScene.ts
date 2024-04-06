@@ -340,4 +340,57 @@ export default class CavnasScene extends Phaser.Scene {
   setScore(lefscore: number, rightScore: number) {
     this.scoreText.setText(`${lefscore} - ${rightScore}`);
   }
+
+  showCornerTransition() {
+    const background = this.add
+      .image(0, 0, "default")
+      .setTint(0x000000)
+      .setAlpha(0)
+      .setOrigin(0)
+      .setDisplaySize(this.game.canvas.width, this.game.canvas.height);
+
+    const cornerText = this.add
+      .text(-2000, this.game.canvas.height / 2 - 40, "Corner", {
+        fontFamily: "Silkscreen",
+        fontSize: 40,
+        color: "#DAF2E9",
+        align: "center",
+        backgroundColor: "#FF7131",
+      })
+      .setOrigin(0.5)
+      .setAlpha(0);
+
+    const kickText = this.add
+      .text(2000, this.game.canvas.height / 2 + 40, "Kick", {
+        fontFamily: "Silkscreen",
+        fontSize: 40,
+        color: "#DAF2E9",
+        align: "center",
+        backgroundColor: "#FF7131",
+      })
+      .setOrigin(0.5)
+      .setAlpha(0);
+
+    this.tweens.add({
+      targets: cornerText,
+      ease: Phaser.Math.Easing.Bounce.Out,
+      alpha: 1,
+      x: this.game.canvas.width / 2,
+      duration: 1500,
+    });
+
+    this.tweens.add({
+      targets: kickText,
+      ease: Phaser.Math.Easing.Bounce.Out,
+      alpha: 1,
+      x: this.game.canvas.width / 2,
+      duration: 1500,
+    });
+
+    this.tweens.add({
+      targets: background,
+      alpha: 0.9,
+      duration: 300,
+    });
+  }
 }

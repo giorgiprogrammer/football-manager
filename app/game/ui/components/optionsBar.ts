@@ -41,6 +41,11 @@ export class OptionsBar extends Phaser.GameObjects.Container {
 
   setChangedParameters() {
     this.team!.strength = interpolate(this.indicatorValue, 800, 2130);
+    this.team.techniqueProperties.goalKeeperMotionSpeed = this.indicatorValue;
+    this.team.techniqueProperties.passAccuracy = this.indicatorValue;
+    this.team.techniqueProperties.passSpeeed = this.indicatorValue;
+    this.team.techniqueProperties.shootSpeed = this.indicatorValue;
+    this.team.techniqueProperties.shootAccuracy = this.indicatorValue;
   }
 
   addTexts() {
