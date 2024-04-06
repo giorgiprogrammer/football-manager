@@ -307,7 +307,7 @@ export class Match {
     if (teamWithBallWas !== teamWithBall) {
       if (footballer.type === "defender") {
         const random = getRandomNumber(0, 100);
-        if (random > 0) {
+        if (random > 70) {
           const side =
             footballer.getBounds().x < this.stadium.getBounds().centerX
               ? "left"
