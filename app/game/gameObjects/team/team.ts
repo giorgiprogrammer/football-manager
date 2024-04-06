@@ -6,6 +6,7 @@ import { TeamData } from "@/app/config/initialTeamsData";
 import { match } from "assert";
 import { Ball } from "../ball";
 import { matchData } from "@/app/config/matchData";
+import { Match } from "../../core/match";
 
 export class Team extends Phaser.GameObjects.Container {
   defenceColumn!: Column;
@@ -27,7 +28,8 @@ export class Team extends Phaser.GameObjects.Container {
     public stadium: Stadium,
     public isHost: boolean,
     public teamData: TeamData,
-    public ball: Ball
+    public ball: Ball,
+    public match: Match
   ) {
     super(scene, x, y);
     scene.add.existing(this);
@@ -53,6 +55,15 @@ export class Team extends Phaser.GameObjects.Container {
     this.attackerColumn.reset();
   }
 
+  resetGoalKeeper() {
+    this.goalKeeper.setPosition(
+      this.isHost
+        ? -calculatePercentage(50, this.stadium.stadiumWidth)
+        : calculatePercentage(50, this.stadium.stadiumWidth),
+      0
+    );
+  }
+
   addGoalKeeper() {
     this.goalKeeper = new Footballer(
       this.scene,
@@ -68,6 +79,10 @@ export class Team extends Phaser.GameObjects.Container {
     );
     this.add(this.goalKeeper);
     this.footballers.push(this.goalKeeper);
+  }
+
+  stopGoalKeeper() {
+    this.goalKeeperTween.pause();
   }
 
   addColumns() {
@@ -153,6 +168,8 @@ export class Team extends Phaser.GameObjects.Container {
     ); // Example threshold distance
 
     this.scene.events.on("update", () => {
+      if (this.match.isPlaying === false) return;
+
       if (!this.hasBall) {
         // for Defender Column
         if (
@@ -206,8 +223,8 @@ export class Team extends Phaser.GameObjects.Container {
     this.goalKeeperTween = this.scene.tweens.add({
       targets: this.goalKeeper,
       duration: interpolate(
-        this.teamData.techniqueProperties.goalKeeperPassSpeed,
-        700,
+        this.teamData.techniqueProperties.goalKeeperMotionSpeed,
+        1200,
         300
       ),
       y: {

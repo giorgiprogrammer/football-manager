@@ -9,6 +9,9 @@ export class Stadium extends Phaser.GameObjects.Container {
   leftGoalPost!: GoalPost;
   rightGoalPost!: GoalPost;
 
+  leftCornerColliders: Array<Phaser.Physics.Arcade.Image> = [];
+  rightCornerColliders: Array<Phaser.Physics.Arcade.Image> = [];
+
   stadiumSurrounding!: StadiumSurrounding;
 
   //pharametres
@@ -107,7 +110,7 @@ export class Stadium extends Phaser.GameObjects.Container {
       .setImmovable(true)
       .setTint(this.lineColor);
     this.add(leftTopLine);
-    this.colliders.push(leftTopLine);
+    this.leftCornerColliders.push(leftTopLine);
 
     const leftBottomLine = this.scene.physics.add
       .image(-this.stadiumWidth / 2, this.stadiumHeight / 2, "default")
@@ -119,7 +122,7 @@ export class Stadium extends Phaser.GameObjects.Container {
       .setImmovable(true)
       .setTint(this.lineColor);
     this.add(leftBottomLine);
-    this.colliders.push(leftBottomLine);
+    this.leftCornerColliders.push(leftBottomLine);
 
     const rightTopLine = this.scene.physics.add
       .image(
@@ -135,7 +138,7 @@ export class Stadium extends Phaser.GameObjects.Container {
       .setImmovable(true)
       .setTint(this.lineColor);
     this.add(rightTopLine);
-    this.colliders.push(rightTopLine);
+    this.rightCornerColliders.push(rightTopLine);
 
     const rightBottomLine = this.scene.physics.add
       .image(
@@ -151,7 +154,7 @@ export class Stadium extends Phaser.GameObjects.Container {
       .setImmovable(true)
       .setTint(this.lineColor);
     this.add(rightBottomLine);
-    this.colliders.push(rightBottomLine);
+    this.rightCornerColliders.push(rightBottomLine);
 
     const leftSmallRectangle = this.graphics.strokeRect(
       -this.stadiumWidth / 2 + this.lineWidth / 2,

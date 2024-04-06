@@ -37,6 +37,13 @@ export class Light extends Phaser.GameObjects.Container {
     this.triangle.setVisible(false);
   }
 
+  resumeMotion() {
+    this.tween.resume();
+    this.triangleTween.resume();
+
+    this.triangle.setVisible(true);
+  }
+
   addRightBottom() {
     this.triangle = this.scene.add
       .image(-50, -50, "triangle")
@@ -144,10 +151,5 @@ export class Light extends Phaser.GameObjects.Container {
       repeat: -1,
       yoyo: true,
     });
-  }
-
-  stopAnimation() {
-    this.tween.pause();
-    this.triangleTween.pause();
   }
 }

@@ -9,8 +9,12 @@ import { MatchData } from "@/app/config/matchData";
 import { Stadium } from "../../gameObjects/stadium";
 import { Ball } from "../../gameObjects/ball";
 import { CameraMotion } from "../cameraMotion";
+import { GameManager } from "../gameManager";
+import EventEmitter from "events";
 
 export class Match {
+  private eventEmitter: EventEmitter = new EventEmitter();
+
   startText!: Phaser.GameObjects.Text;
   hostTeam!: Team;
   guestTeam!: Team;
@@ -21,11 +25,6 @@ export class Match {
 
   interval!: NodeJS.Timeout;
 
-  hostTeamScore = 0;
-  guestTeamScore = 0;
-
-  isGoal = false;
-
   isPlaying = false;
 
   collisionDetections!: CollisionDetections;
@@ -34,18 +33,30 @@ export class Match {
 
   timer = 0;
 
+  ballGoesToCorner = false;
+
   passSound!: Phaser.Sound.BaseSound;
   goalSelebration!: Phaser.Sound.BaseSound;
   refereeSound!: Phaser.Sound.BaseSound;
   fansSound!: Phaser.Sound.BaseSound;
+
+  matchStatus:
+    | "firtHalf"
+    | "secondHalf"
+    | "extraFirstHalf"
+    | "extraSecondHalf"
+    | "penalty" = "firtHalf";
 
   constructor(public scene: Phaser.Scene, public matchData: MatchData) {
     this.init();
   }
 
   init() {
+    this.matchStatus = "firtHalf";
+
     this.addStadium();
     this.addBall();
+    this.addGoalEventListener();
     this.addTeams();
     this.createCollisionDetections();
     this.addSounds();
@@ -59,29 +70,107 @@ export class Match {
     new CameraMotion(this.scene, this.stadium, this.ball, this);
   }
 
+  addGoalEventListener() {
+    this.scene.events.on(Phaser.Scenes.Events.UPDATE, () => {
+      if (!this.isPlaying) return;
+
+      if (
+        this.ball.getBounds().centerX <
+        this.stadium.leftGoalPost.getBounds().centerX
+      ) {
+        if (
+          this.matchStatus === "firtHalf" ||
+          this.matchStatus === "extraFirstHalf"
+        ) {
+          this.isGoal("guest");
+        } else {
+          this.isGoal("host");
+        }
+      }
+
+      if (
+        this.ball.getBounds().centerX >
+        this.stadium.rightGoalPost.getBounds().centerX
+      ) {
+        if (
+          this.matchStatus === "firtHalf" ||
+          this.matchStatus === "extraFirstHalf"
+        ) {
+          this.isGoal("host");
+        } else {
+          this.isGoal("guest");
+        }
+      }
+    });
+  }
+
+  isGoal(team: "host" | "guest") {
+    this.isPlaying = false;
+    this.ball.isGoal();
+
+    this.hostTeam.stopMotion();
+    this.guestTeam.stopMotion();
+    this.hostTeam.stopGoalKeeper();
+    this.guestTeam.stopGoalKeeper();
+
+    if (team === "host") {
+      this.eventEmitter.emit("goal", "host");
+      this.stadium.stadiumSurrounding.startFansSelebration("host");
+    } else {
+      this.eventEmitter.emit("goal", "guest");
+      this.stadium.stadiumSurrounding.startFansSelebration("guest");
+    }
+  }
+
   startMatch() {
     this.refereeSound.play();
     this.stadium.stopLightAnimations();
-    this.startBallMotion();
+    this.startBallMotion("host");
     this.hostTeam.startGoalKeeperMotion();
     this.guestTeam.startGoalKeeperMotion();
 
     this.isPlaying = true;
   }
 
-  startBallMotion() {
+  startBallMotion(ballOwnerTeam: "host" | "guest") {
     const firstRandomFootballer =
-      this.hostTeam.midfielderColumn.footballers[
-        getRandomNumber(
-          0,
-          this.hostTeam.midfielderColumn.footballers.length - 1
-        )
-      ];
+      ballOwnerTeam === "host"
+        ? this.hostTeam.midfielderColumn.footballers[
+            getRandomNumber(
+              0,
+              this.hostTeam.midfielderColumn.footballers.length - 1
+            )
+          ]
+        : this.guestTeam.midfielderColumn.footballers[
+            getRandomNumber(
+              0,
+              this.guestTeam.midfielderColumn.footballers.length - 1
+            )
+          ];
 
     this.ball.firstKick(
       firstRandomFootballer.getBounds().centerX,
       firstRandomFootballer.getBounds().centerY
     );
+  }
+
+  // use this method to resume match after goal
+  resumeMatch(ballOwnerTeam: "host" | "guest") {
+    this.hostTeam.reset();
+    this.guestTeam.reset();
+    this.hostTeam.resetGoalKeeper();
+    this.guestTeam.resetGoalKeeper();
+
+    this.ball.reset();
+
+    setTimeout(() => {
+      this.startBallMotion(ballOwnerTeam);
+      this.hostTeam.startGoalKeeperMotion();
+      this.guestTeam.startGoalKeeperMotion();
+      this.stadium.stadiumSurrounding.stopFansSelebration(
+        ballOwnerTeam === "host" ? "guest" : "host"
+      );
+    }, 3000);
   }
 
   addSounds() {
@@ -125,138 +214,18 @@ export class Match {
     );
   }
 
-  stopHalfTime() {
+  resetMatch() {
     this.ball.reset();
-    this.hostTeam.reset();
-    this.guestTeam.reset();
-    this.hostTeam.goalKeeperTween?.pause();
-    this.guestTeam.goalKeeperTween?.pause();
-    this.isGoal = false;
-
-    this.startText.setVisible(true);
-    const inputImage = this.scene.add
-      .image(0, 0, "default")
-      .setOrigin(0)
-      .setDepth(500)
-      .setAlpha(0.001)
-      .setDisplaySize(
-        this.scene.game.canvas.width,
-        this.scene.game.canvas.height
-      )
-      .setInteractive()
-      .on(Phaser.Input.Events.POINTER_DOWN, () => {
-        this.startText.setVisible(false);
-        inputImage.destroy();
-        this.timer++;
-        const matchIndicatorsScene = this.scene.scene.get(
-          "MatchIndicators"
-        ) as MatchIndicators;
-        matchIndicatorsScene.setTimerText(this.timer);
-
-        this.resumeMatch("host");
-      });
-
     this.isPlaying = false;
-  }
 
-  resetMatch(team: string) {
-    this.ball.reset();
-    this.isGoal = false;
+    this.hostTeam.stopMotion();
+    this.guestTeam.stopMotion();
 
-    const matchIndicatorsScene = this.scene.scene.get(
-      "MatchIndicators"
-    ) as MatchIndicators;
-    if (team === "host") {
-      this.hostTeamScore++;
-      matchIndicatorsScene.setScore(this.hostTeamScore, this.guestTeamScore);
-    } else {
-      this.guestTeamScore++;
-      matchIndicatorsScene.setScore(this.hostTeamScore, this.guestTeamScore);
-    }
+    this.hostTeam.stopGoalKeeper();
+    this.guestTeam.stopGoalKeeper();
 
-    setTimeout(() => {
-      this.resumeMatch(team);
-    }, 1500);
-  }
-
-  resumeMatch(team: string) {
-    this.stadium.stadiumSurrounding.stopLightAnimations();
-    this.hostTeam.goalKeeperTween?.resume();
-    this.guestTeam.goalKeeperTween?.resume();
-
-    const footballer =
-      team === "host"
-        ? this.guestTeam.midfielderColumn.footballers[
-            getRandomNumber(
-              0,
-              this.guestTeam.midfielderColumn.footballers.length - 1
-            )
-          ]
-        : this.hostTeam.midfielderColumn.footballers[
-            getRandomNumber(
-              0,
-              this.hostTeam.midfielderColumn.footballers.length - 1
-            )
-          ];
-
-    // team === "host"
-    //   ? this.hostTeam.startMotion()
-    //   : this.guestTeam.startMotion();
-
-    this.refereeSound.play();
-    this.passSound.play();
-    this.ball.firstKick(
-      footballer.getBounds().centerX,
-      footballer.getBounds().centerY
-    );
-
-    this.isPlaying = true;
-  }
-
-  checkIfIsGoal() {
-    if (this.isGoal) return;
-
-    // Guest Team Goal
-    if (
-      this.ball.getBounds().centerX <
-      this.stadium.leftGoalPost.getBounds().centerX
-    ) {
-      this.goalSelebration.play();
-      this.ball.setVelocity(0, 0);
-      this.ball.setAngularVelocity(0);
-      this.ball.startGoalAnimation();
-      this.hostTeam.reset();
-      this.guestTeam.reset();
-      this.hostTeam.goalKeeperTween?.pause();
-      this.guestTeam.goalKeeperTween?.pause();
-      this.isGoal = true;
-      this.isPlaying = false;
-      // this.matchData.stadium!.stadiumSurrounding.rightFansSelebrate();
-      setTimeout(() => {
-        this.resetMatch("guest");
-      }, 2500);
-    }
-
-    // Host Team Goal
-    if (
-      this.ball.getBounds().centerX >
-      this.stadium.rightGoalPost.getBounds().centerX
-    ) {
-      this.goalSelebration.play();
-      this.ball.setVelocity(0, 0);
-      this.ball.setAngularVelocity(0);
-      this.ball.startGoalAnimation();
-      this.hostTeam.reset();
-      this.guestTeam.reset();
-      this.hostTeam.goalKeeperTween?.pause();
-      this.guestTeam.goalKeeperTween?.pause();
-      this.isGoal = true;
-      this.isPlaying = false;
-      // this.matchData.stadium!.stadiumSurrounding.leftFansSelebrate();
-      setTimeout(() => {
-        this.resetMatch("host");
-      }, 2500);
-    }
+    this.hostTeam.hasBall = false;
+    this.guestTeam.hasBall = false;
   }
 
   createCollisionDetections() {
@@ -281,7 +250,8 @@ export class Match {
       this.stadium,
       true,
       this.matchData.hostTeam,
-      this.ball
+      this.ball,
+      this
     );
     this.guestTeam = new Team(
       this.scene,
@@ -290,7 +260,8 @@ export class Match {
       this.stadium,
       false,
       this.matchData.guestTeam,
-      this.ball
+      this.ball,
+      this
     );
   }
 
@@ -307,101 +278,82 @@ export class Match {
     this.hostTeam.goalKeeperTween?.stop();
     this.guestTeam.goalKeeperTween?.stop();
 
-    this.isGoal = false;
+    // this.isGoal = false;
 
     this.isPlaying = false;
 
-    insertMatchResult(
-      tournamenrDataConfig.guestTeam,
-      tournamenrDataConfig.hostTeam,
-      this.hostTeamScore,
-      this.guestTeamScore,
-      tournamenrDataConfig.division,
-      tournamenrDataConfig.week
-    ).then(
-      (res) => {
-        console.log(res);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    // insertMatchResult(
+    //   tournamenrDataConfig.guestTeam,
+    //   tournamenrDataConfig.hostTeam,
+    //   this.hostTeamScore,
+    //   this.guestTeamScore,
+    //   tournamenrDataConfig.division,
+    //   tournamenrDataConfig.week
+    // ).then(
+    //   (res) => {
+    //     console.log(res);
+    //   },
+    //   (err) => {
+    //     console.log(err);
+    //   }
+    // );
   }
 
-  // startGame() {
-  //   this.refereeSound.play();
-  //   this.passSound.play();
-  //   // this.cameraMotion.isPlaying = true;
+  checkCornerPosibbility(
+    teamWithBallWas: "host" | "guest",
+    teamWithBall: "host" | "guest",
+    footballer: Footballer
+  ) {
+    if (teamWithBallWas !== teamWithBall) {
+      if (footballer.type === "defender") {
+        const random = getRandomNumber(0, 100);
+        if (random > 0) {
+          const side =
+            footballer.getBounds().x < this.stadium.getBounds().centerX
+              ? "left"
+              : "right";
+          this.ball.goToCorner(side, footballer);
 
-  //   const footballer =
-  //     this.hostTeam.midfielderColumn.footballers[
-  //       getRandomNumber(
-  //         0,
-  //         this.hostTeam.midfielderColumn.footballers.length - 1
-  //       )
-  //     ];
+          return true;
+        }
+      }
+    }
 
-  //   this.ball.firstKick(
-  //     footballer.getBounds().centerX,
-  //     footballer.getBounds().centerY
-  //   );
+    return false;
+  }
 
-  //   this.guestTeam.startMotion();
-
-  //   this.isPlaying = true;
-  //   this.timer++;
-  //   const matchIndicatorsScene = this.scene.scene.get(
-  //     "MatchIndicators"
-  //   ) as MatchIndicators;
-  //   matchIndicatorsScene.setTimerText(this.timer);
-
-  //   this.interval = setInterval(() => {
-  //     if (!this.isPlaying) return;
-  //     if (this.isGoal) return;
-
-  //     if (this.timer === 45) {
-  //       this.stopHalfTime();
-  //       return;
-  //     }
-
-  //     if (this.timer === 90) {
-  //       this.finishMatch();
-  //       return;
-  //     }
-
-  //     this.timer++;
-
-  //     const matchIndicatorsScene = this.scene.scene.get(
-  //       "MatchIndicators"
-  //     ) as MatchIndicators;
-  //     matchIndicatorsScene.setTimerText(this.timer);
-  //   }, 1300);
-  // }
-
-  catchBall(team: string, footballer: Footballer) {
-    if (this.isGoal) return;
+  catchBall(team: "host" | "guest", footballer: Footballer) {
+    // if (this.isGoal) return;
     if (footballer.controllBall) return;
+
+    // check corner possibility
+    this.ballGoesToCorner = this.checkCornerPosibbility(
+      this.hostTeam.hasBall ? "host" : "guest",
+      team,
+      footballer
+    );
 
     this.footballerWithBall = footballer;
 
     if (team === "host") {
-      // if mode is experimental
+      // for experimental mode
       this.hostTeam.hasBall = true;
       this.guestTeam.hasBall = false;
 
-      // if mode is classic
+      // for classic mode
       this.hostTeam.stopMotion();
       this.guestTeam.startMotion();
     } else {
-      // if mode is experimental
+      // for experimental mode
       this.hostTeam.hasBall = false;
       this.guestTeam.hasBall = true;
 
-      // if mode is classic
+      // for classic mode
       this.hostTeam.startMotion();
       this.guestTeam.stopMotion();
     }
 
+    if (this.ballGoesToCorner) return;
     this.nextOperation(team);
   }
 
@@ -438,5 +390,36 @@ export class Match {
     }
 
     this.footballerWithBall.makeDesicion(shortVariants, longVariants, this);
+  }
+
+  isCornerEvent(side: "left" | "right") {
+    if (!this.isPlaying) return;
+
+    this.hostTeam.stopMotion();
+    this.hostTeam.stopGoalKeeper();
+    this.guestTeam.stopMotion();
+    this.guestTeam.stopGoalKeeper();
+
+    this.ball.isCorner();
+    this.eventEmitter.emit("corner");
+
+    this.isPlaying = false;
+
+    setTimeout(() => {
+      this.makeCorner(side);
+    }, 3500);
+  }
+
+  makeCorner(side: "left" | "right") {
+    alert("corner");
+  }
+
+  // Create Event Listeners
+  onGoal(callback: (team: "host" | "guest") => void) {
+    this.eventEmitter.on("goal", callback);
+  }
+
+  onCorner(callback: () => void) {
+    this.eventEmitter.on("corner", callback);
   }
 }

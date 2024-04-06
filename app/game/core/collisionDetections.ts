@@ -31,6 +31,8 @@ export class CollisionDetections {
         this.ball.changeRotation();
       }
     );
+
+    this.addCornerCollisions();
   }
 
   addFootballersAndBallCollision(
@@ -50,5 +52,31 @@ export class CollisionDetections {
       this.match.catchBall("guest", footballer);
       footballer.setBall(this.ball);
     });
+  }
+
+  addCornerCollisions() {
+    this.scene.physics.add.collider(
+      this.ball,
+      this.stadium.leftCornerColliders,
+      () => {
+        this.ball.changeRotation();
+
+        if (this.match.ballGoesToCorner) {
+          this.match.isCornerEvent("left");
+        }
+      }
+    );
+
+    this.scene.physics.add.collider(
+      this.ball,
+      this.stadium.rightCornerColliders,
+      () => {
+        this.ball.changeRotation();
+
+        if (this.match.ballGoesToCorner) {
+          this.match.isCornerEvent("right");
+        }
+      }
+    );
   }
 }

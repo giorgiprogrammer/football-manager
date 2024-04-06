@@ -3,9 +3,13 @@ import GamePlay from "./gameplay";
 import { matchData } from "@/app/config/matchData";
 import { tournamenrDataConfig } from "../config/tournamentDataConfig";
 import { tournamentManager } from "@/app/core/tournamentsManager/tournametsManager";
+import { MatchStatsModal } from "../ui/components/matchStatsModal";
 
 export default class CavnasScene extends Phaser.Scene {
   scoreText!: Phaser.GameObjects.Text;
+
+  // Match Modal Variables
+  matchStatsModal!: MatchStatsModal;
 
   startButton!: Phaser.GameObjects.Image;
 
@@ -16,6 +20,9 @@ export default class CavnasScene extends Phaser.Scene {
   guestScore = 0;
 
   timerText!: Phaser.GameObjects.Text;
+  timer = 0;
+
+  timerIsOnn = false;
 
   constructor() {
     super("CanvasScene");
@@ -25,21 +32,25 @@ export default class CavnasScene extends Phaser.Scene {
     this.topIndicators = this.add.container(0, 0).setVisible(false);
 
     this.addTopIndicators();
-    this.addMenuButton();
+    // this.addMenuButton();
     this.addStartModal();
   }
 
   async addStartModal() {
     await tournamentManager.init();
     let division = undefined;
-    if (tournamenrDataConfig.division === 1) {
-      division = tournamentManager.division_1;
-    }
-    if (tournamenrDataConfig.division === 2) {
-      division = tournamentManager.division_2;
-    }
-    if (tournamenrDataConfig.division === 3) {
-      division = tournamentManager.division_3;
+    switch (tournamenrDataConfig.division) {
+      case 1:
+        division = tournamentManager.division_1;
+        break;
+      case 2:
+        division = tournamentManager.division_2;
+        break;
+      case 3:
+        division = tournamentManager.division_3;
+        break;
+      default:
+        break;
     }
 
     this.startModal = this.add.container(
@@ -188,6 +199,53 @@ export default class CavnasScene extends Phaser.Scene {
     this.startModal.add(weekText);
   }
 
+  openMatchStatsModal({
+    hostTeamStats,
+    guesTeamStats,
+  }: {
+    hostTeamStats: {
+      shoots: number;
+      shotsOnTarget: number;
+      ballPossession: number;
+      corners: number;
+      fouls: number;
+      score: number;
+    };
+    guesTeamStats: {
+      shoots: number;
+      shotsOnTarget: number;
+      ballPossession: number;
+      corners: number;
+      fouls: number;
+      score: number;
+    };
+  }) {
+    this.matchStatsModal = new MatchStatsModal(
+      this,
+      this.game.canvas.width / 2,
+      this.game.canvas.height / 2,
+      {
+        title: "Statistics",
+        hostTeamStats: {
+          shoots: hostTeamStats.shoots,
+          shotsOnTarget: hostTeamStats.shotsOnTarget,
+          ballPossession: hostTeamStats.ballPossession,
+          corners: hostTeamStats.corners,
+          fouls: hostTeamStats.fouls,
+          score: hostTeamStats.score,
+        },
+        guesTeamStats: {
+          shoots: guesTeamStats.shoots,
+          shotsOnTarget: guesTeamStats.shotsOnTarget,
+          ballPossession: guesTeamStats.ballPossession,
+          corners: guesTeamStats.corners,
+          fouls: guesTeamStats.fouls,
+          score: guesTeamStats.score,
+        },
+      }
+    );
+  }
+
   addMenuButton() {
     const menuIcon = this.add
       .image(
@@ -281,5 +339,58 @@ export default class CavnasScene extends Phaser.Scene {
 
   setScore(lefscore: number, rightScore: number) {
     this.scoreText.setText(`${lefscore} - ${rightScore}`);
+  }
+
+  showCornerTransition() {
+    const background = this.add
+      .image(0, 0, "default")
+      .setTint(0x000000)
+      .setAlpha(0)
+      .setOrigin(0)
+      .setDisplaySize(this.game.canvas.width, this.game.canvas.height);
+
+    const cornerText = this.add
+      .text(-2000, this.game.canvas.height / 2 - 40, "Corner", {
+        fontFamily: "Silkscreen",
+        fontSize: 40,
+        color: "#DAF2E9",
+        align: "center",
+        backgroundColor: "#FF7131",
+      })
+      .setOrigin(0.5)
+      .setAlpha(0);
+
+    const kickText = this.add
+      .text(2000, this.game.canvas.height / 2 + 40, "Kick", {
+        fontFamily: "Silkscreen",
+        fontSize: 40,
+        color: "#DAF2E9",
+        align: "center",
+        backgroundColor: "#FF7131",
+      })
+      .setOrigin(0.5)
+      .setAlpha(0);
+
+    this.tweens.add({
+      targets: cornerText,
+      ease: Phaser.Math.Easing.Bounce.Out,
+      alpha: 1,
+      x: this.game.canvas.width / 2,
+      duration: 1500,
+    });
+
+    this.tweens.add({
+      targets: kickText,
+      ease: Phaser.Math.Easing.Bounce.Out,
+      alpha: 1,
+      x: this.game.canvas.width / 2,
+      duration: 1500,
+    });
+
+    this.tweens.add({
+      targets: background,
+      alpha: 0.9,
+      duration: 300,
+    });
   }
 }
