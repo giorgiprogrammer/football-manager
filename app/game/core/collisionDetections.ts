@@ -15,12 +15,15 @@ export class CollisionDetections {
 
   init() {
     this.scene.physics.add.collider(this.ball, this.stadium.colliders, () => {
+      if (!this.match.isPlaying) return;
       this.ball.changeRotation();
     });
     this.scene.physics.add.collider(
       this.ball,
       this.stadium.leftGoalPost.colliders,
       () => {
+        if (!this.match.isPlaying) return;
+
         this.ball.changeRotation();
       }
     );
@@ -28,6 +31,8 @@ export class CollisionDetections {
       this.ball,
       this.stadium.rightGoalPost.colliders,
       () => {
+        if (!this.match.isPlaying) return;
+
         this.ball.changeRotation();
       }
     );
@@ -40,6 +45,8 @@ export class CollisionDetections {
     Guestfootballers: Footballer[]
   ) {
     this.scene.physics.add.overlap(this.ball, Hostfootballers, (a, b) => {
+      if (!this.match.isPlaying) return;
+
       const footballer = b as Footballer;
 
       this.match.catchBall("host", footballer);
@@ -47,6 +54,8 @@ export class CollisionDetections {
     });
 
     this.scene.physics.add.overlap(this.ball, Guestfootballers, (a, b) => {
+      if (!this.match.isPlaying) return;
+
       const footballer = b as Footballer;
 
       this.match.catchBall("guest", footballer);
@@ -59,10 +68,17 @@ export class CollisionDetections {
       this.ball,
       this.stadium.leftCornerColliders,
       () => {
+        if (!this.match.isPlaying) return;
+
         this.ball.changeRotation();
 
         if (this.match.ballGoesToCorner) {
-          this.match.isCornerEvent("left");
+          const verticalSide =
+            this.ball.getBounds().y >
+            this.stadium.leftGoalPost.getBounds().centerY
+              ? "bottom"
+              : "top";
+          this.match.isCornerEvent("left", verticalSide);
         }
       }
     );
@@ -71,10 +87,17 @@ export class CollisionDetections {
       this.ball,
       this.stadium.rightCornerColliders,
       () => {
+        if (!this.match.isPlaying) return;
+
         this.ball.changeRotation();
 
         if (this.match.ballGoesToCorner) {
-          this.match.isCornerEvent("right");
+          const verticalSide =
+            this.ball.getBounds().y >
+            this.stadium.leftGoalPost.getBounds().centerY
+              ? "bottom"
+              : "top";
+          this.match.isCornerEvent("right", verticalSide);
         }
       }
     );

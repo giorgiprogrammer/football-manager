@@ -342,12 +342,15 @@ export default class CavnasScene extends Phaser.Scene {
   }
 
   showCornerTransition() {
+    const container = this.add.container(0, 0);
+
     const background = this.add
       .image(0, 0, "default")
       .setTint(0x000000)
       .setAlpha(0)
       .setOrigin(0)
       .setDisplaySize(this.game.canvas.width, this.game.canvas.height);
+    container.add(background);
 
     const cornerText = this.add
       .text(-2000, this.game.canvas.height / 2 - 40, "Corner", {
@@ -359,6 +362,7 @@ export default class CavnasScene extends Phaser.Scene {
       })
       .setOrigin(0.5)
       .setAlpha(0);
+    container.add(cornerText);
 
     const kickText = this.add
       .text(2000, this.game.canvas.height / 2 + 40, "Kick", {
@@ -370,6 +374,7 @@ export default class CavnasScene extends Phaser.Scene {
       })
       .setOrigin(0.5)
       .setAlpha(0);
+    container.add(kickText);
 
     this.tweens.add({
       targets: cornerText,
@@ -385,6 +390,11 @@ export default class CavnasScene extends Phaser.Scene {
       alpha: 1,
       x: this.game.canvas.width / 2,
       duration: 1500,
+      onComplete: () => {
+        setTimeout(() => {
+          container.destroy();
+        }, 1700);
+      },
     });
 
     this.tweens.add({

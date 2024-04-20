@@ -58,9 +58,11 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
 
   setBall(ball: Ball) {
     if (this.controllBall) return;
-    this.controllBall = true;
+    if (this.type !== "goalkeeper") {
+      this.controllBall = true;
+      ball.setPosition(this.getBounds().centerX, this.getBounds().centerY);
+    }
 
-    ball.setPosition(this.getBounds().centerX, this.getBounds().centerY);
     if (this.type !== "goalkeeper") {
       setTimeout(() => {
         ball.setPosition(this.getBounds().centerX, this.getBounds().centerY);
@@ -115,7 +117,6 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
   }
 
   makePass(footballer: Footballer, match: Match) {
-    console.log(this.type, "passing to", footballer.type);
     const y = getRandomNumber(
       interpolate(this.properties.passAccuracy, 150, 0),
       interpolate(this.properties.passAccuracy, 250, 2)
@@ -153,7 +154,7 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
     setTimeout(() => {
       this.controllBall = false;
       if (this.type !== "goalkeeper") this.setAlpha(0.75);
-    }, 600);
+    }, 300);
   }
 
   randomShoot() {

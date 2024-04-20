@@ -62,6 +62,10 @@ export class GameManager {
         this.canvasScene.showCornerTransition();
       }, 300);
     });
+
+    this.match.onFinishCorner(() => {
+      this.canvasScene.timerIsOnn = true;
+    });
   }
 
   addMatchTimer() {
@@ -89,7 +93,9 @@ export class GameManager {
     this.canvasScene.topIndicators.setVisible(true);
     this.canvasScene.timerIsOnn = true;
 
-    this.gamePlayScene.match.startMatch();
+    setTimeout(() => {
+      this.gamePlayScene.match.startMatch();
+    }, 1000);
   }
 
   halfTimeEnd() {

@@ -61,6 +61,7 @@ export default class Menu extends Phaser.Scene {
   addAnimationEffectImage() {
     this.backgroundAniamtionEffectImage = this.add
       .image(0, 0, "default")
+      .setTint(0x000000)
       .setOrigin(0)
       .setDisplaySize(this.game.canvas.width, this.game.canvas.height)
       .setVisible(false)
@@ -244,7 +245,7 @@ export default class Menu extends Phaser.Scene {
         this.add.tween({
           targets: this.backgroundAniamtionEffectImage,
           alpha: 1,
-          duration: 2500,
+          duration: 1600,
           onComplete: () => {
             this.scene.start("GamePlay");
           },
