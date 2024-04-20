@@ -9,6 +9,8 @@ export class Ball extends Phaser.Physics.Arcade.Image {
   goalAnimation!: Phaser.Tweens.Tween;
   anglurarVelocity = 800;
 
+  isCorner = false;
+
   constructor(
     scene: Phaser.Scene,
     x: number,
@@ -54,7 +56,8 @@ export class Ball extends Phaser.Physics.Arcade.Image {
     this.startGoalAnimation();
   }
 
-  isCorner() {
+  stopOnCorner() {
+    this.isCorner = true;
     this.setAngularVelocity(0);
     this.setVelocity(0, 0);
     this.setPosition(this.x, this.y);
@@ -107,6 +110,7 @@ export class Ball extends Phaser.Physics.Arcade.Image {
   }
 
   changeRotation() {
+    if (this.isCorner) return;
     this.anglurarVelocity = -this.anglurarVelocity;
     this.setAngularVelocity(-this.anglurarVelocity);
   }
@@ -116,20 +120,26 @@ export class Ball extends Phaser.Physics.Arcade.Image {
 
     const posX =
       side === "left"
-        ? this.stadium.leftGoalPost.getBounds().centerX - 100
-        : this.stadium.rightGoalPost.getBounds().centerX + 100;
+        ? this.stadium.leftGoalPost.getBounds().centerX - 50
+        : this.stadium.rightGoalPost.getBounds().centerX + 50;
     const posY =
       footballer.getBounds().y > this.stadium.leftGoalPost.getBounds().centerY
         ? this.stadium.leftGoalPost.getBounds().centerY +
-          getRandomNumber(200, 700)
+          getRandomNumber(200, 200)
         : this.stadium.leftGoalPost.getBounds().centerY -
-          getRandomNumber(200, 700);
+          getRandomNumber(200, 200);
 
     this.kick(160, posX, posY);
 
     setTimeout(() => {
       footballer.controllBall = false;
     }, 400);
+  }
+
+  stop() {
+    this.setVelocity(0, 0);
+    this.setAngularVelocity(0);
+    this.setPosition(this.x, this.y);
   }
 }
 

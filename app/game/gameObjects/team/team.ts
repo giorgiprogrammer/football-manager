@@ -53,6 +53,8 @@ export class Team extends Phaser.GameObjects.Container {
     this.defenceColumn.reset();
     this.midfielderColumn.reset();
     this.attackerColumn.reset();
+
+    this.showFootballers();
   }
 
   resetGoalKeeper() {
@@ -236,5 +238,15 @@ export class Team extends Phaser.GameObjects.Container {
     });
   }
 
-  stopGoalKeeperMotion() {}
+  hideFootballers() {
+    this.footballers.forEach((footballer) => {
+      footballer.setVisible(false);
+    });
+  }
+
+  showFootballers() {
+    this.footballers.forEach((footballer) => {
+      footballer.setVisible(true);
+    });
+  }
 }

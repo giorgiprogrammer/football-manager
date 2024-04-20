@@ -5,6 +5,7 @@ import { Match } from "./match";
 
 export class CameraMotion {
   camera_z_index = 0.95;
+  isCorner = false;
 
   constructor(
     public scene: Phaser.Scene,
@@ -22,6 +23,13 @@ export class CameraMotion {
     const centerX = this.ball.x;
 
     this.scene.events.on("update", () => {
+      if (this.isCorner) {
+        this.scene.cameras.main.setZoom(this.camera_z_index);
+        if (this.camera_z_index > 1.1) {
+          this.camera_z_index -= 0.006;
+        }
+      }
+
       if (!this.match.isPlaying) return;
       this.scene.cameras.main.setZoom(this.camera_z_index);
       if (
