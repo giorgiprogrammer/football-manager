@@ -44,5 +44,21 @@ export class SettingsModal extends MenuModal {
       }
     );
     this.add(playStyleOptions);
+
+    const extraTimeOption = new SimpleSelector(
+      this.scene,
+      0,
+      calculatePercentage(40, this.scene.game.canvas.height),
+      ["With Extra Times", "No Extra Times"],
+      "No Extra Times",
+      (value) => {
+        if (value === "With Extra Times") {
+          matchData.isExtraTimes = true;
+        } else {
+          matchData.isExtraTimes = false;
+        }
+      }
+    );
+    this.add(extraTimeOption);
   }
 }

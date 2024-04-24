@@ -7,6 +7,7 @@ export const matchData: MatchData = {
   matchTime: 2,
   mathMode: "classic",
   stadiumSize: "small",
+  isExtraTimes: false,
 };
 
 export type MatchData = {
@@ -15,4 +16,5 @@ export type MatchData = {
   matchTime: number;
   mathMode: "classic" | "experimental";
   stadiumSize: "small" | "normal" | "big" | "Mega";
+  isExtraTimes: boolean;
 };

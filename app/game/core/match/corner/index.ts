@@ -234,6 +234,9 @@ function addGoalEventListener(
       defenderFootballerTween.stop();
       attackerFootballerTween.stop();
 
+      match.hostTeam.stopFaulBehaviour();
+      match.guestTeam.stopFaulBehaviour();
+
       finishCorner("guestGoal", horizontalSide, match);
     }
 
@@ -245,6 +248,9 @@ function addGoalEventListener(
       match.guestTeam.stopGoalKeeper();
       defenderFootballerTween.stop();
       attackerFootballerTween.stop();
+
+      match.hostTeam.stopFaulBehaviour();
+      match.guestTeam.stopFaulBehaviour();
 
       finishCorner("hostGoal", horizontalSide, match);
     }
@@ -427,6 +433,9 @@ function finishCorner(
           match.hostTeam.goalKeeperTween.resume();
           match.guestTeam.goalKeeperTween.resume();
 
+          match.hostTeam.stopFaulBehaviour();
+          match.guestTeam.stopFaulBehaviour();
+
           match.eventEmitter.emit("finishCorner");
         }, 2000);
       }
@@ -448,6 +457,9 @@ function finishCorner(
 
           match.guestTeam.goalKeeperTween.resume();
           match.hostTeam.goalKeeperTween.resume();
+
+          match.hostTeam.stopFaulBehaviour();
+          match.guestTeam.stopFaulBehaviour();
 
           match.eventEmitter.emit("finishCorner");
         }, 2000);

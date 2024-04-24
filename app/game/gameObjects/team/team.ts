@@ -162,6 +162,11 @@ export class Team extends Phaser.GameObjects.Container {
     this.attackerColumn.stopMotion();
   }
 
+  stopFaulBehaviour() {
+    this.midfielderColumn.stopFaulBehaviour();
+    this.defenceColumn.stopFaulBehaviour();
+  }
+
   // For Experimental Mode
   TeamMotionManagement() {
     const thresholdDistance = calculatePercentage(
