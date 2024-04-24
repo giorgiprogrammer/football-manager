@@ -50,7 +50,9 @@ export class CollisionDetections {
       const footballer = b as Footballer;
 
       this.match.catchBall("host", footballer);
-      footballer.setBall(this.ball);
+      if (!footballer.isFaul && !footballer.isPenalty) {
+        footballer.setBall(this.ball);
+      }
     });
 
     this.scene.physics.add.overlap(this.ball, Guestfootballers, (a, b) => {
@@ -59,7 +61,9 @@ export class CollisionDetections {
       const footballer = b as Footballer;
 
       this.match.catchBall("guest", footballer);
-      footballer.setBall(this.ball);
+      if (!footballer.isFaul && !footballer.isPenalty) {
+        footballer.setBall(this.ball);
+      }
     });
   }
 

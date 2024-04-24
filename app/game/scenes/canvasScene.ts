@@ -341,7 +341,7 @@ export default class CavnasScene extends Phaser.Scene {
     this.scoreText.setText(`${lefscore} - ${rightScore}`);
   }
 
-  showCornerTransition() {
+  showMatchActionTransition(topWord: string, bottomWord: string) {
     const container = this.add.container(0, 0);
 
     const background = this.add
@@ -352,8 +352,8 @@ export default class CavnasScene extends Phaser.Scene {
       .setDisplaySize(this.game.canvas.width, this.game.canvas.height);
     container.add(background);
 
-    const cornerText = this.add
-      .text(-2000, this.game.canvas.height / 2 - 40, "Corner", {
+    const topText = this.add
+      .text(-2000, this.game.canvas.height / 2 - 40, topWord, {
         fontFamily: "Silkscreen",
         fontSize: 40,
         color: "#DAF2E9",
@@ -362,10 +362,10 @@ export default class CavnasScene extends Phaser.Scene {
       })
       .setOrigin(0.5)
       .setAlpha(0);
-    container.add(cornerText);
+    container.add(topText);
 
-    const kickText = this.add
-      .text(2000, this.game.canvas.height / 2 + 40, "Kick", {
+    const bottomText = this.add
+      .text(2000, this.game.canvas.height / 2 + 40, bottomWord, {
         fontFamily: "Silkscreen",
         fontSize: 40,
         color: "#DAF2E9",
@@ -374,10 +374,10 @@ export default class CavnasScene extends Phaser.Scene {
       })
       .setOrigin(0.5)
       .setAlpha(0);
-    container.add(kickText);
+    container.add(bottomText);
 
     this.tweens.add({
-      targets: cornerText,
+      targets: topText,
       ease: Phaser.Math.Easing.Bounce.Out,
       alpha: 1,
       x: this.game.canvas.width / 2,
@@ -385,7 +385,7 @@ export default class CavnasScene extends Phaser.Scene {
     });
 
     this.tweens.add({
-      targets: kickText,
+      targets: bottomText,
       ease: Phaser.Math.Easing.Bounce.Out,
       alpha: 1,
       x: this.game.canvas.width / 2,

@@ -59,12 +59,26 @@ export class GameManager {
     this.match.onCorner(() => {
       this.canvasScene.timerIsOnn = false;
       setTimeout(() => {
-        this.canvasScene.showCornerTransition();
+        this.canvasScene.showMatchActionTransition("Corner", "Kick!");
       }, 300);
     });
 
     this.match.onFinishCorner(() => {
       this.canvasScene.timerIsOnn = true;
+    });
+
+    this.match.onFinishFaul(() => {
+      this.canvasScene.timerIsOnn = true;
+    });
+
+    this.match.onFaul(() => {
+      this.canvasScene.timerIsOnn = false;
+      this.canvasScene.showMatchActionTransition("Free", "Kick!");
+    });
+
+    this.match.onPenalty(() => {
+      this.canvasScene.timerIsOnn = false;
+      this.canvasScene.showMatchActionTransition("Penalty", "Kick!");
     });
   }
 

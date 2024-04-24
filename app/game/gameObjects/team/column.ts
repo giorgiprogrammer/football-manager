@@ -1,6 +1,7 @@
 import {
   calculatePercentage,
   clamp,
+  getRandomNumber,
   interpolate,
   mapToPercentageInRange,
 } from "@/app/utils/math";
@@ -9,6 +10,7 @@ import { Footballer } from "./footballer";
 import { TeamProperties } from "../../types/types";
 import { TeamData } from "@/app/config/initialTeamsData";
 import { matchData } from "@/app/config/matchData";
+import { Match } from "../../core/match";
 
 export class Column extends Phaser.GameObjects.Container {
   footballers: Footballer[] = [];
@@ -118,6 +120,31 @@ export class Column extends Phaser.GameObjects.Container {
   }
 
   startMotion(distance: number) {
+    if (this.type === "midfielder") {
+      const foulChance = getRandomNumber(0, 100);
+      if (foulChance > 80) {
+        this.footballers[
+          getRandomNumber(0, this.footballers.length - 1)
+        ].startFaulBehaviour();
+      }
+    }
+
+    if (this.type === "defender") {
+      const penaltyChange = getRandomNumber(0, 100);
+      if (penaltyChange > 0) {
+        if (this.footballers.length > 3) {
+          this.footballers[
+            getRandomNumber(
+              Math.floor((this.footballers.length - 1) / 2),
+              Math.floor((this.footballers.length - 1) / 2 + 1)
+            )
+          ].startPenaltyBehaviour();
+        } else {
+          this.footballers[1].startPenaltyBehaviour();
+        }
+      }
+    }
+
     const speed = interpolate(
       mapToPercentageInRange(this.team.strength, 800, 2130) + 1,
       1800,
@@ -159,5 +186,12 @@ export class Column extends Phaser.GameObjects.Container {
 
   stopMotion() {
     if (this.tween?.isDestroyed() !== true) this.tween?.pause();
+  }
+
+  stopFaulBehaviour() {
+    this.footballers.forEach((footballer) => {
+      footballer.stopFaulBehaviour();
+      footballer.stopPenaltyBehaviour();
+    });
   }
 }

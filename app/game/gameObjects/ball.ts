@@ -7,6 +7,8 @@ export class Ball extends Phaser.Physics.Arcade.Image {
   private eventEmitter: EventEmitter = new EventEmitter();
 
   goalAnimation!: Phaser.Tweens.Tween;
+  blinkTween!: Phaser.Tweens.Tween;
+
   anglurarVelocity = 800;
 
   isCorner = false;
@@ -140,6 +142,26 @@ export class Ball extends Phaser.Physics.Arcade.Image {
     this.setVelocity(0, 0);
     this.setAngularVelocity(0);
     this.setPosition(this.x, this.y);
+  }
+
+  startBlink() {
+    if (this.blinkTween) {
+      this.blinkTween.resume();
+      return;
+    }
+
+    this.blinkTween = this.scene.tweens.add({
+      targets: this,
+      alpha: 0,
+      repeat: -1,
+      yoyo: true,
+      duration: 150,
+    });
+  }
+
+  stopBlink() {
+    this.blinkTween?.pause();
+    this.setAlpha(1);
   }
 }
 

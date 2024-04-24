@@ -16,6 +16,11 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
 
   shadow: any;
 
+  isFaul = false;
+  isPenalty = false;
+
+  tweenForFaul!: Phaser.Tweens.Tween;
+
   constructor(
     scene: Phaser.Scene,
     x: number,
@@ -171,5 +176,53 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
           calculatePercentage(20, this.stadium.stadiumHeight)
       )
     );
+  }
+
+  startPenaltyBehaviour() {
+    this.isPenalty = true;
+
+    if (this.tweenForFaul) {
+      this.tweenForFaul.resume();
+      return;
+    }
+
+    this.tweenForFaul = this.scene.add.tween({
+      targets: this,
+      alpha: 0.2,
+      duration: 300,
+      yoyo: true,
+      repeat: -1,
+    });
+  }
+
+  startFaulBehaviour() {
+    this.isFaul = true;
+
+    if (this.tweenForFaul) {
+      this.tweenForFaul.resume();
+      return;
+    }
+
+    this.tweenForFaul = this.scene.add.tween({
+      targets: this,
+      alpha: 0.2,
+      duration: 300,
+      yoyo: true,
+      repeat: -1,
+    });
+  }
+
+  stopFaulBehaviour() {
+    this.isFaul = false;
+    if (this.tweenForFaul) this.tweenForFaul.pause();
+
+    this.setAlpha(0.75);
+  }
+
+  stopPenaltyBehaviour() {
+    this.isPenalty = false;
+    if (this.tweenForFaul) this.tweenForFaul.pause();
+
+    this.setAlpha(0.75);
   }
 }

@@ -9,6 +9,8 @@ import { Ball } from "../../gameObjects/ball";
 import { CameraMotion } from "../cameraMotion";
 import EventEmitter from "events";
 import { makeCornerArrangement } from "./corner";
+import { Foul } from "./foul";
+import { Penalty } from "./penalty";
 
 export class Match {
   eventEmitter: EventEmitter = new EventEmitter();
@@ -39,6 +41,8 @@ export class Match {
   fansSound!: Phaser.Sound.BaseSound;
 
   cameraMotion!: CameraMotion;
+
+  foul!: Foul;
 
   matchStatus:
     | "firtHalf"
@@ -104,6 +108,9 @@ export class Match {
     this.hostTeam.stopGoalKeeper();
     this.guestTeam.stopGoalKeeper();
 
+    this.hostTeam.stopFaulBehaviour();
+    this.guestTeam.stopFaulBehaviour();
+
     if (team === "host") {
       this.eventEmitter.emit("goal", "host");
       this.stadium.stadiumSurrounding.startFansSelebration("host");
@@ -151,6 +158,9 @@ export class Match {
     this.guestTeam.reset();
     this.hostTeam.resetGoalKeeper();
     this.guestTeam.resetGoalKeeper();
+
+    this.hostTeam.stopFaulBehaviour();
+    this.guestTeam.stopFaulBehaviour();
 
     this.ball.reset();
 
@@ -214,6 +224,9 @@ export class Match {
 
     this.hostTeam.stopGoalKeeper();
     this.guestTeam.stopGoalKeeper();
+
+    this.hostTeam.stopFaulBehaviour();
+    this.guestTeam.stopFaulBehaviour();
 
     this.hostTeam.hasBall = false;
     this.guestTeam.hasBall = false;
@@ -294,8 +307,6 @@ export class Match {
     teamWithBall: "host" | "guest",
     footballer: Footballer
   ) {
-    console.log(footballer.type);
-
     if (footballer.type === "defender") {
       // if ball touch defender from behind don't go to corner
       if (teamWithBall === "host") {
@@ -308,7 +319,7 @@ export class Match {
       }
 
       const random = getRandomNumber(1, 100);
-      if (random > 0) {
+      if (random > 70) {
         const side =
           footballer.getBounds().x < this.stadium.getBounds().centerX
             ? "left"
@@ -322,15 +333,52 @@ export class Match {
     return false;
   }
 
+  startFaulPreperation(whoIsFaul: "host" | "guest") {
+    this.isPlaying = false;
+    this.ball.stop();
+
+    this.hostTeam.stopMotion();
+    this.guestTeam.stopMotion();
+
+    this.hostTeam.stopGoalKeeper();
+    this.guestTeam.stopGoalKeeper();
+
+    this.foul = new Foul(this.scene, this, whoIsFaul);
+  }
+
+  startPenaltyPreperation(whoIsFaul: "host" | "guest") {
+    this.isPlaying = false;
+    this.ball.stop();
+
+    this.hostTeam.stopMotion();
+    this.guestTeam.stopMotion();
+
+    this.hostTeam.stopGoalKeeper();
+    this.guestTeam.stopGoalKeeper();
+
+    new Penalty(this.scene, this, whoIsFaul);
+  }
+
   catchBall(team: "host" | "guest", footballer: Footballer) {
-    // if (this.isGoal) return;
+    this.footballerWithBall = footballer;
+
     if (footballer.controllBall) return;
     if (!this.isPlaying) return;
 
-    // check corner possibility
-    this.ballGoesToCorner = this.checkCornerPosibbility(team, footballer);
+    //check penaly
+    if (footballer.isPenalty) {
+      this.startPenaltyPreperation(team);
+      return;
+    }
 
-    this.footballerWithBall = footballer;
+    // check faul
+    if (footballer.isFaul) {
+      this.startFaulPreperation(team);
+      return;
+    }
+
+    // check corner
+    this.ballGoesToCorner = this.checkCornerPosibbility(team, footballer);
 
     if (team === "host") {
       // for experimental mode
@@ -339,6 +387,7 @@ export class Match {
 
       // for classic mode
       this.hostTeam.stopMotion();
+      this.hostTeam.stopFaulBehaviour();
       this.guestTeam.startMotion();
     } else {
       // for experimental mode
@@ -348,6 +397,7 @@ export class Match {
       // for classic mode
       this.hostTeam.startMotion();
       this.guestTeam.stopMotion();
+      this.guestTeam.stopFaulBehaviour();
     }
 
     if (this.ballGoesToCorner) return;
@@ -399,6 +449,9 @@ export class Match {
     this.hostTeam.stopGoalKeeper();
     this.guestTeam.stopMotion();
     this.guestTeam.stopGoalKeeper();
+
+    this.hostTeam.stopFaulBehaviour();
+    this.guestTeam.stopFaulBehaviour();
 
     this.ball.stopOnCorner();
     this.eventEmitter.emit("corner");
@@ -461,5 +514,17 @@ export class Match {
 
   onFinishCorner(callback: () => void) {
     this.eventEmitter.on("finishCorner", callback);
+  }
+
+  onFinishFaul(callback: () => void) {
+    this.eventEmitter.on("finishFaul", callback);
+  }
+
+  onFaul(callback: () => void) {
+    this.eventEmitter.on("faul", callback);
+  }
+
+  onPenalty(callback: () => void) {
+    this.eventEmitter.on("penalty", callback);
   }
 }
