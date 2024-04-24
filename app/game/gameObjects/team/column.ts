@@ -131,7 +131,7 @@ export class Column extends Phaser.GameObjects.Container {
 
     if (this.type === "defender") {
       const penaltyChange = getRandomNumber(0, 100);
-      if (penaltyChange > 0) {
+      if (penaltyChange > 90) {
         if (this.footballers.length > 3) {
           this.footballers[
             getRandomNumber(
