@@ -20,7 +20,10 @@ export class SettingsModal extends MenuModal {
       0,
       -calculatePercentage(20, this.scene.game.canvas.height),
       ["1 min", "1.5 min", "2 min", "2.5 min", "3 min", "5 min"],
-      "3 min"
+      "2 min",
+      (value) => {
+        matchData.matchTime = parseFloat(value);
+      }
     );
     this.add(timeOptions);
 

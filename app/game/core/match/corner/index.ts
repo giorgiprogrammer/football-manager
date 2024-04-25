@@ -1,4 +1,4 @@
-import { matchData } from "@/app/config/matchData";
+import { matchData, matchStats } from "@/app/config/matchData";
 import { calculatePercentage, getRandomNumber } from "@/app/utils/math";
 import { Match } from "..";
 import { Footballer } from "@/app/game/gameObjects/team/footballer";
@@ -20,6 +20,10 @@ export function makeCornerArrangement(
   scene: Phaser.Scene,
   match: Match
 ) {
+  horizontalSide === "right"
+    ? matchStats.hostTeamStats.corners++
+    : matchStats.guesTeamStats.corners++;
+
   isFinishedCorner = false;
   if (horizontalSide === "left" && verticalSide === "top") {
     cornerFootballer = scene.add

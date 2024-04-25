@@ -1,6 +1,6 @@
 import { calculatePercentage } from "@/app/utils/math";
 import GamePlay from "./gameplay";
-import { matchData } from "@/app/config/matchData";
+import { matchData, matchStatsProps } from "@/app/config/matchData";
 import { tournamenrDataConfig } from "../config/tournamentDataConfig";
 import { tournamentManager } from "@/app/core/tournamentsManager/tournametsManager";
 import { MatchStatsModal } from "../ui/components/matchStatsModal";
@@ -199,27 +199,7 @@ export default class CavnasScene extends Phaser.Scene {
     this.startModal.add(weekText);
   }
 
-  openMatchStatsModal({
-    hostTeamStats,
-    guesTeamStats,
-  }: {
-    hostTeamStats: {
-      shoots: number;
-      shotsOnTarget: number;
-      ballPossession: number;
-      corners: number;
-      fouls: number;
-      score: number;
-    };
-    guesTeamStats: {
-      shoots: number;
-      shotsOnTarget: number;
-      ballPossession: number;
-      corners: number;
-      fouls: number;
-      score: number;
-    };
-  }) {
+  openMatchStatsModal({ hostTeamStats, guesTeamStats }: matchStatsProps) {
     this.matchStatsModal = new MatchStatsModal(
       this,
       this.game.canvas.width / 2,
@@ -228,7 +208,7 @@ export default class CavnasScene extends Phaser.Scene {
         title: "Statistics",
         hostTeamStats: {
           shoots: hostTeamStats.shoots,
-          shotsOnTarget: hostTeamStats.shotsOnTarget,
+          passes: hostTeamStats.passes,
           ballPossession: hostTeamStats.ballPossession,
           corners: hostTeamStats.corners,
           fouls: hostTeamStats.fouls,
@@ -236,7 +216,7 @@ export default class CavnasScene extends Phaser.Scene {
         },
         guesTeamStats: {
           shoots: guesTeamStats.shoots,
-          shotsOnTarget: guesTeamStats.shotsOnTarget,
+          passes: guesTeamStats.passes,
           ballPossession: guesTeamStats.ballPossession,
           corners: guesTeamStats.corners,
           fouls: guesTeamStats.fouls,

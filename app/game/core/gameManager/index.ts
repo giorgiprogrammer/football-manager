@@ -1,9 +1,14 @@
+import { matchData, matchStats } from "@/app/config/matchData";
 import CavnasScene from "../../scenes/canvasScene";
 import GamePlay from "../../scenes/gameplay";
 import { Match } from "../match";
+import { calculatePercentage } from "@/app/utils/math";
 
 export class GameManager {
   halfTimerIsPassed = false;
+
+  ballPossessionTimeForHostTeam = 0;
+  ballPossessionTimeForGuestTeam = 0;
 
   constructor(
     public gamePlayScene: GamePlay,
@@ -84,9 +89,16 @@ export class GameManager {
 
   addMatchTimer() {
     this.gamePlayScene.time.addEvent({
-      delay: 1200,
+      delay: Math.floor((((60 * matchData.matchTime) / 2) * 1000) / 45),
       callback: () => {
         if (!this.canvasScene.timerIsOnn) return;
+
+        if (this.match.hostTeam.hasBall) {
+          this.ballPossessionTimeForHostTeam++;
+        }
+        if (this.match.guestTeam.hasBall) {
+          this.ballPossessionTimeForGuestTeam++;
+        }
 
         if (this.canvasScene.timer >= 45 && this.halfTimerIsPassed === false) {
           if (this.match.footballerWithBall.controllBall) {
@@ -114,27 +126,22 @@ export class GameManager {
 
   halfTimeEnd() {
     this.canvasScene.timerIsOnn = false;
+
+    matchStats.guesTeamStats.ballPossession = Math.floor(
+      (this.ballPossessionTimeForGuestTeam / 45) * 100
+    );
+
+    matchStats.hostTeamStats.ballPossession = Math.floor(
+      (this.ballPossessionTimeForHostTeam / 45) * 100
+    );
+
     this.canvasScene.timer = 45;
     this.canvasScene.setTimerText(45);
 
-    this.canvasScene.openMatchStatsModal({
-      hostTeamStats: {
-        shoots: 0,
-        shotsOnTarget: 0,
-        ballPossession: 0,
-        corners: 0,
-        fouls: 0,
-        score: 0,
-      },
-      guesTeamStats: {
-        shoots: 0,
-        shotsOnTarget: 0,
-        ballPossession: 0,
-        corners: 0,
-        fouls: 0,
-        score: 0,
-      },
-    });
+    matchStats.guesTeamStats.score = this.canvasScene.guestScore;
+    matchStats.hostTeamStats.score = this.canvasScene.hostScore;
+
+    this.canvasScene.openMatchStatsModal(matchStats);
     this.halfTimerIsPassed = true;
 
     this.match.isPlaying = false;
