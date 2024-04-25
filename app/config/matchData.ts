@@ -10,6 +10,44 @@ export const matchData: MatchData = {
   isExtraTimes: false,
 };
 
+export const matchStats = {
+  hostTeamStats: {
+    shoots: 0,
+    passes: 0,
+    ballPossession: 0,
+    corners: 0,
+    fouls: 0,
+    score: 0,
+  },
+  guesTeamStats: {
+    shoots: 0,
+    passes: 0,
+    ballPossession: 0,
+    corners: 0,
+    fouls: 0,
+    score: 0,
+  },
+};
+
+export type matchStatsProps = {
+  hostTeamStats: {
+    shoots: number;
+    passes: number;
+    ballPossession: number;
+    corners: number;
+    fouls: number;
+    score: number;
+  };
+  guesTeamStats: {
+    shoots: number;
+    passes: number;
+    ballPossession: number;
+    corners: number;
+    fouls: number;
+    score: number;
+  };
+};
+
 export type MatchData = {
   hostTeam: TeamData;
   guestTeam: TeamData;

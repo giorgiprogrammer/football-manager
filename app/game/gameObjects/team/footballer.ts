@@ -7,6 +7,7 @@ import { Ball } from "../ball";
 import { Stadium } from "../stadium";
 import { Match } from "../../core/match";
 import { TeamTechniqueProperties } from "@/app/config/initialTeamsData";
+import { matchStats } from "@/app/config/matchData";
 
 export class Footballer extends Phaser.Physics.Arcade.Image {
   ball!: Ball;
@@ -136,6 +137,10 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
       footballer.getBounds().centerY + randomY
     );
 
+    this.isHost
+      ? matchStats.hostTeamStats.passes++
+      : matchStats.guesTeamStats.passes++;
+
     setTimeout(() => {
       this.controllBall = false;
       if (this.type !== "goalkeeper") this.setAlpha(0.75);
@@ -143,6 +148,10 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
   }
 
   shoot() {
+    this.isHost
+      ? matchStats.hostTeamStats.shoots++
+      : matchStats.guesTeamStats.shoots++;
+
     this.shootSound.play();
     this.ball.kick(
       interpolate(this.properties.shootSpeed, 140, 330),

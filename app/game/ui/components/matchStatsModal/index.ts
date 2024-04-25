@@ -10,7 +10,7 @@ export class MatchStatsModal extends Phaser.GameObjects.Container {
       title: string;
       hostTeamStats: {
         shoots: number;
-        shotsOnTarget: number;
+        passes: number;
         ballPossession: number;
         corners: number;
         fouls: number;
@@ -18,7 +18,7 @@ export class MatchStatsModal extends Phaser.GameObjects.Container {
       };
       guesTeamStats: {
         shoots: number;
-        shotsOnTarget: number;
+        passes: number;
         ballPossession: number;
         corners: number;
         fouls: number;
@@ -100,7 +100,7 @@ export class MatchStatsModal extends Phaser.GameObjects.Container {
       .text(
         -calculatePercentage(45, this.getBounds().width),
         -calculatePercentage(15, this.getBounds().height),
-        `Shots on Target: ${this.options.hostTeamStats.shotsOnTarget} `,
+        `Passes: ${this.options.hostTeamStats.passes} `,
         {
           fontFamily: "Silkscreen",
           fontSize: "18px",
@@ -192,7 +192,7 @@ export class MatchStatsModal extends Phaser.GameObjects.Container {
       .text(
         calculatePercentage(45, this.getBounds().width),
         -calculatePercentage(15, this.getBounds().height),
-        `Shots on Target: ${this.options.guesTeamStats.shotsOnTarget} `,
+        `Passes: ${this.options.guesTeamStats.passes} `,
         {
           fontFamily: "Silkscreen",
           fontSize: "18px",

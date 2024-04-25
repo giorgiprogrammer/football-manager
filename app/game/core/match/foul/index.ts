@@ -1,4 +1,4 @@
-import { matchData } from "@/app/config/matchData";
+import { matchData, matchStats } from "@/app/config/matchData";
 import { Match } from "..";
 import { calculatePercentage, getRandomNumber } from "@/app/utils/math";
 import { Ball } from "@/app/game/gameObjects/ball";
@@ -20,6 +20,10 @@ export class Foul {
     this.match.ball.startBlink();
     this.addGoalEventListener(this.scene, this.match.ball, this.match);
     this.addCollisions();
+
+    this.whoFouled === "host"
+      ? matchStats.hostTeamStats.fouls++
+      : matchStats.guesTeamStats.fouls++;
 
     setTimeout(() => {
       this.makeFoul();
