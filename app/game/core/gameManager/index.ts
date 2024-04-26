@@ -6,6 +6,9 @@ import { calculatePercentage } from "@/app/utils/math";
 
 export class GameManager {
   halfTimerIsPassed = false;
+  fullTimerIsPassed = false;
+  firstExtraTimeIsPassed = false;
+  secondExtraTimeIsPassed = false;
 
   ballPossessionTimeForHostTeam = 0;
   ballPossessionTimeForGuestTeam = 0;
@@ -107,6 +110,33 @@ export class GameManager {
           }
         }
 
+        if (this.canvasScene.timer >= 90 && this.fullTimerIsPassed === false) {
+          if (this.match.footballerWithBall.controllBall) {
+            this.fullTimeEnd();
+            return;
+          }
+        }
+
+        if (
+          this.canvasScene.timer >= 105 &&
+          this.firstExtraTimeIsPassed === false
+        ) {
+          if (this.match.footballerWithBall.controllBall) {
+            this.firstExtraTimeEnd();
+            return;
+          }
+        }
+
+        if (
+          this.canvasScene.timer >= 120 &&
+          this.secondExtraTimeIsPassed === false
+        ) {
+          if (this.match.footballerWithBall.controllBall) {
+            this.secondExtraTimeEnd();
+            return;
+          }
+        }
+
         this.canvasScene.timer++;
         this.canvasScene.setTimerText(this.canvasScene.timer);
       },
@@ -120,8 +150,30 @@ export class GameManager {
     this.canvasScene.timerIsOnn = true;
 
     setTimeout(() => {
-      this.gamePlayScene.match.startMatch();
+      this.gamePlayScene.match.startPlay("host");
     }, 1000);
+  }
+
+  // Ufter second half or full time or extra time
+  continueMatch() {
+    if (this.canvasScene.timer === 45) {
+      this.startSecondHalf();
+      return;
+    }
+
+    if (this.canvasScene.timer === 90) {
+      this.startFirstExtraTime();
+      return;
+    }
+
+    if (this.canvasScene.timer === 105) {
+      this.startSecondExtraTime();
+      return;
+    }
+  }
+
+  startPenalties() {
+    alert("penalties");
   }
 
   halfTimeEnd() {
@@ -148,9 +200,77 @@ export class GameManager {
     this.match.resetMatch();
   }
 
-  fullTimeEnd() {}
+  fullTimeEnd() {
+    this.canvasScene.timerIsOnn = false;
 
-  extraTimeEnd() {}
+    matchStats.guesTeamStats.ballPossession = Math.floor(
+      (this.ballPossessionTimeForGuestTeam / 90) * 100
+    );
+
+    matchStats.hostTeamStats.ballPossession = Math.floor(
+      (this.ballPossessionTimeForHostTeam / 90) * 100
+    );
+
+    this.canvasScene.timer = 90;
+    this.canvasScene.setTimerText(90);
+
+    matchStats.guesTeamStats.score = this.canvasScene.guestScore;
+    matchStats.hostTeamStats.score = this.canvasScene.hostScore;
+
+    this.canvasScene.openMatchStatsModal(matchStats);
+    this.fullTimerIsPassed = true;
+
+    this.match.isPlaying = false;
+    this.match.resetMatch();
+  }
+
+  firstExtraTimeEnd() {
+    this.canvasScene.timerIsOnn = false;
+
+    matchStats.guesTeamStats.ballPossession = Math.floor(
+      (this.ballPossessionTimeForGuestTeam / 105) * 100
+    );
+
+    matchStats.hostTeamStats.ballPossession = Math.floor(
+      (this.ballPossessionTimeForHostTeam / 105) * 100
+    );
+
+    this.canvasScene.timer = 105;
+    this.canvasScene.setTimerText(105);
+
+    matchStats.guesTeamStats.score = this.canvasScene.guestScore;
+    matchStats.hostTeamStats.score = this.canvasScene.hostScore;
+
+    this.canvasScene.openMatchStatsModal(matchStats);
+    this.firstExtraTimeIsPassed = true;
+
+    this.match.isPlaying = false;
+    this.match.resetMatch();
+  }
+
+  secondExtraTimeEnd() {
+    this.canvasScene.timerIsOnn = false;
+
+    matchStats.guesTeamStats.ballPossession = Math.floor(
+      (this.ballPossessionTimeForGuestTeam / 120) * 100
+    );
+
+    matchStats.hostTeamStats.ballPossession = Math.floor(
+      (this.ballPossessionTimeForHostTeam / 120) * 100
+    );
+
+    this.canvasScene.timer = 120;
+    this.canvasScene.setTimerText(120);
+
+    matchStats.guesTeamStats.score = this.canvasScene.guestScore;
+    matchStats.hostTeamStats.score = this.canvasScene.hostScore;
+
+    this.canvasScene.openMatchStatsModal(matchStats);
+    this.secondExtraTimeIsPassed = true;
+
+    this.match.isPlaying = false;
+    this.match.resetMatch();
+  }
 
   startSecondHalf() {
     this.canvasScene.timerIsOnn = true;
@@ -158,5 +278,24 @@ export class GameManager {
     this.match.matchStatus = "secondHalf";
 
     this.match.isPlaying = true;
+    this.gamePlayScene.match.startPlay("guest");
+  }
+
+  startFirstExtraTime() {
+    this.canvasScene.timerIsOnn = true;
+    this.canvasScene.matchStatsModal.destroy(true);
+    // this.match.matchStatus = "fullTime";
+
+    this.match.isPlaying = true;
+    this.gamePlayScene.match.startPlay("host");
+  }
+
+  startSecondExtraTime() {
+    this.canvasScene.timerIsOnn = true;
+    this.canvasScene.matchStatsModal.destroy(true);
+    // this.match.matchStatus = "fullTime";
+
+    this.match.isPlaying = true;
+    this.gamePlayScene.match.startPlay("guest");
   }
 }

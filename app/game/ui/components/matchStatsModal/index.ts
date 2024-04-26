@@ -75,7 +75,7 @@ export class MatchStatsModal extends Phaser.GameObjects.Container {
       })
       .on(Phaser.Input.Events.POINTER_DOWN, () => {
         const gamePlayScene = this.scene.scene.get("GamePlay") as GamePlay;
-        gamePlayScene.gameManager.startSecondHalf();
+        gamePlayScene.gameManager.continueMatch();
       });
     this.add(continueButton);
   }

@@ -120,10 +120,10 @@ export class Match {
     }
   }
 
-  startMatch() {
+  startPlay(teamWithBall: "host" | "guest") {
     this.refereeSound.play();
     this.stadium.stopLightAnimations();
-    this.startBallMotion("host");
+    this.startBallMotion(teamWithBall);
     this.hostTeam.startGoalKeeperMotion();
     this.guestTeam.startGoalKeeperMotion();
 
