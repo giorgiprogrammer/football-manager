@@ -17,6 +17,9 @@ export class Stadium extends Phaser.GameObjects.Container {
   leftTopLine!: Phaser.Physics.Arcade.Image;
   rightTopLine!: Phaser.Physics.Arcade.Image;
 
+  leftBottomLine!: Phaser.Physics.Arcade.Image;
+  rightBottomLine!: Phaser.Physics.Arcade.Image;
+
   //pharametres
   lineWidth = 3;
   lineColor = 0xf1ffff;
@@ -115,7 +118,7 @@ export class Stadium extends Phaser.GameObjects.Container {
     this.add(this.leftTopLine);
     this.leftCornerColliders.push(this.leftTopLine);
 
-    const leftBottomLine = this.scene.physics.add
+    this.leftBottomLine = this.scene.physics.add
       .image(-this.stadiumWidth / 2, this.stadiumHeight / 2, "default")
       .setDisplaySize(
         this.lineWidth,
@@ -124,8 +127,8 @@ export class Stadium extends Phaser.GameObjects.Container {
       .setOrigin(0, 1)
       .setImmovable(true)
       .setTint(this.lineColor);
-    this.add(leftBottomLine);
-    this.leftCornerColliders.push(leftBottomLine);
+    this.add(this.leftBottomLine);
+    this.leftCornerColliders.push(this.leftBottomLine);
 
     this.rightTopLine = this.scene.physics.add
       .image(
@@ -143,7 +146,7 @@ export class Stadium extends Phaser.GameObjects.Container {
     this.add(this.rightTopLine);
     this.rightCornerColliders.push(this.rightTopLine);
 
-    const rightBottomLine = this.scene.physics.add
+    this.rightBottomLine = this.scene.physics.add
       .image(
         this.stadiumWidth / 2 - this.lineWidth,
         this.stadiumHeight / 2,
@@ -156,8 +159,8 @@ export class Stadium extends Phaser.GameObjects.Container {
       .setOrigin(0, 1)
       .setImmovable(true)
       .setTint(this.lineColor);
-    this.add(rightBottomLine);
-    this.rightCornerColliders.push(rightBottomLine);
+    this.add(this.rightBottomLine);
+    this.rightCornerColliders.push(this.rightBottomLine);
 
     const leftSmallRectangle = this.graphics.strokeRect(
       -this.stadiumWidth / 2 + this.lineWidth / 2,

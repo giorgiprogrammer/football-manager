@@ -228,6 +228,9 @@ export class Match {
     this.hostTeam.stopFaulBehaviour();
     this.guestTeam.stopFaulBehaviour();
 
+    this.hostTeam.reset();
+    this.guestTeam.reset();
+
     this.hostTeam.hasBall = false;
     this.guestTeam.hasBall = false;
   }
@@ -473,28 +476,28 @@ export class Match {
     if (horizontalSide === "left" && verticalSide === "top") {
       this.ball.setPosition(
         this.stadium.leftTopLine.getBounds().centerX,
-        this.stadium.getBounds().centerY - this.stadium.stadiumHeight / 2
+        this.stadium.leftTopLine.getBounds().y
       );
     }
 
     if (horizontalSide === "right" && verticalSide === "top") {
       this.ball.setPosition(
         this.stadium.rightTopLine.getBounds().centerX,
-        this.stadium.getBounds().centerY - this.stadium.stadiumHeight / 2
+        this.stadium.rightTopLine.getBounds().y
       );
     }
 
     if (horizontalSide === "left" && verticalSide === "bottom") {
       this.ball.setPosition(
         this.stadium.leftTopLine.getBounds().centerX,
-        this.stadium.getBounds().centerY + this.stadium.stadiumHeight / 2
+        this.stadium.leftBottomLine.getBounds().bottom
       );
     }
 
     if (horizontalSide === "right" && verticalSide === "bottom") {
       this.ball.setPosition(
         this.stadium.rightTopLine.getBounds().centerX,
-        this.stadium.getBounds().centerY + this.stadium.stadiumHeight / 2
+        this.stadium.rightBottomLine.getBounds().bottom
       );
     }
 

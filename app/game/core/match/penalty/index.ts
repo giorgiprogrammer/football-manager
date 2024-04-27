@@ -36,13 +36,13 @@ export class Penalty {
       this.match.ball.setPosition(
         this.match.stadium.leftGoalPost.getBounds().centerX +
           calculatePercentage(13, this.match.stadium.stadiumWidth),
-        this.match.stadium.getBounds().centerY
+        this.match.stadium.leftGoalPost.getBounds().centerY
       );
     } else {
       this.match.ball.setPosition(
         this.match.stadium.rightGoalPost.getBounds().centerX -
           calculatePercentage(13, this.match.stadium.stadiumWidth),
-        this.match.stadium.getBounds().centerY
+        this.match.stadium.rightGoalPost.getBounds().centerY
       );
     }
 
