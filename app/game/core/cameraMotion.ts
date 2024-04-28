@@ -21,20 +21,27 @@ export class CameraMotion {
     this.scene.cameras.main.startFollow(this.ball, false, 0.009);
     this.scene.cameras.main.setZoom(this.camera_z_index);
 
-    this.scene.cameras.main.setBounds(
-      0,
-      0,
-      calculatePercentage(100, this.scene.game.canvas.width),
-      calculatePercentage(100, this.scene.game.canvas.height),
-      true
-    );
+    // alert(window.innerWidth);
+    // alert(window.innerHeight);
+
+    // this.scene.cameras.main.setBounds(
+    //   0,
+    //   0,
+    //   this.match.stadium.getBounds().width,
+    //   this.match.stadium.getBounds().height,
+    //   true
+    // );
 
     const centerX = this.ball.x;
 
     this.scene.events.on("update", () => {
       if (this.isCorner) {
         this.scene.cameras.main.setZoom(this.camera_z_index);
-        if (this.camera_z_index > this.startCameraZoomIndex - 0.3) {
+        if (
+          this.camera_z_index >
+          this.startCameraZoomIndex -
+            calculatePercentage(0.01, this.scene.game.canvas.width)
+        ) {
           this.camera_z_index -= 0.009;
         }
       }
@@ -47,11 +54,19 @@ export class CameraMotion {
         this.ball.x <
           centerX + calculatePercentage(25, this.stadium.stadiumWidth)
       ) {
-        if (this.camera_z_index > this.startCameraZoomIndex - 0.3) {
+        if (
+          this.camera_z_index >
+          this.startCameraZoomIndex -
+            calculatePercentage(0.01, this.scene.game.canvas.width)
+        ) {
           this.camera_z_index -= 0.009;
         }
       } else {
-        if (this.camera_z_index < this.startCameraZoomIndex + 0.25) {
+        if (
+          this.camera_z_index <
+          this.startCameraZoomIndex +
+            calculatePercentage(0.01, this.scene.game.canvas.width)
+        ) {
           this.camera_z_index += 0.009;
         }
       }

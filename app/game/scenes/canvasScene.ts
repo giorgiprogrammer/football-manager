@@ -106,7 +106,7 @@ export default class CavnasScene extends Phaser.Scene {
         matchData.hostTeam.name,
         {
           fontFamily: "Silkscreen",
-          fontSize: 25,
+          fontSize: calculatePercentage(2, this.game.canvas.width),
           color: "#DAF2E9",
           align: "right",
         }
@@ -123,7 +123,7 @@ export default class CavnasScene extends Phaser.Scene {
             `${index + 1}th`,
             {
               fontFamily: "Silkscreen",
-              fontSize: 20,
+              fontSize: calculatePercentage(1.5, this.game.canvas.width),
               color: "#EB5344",
               align: "right",
             }
@@ -140,7 +140,7 @@ export default class CavnasScene extends Phaser.Scene {
         matchData.guestTeam.name,
         {
           fontFamily: "Silkscreen",
-          fontSize: 25,
+          fontSize: calculatePercentage(2, this.game.canvas.width),
           color: "#DAF2E9",
           align: "left",
         }
@@ -157,7 +157,7 @@ export default class CavnasScene extends Phaser.Scene {
             `${index + 1}th`,
             {
               fontFamily: "Silkscreen",
-              fontSize: 20,
+              fontSize: calculatePercentage(1.5, this.game.canvas.width),
               color: "#EB5344",
               align: "left",
             }
@@ -170,7 +170,7 @@ export default class CavnasScene extends Phaser.Scene {
     const vsText = this.add
       .text(0, 0, "VS", {
         fontFamily: "Silkscreen",
-        fontSize: 30,
+        fontSize: calculatePercentage(2.5, this.game.canvas.width),
         color: "#FF7131",
         align: "center",
       })
@@ -220,7 +220,7 @@ export default class CavnasScene extends Phaser.Scene {
         `Week ${tournamenrDataConfig.week}`,
         {
           fontFamily: "Silkscreen",
-          fontSize: 27,
+          fontSize: calculatePercentage(3, this.game.canvas.width),
           color: "#DAF2E9",
           align: "center",
         }
@@ -287,7 +287,7 @@ export default class CavnasScene extends Phaser.Scene {
         `${this.hostScore} - ${this.guestScore}`,
         {
           fontFamily: "Silkscreen",
-          fontSize: 40,
+          fontSize: calculatePercentage(3, this.game.canvas.width),
           color: "#DAF2E9",
           align: "center",
         }
@@ -302,7 +302,7 @@ export default class CavnasScene extends Phaser.Scene {
         calculatePercentage(5, this.game.canvas.height),
         matchData.hostTeam.logoKey
       )
-      .setScale(0.8);
+      .setScale(calculatePercentage(0.05, this.game.canvas.width));
     this.topIndicators.add(hostTeamIcon);
 
     const guestTeam = this.add
@@ -312,7 +312,7 @@ export default class CavnasScene extends Phaser.Scene {
         calculatePercentage(5, this.game.canvas.height),
         matchData.guestTeam.logoKey
       )
-      .setScale(0.8);
+      .setScale(calculatePercentage(0.05, this.game.canvas.width));
     this.topIndicators.add(guestTeam);
 
     this.timerText = this.add
@@ -322,7 +322,7 @@ export default class CavnasScene extends Phaser.Scene {
         "0",
         {
           fontFamily: "Silkscreen",
-          fontSize: 35,
+          fontSize: calculatePercentage(2.4, this.game.canvas.width),
           color: "#DAF2E9",
           align: "center",
         }
