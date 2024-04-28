@@ -1,7 +1,11 @@
 import { MenuButton } from "../ui/menuButton";
 import { Selector } from "../ui/selector";
 import { TeamData, initialTeamsData } from "@/app/config/initialTeamsData";
-import { calculatePercentage } from "@/app/utils/math";
+import {
+  calculatePercentage,
+  interpolate,
+  mapToPercentageInRange,
+} from "@/app/utils/math";
 import { SettingsModal } from "../ui/components/menuModal/settingsModal";
 import { TacticsModal } from "../ui/components/menuModal/tacticsModal";
 import { deepCopy } from "@/app/utils/helperFunctions";
@@ -53,10 +57,45 @@ export default class Menu extends Phaser.Scene {
     });
 
     this.addAnimationEffectImage();
-    this.getTeamPositionsDataFromTournament();
+    this.setDefaultParametersforTeams();
   }
 
-  getTeamPositionsDataFromTournament() {}
+  setDefaultParametersforTeams() {
+    // this.team!.strength = interpolate(this.indicatorValue, 800, 2130);
+    matchData.hostTeam.techniqueProperties.goalKeeperMotionSpeed =
+      mapToPercentageInRange(matchData.hostTeam.strength, 800, 2130);
+    matchData.hostTeam.techniqueProperties.passAccuracy =
+      mapToPercentageInRange(matchData.hostTeam.strength, 800, 2130);
+    matchData.hostTeam.techniqueProperties.passSpeeed = mapToPercentageInRange(
+      matchData.hostTeam.strength,
+      800,
+      2130
+    );
+    matchData.hostTeam.techniqueProperties.shootSpeed = mapToPercentageInRange(
+      matchData.hostTeam.strength,
+      800,
+      2130
+    );
+    matchData.hostTeam.techniqueProperties.shootAccuracy =
+      mapToPercentageInRange(matchData.hostTeam.strength, 800, 2130);
+    // for Gues Team
+    matchData.guestTeam.techniqueProperties.goalKeeperMotionSpeed =
+      mapToPercentageInRange(matchData.guestTeam.strength, 800, 2130);
+    matchData.guestTeam.techniqueProperties.passAccuracy =
+      mapToPercentageInRange(matchData.guestTeam.strength, 800, 2130);
+    matchData.guestTeam.techniqueProperties.passSpeeed = mapToPercentageInRange(
+      matchData.guestTeam.strength,
+      800,
+      2130
+    );
+    matchData.guestTeam.techniqueProperties.shootSpeed = mapToPercentageInRange(
+      matchData.guestTeam.strength,
+      800,
+      2130
+    );
+    matchData.guestTeam.techniqueProperties.shootAccuracy =
+      mapToPercentageInRange(matchData.guestTeam.strength, 800, 2130);
+  }
 
   addAnimationEffectImage() {
     this.backgroundAniamtionEffectImage = this.add

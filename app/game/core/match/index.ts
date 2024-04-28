@@ -127,6 +127,12 @@ export class Match {
     this.hostTeam.startGoalKeeperMotion();
     this.guestTeam.startGoalKeeperMotion();
 
+    if (teamWithBall === "host") {
+      this.hostTeam.hasBall = true;
+    } else {
+      this.guestTeam.hasBall = true;
+    }
+
     this.isPlaying = true;
   }
 
@@ -161,6 +167,12 @@ export class Match {
 
     this.hostTeam.stopFaulBehaviour();
     this.guestTeam.stopFaulBehaviour();
+
+    if (ballOwnerTeam === "host") {
+      this.hostTeam.hasBall = true;
+    } else {
+      this.guestTeam.hasBall = true;
+    }
 
     this.ball.reset();
 

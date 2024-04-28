@@ -35,14 +35,20 @@ export default class GamePlay extends Phaser.Scene {
   addBackground() {
     this.add
       .image(this.game.canvas.width / 2, this.game.canvas.height / 2, "default")
-      .setDisplaySize(
-        this.match.stadium.getBounds().width +
-          calculatePercentage(10, this.match.stadium.getBounds().width),
-        this.match.stadium.getBounds().height +
-          calculatePercentage(10, this.match.stadium.getBounds().height)
-      )
+      .setDisplaySize(1450, 780)
       .setTint(0x4d3916)
       .setDepth(-90);
+
+    // this.add
+    //   .image(
+    //     this.game.canvas.width / 2,
+    //     this.game.canvas.height / 2,
+    //     "stadium-surrounding"
+    //   )
+    //   .setDisplaySize(2450, 1280)
+    //   .setTint(0x4d3916)
+    //   .setScale(3.1)
+    //   .setDepth(-100);
 
     // const topBorder = this.add
     //   .image(

@@ -164,10 +164,10 @@ export class GameManager {
   startMatch() {
     this.canvasScene.startModal.setVisible(false);
     this.canvasScene.topIndicators.setVisible(true);
-    this.canvasScene.timerIsOnn = true;
 
     setTimeout(() => {
       this.gamePlayScene.match.startPlay("host");
+      this.canvasScene.timerIsOnn = true;
     }, 1000);
   }
 
@@ -195,10 +195,6 @@ export class GameManager {
       this.canvasScene.matchStatsModal.destroy(true);
       this.match.startPenalties();
     }
-  }
-
-  startPenalties() {
-    alert("penalties");
   }
 
   halfTimeEnd() {
@@ -243,7 +239,6 @@ export class GameManager {
     matchStats.hostTeamStats.score = this.canvasScene.hostScore;
 
     if (matchData.isExtraTimes) {
-      alert(this.canvasScene.hostScore + " : " + this.canvasScene.guestScore);
       if (this.canvasScene.guestScore === this.canvasScene.hostScore) {
         this.canvasScene.openMatchStatsModal(matchStats, false);
         this.fullTimerIsPassed = true;
@@ -351,6 +346,10 @@ export class GameManager {
     this.match.isPlaying = false;
     this.match.resetMatch();
     this.canvasScene.openMatchStatsModal(matchStats, true);
+
+    setTimeout(() => {
+      this.match.ball.reset();
+    }, 1000);
 
     insertMatchResult(
       tournamenrDataConfig.guestTeam,

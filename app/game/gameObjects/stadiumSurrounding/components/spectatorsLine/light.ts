@@ -46,7 +46,7 @@ export class Light extends Phaser.GameObjects.Container {
 
   addRightBottom() {
     this.triangle = this.scene.add
-      .image(-50, -50, "triangle")
+      .image(-80, -80, "triangle")
       .setOrigin(0.5)
       .setFlipY(true)
       .setAngle(-45)
@@ -55,7 +55,7 @@ export class Light extends Phaser.GameObjects.Container {
     this.add(this.triangle);
 
     const light = this.scene.add
-      .image(0, 0, "default")
+      .image(0, 0, "scene-light")
       .setTint(0xf06e0c)
       .setAngle(-45)
       .setDisplaySize(30, 36)
@@ -65,7 +65,7 @@ export class Light extends Phaser.GameObjects.Container {
 
   addLeftBottom() {
     this.triangle = this.scene.add
-      .image(50, -50, "triangle")
+      .image(80, -80, "triangle")
       .setOrigin(0.5)
       .setFlipY(true)
       .setAngle(45)
@@ -74,7 +74,7 @@ export class Light extends Phaser.GameObjects.Container {
     this.add(this.triangle);
 
     const light = this.scene.add
-      .image(0, 0, "default")
+      .image(0, 0, "scene-light")
       .setTint(0xf06e0c)
       .setAngle(45)
       .setDisplaySize(30, 36)
@@ -84,7 +84,7 @@ export class Light extends Phaser.GameObjects.Container {
 
   addRightTop() {
     this.triangle = this.scene.add
-      .image(-50, 50, "triangle")
+      .image(-80, 80, "triangle")
       .setOrigin(0.5)
       .setAngle(45)
       .setAlpha(0.4)
@@ -92,7 +92,7 @@ export class Light extends Phaser.GameObjects.Container {
     this.add(this.triangle);
 
     const light = this.scene.add
-      .image(0, 0, "default")
+      .image(0, 0, "scene-light-bottom")
       .setTint(0xf06e0c)
       .setAngle(45)
       .setDisplaySize(30, 36)
@@ -102,7 +102,7 @@ export class Light extends Phaser.GameObjects.Container {
 
   addLeftTop() {
     this.triangle = this.scene.add
-      .image(50, 50, "triangle")
+      .image(80, 80, "triangle")
       .setOrigin(0.5)
       .setAngle(-45)
       .setAlpha(0.4)
@@ -110,7 +110,7 @@ export class Light extends Phaser.GameObjects.Container {
     this.add(this.triangle);
 
     const light = this.scene.add
-      .image(0, 0, "default")
+      .image(0, 0, "scene-light-bottom")
       .setTint(0xf06e0c)
       .setAngle(-45)
       .setDisplaySize(30, 36)

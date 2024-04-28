@@ -18,7 +18,7 @@ export class SettingsModal extends MenuModal {
     const timeOptions = new SimpleSelector(
       this.scene,
       0,
-      -calculatePercentage(20, this.scene.game.canvas.height),
+      -calculatePercentage(25, this.scene.game.canvas.height),
       ["1 min", "1.5 min", "2 min", "2.5 min", "3 min", "5 min"],
       "2 min",
       (value) => {
@@ -30,7 +30,7 @@ export class SettingsModal extends MenuModal {
     const stadiumOptions = new SimpleSelector(
       this.scene,
       0,
-      0,
+      -calculatePercentage(5, this.scene.game.canvas.height),
       ["Small", "Medium", "Big", "Mega"],
       "Medium"
     );
@@ -39,7 +39,7 @@ export class SettingsModal extends MenuModal {
     const playStyleOptions = new SimpleSelector(
       this.scene,
       0,
-      calculatePercentage(20, this.scene.game.canvas.height),
+      calculatePercentage(15, this.scene.game.canvas.height),
       ["classic", "experimental"],
       "classic",
       (value) => {
@@ -51,7 +51,7 @@ export class SettingsModal extends MenuModal {
     const extraTimeOption = new SimpleSelector(
       this.scene,
       0,
-      calculatePercentage(40, this.scene.game.canvas.height),
+      calculatePercentage(30, this.scene.game.canvas.height),
       ["With Extra Times", "No Extra Times"],
       "No Extra Times",
       (value) => {

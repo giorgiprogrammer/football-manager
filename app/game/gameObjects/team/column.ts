@@ -18,6 +18,8 @@ export class Column extends Phaser.GameObjects.Container {
 
   tween!: Phaser.Tweens.Tween;
 
+  alreadyStartFaulBehaviour = false;
+
   constructor(
     scene: Phaser.Scene,
     x: number,
@@ -121,26 +123,63 @@ export class Column extends Phaser.GameObjects.Container {
 
   startMotion(distance: number) {
     if (this.type === "midfielder") {
-      const foulChance = getRandomNumber(0, 100);
-      if (foulChance > 80) {
-        this.footballers[
-          getRandomNumber(0, this.footballers.length - 1)
-        ].startFaulBehaviour();
+      if (matchData.mathMode === "classic") {
+        const foulChance = getRandomNumber(0, 100);
+        if (foulChance > 80) {
+          this.footballers[
+            getRandomNumber(0, this.footballers.length - 1)
+          ].startFaulBehaviour();
+        }
+      }
+
+      if (matchData.mathMode === "experimental") {
+        if (!this.alreadyStartFaulBehaviour) {
+          this.alreadyStartFaulBehaviour = true;
+
+          const foulChance = getRandomNumber(0, 100);
+          if (foulChance > 80) {
+            this.footballers[
+              getRandomNumber(0, this.footballers.length - 1)
+            ].startFaulBehaviour();
+          }
+        }
       }
     }
 
     if (this.type === "defender") {
-      const penaltyChange = getRandomNumber(0, 100);
-      if (penaltyChange > 90) {
-        if (this.footballers.length > 3) {
-          this.footballers[
-            getRandomNumber(
-              Math.floor((this.footballers.length - 1) / 2),
-              Math.floor((this.footballers.length - 1) / 2 + 1)
-            )
-          ].startPenaltyBehaviour();
-        } else {
-          this.footballers[1].startPenaltyBehaviour();
+      if (matchData.mathMode === "classic") {
+        const penaltyChange = getRandomNumber(0, 100);
+        if (penaltyChange > 90) {
+          if (this.footballers.length > 3) {
+            this.footballers[
+              getRandomNumber(
+                Math.floor((this.footballers.length - 1) / 2),
+                Math.floor((this.footballers.length - 1) / 2 + 1)
+              )
+            ].startPenaltyBehaviour();
+          } else {
+            this.footballers[1].startPenaltyBehaviour();
+          }
+        }
+      }
+
+      if (matchData.mathMode === "experimental") {
+        if (!this.alreadyStartFaulBehaviour) {
+          this.alreadyStartFaulBehaviour = true;
+
+          const penaltyChange = getRandomNumber(0, 100);
+          if (penaltyChange > 90) {
+            if (this.footballers.length > 3) {
+              this.footballers[
+                getRandomNumber(
+                  Math.floor((this.footballers.length - 1) / 2),
+                  Math.floor((this.footballers.length - 1) / 2 + 1)
+                )
+              ].startPenaltyBehaviour();
+            } else {
+              this.footballers[1].startPenaltyBehaviour();
+            }
+          }
         }
       }
     }
@@ -185,6 +224,7 @@ export class Column extends Phaser.GameObjects.Container {
   }
 
   stopMotion() {
+    this.alreadyStartFaulBehaviour = false;
     if (this.tween?.isDestroyed() !== true) this.tween?.pause();
   }
 

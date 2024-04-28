@@ -40,6 +40,7 @@ export default class Preload extends Phaser.Scene {
     this.load.image("menu-close", "image/ui/menu-close.png");
     this.load.image("tactics-stadium", "image/ui/tactics-stadium.png");
     this.load.image("stadium-surrounding", "image/ui/stadium-surrounding.png");
+    // this.load.image("stadium-surrounding", "image/ui/stadium-surrounding.jpg");
     this.load.image("triangle", "image/ui/triangle.png");
     this.load.image("roof", "image/ui/roof.jpg");
     this.load.image("city", "image/ui/city.jpg");
@@ -47,6 +48,8 @@ export default class Preload extends Phaser.Scene {
     this.load.image("home-button", "image/ui/home-button.png");
     this.load.image("done-icon", "image/ui/done.png");
     this.load.image("wrong-icon", "image/ui/wrong.png");
+    this.load.image("scene-light", "image/ui/scene-light.png");
+    this.load.image("scene-light-bottom", "image/ui/scene-light-bottom.png");
 
     // Fans
     this.load.image("fan", "image/ui/fan.png");
@@ -54,7 +57,6 @@ export default class Preload extends Phaser.Scene {
     this.load.image("fanFromBottomSide", "image/ui/fanFromBottomSide.png");
     this.load.image("fanFromTopSide", "image/ui/fanFromTopSide.png");
     this.load.image("fanFromRightSide", "image/ui/fanFromRightSide.png");
-
     // Nations
     this.load.image("algeria", "image/teamLogos/nations/Algeria.png");
     this.load.image("argentina", "image/teamLogos/nations/Argentina.png");
