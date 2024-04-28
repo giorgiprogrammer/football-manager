@@ -2,7 +2,6 @@ import { Team } from "../../gameObjects/team/team";
 import { CollisionDetections } from "../collisionDetections";
 import { Footballer } from "../../gameObjects/team/footballer";
 import { calculatePercentage, getRandomNumber } from "@/app/utils/math";
-import { insertMatchResult } from "@/app/services/supabase/tournamentApi";
 import { MatchData } from "@/app/config/matchData";
 import { Stadium } from "../../gameObjects/stadium";
 import { Ball } from "../../gameObjects/ball";
@@ -11,6 +10,7 @@ import EventEmitter from "events";
 import { makeCornerArrangement } from "./corner";
 import { Foul } from "./foul";
 import { Penalty } from "./penalty";
+import { Penalties } from "./penalties";
 
 export class Match {
   eventEmitter: EventEmitter = new EventEmitter();
@@ -285,25 +285,7 @@ export class Match {
     this.hostTeam.goalKeeperTween?.stop();
     this.guestTeam.goalKeeperTween?.stop();
 
-    // this.isGoal = false;
-
     this.isPlaying = false;
-
-    // insertMatchResult(
-    //   tournamenrDataConfig.guestTeam,
-    //   tournamenrDataConfig.hostTeam,
-    //   this.hostTeamScore,
-    //   this.guestTeamScore,
-    //   tournamenrDataConfig.division,
-    //   tournamenrDataConfig.week
-    // ).then(
-    //   (res) => {
-    //     console.log(res);
-    //   },
-    //   (err) => {
-    //     console.log(err);
-    //   }
-    // );
   }
 
   checkCornerPosibbility(
@@ -529,5 +511,16 @@ export class Match {
 
   onPenalty(callback: () => void) {
     this.eventEmitter.on("penalty", callback);
+  }
+
+  onFinishPenalties(callback: (winnerTeam: "host" | "guest") => void) {
+    this.eventEmitter.on("finishPenalties", callback);
+  }
+
+  startPenalties() {
+    this.hostTeam.hideFootballers();
+    this.guestTeam.hideFootballers();
+
+    new Penalties(this.scene, this);
   }
 }

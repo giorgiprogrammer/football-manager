@@ -24,6 +24,9 @@ export default class CavnasScene extends Phaser.Scene {
 
   timerIsOnn = false;
 
+  hostTeamPelantieIcons: Array<Phaser.GameObjects.Image> = [];
+  guestTeamPelantieIcons: Array<Phaser.GameObjects.Image> = [];
+
   constructor() {
     super("CanvasScene");
   }
@@ -34,6 +37,33 @@ export default class CavnasScene extends Phaser.Scene {
     this.addTopIndicators();
     // this.addMenuButton();
     this.addStartModal();
+  }
+
+  addPenaltiesSign(team: "host" | "guest", status: "done" | "wrong") {
+    if (team === "host") {
+      const posX =
+        50 +
+        calculatePercentage(4, this.game.canvas.width) *
+          this.hostTeamPelantieIcons.length;
+
+      const icon = this.add
+        .image(posX, 50, status === "done" ? "done-icon" : "wrong-icon")
+        .setDisplaySize(50, 50);
+
+      this.hostTeamPelantieIcons.push(icon);
+    } else {
+      const posX =
+        this.game.canvas.width -
+        50 -
+        calculatePercentage(4, this.game.canvas.width) *
+          this.guestTeamPelantieIcons.length;
+
+      const icon = this.add
+        .image(posX, 50, status === "done" ? "done-icon" : "wrong-icon")
+        .setDisplaySize(50, 50);
+
+      this.guestTeamPelantieIcons.push(icon);
+    }
   }
 
   async addStartModal() {
@@ -199,11 +229,15 @@ export default class CavnasScene extends Phaser.Scene {
     this.startModal.add(weekText);
   }
 
-  openMatchStatsModal({ hostTeamStats, guesTeamStats }: matchStatsProps) {
+  openMatchStatsModal(
+    { hostTeamStats, guesTeamStats }: matchStatsProps,
+    finishMatch: boolean
+  ) {
     this.matchStatsModal = new MatchStatsModal(
       this,
       this.game.canvas.width / 2,
       this.game.canvas.height / 2,
+      finishMatch,
       {
         title: "Statistics",
         hostTeamStats: {

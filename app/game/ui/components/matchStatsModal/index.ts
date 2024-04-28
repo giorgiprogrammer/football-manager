@@ -6,6 +6,7 @@ export class MatchStatsModal extends Phaser.GameObjects.Container {
     scene: Phaser.Scene,
     x: number,
     y: number,
+    public isGameFinished: boolean,
     public options: {
       title: string;
       hostTeamStats: {
@@ -49,35 +50,66 @@ export class MatchStatsModal extends Phaser.GameObjects.Container {
       .setDisplaySize(calculatePercentage(4, this.getBounds().width), 4);
     this.add(vsLine);
 
-    const continueButton = this.scene.add
-      .image(
-        0,
-        calculatePercentage(50, this.getBounds().height),
-        "start-button"
-      )
-      .setDisplaySize(
-        calculatePercentage(8, this.getBounds().width),
-        calculatePercentage(8, this.getBounds().width)
-      )
-      .setOrigin(0.5)
-      .setInteractive({ cursor: "pointer" })
-      .on(Phaser.Input.Events.POINTER_OVER, () => {
-        continueButton.setDisplaySize(
-          calculatePercentage(9, this.getBounds().width),
-          calculatePercentage(9, this.getBounds().width)
-        );
-      })
-      .on(Phaser.Input.Events.POINTER_OUT, () => {
-        continueButton.setDisplaySize(
+    if (this.isGameFinished) {
+      const homeButton = this.scene.add
+        .image(
+          0,
+          calculatePercentage(50, this.getBounds().height),
+          "home-button"
+        )
+        .setDisplaySize(
           calculatePercentage(8, this.getBounds().width),
           calculatePercentage(8, this.getBounds().width)
-        );
-      })
-      .on(Phaser.Input.Events.POINTER_DOWN, () => {
-        const gamePlayScene = this.scene.scene.get("GamePlay") as GamePlay;
-        gamePlayScene.gameManager.continueMatch();
-      });
-    this.add(continueButton);
+        )
+        .setOrigin(0.5)
+        .setInteractive({ cursor: "pointer" })
+        .on(Phaser.Input.Events.POINTER_OVER, () => {
+          homeButton.setDisplaySize(
+            calculatePercentage(9, this.getBounds().width),
+            calculatePercentage(9, this.getBounds().width)
+          );
+        })
+        .on(Phaser.Input.Events.POINTER_OUT, () => {
+          homeButton.setDisplaySize(
+            calculatePercentage(8, this.getBounds().width),
+            calculatePercentage(8, this.getBounds().width)
+          );
+        })
+        .on(Phaser.Input.Events.POINTER_DOWN, () => {
+          document.location.href = "/admin";
+        });
+      this.add(homeButton);
+    } else {
+      const continueButton = this.scene.add
+        .image(
+          0,
+          calculatePercentage(50, this.getBounds().height),
+          "start-button"
+        )
+        .setDisplaySize(
+          calculatePercentage(8, this.getBounds().width),
+          calculatePercentage(8, this.getBounds().width)
+        )
+        .setOrigin(0.5)
+        .setInteractive({ cursor: "pointer" })
+        .on(Phaser.Input.Events.POINTER_OVER, () => {
+          continueButton.setDisplaySize(
+            calculatePercentage(9, this.getBounds().width),
+            calculatePercentage(9, this.getBounds().width)
+          );
+        })
+        .on(Phaser.Input.Events.POINTER_OUT, () => {
+          continueButton.setDisplaySize(
+            calculatePercentage(8, this.getBounds().width),
+            calculatePercentage(8, this.getBounds().width)
+          );
+        })
+        .on(Phaser.Input.Events.POINTER_DOWN, () => {
+          const gamePlayScene = this.scene.scene.get("GamePlay") as GamePlay;
+          gamePlayScene.gameManager.continueMatch();
+        });
+      this.add(continueButton);
+    }
   }
 
   addHostTeamIndicators() {
