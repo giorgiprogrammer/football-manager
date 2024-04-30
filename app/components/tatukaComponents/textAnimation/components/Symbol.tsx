@@ -21,7 +21,7 @@ export default function Symbol({
   animationName?: string;
   onAnimationEnd?: AnimationEventHandler<HTMLLIElement> | undefined;
 }) {
-  const className = clsx(`symbol`, animationName);
+  const className = clsx(`symbol custom-font-1`, animationName);
 
   return (
     <li

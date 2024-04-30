@@ -1,0 +1,65 @@
+.simulatorPage {
+  position: fixed;
+  width: 100vw;
+  height: 100vw;
+
+  top: 0;
+  left: 0;
+
+  background-color: rgb(106, 255, 126);
+  opacity: 0;
+
+  animation-delay: 0.9s;
+  animation-name: show-animation;
+  animation-duration: 0.4s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+
+  display: flex;
+  justify-content: center;
+}
+
+@keyframes show-animation {
+  from {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+/* Scroll */
+/* width */
+.feed::-webkit-scrollbar {
+  width: 0px;
+}
+
+/* Track */
+.feed::-webkit-scrollbar-track {
+  background: #51ec66;
+  opacity: 0;
+}
+
+/* Handle */
+.feed::-webkit-scrollbar-thumb {
+  background: #4300fc;
+}
+
+/* Handle on hover */
+.feed::-webkit-scrollbar-thumb:hover {
+  background: #b91010;
+}
+
+.feed {
+  width: 50vw;
+  height: 100vh;
+  background-color: rgb(255, 255, 255);
+
+  overflow-y: scroll;
+  padding-top: 10px;
+
+  padding-left: 20px;
+  padding-right: 20px;
+}
