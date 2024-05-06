@@ -13,7 +13,7 @@ export default function HomePage() {
         </h1>
         <h2 className="custom-font-2 text-lg sm:text-sm sm:leading-5 mt-2">
           This platform caters to both game enthusiasts and football fans. Soon,
-          you'll be able to enjoy not just private football manager games
+          you will be able to enjoy not just private football manager games
           against the computer, but also engage in online multiplayer matches.{" "}
           <br></br> <br></br> Currently, we offer a simulator where you can
           select teams, adjust parameters, and watch the games unfold, seeing

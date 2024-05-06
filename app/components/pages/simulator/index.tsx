@@ -135,8 +135,8 @@ export default function SimulatorPage() {
           <br></br>
           2. tournament
           <br></br>
-          If you choose a quick match, you'll need to fill out a form. You'll
-          input the names of the first and second teams, set parameters,
+          If you choose a quick match, you will need to fill out a form. You
+          will input the names of the first and second teams, set parameters,
           tactics, and icons before clicking the start button
         </p>
 
@@ -180,9 +180,9 @@ export default function SimulatorPage() {
             <br></br>
             4.Shoot accuracy
             <br></br>
-            5.Players' motion speed
+            5.Players motion speed
             <br></br>
-            6.Goalkeeper's motion speed
+            6.Goalkeepers motion speed
             <br></br>
             7.Pass delay
             <br></br>
