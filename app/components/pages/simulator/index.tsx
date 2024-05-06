@@ -244,7 +244,7 @@ export default function SimulatorPage() {
           for content creators on social media platforms
         </p>
 
-        <div className=" w-[10%] sm:w-[2%] fixed z-50 left-[0%] sm:left-[25%] bottom-[10%] sm:bottom-[40px]">
+        <div className="w-[10%] sm:w-[2%] fixed z-50 left-[90%] sm:left-[25%] bottom-[10%] sm:bottom-[40px]">
           <MouseScrollIndicator />
         </div>
       </div>
