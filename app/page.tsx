@@ -1,8 +1,9 @@
-import PageLayout from "./components/layout";
-import Header from "./components/layout/header/header";
-import HomePage from "./components/pages/homePage";
-
 import { Inter, Roboto } from "next/font/google";
+import Bound from "./components/global/bound";
+import WebIndicators from "./components/global/webIndicators";
+import { Modal } from "./components/modal";
+import HomePage from "./components/pages/homePage";
+import AppProvider, { AppContext } from "./context/appContext";
 
 const roboto = Roboto({
   weight: "400",
@@ -12,9 +13,9 @@ const roboto = Roboto({
 export default function Home() {
   return (
     <main className={roboto.className}>
-      <PageLayout>
+      <AppProvider>
         <HomePage />
-      </PageLayout>
+      </AppProvider>
     </main>
   );
 }

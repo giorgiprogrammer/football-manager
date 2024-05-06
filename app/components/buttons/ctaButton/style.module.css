@@ -1,0 +1,30 @@
+.ctaButton {
+  padding-left: 8px;
+  padding-right: 8px;
+
+  padding-bottom: 5px;
+  padding-top: 5px;
+
+  transition: 0.3s;
+
+  border-color: #ffa700;
+  background-color: #ffa700;
+  color: rgba(119, 4, 0, 0.877);
+
+  box-shadow: -4px -4px 0px 0px rgb(85, 45, 0);
+}
+
+.ctaButton:hover {
+  color: rgb(44, 44, 44);
+  box-shadow: 4px 4px 0px 0px rgb(85, 45, 0);
+}
+
+@media screen and (min-device-width: 0px) and (max-device-width: 580px) {
+  .ctaButton {
+    padding-left: 15px;
+    padding-right: 15px;
+
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+}

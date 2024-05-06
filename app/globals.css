@@ -1,7 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Faster+One&family=Rubik+Doodle+Shadow&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Workbench&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Workbench&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Jersey+15+Charted&family=Workbench&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Jersey+15+Charted&family=Saira+Condensed:wght@100;200;300;400;500;600;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Workbench&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -16,16 +14,11 @@ body {
   overflow-x: hidden;
 }
 
-.custom-font {
-  font-family: "Faster One", system-ui;
+.custom-font-1 {
+  font-family: "Jersey 15 Charted", sans-serif;
 }
-
 .custom-font-2 {
-  font-family: "Workbench", sans-serif;
-}
-
-.custom-font-3 {
-  font-family: "Arvo", serif;
+  font-family: "Space Mono", monospace;
 }
 
 .box-shadow {

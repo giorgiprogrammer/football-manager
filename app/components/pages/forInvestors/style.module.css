@@ -1,0 +1,84 @@
+.forInvestors {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+
+  top: 0;
+  left: 0;
+
+  background-color: rgb(228, 228, 228);
+  opacity: 0;
+
+  animation-delay: 0.9s;
+  animation-name: show-animation;
+  animation-duration: 0.4s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+
+  display: flex;
+  justify-content: center;
+}
+
+@keyframes show-animation {
+  from {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+/* Scroll */
+/* width */
+.feed::-webkit-scrollbar {
+  width: 0px;
+}
+
+/* Track */
+.feed::-webkit-scrollbar-track {
+  background: #51ec66;
+  opacity: 0;
+}
+
+/* Handle */
+.feed::-webkit-scrollbar-thumb {
+  background: #4300fc;
+}
+
+/* Handle on hover */
+.feed::-webkit-scrollbar-thumb:hover {
+  background: #b91010;
+}
+
+.shadow {
+  box-shadow: 10px 10px 0px 0px rgb(51, 51, 51);
+}
+
+.feed {
+  width: 50vw;
+  height: 100vh;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+
+  text-align: center;
+  text-wrap: balance;
+
+  overflow-y: scroll;
+  padding-top: 10px;
+
+  padding-left: 20px;
+  padding-right: 20px;
+
+  padding-bottom: 30px;
+}
+
+@media screen and (min-device-width: 0px) and (max-device-width: 580px) {
+  .feed {
+    width: 100vw;
+  }
+}
