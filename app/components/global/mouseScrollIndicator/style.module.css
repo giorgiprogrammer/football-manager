@@ -1,0 +1,39 @@
+.scrollDown {
+  border: 10px solid #ff9531;
+  border-radius: 90px;
+
+  opacity: 0.8;
+
+  z-index: 10;
+}
+
+.scrollDown::before {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  content: "";
+  width: 16px;
+  height: 16px;
+  margin-left: -8px;
+  background-color: #ffffff;
+  border-radius: 100%;
+  -webkit-animation: 2s infinite scrollDown;
+  -moz-animation: 2s infinite scrollDown;
+  animation: 2s infinite scrollDown;
+}
+
+@keyframes scrollDown {
+  0% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  80% {
+    transform: translate(0, 20px);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}

@@ -1,4 +1,4 @@
-.simulatorPage {
+.forInvestors {
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -6,7 +6,7 @@
   top: 0;
   left: 0;
 
-  background-color: rgb(149, 255, 161);
+  background-color: rgb(228, 228, 228);
   opacity: 0;
 
   animation-delay: 0.9s;

@@ -11,15 +11,12 @@ export default function CtaButton({
   onClick: () => void;
   className?: string;
 }) {
-  const [pressed, setPressed] = useState(false);
-
   return (
     <button
       onClick={() => {
         onClick();
-        setPressed(true);
       }}
-      className={clsx(className, style.ctaButton, pressed && style.pressed)}
+      className={clsx(className, style.ctaButton)}
     >
       {label}
     </button>

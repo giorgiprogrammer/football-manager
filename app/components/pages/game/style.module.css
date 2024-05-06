@@ -1,0 +1,32 @@
+.gamePage {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+
+  top: 0;
+  left: 0;
+
+  background-color: rgb(199, 214, 255);
+  opacity: 0;
+
+  animation-delay: 0.9s;
+  animation-name: show-animation;
+  animation-duration: 0.4s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes show-animation {
+  from {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}

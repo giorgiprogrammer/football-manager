@@ -10,7 +10,7 @@ export default function WebIndicators() {
   const appContext = useContext(AppContext);
 
   return (
-    <div className=" fixed bottom-0 w-screen h-14 flex items-end justify-between">
+    <div className=" fixed bottom-0 w-[10%] h-14 flex items-end justify-between">
       {/* Background */}
       {/* <div className=" absolute bg-slate-950 opacity-90 w-full h-full"></div> */}
 
@@ -29,11 +29,11 @@ export default function WebIndicators() {
           onClick={() => {
             appContext.setSelectedMenuItem("");
           }}
-          className="cursor-pointer absolute -left-2 -bottom-1"
+          className="cursor-pointer absolute -left-1 sm:-left-2 bottom-2 sm:-bottom-1 sm:scale-[0.7]"
           src="/website/images/ui/back-button.png"
           width={60}
           height={60}
-          alt="Picture of the author"
+          alt="back-button"
         />
       )}
     </div>

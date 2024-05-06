@@ -9,32 +9,22 @@
 
   border-color: #ffa700;
   background-color: #ffa700;
-  color: rgba(189, 95, 40, 0.877);
+  color: rgba(119, 4, 0, 0.877);
+
+  box-shadow: -4px -4px 0px 0px rgb(85, 45, 0);
 }
 
 .ctaButton:hover {
   color: rgb(44, 44, 44);
+  box-shadow: 4px 4px 0px 0px rgb(85, 45, 0);
 }
 
-.pressed {
-  animation-name: pressed-animation;
-  animation-duration: 0.5s;
-  animation-timing-function: ease-in-out;
-  animation-fill-mode: forwards;
-}
+@media screen and (min-device-width: 0px) and (max-device-width: 580px) {
+  .ctaButton {
+    padding-left: 15px;
+    padding-right: 15px;
 
-@keyframes pressed-animation {
-  0% {
-  }
-  30% {
-    transform: scale(0.6);
-    opacity: 1;
-    background-color: black;
-  }
-  100% {
-    background-color: black;
-    transform: scale(1.4);
-    opacity: 0;
-    color: wheat;
+    padding-bottom: 10px;
+    padding-top: 10px;
   }
 }
