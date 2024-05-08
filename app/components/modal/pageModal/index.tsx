@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import style from "./style.module.css";
 import { AppContext } from "@/app/context/appContext";
-import SimulatorPage from "../pages/simulator";
-import GamePage from "../pages/game";
-import ForInvestors from "../pages/forInvestors";
+import SimulatorPage from "../../pages/simulator";
+import GamePage from "../../pages/game";
+import ForInvestors from "../../pages/forInvestors";
 import clsx from "clsx";
 
 export function Modal({ backgroundColor }: { backgroundColor: string }) {

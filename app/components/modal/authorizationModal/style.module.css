@@ -1,0 +1,26 @@
+.authorizationModal {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+
+  z-index: 30;
+
+  top: 0;
+  left: 0;
+
+  animation-name: show-animation;
+  animation-duration: 0.4s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes show-animation {
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
