@@ -18,6 +18,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-player": "^2.13.0",
+    "transliterate": "^1.0.1",
     "transliteration": "^2.3.5",
     "webfontloader": "^1.6.28"
   },

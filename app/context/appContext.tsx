@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useState } from "react";
+import { initialTeamsData } from "../config/initialTeamsData";
 
 type AppContextProps = {
   menuIsOpen: boolean;
@@ -19,6 +20,8 @@ type AppContextProps = {
       username: string;
     }>
   >;
+  userTeams: typeof initialTeamsData;
+  setUserTeams: React.Dispatch<React.SetStateAction<typeof initialTeamsData>>;
 };
 
 export const AppContext = createContext<AppContextProps>({
@@ -33,6 +36,8 @@ export const AppContext = createContext<AppContextProps>({
     username: "",
   },
   setUserData: () => {},
+  userTeams: initialTeamsData,
+  setUserTeams: () => {},
 });
 
 export default function AppProvider({
@@ -47,6 +52,7 @@ export default function AppProvider({
     isLogin: false,
     username: "",
   });
+  const [userTeams, setUserTeams] = useState(initialTeamsData);
 
   return (
     <AppContext.Provider
@@ -59,6 +65,8 @@ export default function AppProvider({
         setOpenAutorizationModal,
         userData,
         setUserData,
+        userTeams,
+        setUserTeams,
       }}
     >
       {children}

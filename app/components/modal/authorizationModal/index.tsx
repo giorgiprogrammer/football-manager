@@ -22,18 +22,16 @@ export default function AuthorizationModal() {
   const [showSystemLogin, setShowSystemLogin] = useState(false);
 
   return (
-    <div
-      className={style.authorizationModal + " flex justify-center items-center"}
-    >
+    <div className={style.authorizationModal}>
       <div
         onClick={() => {
           !isWait && appContext.setOpenAutorizationModal(false);
         }}
-        className="fixed w-full h-full bg-black opacity-70 "
+        className="fixed left-0 top-0 w-full h-full bg-black opacity-70 "
       ></div>
       {/* loading shadow*/}
       {isWait && (
-        <div className=" fixed z-40 w-screen h-screen bg-black opacity-70 "></div>
+        <div className="left-0 top-0 fixed z-40 w-screen h-screen bg-black opacity-70 "></div>
       )}
 
       <div className="flex gap-3">
@@ -103,7 +101,7 @@ export default function AuthorizationModal() {
               setUserData({ ...userData, logPassword: event.target.value });
             }}
             type="password"
-            className=" border px-2 py-1 mt-4 custom-font-2"
+            className="border px-2 py-1 mt-4 custom-font-2"
             placeholder="Password: "
             maxLength={20}
           ></input>

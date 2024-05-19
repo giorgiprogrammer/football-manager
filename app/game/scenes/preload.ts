@@ -132,10 +132,7 @@ export default class Preload extends Phaser.Scene {
     );
     this.load.image("benfica", "image/teamLogos/otherEuropeans/Benfica.png");
     this.load.image("dortmund", "image/teamLogos/otherEuropeans/Dortmund.png");
-    this.load.image(
-      "fenerbahce",
-      "image/teamLogos/otherEuropeans/Fenerbahce.png"
-    );
+    this.load.image("image/teamLogos/otherEuropeans/Fenerbahce.png");
     this.load.image("feynoord", "image/teamLogos/otherEuropeans/Feynoord.png");
     this.load.image(
       "galatasaray",

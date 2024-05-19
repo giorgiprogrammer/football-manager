@@ -10,7 +10,8 @@ export function getRandomNumber(from: number, to: number) {
 
 export function calculatePercentage(part: number, total: number): number {
   if (total === 0) {
-    throw new Error("Total cannot be zero");
+    console.log("Total cannot be zero");
+    // throw new Error("Total cannot be zero");
   }
 
   return (part * total) / 100;

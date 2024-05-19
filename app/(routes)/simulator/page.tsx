@@ -1,9 +1,10 @@
-import Game from "@/app/game";
+import AppProvider, { AppContext } from "@/app/context/appContext";
+import SimulatorPage from "./components/simulatorPage";
 
-export default function SimulatorPage() {
+export default function Page() {
   return (
-    <div className="w-screen min-h-screen">
-      <Game />
-    </div>
+    <AppProvider>
+      <SimulatorPage />
+    </AppProvider>
   );
 }

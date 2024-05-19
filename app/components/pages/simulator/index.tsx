@@ -6,15 +6,32 @@ import style from "./style.module.css";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "@/app/context/appContext";
 import { logOut } from "@/app/core/user";
+import WarningModal from "../../global/warningModal";
+import { useRouter } from "next/navigation";
 
-export default function SimulatorPage() {
+export default function SimulatorModal() {
   const appContext = useContext(AppContext);
+  const router = useRouter();
+
+  const [showWarningModal, setShowWarningModal] = useState(false);
+  const [warningMessage, setWarningMessage] = useState("");
 
   return (
     <div className={style.simulatorPage}>
+      {/* Warning Modal */}
+      {showWarningModal && (
+        <WarningModal
+          callBack={() => {
+            setShowWarningModal(false);
+          }}
+          Title={"Warning"}
+          text={warningMessage}
+        />
+      )}
+
       {/* Right Menu */}
       <div
         className={
@@ -23,7 +40,14 @@ export default function SimulatorPage() {
       >
         <CtaButton
           className="custom-font-2 font-bold text-xl sm:text-lg "
-          onClick={() => {}}
+          onClick={() => {
+            if (appContext.userData.isLogin) {
+              router.push("/simulator");
+            } else {
+              setWarningMessage("You need to Authentication first!");
+              setShowWarningModal(true);
+            }
+          }}
           label="Open Simulator"
         />
       </div>

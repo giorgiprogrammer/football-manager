@@ -8,6 +8,7 @@ export const matchData: MatchData = {
   mathMode: "classic",
   stadiumSize: "small",
   isExtraTimes: false,
+  matchIsFor: "Quiq Match",
 };
 
 export const matchStats = {
@@ -55,4 +56,5 @@ export type MatchData = {
   mathMode: "classic" | "experimental";
   stadiumSize: "small" | "normal" | "big" | "Mega";
   isExtraTimes: boolean;
+  matchIsFor: "Quiq Match" | "League" | "Cup";
 };

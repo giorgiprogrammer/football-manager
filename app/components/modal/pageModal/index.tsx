@@ -6,7 +6,7 @@ import GamePage from "../../pages/game";
 import ForInvestors from "../../pages/forInvestors";
 import clsx from "clsx";
 
-export function Modal({ backgroundColor }: { backgroundColor: string }) {
+export function PageModal({ backgroundColor }: { backgroundColor: string }) {
   const appContext = useContext(AppContext);
 
   return (

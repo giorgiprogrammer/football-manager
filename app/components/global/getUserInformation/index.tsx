@@ -5,6 +5,7 @@ import style from "./style.module.css";
 import { useContext, useEffect } from "react";
 import { AppContext } from "@/app/context/appContext";
 import { signIn } from "@/app/core/user";
+import { getUserTemasData } from "@/app/core/supabaseHelper";
 
 export default function GetUserInformation({
   callBack,
@@ -14,23 +15,37 @@ export default function GetUserInformation({
   const appContext = useContext(AppContext);
 
   useEffect(() => {
+    console.log("hm: " + appContext.userData.isLogin);
+  }, [appContext.userData]);
+
+  useEffect(() => {
     const username = sessionStorage.getItem("username");
     const password = sessionStorage.getItem("password");
 
     if (username && password) {
       signIn(username, password).then((response) => {
-        console.log(username, password);
-        console.log(response);
+        if (response.status === "error") {
+          setTimeout(() => {
+            callBack();
+          }, 1000);
+        }
+
         if (response.status === "ok") {
           appContext.setUserData({
             isLogin: true,
             username: username,
           });
-        }
 
-        setTimeout(() => {
-          callBack();
-        }, 1000);
+          getUserTemasData(username).then((data) => {
+            if (data) {
+              appContext.setUserTeams(data[0].teams);
+            }
+
+            setTimeout(() => {
+              callBack();
+            }, 1000);
+          });
+        }
       });
     } else {
       setTimeout(() => {

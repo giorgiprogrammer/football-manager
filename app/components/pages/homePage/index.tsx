@@ -3,7 +3,7 @@
 import { useContext, useState } from "react";
 import Bound from "../../global/bound";
 import WebIndicators from "../../global/webIndicators";
-import { Modal } from "../../modal/pageModal";
+import { PageModal } from "../../modal/pageModal";
 import { AppContext } from "@/app/context/appContext";
 import AuthorizationModal from "../../modal/authorizationModal";
 import GetUserInformation from "../../global/getUserInformation";
@@ -43,7 +43,7 @@ export default function HomePage() {
       </Bound>
 
       {appContext.openAutorizationModal && <AuthorizationModal />}
-      <Modal backgroundColor="#050505" />
+      <PageModal backgroundColor="#050505" />
       <WebIndicators />
     </div>
   );
