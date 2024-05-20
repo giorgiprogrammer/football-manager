@@ -44,7 +44,7 @@ export class Selector extends Phaser.GameObjects.Container {
         this.scene.tweens.add({
           targets: item.image,
           y: this.items[(index + 1) % this.items.length].image.y,
-          scale: this.items[(index + 1) % this.items.length].image.scale,
+          // scale: this.items[(index + 1) % this.items.length].image.scale,
           alpha: this.items[(index + 1) % this.items.length].image.alpha,
           duration: 300,
           onComplete: () => {
@@ -64,9 +64,9 @@ export class Selector extends Phaser.GameObjects.Container {
           targets: item.image,
           y: this.items[index === 0 ? this.items.length - 1 : index - 1].image
             .y,
-          scale:
-            this.items[index === 0 ? this.items.length - 1 : index - 1].image
-              .scale,
+          // scale:
+          //   this.items[index === 0 ? this.items.length - 1 : index - 1].image
+          //     .scale,
           alpha:
             this.items[index === 0 ? this.items.length - 1 : index - 1].image
               .alpha,
@@ -150,10 +150,7 @@ export class Selector extends Phaser.GameObjects.Container {
     this.selectedItemIndex = Math.floor(this.items.length / 2);
 
     for (const [index, item] of this.items.entries()) {
-      item.image.setDisplaySize(
-        calculatePercentage(4, this.scene.game.canvas.width),
-        calculatePercentage(4, this.scene.game.canvas.width)
-      );
+      // item.image.setDisplaySize(100, 100);
 
       // then we need to calculate the position of the next image
       imagePositionY += item.image.displayHeight + this.padding;
@@ -173,8 +170,8 @@ export class Selector extends Phaser.GameObjects.Container {
         const minusOpacity = (Math.floor(this.items.length / 2) - index) / 2.5;
         item.image.setAlpha(1 + makeNegative(minusOpacity));
 
-        const minusScale = (Math.floor(this.items.length / 2) - index) / 5;
-        item.image.setScale(item.image.scale + makeNegative(minusScale));
+        // const minusScale = (Math.floor(this.items.length / 2) - index) / 5;
+        // item.image.setScale(item.image.scale + makeNegative(minusScale));
 
         //then make the image visible
         item.image.setTint(

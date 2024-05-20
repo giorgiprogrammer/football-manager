@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import TeamSettingsModal from "./TeamSettingsModal/teamSettingsModal";
 import { useContext, useState } from "react";
 import { AppContext } from "@/app/context/appContext";
+import { gameConfig } from "@/app/game/config/gameConfig";
 
 export default function BottomIndicators() {
   const router = useRouter();
@@ -26,6 +27,7 @@ export default function BottomIndicators() {
             );
             return;
           }
+          gameConfig.menuTeams = appContext.userTeams;
 
           router.push("/game");
         }}

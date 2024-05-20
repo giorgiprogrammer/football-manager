@@ -228,7 +228,6 @@ export async function insertNewTeam(
 
   if (updateQuery.error) {
     console.log(updateQuery.error.message);
-    console.log("aaaaq vaaaar");
     return updateQuery.error;
   } else {
     console.log("Team Updated successfully");

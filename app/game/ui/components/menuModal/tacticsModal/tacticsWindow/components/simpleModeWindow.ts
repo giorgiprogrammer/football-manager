@@ -1,10 +1,10 @@
-import { gameConfig } from "@/app/config/gameConfig";
 import { TeamData } from "@/app/config/initialTeamsData";
 import { calculatePercentage } from "@/app/utils/math";
 import { SimpleSelector } from "../../../simpleSelector";
 import { OptionsBar } from "../../../../optionsBar";
 import { matchData } from "@/app/config/matchData";
 import { deepCopy } from "@/app/utils/helperFunctions";
+import { gameConfig } from "@/app/game/config/gameConfig";
 
 export class SimpleModeWindow extends Phaser.GameObjects.Container {
   stadium!: Phaser.GameObjects.Image;
@@ -232,7 +232,7 @@ export class SimpleModeWindow extends Phaser.GameObjects.Container {
         .image(
           posX,
           i * calculatePercentage(4, this.scene.game.canvas.height),
-          this.team.logoKey
+          this.team.name
         )
         .setAlpha(0.8)
         .setDisplaySize(
@@ -311,7 +311,7 @@ export class SimpleModeWindow extends Phaser.GameObjects.Container {
         .image(
           posX,
           i * calculatePercentage(4, this.scene.game.canvas.height),
-          this.team.logoKey
+          this.team.name
         )
         .setAlpha(0.8)
         .setDisplaySize(
@@ -366,7 +366,7 @@ export class SimpleModeWindow extends Phaser.GameObjects.Container {
         .image(
           posX,
           i * calculatePercentage(4, this.scene.game.canvas.height),
-          this.team.logoKey
+          this.team.name
         )
         .setAlpha(0.8)
         .setDisplaySize(

@@ -1,12 +1,17 @@
 import { MenuButton } from "../ui/menuButton";
 import { Selector } from "../ui/selector";
-import { TeamData, initialTeamsData } from "@/app/config/initialTeamsData";
+import {
+  TeamData,
+  TeamsData,
+  initialTeamsData,
+} from "@/app/config/initialTeamsData";
 import { calculatePercentage, mapToPercentageInRange } from "@/app/utils/math";
 import { SettingsModal } from "../ui/components/menuModal/settingsModal";
 import { TacticsModal } from "../ui/components/menuModal/tacticsModal";
 import { deepCopy } from "@/app/utils/helperFunctions";
 import { matchData } from "@/app/config/matchData";
 import { tournamenrDataConfig } from "../config/tournamentDataConfig";
+import { gameConfig } from "../config/gameConfig";
 
 export default class Menu extends Phaser.Scene {
   hostTeamsSelector!: Selector;
@@ -40,18 +45,14 @@ export default class Menu extends Phaser.Scene {
       setTimeout(() => {
         this.scale.resize(this.game.canvas.width, this.game.canvas.height);
         this.renderer.resize(this.game.canvas.width, this.game.canvas.height);
-
         this.scene.restart();
       }, 1000);
     });
-
     this.addUI();
     this.updateSelectedTeams();
-
     this.events.on("rotate", () => {
       this.updateSelectedTeams();
     });
-
     this.addAnimationEffectImage();
     this.setDefaultParametersforTeams();
   }
@@ -160,25 +161,35 @@ export default class Menu extends Phaser.Scene {
 
   addTeamSelectors() {
     // Prepare Data
-    const leftTeamLogos = this.add.group();
-    const leftTeamsSelectorData = Object.entries(initialTeamsData).map(
-      ([name, data]) => {
-        return {
-          image: leftTeamLogos.get(0, 0, data.logoKey, undefined, false),
-          name: name,
-        };
-      }
-    );
-    const rightTeamLogos = this.add.group();
-    const rightTeamsSelectorData = Object.entries(initialTeamsData).map(
-      ([name, data]) => {
-        return {
-          image: rightTeamLogos.get(0, 0, data.logoKey, undefined, false),
-          name: name,
-        };
-      }
-    );
+    // const leftTeamLogos = this.add.group();
+    // const leftTeamsSelectorData = Object.entries(
+    //   gameConfig.menuTeams as TeamsData
+    // ).map(([name, data]) => {
+    //   return {
+    //     image: leftTeamLogos.get(0, 0, data.name, undefined, false),
+    //     name: name,
+    //   };
+    // });
+    // const rightTeamLogos = this.add.group();
+    // const rightTeamsSelectorData = Object.entries(
+    //   gameConfig.menuTeams as TeamsData
+    // ).map(([name, data]) => {
+    //   return {
+    //     image: rightTeamLogos.get(0, 0, data.name, undefined, false),
+    //     name: name,
+    //   };
+    // });
     // Host Teams Selector
+    const leftTeamsSelectorData = Object.entries(
+      gameConfig.menuTeams as TeamsData
+    ).map(([name, data]) => {
+      const image = this.add.image(0, 0, data.name).setDisplaySize(40, 40);
+      return {
+        image: image,
+        name: name,
+      };
+    });
+
     this.hostTeamsSelector = new Selector(
       this,
       0,
@@ -194,6 +205,17 @@ export default class Menu extends Phaser.Scene {
       60,
       -calculatePercentage(40, this.game.canvas.height)
     );
+
+    // Host Teams Selector
+    const rightTeamsSelectorData = Object.entries(
+      gameConfig.menuTeams as TeamsData
+    ).map(([name, data]) => {
+      const image = this.add.image(0, 0, data.name).setDisplaySize(40, 40);
+      return {
+        image: image,
+        name: name,
+      };
+    });
 
     // Right Teams Selector
     this.guestTeamsSelector = new Selector(
@@ -315,6 +337,13 @@ export default class Menu extends Phaser.Scene {
     )
       .setInteractive()
       .on(Phaser.Input.Events.POINTER_DOWN, () => {
+        const asd = gameConfig.menuTeams as TeamsData;
+        console.log(asd);
+        this.selectedHostTeam = asd["Dinamo Tbilisi"];
+        this.selectedGuestTeam = asd.Liverpool;
+
+        console.log(this.selectedHostTeam, this.selectedGuestTeam);
+
         this.tacticsModal.setVisible(true);
         this.tacticsModal.setTeams(
           this.selectedHostTeam,

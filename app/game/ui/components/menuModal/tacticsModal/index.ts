@@ -36,7 +36,7 @@ export class TacticsModal extends MenuModal {
     this.hostTeamTacticsWindow.team = hostTeam;
     this.guestTeamTacticsWindow.team = guestTeam;
 
-    this.addTeamLogos(hostTeam.logoKey, guestTeam.logoKey);
+    this.addTeamLogos(hostTeam.name, guestTeam.name);
   }
 
   addTeamLogos(hostTeamLogoKey: string, guestTeamLogoKey: string) {

@@ -1,4 +1,4 @@
-import { tournamentManager } from "@/app/core/tournamentsManager/tournametsManager";
+// import { tournamentManager } from "@/app/core/tournamentsManager/tournametsManager";
 import Fixtures from "./components/fixtures";
 import { Interface } from "./components/interface";
 

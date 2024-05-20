@@ -2,9 +2,13 @@
 
 import { useSearchParams } from "next/navigation";
 import style from "./style.module.css";
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { tournamenrDataConfig } from "./config/tournamentDataConfig";
 import { matchData } from "../config/matchData";
+import GetUserInformation from "../components/global/getUserInformation";
+import { AppContext } from "../context/appContext";
+import { useRouter } from "next/navigation";
+import { gameConfig } from "./config/gameConfig";
 
 let Preload: any;
 let Menu: any;
@@ -12,6 +16,11 @@ let GamePlay: any;
 let CanvasScene: any;
 
 export const Game = () => {
+  const appContext = useContext(AppContext);
+  const router = useRouter();
+
+  const [showGetUserInformation, setShowGetUserInformation] = useState(true);
+
   const searchParams = useSearchParams();
 
   if (searchParams.get("matchMode") === undefined) {
@@ -33,6 +42,13 @@ export const Game = () => {
   const canvasContainer = useRef(null);
 
   useEffect(() => {
+    if (
+      Object.keys(gameConfig.menuTeams).length === 0 &&
+      matchData.matchIsFor === "Quiq Match"
+    ) {
+      router.push("/");
+    }
+
     if (!canvasContainer.current) return;
 
     // Client-side-only code
@@ -68,7 +84,23 @@ export const Game = () => {
     });
   }, []);
 
-  return <div ref={canvasContainer} className={style.canvasContainer}></div>;
+  useEffect(() => {
+    if (!showGetUserInformation && !appContext.userData.isLogin) {
+      router.push("/");
+    }
+  }, [showGetUserInformation]);
+
+  return (
+    <div ref={canvasContainer} className={style.canvasContainer}>
+      {showGetUserInformation && (
+        <GetUserInformation
+          callBack={() => {
+            setShowGetUserInformation(false);
+          }}
+        />
+      )}
+    </div>
+  );
 };
 
 export default Game;
