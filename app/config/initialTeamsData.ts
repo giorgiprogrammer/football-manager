@@ -21,6 +21,7 @@ export type TeamData = {
     happyImage: string;
     sadImage: string;
   };
+  selectedForMenu?: boolean;
 };
 
 export type TeamTechniqueProperties = {
@@ -49,7 +50,7 @@ type FormationProperties = {
 export const initialTeamsData: TeamsData = {
   [teamNames.Arsenal]: {
     name: teamNames.Arsenal,
-    logoKey: TeamLogos.Arcenal,
+    logoKey: TeamLogos.Arsenal,
     formation: "4-3-3",
     formationProperties: {
       defence: "wide-attack",
@@ -77,6 +78,7 @@ export const initialTeamsData: TeamsData = {
       happyImage: "mikel_arteta_happy",
       sadImage: "mikel_arteta_sad",
     },
+    selectedForMenu: true,
   },
   [teamNames.AtleticoMadrid]: {
     name: teamNames.AtleticoMadrid,
@@ -108,6 +110,7 @@ export const initialTeamsData: TeamsData = {
       happyImage: "mikel_arteta_happy",
       sadImage: "mikel_arteta_sad",
     },
+    selectedForMenu: true,
   },
   [teamNames.Barcelona]: {
     name: teamNames.Barcelona,
@@ -139,6 +142,7 @@ export const initialTeamsData: TeamsData = {
       happyImage: "mikel_arteta_happy",
       sadImage: "mikel_arteta_sad",
     },
+    selectedForMenu: true,
   },
   [teamNames.ManchesterUnited]: {
     name: teamNames.ManchesterUnited,
@@ -170,6 +174,7 @@ export const initialTeamsData: TeamsData = {
       happyImage: "mikel_arteta_happy",
       sadImage: "mikel_arteta_sad",
     },
+    selectedForMenu: true,
   },
   [teamNames.RealMadrid]: {
     name: teamNames.RealMadrid,
@@ -201,6 +206,7 @@ export const initialTeamsData: TeamsData = {
       happyImage: "mikel_arteta_happy",
       sadImage: "mikel_arteta_sad",
     },
+    selectedForMenu: true,
   },
   [teamNames.Liverpool]: {
     name: teamNames.Liverpool,
@@ -232,10 +238,43 @@ export const initialTeamsData: TeamsData = {
       happyImage: "mikel_arteta_happy",
       sadImage: "mikel_arteta_sad",
     },
+    selectedForMenu: true,
   },
   [teamNames.Juventus]: {
     name: teamNames.Juventus,
     logoKey: TeamLogos.Juventus,
+    formation: "4-4-2",
+    formationProperties: {
+      defence: "normal",
+      midfield: "center-attack",
+      attack: "center-attack",
+    },
+    techniqueProperties: {
+      goalKeeperMotionSpeed: 50,
+      goalKeeperPassSpeed: 50,
+      passSpeeed: 50,
+      passAccuracy: 50,
+      shootSpeed: 50,
+      shootAccuracy: 50,
+      longPassChance: 50,
+      shortPassChance: 50,
+      passDelay: 20,
+    },
+    teamColor: "0xFFF7FF",
+    teamSecondaryColor: "0x000000",
+    strength: 1809,
+    goalSoundKey: "arsenal_goal_sound",
+    coach: {
+      name: "Mikel Arteta",
+      image: "mikel_arteta",
+      happyImage: "mikel_arteta_happy",
+      sadImage: "mikel_arteta_sad",
+    },
+    selectedForMenu: true,
+  },
+  [teamNames.BayernMunich]: {
+    name: teamNames.BayernMunich,
+    logoKey: TeamLogos.BayernMunich,
     formation: "4-3-3",
     formationProperties: {
       defence: "normal",
@@ -263,5 +302,70 @@ export const initialTeamsData: TeamsData = {
       happyImage: "mikel_arteta_happy",
       sadImage: "mikel_arteta_sad",
     },
+    selectedForMenu: true,
+  },
+  [teamNames.Chelsea]: {
+    name: teamNames.Chelsea,
+    logoKey: TeamLogos.Chelsea,
+    formation: "4-3-3",
+    formationProperties: {
+      defence: "normal",
+      midfield: "center-attack",
+      attack: "center-attack",
+    },
+    techniqueProperties: {
+      goalKeeperMotionSpeed: 50,
+      goalKeeperPassSpeed: 50,
+      passSpeeed: 50,
+      passAccuracy: 50,
+      shootSpeed: 50,
+      shootAccuracy: 50,
+      longPassChance: 50,
+      shortPassChance: 50,
+      passDelay: 20,
+    },
+    teamColor: "0xFFF7FF",
+    teamSecondaryColor: "0x000000",
+    strength: 1809,
+    goalSoundKey: "arsenal_goal_sound",
+    coach: {
+      name: "Mikel Arteta",
+      image: "mikel_arteta",
+      happyImage: "mikel_arteta_happy",
+      sadImage: "mikel_arteta_sad",
+    },
+    selectedForMenu: true,
+  },
+  [teamNames.ManchesterCity]: {
+    name: teamNames.ManchesterCity,
+    logoKey: TeamLogos.ManchesterCity,
+    formation: "4-3-3",
+    formationProperties: {
+      defence: "normal",
+      midfield: "center-attack",
+      attack: "center-attack",
+    },
+    techniqueProperties: {
+      goalKeeperMotionSpeed: 50,
+      goalKeeperPassSpeed: 50,
+      passSpeeed: 50,
+      passAccuracy: 50,
+      shootSpeed: 50,
+      shootAccuracy: 50,
+      longPassChance: 50,
+      shortPassChance: 50,
+      passDelay: 20,
+    },
+    teamColor: "0xFFF7FF",
+    teamSecondaryColor: "0x000000",
+    strength: 1809,
+    goalSoundKey: "arsenal_goal_sound",
+    coach: {
+      name: "Mikel Arteta",
+      image: "mikel_arteta",
+      happyImage: "mikel_arteta_happy",
+      sadImage: "mikel_arteta_sad",
+    },
+    selectedForMenu: true,
   },
 };

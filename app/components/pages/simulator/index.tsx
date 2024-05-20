@@ -6,10 +6,32 @@ import style from "./style.module.css";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useContext, useState } from "react";
+import { AppContext } from "@/app/context/appContext";
+import { logOut } from "@/app/core/user";
+import WarningModal from "../../global/warningModal";
+import { useRouter } from "next/navigation";
 
-export default function SimulatorPage() {
+export default function SimulatorModal() {
+  const appContext = useContext(AppContext);
+  const router = useRouter();
+
+  const [showWarningModal, setShowWarningModal] = useState(false);
+  const [warningMessage, setWarningMessage] = useState("");
+
   return (
     <div className={style.simulatorPage}>
+      {/* Warning Modal */}
+      {showWarningModal && (
+        <WarningModal
+          callBack={() => {
+            setShowWarningModal(false);
+          }}
+          Title={"Warning"}
+          text={warningMessage}
+        />
+      )}
+
       {/* Right Menu */}
       <div
         className={
@@ -18,7 +40,14 @@ export default function SimulatorPage() {
       >
         <CtaButton
           className="custom-font-2 font-bold text-xl sm:text-lg "
-          onClick={() => {}}
+          onClick={() => {
+            if (appContext.userData.isLogin) {
+              router.push("/simulator");
+            } else {
+              setWarningMessage("You need to Authentication first!");
+              setShowWarningModal(true);
+            }
+          }}
           label="Open Simulator"
         />
       </div>
@@ -28,11 +57,23 @@ export default function SimulatorPage() {
           "w-[25vw] h-screen fixed left-0 hidden sm:flex justify-center items-center "
         }
       >
-        <CtaButton
-          className="custom-font-2 font-bold text-xl sm:text-lg "
-          onClick={() => {}}
-          label="Sign Up"
-        />
+        {appContext.userData.isLogin ? (
+          <CtaButton
+            className="custom-font-2 font-bold text-xl sm:text-lg "
+            onClick={() => {
+              logOut();
+            }}
+            label="Log Out"
+          />
+        ) : (
+          <CtaButton
+            className="custom-font-2 font-bold text-xl sm:text-lg "
+            onClick={() => {
+              appContext.setOpenAutorizationModal(true);
+            }}
+            label="Authentication"
+          />
+        )}
       </div>
       {/* Feed */}
       <div className={style.feed}>
@@ -159,7 +200,9 @@ export default function SimulatorPage() {
 
         <CtaButton
           className="custom-font-2 text-xl sm:text-lg font-bold mt-7 sm:hidden"
-          onClick={() => {}}
+          onClick={() => {
+            appContext.setOpenAutorizationModal(true);
+          }}
           label="Sign Up"
         />
 

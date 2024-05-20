@@ -1,12 +1,28 @@
 "use client";
 
+import { useContext, useState } from "react";
 import Bound from "../../global/bound";
 import WebIndicators from "../../global/webIndicators";
-import { Modal } from "../../modal";
+import { PageModal } from "../../modal/pageModal";
+import { AppContext } from "@/app/context/appContext";
+import AuthorizationModal from "../../modal/authorizationModal";
+import GetUserInformation from "../../global/getUserInformation";
 
 export default function HomePage() {
+  const appContext = useContext(AppContext);
+
+  const [showGetUserInformation, setShowGetUserInformation] = useState(true);
+
   return (
     <div className="w-screen h-screen">
+      {showGetUserInformation && (
+        <GetUserInformation
+          callBack={() => {
+            setShowGetUserInformation(false);
+          }}
+        />
+      )}
+
       <Bound>
         <h1 className="text-[#4e4e4e] custom-font-2 font-bold text-3xl">
           Football Manager
@@ -26,7 +42,8 @@ export default function HomePage() {
         </h2>
       </Bound>
 
-      <Modal backgroundColor="#050505" />
+      {appContext.openAutorizationModal && <AuthorizationModal />}
+      <PageModal backgroundColor="#050505" />
       <WebIndicators />
     </div>
   );

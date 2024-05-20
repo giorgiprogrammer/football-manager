@@ -1,11 +1,7 @@
 import { MenuButton } from "../ui/menuButton";
 import { Selector } from "../ui/selector";
 import { TeamData, initialTeamsData } from "@/app/config/initialTeamsData";
-import {
-  calculatePercentage,
-  interpolate,
-  mapToPercentageInRange,
-} from "@/app/utils/math";
+import { calculatePercentage, mapToPercentageInRange } from "@/app/utils/math";
 import { SettingsModal } from "../ui/components/menuModal/settingsModal";
 import { TacticsModal } from "../ui/components/menuModal/tacticsModal";
 import { deepCopy } from "@/app/utils/helperFunctions";
@@ -128,6 +124,7 @@ export default class Menu extends Phaser.Scene {
     this.addTexts();
     this.addButtons();
     this.addTeamSelectors();
+    this.addMatchModeText();
 
     this.settingsModal = new SettingsModal(
       this,
@@ -144,6 +141,21 @@ export default class Menu extends Phaser.Scene {
     )
       .setDepth(10)
       .setVisible(false);
+  }
+
+  addMatchModeText() {
+    this.add
+      .text(
+        this.game.canvas.width / 2,
+        calculatePercentage(5, this.game.canvas.height),
+        matchData.matchIsFor,
+        {
+          fontSize: calculatePercentage(3, this.game.canvas.width),
+          color: "#E62F0B",
+          align: "center",
+        }
+      )
+      .setOrigin(0.5);
   }
 
   addTeamSelectors() {
@@ -180,8 +192,7 @@ export default class Menu extends Phaser.Scene {
 
     this.hostTeamsSelector.setPosition(
       60,
-      this.game.canvas.height / 2 -
-        this.hostTeamsSelector.getBounds().height / 1.3
+      -calculatePercentage(40, this.game.canvas.height)
     );
 
     // Right Teams Selector
@@ -198,8 +209,7 @@ export default class Menu extends Phaser.Scene {
 
     this.guestTeamsSelector.setPosition(
       this.game.canvas.width - 60,
-      this.game.canvas.height / 2 -
-        this.guestTeamsSelector.getBounds().height / 1.3
+      -calculatePercentage(40, this.game.canvas.height)
     );
   }
 

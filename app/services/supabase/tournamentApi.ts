@@ -1,5 +1,5 @@
 import { initialSheduleData } from "@/app/config/initialSheduleData";
-import { supabase } from "./config";
+import supabase from "./config";
 import { getRandomNumber } from "@/app/utils/math";
 import { fixturesType } from "@/app/core/tournamentsManager/tournametsManager";
 

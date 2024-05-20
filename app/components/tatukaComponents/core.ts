@@ -1,5 +1,5 @@
-import { TextAnimationProps } from "../types/component-types";
-import { calculatePercentage, getRandomNumber } from "../utils/math";
+import { TextAnimationProps } from "./types/component-types";
+import { calculatePercentage, getRandomNumber } from "../../utils/math";
 
 export default class TextAnimationCore {
   animationDelayTimes: number[] = [];

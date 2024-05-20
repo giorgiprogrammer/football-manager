@@ -16,7 +16,7 @@ export default function CtaButton({
       onClick={() => {
         onClick();
       }}
-      className={clsx(className, style.ctaButton)}
+      className={clsx(style.ctaButton, className)}
     >
       {label}
     </button>

@@ -38,58 +38,5 @@ export default class GamePlay extends Phaser.Scene {
       .setDisplaySize(1450, 780)
       .setTint(0x4d3916)
       .setDepth(-90);
-
-    // this.add
-    //   .image(
-    //     this.game.canvas.width / 2,
-    //     this.game.canvas.height / 2,
-    //     "stadium-surrounding"
-    //   )
-    //   .setDisplaySize(2450, 1280)
-    //   .setTint(0x4d3916)
-    //   .setScale(3.1)
-    //   .setDepth(-100);
-
-    // const topBorder = this.add
-    //   .image(
-    //     this.game.canvas.width / 2,
-    //     this.game.canvas.height / 2 - this.match.stadium.getBounds().height / 2,
-    //     "roof"
-    //   )
-    //   .setOrigin(0.5, 1)
-    //   .setTint(0x9c762d)
-    //   .setDisplaySize(this.match.stadium.getBounds().width, 15);
-
-    // const bottomBorder = this.add
-    //   .image(
-    //     this.game.canvas.width / 2,
-    //     this.game.canvas.height / 2 + this.match.stadium.getBounds().height / 2,
-    //     "roof"
-    //   )
-    //   .setOrigin(0.5, 0)
-    //   .setTint(0x9c762d)
-    //   .setDisplaySize(this.match.stadium.getBounds().width, 15);
-
-    // const leftBorder = this.add
-    //   .image(
-    //     this.game.canvas.width / 2 - this.match.stadium.getBounds().width / 2,
-    //     this.game.canvas.height / 2,
-    //     "roof"
-    //   )
-    //   .setOrigin(0.5, 0)
-    //   .setTint(0x9c762d)
-    //   .setAngle(90)
-    //   .setDisplaySize(this.match.stadium.getBounds().height + 30, 15);
-
-    // const rightBorder = this.add
-    //   .image(
-    //     this.game.canvas.width / 2 + this.match.stadium.getBounds().width / 2,
-    //     this.game.canvas.height / 2,
-    //     "roof"
-    //   )
-    //   .setOrigin(0.5, 1)
-    //   .setTint(0x9c762d)
-    //   .setAngle(90)
-    //   .setDisplaySize(this.match.stadium.getBounds().height + 30, 15);
   }
 }
