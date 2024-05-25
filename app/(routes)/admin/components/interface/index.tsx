@@ -1,6 +1,6 @@
 "use client";
 
-import { tournamentManager } from "@/app/core/tournamentsManager/tournametsManager";
+// import { tournamentManager } from "@/app/core/tournamentsManager/tournametsManager";
 import { useState } from "react";
 
 export function Interface() {
@@ -9,7 +9,7 @@ export function Interface() {
   return (
     <>
       <p>{apiText}</p>
-      <button
+      {/* <button
         onClick={() => {
           setApiText("");
           tournamentManager.initTournament().then(
@@ -26,9 +26,9 @@ export function Interface() {
         className=" px-3 py-2 bg-slate-800 text-white "
       >
         Start New Tournament
-      </button>
+      </button> */}
 
-      <button
+      {/* <button
         onClick={() => {
           setApiText("");
           tournamentManager.deleteTournament().then(
@@ -45,7 +45,7 @@ export function Interface() {
         className="px-3 py-2 bg-slate-800 text-white "
       >
         Delete Tournament
-      </button>
+      </button> */}
     </>
   );
 }
