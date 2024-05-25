@@ -1,5 +1,6 @@
 import { calculatePercentage, getRandomNumber } from "@/app/utils/math";
 import { Stadium } from "../../../stadium";
+import { hexStringToNumber } from "@/app/utils/helperFunctions";
 
 export class SpectatorsLine extends Phaser.GameObjects.Container {
   blitter!: Phaser.GameObjects.Blitter;
@@ -12,8 +13,8 @@ export class SpectatorsLine extends Phaser.GameObjects.Container {
     x: number,
     y: number,
     public colorProperties: {
-      hostFansColor: number;
-      guestFanstColor: number;
+      hostFansColor: string;
+      guestFanstColor: string;
       hostFansChance: number;
     },
     public stadium: Stadium,
@@ -56,7 +57,10 @@ export class SpectatorsLine extends Phaser.GameObjects.Container {
         randomNumber > this.colorProperties.hostFansChance
           ? this.colorProperties.guestFanstColor
           : this.colorProperties.hostFansColor;
-      const fan = this.blitter.create(0, posY).setTint(color);
+
+      const fan = this.blitter
+        .create(0, posY)
+        .setTint(hexStringToNumber(color));
       randomNumber > this.colorProperties.hostFansChance
         ? this.guestFans.push(fan)
         : this.hostFans.push(fan);
@@ -76,7 +80,9 @@ export class SpectatorsLine extends Phaser.GameObjects.Container {
         randomNumber > this.colorProperties.hostFansChance
           ? this.colorProperties.guestFanstColor
           : this.colorProperties.hostFansColor;
-      const fan = this.blitter.create(0, posY).setTint(color);
+      const fan = this.blitter
+        .create(0, posY)
+        .setTint(hexStringToNumber(color));
       this.add(this.blitter);
 
       randomNumber > this.colorProperties.hostFansChance
@@ -96,7 +102,9 @@ export class SpectatorsLine extends Phaser.GameObjects.Container {
         randomNumber > this.colorProperties.hostFansChance
           ? this.colorProperties.guestFanstColor
           : this.colorProperties.hostFansColor;
-      const fan = this.blitter.create(posX, 0).setTint(color);
+      const fan = this.blitter
+        .create(posX, 0)
+        .setTint(hexStringToNumber(color));
       this.add(this.blitter);
 
       randomNumber > this.colorProperties.hostFansChance
@@ -116,7 +124,9 @@ export class SpectatorsLine extends Phaser.GameObjects.Container {
         getRandomNumber(0, 100) > this.colorProperties.hostFansChance
           ? this.colorProperties.guestFanstColor
           : this.colorProperties.hostFansColor;
-      const fan = this.blitter.create(posX, 0).setTint(color);
+      const fan = this.blitter
+        .create(posX, 0)
+        .setTint(hexStringToNumber(color));
       this.add(this.blitter);
 
       randomNumber > this.colorProperties.hostFansChance

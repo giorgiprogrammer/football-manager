@@ -15,10 +15,6 @@ export default function GetUserInformation({
   const appContext = useContext(AppContext);
 
   useEffect(() => {
-    console.log("hm: " + appContext.userData.isLogin);
-  }, [appContext.userData]);
-
-  useEffect(() => {
     const username = sessionStorage.getItem("username");
     const password = sessionStorage.getItem("password");
 

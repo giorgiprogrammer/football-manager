@@ -53,13 +53,22 @@ export class Foul {
         .image(
           this.match.ball.x + 20,
           this.match.ball.getBounds().centerY,
-          matchData.guestTeam.logoKey
+          matchData.guestTeam.name
         )
         .setOrigin(0.5, 0.5)
         .setDisplaySize(
           calculatePercentage(3, this.match.stadium.stadiumWidth),
           calculatePercentage(3, this.match.stadium.stadiumWidth)
         );
+      // Add Mask
+      const circle = this.scene.add
+        .graphics()
+        .setPosition(
+          this.footballer.getBounds().centerX,
+          this.footballer.getBounds().centerY
+        )
+        .fillCircle(0, 0, 13);
+      this.footballer.setMask(circle.createGeometryMask());
 
       setTimeout(() => {
         this.shoot("leftSide");
@@ -72,13 +81,22 @@ export class Foul {
         .image(
           this.match.ball.x - 20,
           this.match.ball.getBounds().centerY,
-          matchData.hostTeam.logoKey
+          matchData.hostTeam.name
         )
         .setOrigin(0.5, 0.5)
         .setDisplaySize(
           calculatePercentage(3, this.match.stadium.stadiumWidth),
           calculatePercentage(3, this.match.stadium.stadiumWidth)
         );
+      // Add Mask
+      const circle = this.scene.add
+        .graphics()
+        .setPosition(
+          this.footballer.getBounds().centerX,
+          this.footballer.getBounds().centerY
+        )
+        .fillCircle(0, 0, 13);
+      this.footballer.setMask(circle.createGeometryMask());
 
       setTimeout(() => {
         this.shoot("rightSide");

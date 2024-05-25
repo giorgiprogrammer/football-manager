@@ -101,3 +101,13 @@ export function deepCopy<T>(obj: T): T {
 
   return copy as T;
 }
+
+export function hexStringToNumber(hexString: string): number {
+  // Remove the leading '#' if it exists
+  if (hexString.startsWith("#")) {
+    hexString = hexString.slice(1);
+  }
+
+  // Parse the hex string to an integer with base 16
+  return parseInt(hexString, 16);
+}

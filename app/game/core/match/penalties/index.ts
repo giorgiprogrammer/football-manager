@@ -40,11 +40,11 @@ export class Penalties {
     }
 
     if (this.firstTeamWhoWillStart === "host") {
-      this.match.guestTeam.goalKeeper.setTexture(matchData.guestTeam.logoKey);
-      this.match.hostTeam.goalKeeper.setTexture(matchData.guestTeam.logoKey);
+      this.match.guestTeam.goalKeeper.setTexture(matchData.guestTeam.name);
+      this.match.hostTeam.goalKeeper.setTexture(matchData.guestTeam.name);
     } else {
-      this.match.hostTeam.goalKeeper.setTexture(matchData.hostTeam.logoKey);
-      this.match.guestTeam.goalKeeper.setTexture(matchData.hostTeam.logoKey);
+      this.match.hostTeam.goalKeeper.setTexture(matchData.hostTeam.name);
+      this.match.guestTeam.goalKeeper.setTexture(matchData.hostTeam.name);
     }
 
     if (this.horizontalSide === "left") {
@@ -59,14 +59,23 @@ export class Penalties {
           this.match.ball.x + 20,
           this.match.ball.getBounds().centerY,
           this.firstTeamWhoWillStart === "host"
-            ? matchData.hostTeam.logoKey
-            : matchData.guestTeam.logoKey
+            ? matchData.hostTeam.name
+            : matchData.guestTeam.name
         )
         .setOrigin(0.5, 0.5)
         .setDisplaySize(
           calculatePercentage(3, this.match.stadium.stadiumWidth),
           calculatePercentage(3, this.match.stadium.stadiumWidth)
         );
+      // Add Mask
+      const circle = this.scene.add
+        .graphics()
+        .setPosition(
+          this.footballer.getBounds().centerX,
+          this.footballer.getBounds().centerY
+        )
+        .fillCircle(0, 0, 13);
+      this.footballer.setMask(circle.createGeometryMask());
     } else {
       this.match.ball.setPosition(
         this.match.stadium.rightGoalPost.getBounds().centerX -
@@ -79,14 +88,23 @@ export class Penalties {
           this.match.ball.x - 20,
           this.match.ball.getBounds().centerY,
           this.firstTeamWhoWillStart === "host"
-            ? matchData.hostTeam.logoKey
-            : matchData.guestTeam.logoKey
+            ? matchData.hostTeam.name
+            : matchData.guestTeam.name
         )
         .setOrigin(0.5, 0.5)
         .setDisplaySize(
           calculatePercentage(3, this.match.stadium.stadiumWidth),
           calculatePercentage(3, this.match.stadium.stadiumWidth)
         );
+      // Add Mask
+      const circle = this.scene.add
+        .graphics()
+        .setPosition(
+          this.footballer.getBounds().centerX,
+          this.footballer.getBounds().centerY
+        )
+        .fillCircle(0, 0, 13);
+      this.footballer.setMask(circle.createGeometryMask());
     }
 
     setTimeout(() => {
@@ -311,19 +329,19 @@ export class Penalties {
 
     if (this.firstTeamWhoWillStart === "host") {
       this.firstTeamWhoWillStart = "guest";
-      this.footballer.setTexture(matchData.guestTeam.logoKey);
+      this.footballer.setTexture(matchData.guestTeam.name);
 
-      this.match.hostTeam.goalKeeper.setTexture(matchData.hostTeam.logoKey);
-      this.match.guestTeam.goalKeeper.setTexture(matchData.hostTeam.logoKey);
+      this.match.hostTeam.goalKeeper.setTexture(matchData.hostTeam.name);
+      this.match.guestTeam.goalKeeper.setTexture(matchData.hostTeam.name);
 
       return;
     }
     if (this.firstTeamWhoWillStart === "guest") {
       this.firstTeamWhoWillStart = "host";
-      this.footballer.setTexture(matchData.hostTeam.logoKey);
+      this.footballer.setTexture(matchData.hostTeam.name);
 
-      this.match.hostTeam.goalKeeper.setTexture(matchData.guestTeam.logoKey);
-      this.match.guestTeam.goalKeeper.setTexture(matchData.guestTeam.logoKey);
+      this.match.hostTeam.goalKeeper.setTexture(matchData.guestTeam.name);
+      this.match.guestTeam.goalKeeper.setTexture(matchData.guestTeam.name);
       return;
     }
   }

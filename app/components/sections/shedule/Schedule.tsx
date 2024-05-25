@@ -1,4 +1,4 @@
-import { tournamentManager } from "@/app/core/tournamentsManager/tournametsManager";
+// import { tournamentManager } from "@/app/core/tournamentsManager/tournametsManager";
 import Row from "./components/Row";
 
 export default async function Schedule({
@@ -8,23 +8,23 @@ export default async function Schedule({
 }) {
   let division: any[] = [];
 
-  await tournamentManager.init();
+  // await tournamentManager.init();
 
   // Depending on division_id, select the appropriate division array
-  switch (division_id) {
-    case 1:
-      division = tournamentManager.division_1;
-      break;
-    case 2:
-      division = tournamentManager.division_2;
-      break;
-    case 3:
-      division = tournamentManager.division_3;
-      break;
-    default:
-      // Handle invalid division_id
-      break;
-  }
+  // switch (division_id) {
+  //   case 1:
+  //     division = tournamentManager.division_1;
+  //     break;
+  //   case 2:
+  //     division = tournamentManager.division_2;
+  //     break;
+  //   case 3:
+  //     division = tournamentManager.division_3;
+  //     break;
+  //   default:
+  //     // Handle invalid division_id
+  //     break;
+  // }
 
   return (
     <div className="w-[95vw] relative flex flex-col items-center">

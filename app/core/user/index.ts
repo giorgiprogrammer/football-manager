@@ -159,6 +159,7 @@ export function logOut() {
 }
 
 export async function insertNewTeam(
+  updateMode: "withNewTeamLogo" | "withoutNewTeamLogo",
   teams: TeamsData,
   username: string,
   teamData: {
@@ -185,11 +186,16 @@ export async function insertNewTeam(
     username
   )}/${teamData.teamName}.png`;
 
+  const previousTeamLogoUrlString = teams[teamData.teamName]?.logoKey;
+
   const newTeams = {
     ...teams,
     [teamData.teamName]: {
       name: teamData.teamName,
-      logoKey: teamLogoUrlString,
+      logoKey:
+        updateMode === "withoutNewTeamLogo"
+          ? previousTeamLogoUrlString
+          : teamLogoUrlString,
       formation: teamData.formation,
       formationProperties: {
         defence: "normal",
@@ -205,7 +211,7 @@ export async function insertNewTeam(
         shootAccuracy: 0,
         longPassChance: 0,
         shortPassChance: 0,
-        passDelay: 0,
+        passDelay: 20,
       },
       teamColor: teamData.color,
       teamSecondaryColor: teamData.secondaryColor,
@@ -228,11 +234,12 @@ export async function insertNewTeam(
 
   if (updateQuery.error) {
     console.log(updateQuery.error.message);
-    console.log("aaaaq vaaaar");
     return updateQuery.error;
   } else {
     console.log("Team Updated successfully");
   }
+
+  if (updateMode === "withoutNewTeamLogo") return;
 
   // Upload Team Logo
   const { data, error } = await supabase.storage

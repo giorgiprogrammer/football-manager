@@ -103,4 +103,4 @@ export class TournamentManager {
   calculateNextFixtures() {}
 }
 
-export const tournamentManager = new TournamentManager();
+// export const tournamentManager = new TournamentManager();

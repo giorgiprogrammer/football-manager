@@ -61,15 +61,17 @@ export default function TeamSettingsModal({
         {/* Teams */}
         <div className="mt-4 flex flex-col gap-[10px]">
           {Object.entries(appContext.userTeams).map((team, index) => {
-            console.log(team[1].logoKey);
             return (
               <div key={"team_" + index}>
                 <div className=" w-fit flex items-center">
                   {/* Logo */}
                   <div className="w-[35px] h-[35px] relative px-2 ">
                     <Image
+                      key={team[1].logoKey}
                       fill
-                      src={`${team[1].logoKey}`}
+                      src={`${
+                        team[1].logoKey
+                      }?timestamp=${new Date().getTime()}`}
                       sizes="100vw"
                       alt="youtube-icon"
                     />
@@ -157,11 +159,13 @@ export default function TeamSettingsModal({
                     )}
                   </div>{" "}
                 </div>
-                {openUpdateTeam[index] && <AddNewTeam team={team[1]} />}
+                {openUpdateTeam[index] && (
+                  <AddNewTeam operationIs="update" team={team[1]} />
+                )}
               </div>
             );
           })}
-          {openAddNewTeam && <AddNewTeam />}
+          {openAddNewTeam && <AddNewTeam operationIs="addNew" />}
           <div className="flex">
             <button
               onClick={() => {

@@ -1,15 +1,15 @@
-import { tournamentManager } from "@/app/core/tournamentsManager/tournametsManager";
+// import { tournamentManager } from "@/app/core/tournamentsManager/tournametsManager";
 import Link from "next/link";
 import { Fragment } from "react";
 
 export async function Division({ id }: { id: number }) {
-  const fixtures = (await tournamentManager.api.getFixtures(id)).data;
+  // const fixtures = (await tournamentManager.api.getFixtures(id)).data;
 
   return (
     <>
       <h4 className="text-xl font-semibold "> Division {id} </h4>
 
-      {fixtures
+      {/* {fixtures
         ? [...Array(9)].map((_, week) => (
             <Fragment key={`week_${week}`}>
               <h3 className="text-lg font-semibold  "> Week {week + 1} </h3>
@@ -58,7 +58,7 @@ export async function Division({ id }: { id: number }) {
                 ))}
             </Fragment>
           ))
-        : null}
+        : null} */}
     </>
   );
 }

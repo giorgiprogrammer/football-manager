@@ -31,8 +31,8 @@ export class Stadium extends Phaser.GameObjects.Container {
     public stadiumWidth: number,
     public stadiumHeight: number,
     public hostFansChance: number,
-    public hostFansColor: number,
-    public guestFanstColor: number
+    public hostFansColor: string,
+    public guestFanstColor: string
   ) {
     super(scene, x, y);
     scene.add.existing(this);

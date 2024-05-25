@@ -73,7 +73,7 @@ export class Team extends Phaser.GameObjects.Container {
         ? -calculatePercentage(50, this.stadium.stadiumWidth)
         : calculatePercentage(50, this.stadium.stadiumWidth),
       0,
-      this.teamData.logoKey,
+      this.teamData.name,
       "goalkeeper",
       this.isHost,
       this.stadium,

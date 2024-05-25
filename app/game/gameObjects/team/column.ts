@@ -105,7 +105,7 @@ export class Column extends Phaser.GameObjects.Container {
         this.scene,
         posX,
         y,
-        this.team.logoKey,
+        this.team.name,
         this.type,
         this.isHost,
         this.stadium,
@@ -113,6 +113,7 @@ export class Column extends Phaser.GameObjects.Container {
       );
       this.add(footballer);
       this.footballers.push(footballer);
+
       y += padding;
 
       if (i === 0) {

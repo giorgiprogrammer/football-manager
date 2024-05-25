@@ -30,6 +30,29 @@ export default class GamePlay extends Phaser.Scene {
     this.match = new Match(this, matchData);
     this.canvasScene = this.scene.get("CanvasScene") as CavnasScene;
     this.gameManager = new GameManager(this, this.canvasScene, this.match);
+
+    this.addMasks();
+  }
+
+  addMasks() {
+    this.match.hostTeam.footballers.forEach((footballer) => {
+      const circle = this.add
+        .graphics()
+        .setPosition(
+          footballer.getBounds().centerX,
+          footballer.getBounds().centerY
+        )
+        .fillCircle(0, 0, 13);
+
+      footballer.setMask(circle.createGeometryMask());
+
+      this.scene.scene.events.on("update", () => {
+        circle.setPosition(
+          footballer.getBounds().centerX,
+          footballer.getBounds().centerY
+        );
+      });
+    });
   }
 
   addBackground() {
