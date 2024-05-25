@@ -1,4 +1,5 @@
 import { calculatePercentage, isInRange, makeNegative } from "@/app/utils/math";
+import { it } from "node:test";
 
 export class Selector extends Phaser.GameObjects.Container {
   forwardArrowButton!: Phaser.GameObjects.Image;
@@ -179,7 +180,7 @@ export class Selector extends Phaser.GameObjects.Container {
         );
       } else {
         item.image.setAlpha(0);
-        item.image.setScale(0);
+        // item.image.setScale(0);
       }
       item.image.setVisible(true);
 

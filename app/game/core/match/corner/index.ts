@@ -27,22 +27,42 @@ export function makeCornerArrangement(
   isFinishedCorner = false;
   if (horizontalSide === "left" && verticalSide === "top") {
     cornerFootballer = scene.add
-      .image(match.ball.x - 13, match.ball.y - 13, matchData.guestTeam.logoKey)
+      .image(match.ball.x - 13, match.ball.y - 13, matchData.guestTeam.name)
       .setOrigin(0.5, 0.5)
       .setDisplaySize(
         calculatePercentage(3, match.stadium.stadiumWidth),
         calculatePercentage(3, match.stadium.stadiumWidth)
       );
+
+    // Add Mask
+    const circle = scene.add
+      .graphics()
+      .setPosition(
+        cornerFootballer.getBounds().centerX,
+        cornerFootballer.getBounds().centerY
+      )
+      .fillCircle(0, 0, 13);
+    cornerFootballer.setMask(circle.createGeometryMask());
 
     defenderFootballer = new CornerFootballer(
       scene,
       match.stadium.leftGoalPost.getBounds().centerX + 60,
       match.stadium.leftGoalPost.getBounds().centerY - 50,
-      matchData.hostTeam.logoKey,
+      matchData.hostTeam.name,
       "defender",
       match.stadium,
       match.ball
     );
+
+    // Add Mask
+    const circle_2 = scene.add
+      .graphics()
+      .setPosition(
+        defenderFootballer.getBounds().centerX,
+        defenderFootballer.getBounds().centerY
+      )
+      .fillCircle(0, 0, 13);
+    defenderFootballer.setMask(circle_2.createGeometryMask());
 
     defenderFootballerTween = scene.tweens.add({
       targets: defenderFootballer,
@@ -56,11 +76,21 @@ export function makeCornerArrangement(
       scene,
       match.stadium.leftGoalPost.getBounds().centerX + 80,
       match.stadium.leftGoalPost.getBounds().centerY,
-      matchData.guestTeam.logoKey,
+      matchData.guestTeam.name,
       "attacker",
       match.stadium,
       match.ball
     );
+
+    // Add Mask
+    const circle_3 = scene.add
+      .graphics()
+      .setPosition(
+        attackerFootballer.getBounds().centerX,
+        attackerFootballer.getBounds().centerY
+      )
+      .fillCircle(0, 0, 13);
+    attackerFootballer.setMask(circle_3.createGeometryMask());
 
     attackerFootballerTween = scene.tweens.add({
       targets: attackerFootballer,
@@ -68,23 +98,44 @@ export function makeCornerArrangement(
       yoyo: true,
       repeat: -1,
       duration: 1000,
+    });
+
+    scene.events.on(Phaser.Scenes.Events.UPDATE, () => {
+      circle_2.setPosition(
+        defenderFootballer.getBounds().centerX,
+        defenderFootballer.getBounds().centerY
+      );
+      circle_3.setPosition(
+        attackerFootballer.getBounds().centerX,
+        attackerFootballer.getBounds().centerY
+      );
     });
   }
 
   if (horizontalSide === "left" && verticalSide === "bottom") {
     cornerFootballer = scene.add
-      .image(match.ball.x - 13, match.ball.y + 13, matchData.guestTeam.logoKey)
+      .image(match.ball.x - 13, match.ball.y + 13, matchData.guestTeam.name)
       .setOrigin(0.5, 0.5)
       .setDisplaySize(
         calculatePercentage(3, match.stadium.stadiumWidth),
         calculatePercentage(3, match.stadium.stadiumWidth)
       );
 
+    // Add Mask
+    const circle = scene.add
+      .graphics()
+      .setPosition(
+        cornerFootballer.getBounds().centerX,
+        cornerFootballer.getBounds().centerY
+      )
+      .fillCircle(0, 0, 13);
+    cornerFootballer.setMask(circle.createGeometryMask());
+
     defenderFootballer = new CornerFootballer(
       scene,
       match.stadium.leftGoalPost.getBounds().centerX + 60,
       match.stadium.leftGoalPost.getBounds().centerY + 50,
-      matchData.hostTeam.logoKey,
+      matchData.hostTeam.name,
       "defender",
       match.stadium,
       match.ball
@@ -98,11 +149,21 @@ export function makeCornerArrangement(
       duration: 800,
     });
 
+    // Add Mask
+    const circle_2 = scene.add
+      .graphics()
+      .setPosition(
+        defenderFootballer.getBounds().centerX,
+        defenderFootballer.getBounds().centerY
+      )
+      .fillCircle(0, 0, 13);
+    defenderFootballer.setMask(circle_2.createGeometryMask());
+
     attackerFootballer = new CornerFootballer(
       scene,
       match.stadium.leftGoalPost.getBounds().centerX + 80,
       match.stadium.leftGoalPost.getBounds().centerY,
-      matchData.guestTeam.logoKey,
+      matchData.guestTeam.name,
       "attacker",
       match.stadium,
       match.ball
@@ -115,26 +176,67 @@ export function makeCornerArrangement(
       repeat: -1,
       duration: 1000,
     });
+
+    // Add Mask
+    const circle_3 = scene.add
+      .graphics()
+      .setPosition(
+        attackerFootballer.getBounds().centerX,
+        attackerFootballer.getBounds().centerY
+      )
+      .fillCircle(0, 0, 13);
+    attackerFootballer.setMask(circle_3.createGeometryMask());
+
+    scene.events.on(Phaser.Scenes.Events.UPDATE, () => {
+      circle_2.setPosition(
+        defenderFootballer.getBounds().centerX,
+        defenderFootballer.getBounds().centerY
+      );
+      circle_3.setPosition(
+        attackerFootballer.getBounds().centerX,
+        attackerFootballer.getBounds().centerY
+      );
+    });
   }
 
   if (horizontalSide === "right" && verticalSide === "top") {
     cornerFootballer = scene.add
-      .image(match.ball.x + 13, match.ball.y - 13, matchData.hostTeam.logoKey)
+      .image(match.ball.x + 13, match.ball.y - 13, matchData.hostTeam.name)
       .setOrigin(0.5, 0.5)
       .setDisplaySize(
         calculatePercentage(3, match.stadium.stadiumWidth),
         calculatePercentage(3, match.stadium.stadiumWidth)
       );
+
+    // Add Mask
+    const circle = scene.add
+      .graphics()
+      .setPosition(
+        cornerFootballer.getBounds().centerX,
+        cornerFootballer.getBounds().centerY
+      )
+      .fillCircle(0, 0, 13);
+    cornerFootballer.setMask(circle.createGeometryMask());
 
     defenderFootballer = new CornerFootballer(
       scene,
       match.stadium.rightGoalPost.getBounds().centerX - 60,
       match.stadium.rightGoalPost.getBounds().centerY - 50,
-      matchData.guestTeam.logoKey,
+      matchData.guestTeam.name,
       "defender",
       match.stadium,
       match.ball
     );
+
+    // Add Mask
+    const circle_2 = scene.add
+      .graphics()
+      .setPosition(
+        defenderFootballer.getBounds().centerX,
+        defenderFootballer.getBounds().centerY
+      )
+      .fillCircle(0, 0, 13);
+    defenderFootballer.setMask(circle_2.createGeometryMask());
 
     defenderFootballerTween = scene.tweens.add({
       targets: defenderFootballer,
@@ -148,11 +250,21 @@ export function makeCornerArrangement(
       scene,
       match.stadium.rightGoalPost.getBounds().centerX - 80,
       match.stadium.rightGoalPost.getBounds().centerY,
-      matchData.hostTeam.logoKey,
+      matchData.hostTeam.name,
       "attacker",
       match.stadium,
       match.ball
     );
+
+    // Add Mask
+    const circle_3 = scene.add
+      .graphics()
+      .setPosition(
+        attackerFootballer.getBounds().centerX,
+        attackerFootballer.getBounds().centerY
+      )
+      .fillCircle(0, 0, 13);
+    attackerFootballer.setMask(circle_3.createGeometryMask());
 
     attackerFootballerTween = scene.tweens.add({
       targets: attackerFootballer,
@@ -161,26 +273,57 @@ export function makeCornerArrangement(
       repeat: -1,
       duration: 1000,
     });
+
+    scene.events.on(Phaser.Scenes.Events.UPDATE, () => {
+      circle_2.setPosition(
+        defenderFootballer.getBounds().centerX,
+        defenderFootballer.getBounds().centerY
+      );
+      circle_3.setPosition(
+        attackerFootballer.getBounds().centerX,
+        attackerFootballer.getBounds().centerY
+      );
+    });
   }
 
   if (horizontalSide === "right" && verticalSide === "bottom") {
     cornerFootballer = scene.add
-      .image(match.ball.x + 13, match.ball.y + 13, matchData.hostTeam.logoKey)
+      .image(match.ball.x + 13, match.ball.y + 13, matchData.hostTeam.name)
       .setOrigin(0.5, 0.5)
       .setDisplaySize(
         calculatePercentage(3, match.stadium.stadiumWidth),
         calculatePercentage(3, match.stadium.stadiumWidth)
       );
 
+    // Add Mask
+    const circle = scene.add
+      .graphics()
+      .setPosition(
+        cornerFootballer.getBounds().centerX,
+        cornerFootballer.getBounds().centerY
+      )
+      .fillCircle(0, 0, 13);
+    cornerFootballer.setMask(circle.createGeometryMask());
+
     defenderFootballer = new CornerFootballer(
       scene,
       match.stadium.rightGoalPost.getBounds().centerX - 60,
       match.stadium.rightGoalPost.getBounds().centerY + 50,
-      matchData.guestTeam.logoKey,
+      matchData.guestTeam.name,
       "defender",
       match.stadium,
       match.ball
     );
+
+    // Add Mask
+    const circle_2 = scene.add
+      .graphics()
+      .setPosition(
+        defenderFootballer.getBounds().centerX,
+        defenderFootballer.getBounds().centerY
+      )
+      .fillCircle(0, 0, 13);
+    defenderFootballer.setMask(circle_2.createGeometryMask());
 
     defenderFootballerTween = scene.tweens.add({
       targets: defenderFootballer,
@@ -194,11 +337,21 @@ export function makeCornerArrangement(
       scene,
       match.stadium.rightGoalPost.getBounds().centerX - 80,
       match.stadium.rightGoalPost.getBounds().centerY,
-      matchData.hostTeam.logoKey,
+      matchData.hostTeam.name,
       "attacker",
       match.stadium,
       match.ball
     );
+
+    // Add Mask
+    const circle_3 = scene.add
+      .graphics()
+      .setPosition(
+        attackerFootballer.getBounds().centerX,
+        attackerFootballer.getBounds().centerY
+      )
+      .fillCircle(0, 0, 13);
+    attackerFootballer.setMask(circle_3.createGeometryMask());
 
     attackerFootballerTween = scene.tweens.add({
       targets: attackerFootballer,
@@ -206,6 +359,17 @@ export function makeCornerArrangement(
       yoyo: true,
       repeat: -1,
       duration: 1000,
+    });
+
+    scene.events.on(Phaser.Scenes.Events.UPDATE, () => {
+      circle_2.setPosition(
+        defenderFootballer.getBounds().centerX,
+        defenderFootballer.getBounds().centerY
+      );
+      circle_3.setPosition(
+        attackerFootballer.getBounds().centerX,
+        attackerFootballer.getBounds().centerY
+      );
     });
   }
 

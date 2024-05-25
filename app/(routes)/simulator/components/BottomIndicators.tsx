@@ -27,7 +27,11 @@ export default function BottomIndicators() {
             );
             return;
           }
-          gameConfig.menuTeams = appContext.userTeams;
+          gameConfig.menuTeams = Object.keys(appContext.userTeams)
+            .filter(
+              (teamName) => appContext.userTeams[teamName].selectedForMenu
+            )
+            .map((teamName) => appContext.userTeams[teamName]);
 
           router.push("/game");
         }}

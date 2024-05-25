@@ -9,6 +9,7 @@ import GetUserInformation from "../components/global/getUserInformation";
 import { AppContext } from "../context/appContext";
 import { useRouter } from "next/navigation";
 import { gameConfig } from "./config/gameConfig";
+import { TeamsData } from "../config/initialTeamsData";
 
 let Preload: any;
 let Menu: any;
@@ -23,7 +24,7 @@ export const Game = () => {
 
   const searchParams = useSearchParams();
 
-  if (searchParams.get("matchMode") === undefined) {
+  if (searchParams.get("matchMode") === null) {
     matchData.matchIsFor = "Quiq Match";
   }
 
@@ -80,7 +81,7 @@ export const Game = () => {
         backgroundColor: 0x08170f,
         scene: [Preload, Menu, GamePlay, CanvasScene],
       });
-      // return () => game?.destroy(true, false);
+      return () => game?.destroy(true, false);
     });
   }, []);
 

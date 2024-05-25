@@ -22,6 +22,8 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
 
   tweenForFaul!: Phaser.Tweens.Tween;
 
+  circle!: Phaser.GameObjects.Arc;
+
   constructor(
     scene: Phaser.Scene,
     x: number,
@@ -32,7 +34,7 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
     public stadium: Stadium,
     public properties: TeamTechniqueProperties
   ) {
-    super(scene, x, y, key);
+    super(scene, x, y, key, undefined);
     scene.physics.add.existing(this);
 
     this.init();
@@ -131,6 +133,7 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
     const randomY = getRandomNumber(0, 1) === 0 ? y : -y;
 
     this.passSound.play();
+
     this.ball.kick(
       interpolate(this.properties.passSpeeed, 140, 260),
       footballer.getBounds().centerX,

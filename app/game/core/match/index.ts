@@ -222,8 +222,8 @@ export class Match {
       850,
       400,
       50,
-      Number(this.matchData.hostTeam.teamColor),
-      Number(this.matchData.guestTeam.teamColor)
+      this.matchData.hostTeam.teamColor,
+      this.matchData.guestTeam.teamColor
     );
   }
 

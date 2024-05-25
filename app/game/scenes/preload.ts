@@ -2,6 +2,7 @@ import { TeamData, TeamsData } from "@/app/config/initialTeamsData";
 import { gameConfig } from "../config/gameConfig";
 import { WebFontFile } from "../helper/webFontLoader";
 import Phaser from "phaser";
+import { matchData } from "@/app/config/matchData";
 
 export default class Preload extends Phaser.Scene {
   constructor() {
@@ -16,9 +17,13 @@ export default class Preload extends Phaser.Scene {
       "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexglowfilter2pipelineplugin.min.js",
       true
     );
+
     // Load TeamLogos
     Object.entries(gameConfig.menuTeams as TeamsData).forEach((team) => {
-      this.load.image(`${team[1].name}`, `${team[1].logoKey}`);
+      this.load.image(
+        `${team[1].name}`,
+        `${team[1].logoKey}?timestamp=${new Date().getTime()}`
+      );
     });
 
     // //Choacs
@@ -26,11 +31,11 @@ export default class Preload extends Phaser.Scene {
     // this.load.image("mourinho-default", "image/coachs/mourinho-default.jpg");
 
     // //sound Effects
-    // this.load.audio("passSound", ["sounds/pass.mp3"]);
-    // this.load.audio("shootSound", ["sounds/shoot.mp3"]);
-    // this.load.audio("goalSelebrationSound", ["sounds/goalSelebration.mp3"]);
-    // this.load.audio("refereeSound", ["sounds/referee.mp3"]);
-    // this.load.audio("fansSound", ["sounds/fans.mp3"]);
+    this.load.audio("passSound", ["sounds/pass.mp3"]);
+    this.load.audio("shootSound", ["sounds/shoot.mp3"]);
+    this.load.audio("goalSelebrationSound", ["sounds/goalSelebration.mp3"]);
+    this.load.audio("refereeSound", ["sounds/referee.mp3"]);
+    this.load.audio("fansSound", ["sounds/fans.mp3"]);
 
     // //Font
     // // this.load.addFile(new WebFontFile(this.load, "Rubik Mono One"));
@@ -59,11 +64,11 @@ export default class Preload extends Phaser.Scene {
     this.load.image("scene-light-bottom", "image/ui/scene-light-bottom.png");
 
     // // Fans
-    // this.load.image("fan", "image/ui/fan.png");
-    // this.load.image("fanFromLeftSide", "image/ui/fanFromLeftSide.png");
-    // this.load.image("fanFromBottomSide", "image/ui/fanFromBottomSide.png");
-    // this.load.image("fanFromTopSide", "image/ui/fanFromTopSide.png");
-    // this.load.image("fanFromRightSide", "image/ui/fanFromRightSide.png");
+    this.load.image("fan", "image/ui/fan.png");
+    this.load.image("fanFromLeftSide", "image/ui/fanFromLeftSide.png");
+    this.load.image("fanFromBottomSide", "image/ui/fanFromBottomSide.png");
+    this.load.image("fanFromTopSide", "image/ui/fanFromTopSide.png");
+    this.load.image("fanFromRightSide", "image/ui/fanFromRightSide.png");
     // // Nations
     // this.load.image("algeria", "image/teamLogos/nations/Algeria.png");
     // this.load.image("argentina", "image/teamLogos/nations/Argentina.png");

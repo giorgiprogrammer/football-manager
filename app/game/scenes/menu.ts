@@ -9,7 +9,7 @@ import { calculatePercentage, mapToPercentageInRange } from "@/app/utils/math";
 import { SettingsModal } from "../ui/components/menuModal/settingsModal";
 import { TacticsModal } from "../ui/components/menuModal/tacticsModal";
 import { deepCopy } from "@/app/utils/helperFunctions";
-import { matchData } from "@/app/config/matchData";
+import { MatchData, matchData } from "@/app/config/matchData";
 import { tournamenrDataConfig } from "../config/tournamentDataConfig";
 import { gameConfig } from "../config/gameConfig";
 
@@ -48,17 +48,20 @@ export default class Menu extends Phaser.Scene {
         this.scene.restart();
       }, 1000);
     });
+
     this.addUI();
+
     this.updateSelectedTeams();
     this.events.on("rotate", () => {
       this.updateSelectedTeams();
+      this.setDefaultParametersforTeams();
     });
+
     this.addAnimationEffectImage();
     this.setDefaultParametersforTeams();
   }
 
   setDefaultParametersforTeams() {
-    // this.team!.strength = interpolate(this.indicatorValue, 800, 2130);
     matchData.hostTeam.techniqueProperties.goalKeeperMotionSpeed =
       mapToPercentageInRange(matchData.hostTeam.strength, 800, 2130);
     matchData.hostTeam.techniqueProperties.passAccuracy =
@@ -75,6 +78,7 @@ export default class Menu extends Phaser.Scene {
     );
     matchData.hostTeam.techniqueProperties.shootAccuracy =
       mapToPercentageInRange(matchData.hostTeam.strength, 800, 2130);
+
     // for Gues Team
     matchData.guestTeam.techniqueProperties.goalKeeperMotionSpeed =
       mapToPercentageInRange(matchData.guestTeam.strength, 800, 2130);
@@ -106,10 +110,15 @@ export default class Menu extends Phaser.Scene {
   }
 
   updateSelectedTeams() {
-    this.selectedHostTeam =
-      initialTeamsData[this.hostTeamsSelector.selectedItem.name];
-    this.selectedGuestTeam =
-      initialTeamsData[this.guestTeamsSelector.selectedItem.name];
+    const menuTeams = gameConfig.menuTeams as TeamsData;
+
+    this.selectedHostTeam = Object.values(menuTeams).find(
+      (team) => team.name === this.hostTeamsSelector.selectedItem.name
+    )!;
+
+    this.selectedGuestTeam = Object.values(menuTeams).find(
+      (team) => team.name === this.guestTeamsSelector.selectedItem.name
+    )!;
 
     matchData.hostTeam = deepCopy<TeamData>(this.selectedHostTeam);
     matchData.guestTeam = deepCopy<TeamData>(this.selectedGuestTeam);
@@ -160,33 +169,15 @@ export default class Menu extends Phaser.Scene {
   }
 
   addTeamSelectors() {
-    // Prepare Data
-    // const leftTeamLogos = this.add.group();
-    // const leftTeamsSelectorData = Object.entries(
-    //   gameConfig.menuTeams as TeamsData
-    // ).map(([name, data]) => {
-    //   return {
-    //     image: leftTeamLogos.get(0, 0, data.name, undefined, false),
-    //     name: name,
-    //   };
-    // });
-    // const rightTeamLogos = this.add.group();
-    // const rightTeamsSelectorData = Object.entries(
-    //   gameConfig.menuTeams as TeamsData
-    // ).map(([name, data]) => {
-    //   return {
-    //     image: rightTeamLogos.get(0, 0, data.name, undefined, false),
-    //     name: name,
-    //   };
-    // });
     // Host Teams Selector
     const leftTeamsSelectorData = Object.entries(
       gameConfig.menuTeams as TeamsData
     ).map(([name, data]) => {
-      const image = this.add.image(0, 0, data.name).setDisplaySize(40, 40);
+      const image = this.add.image(0, 0, data.name).setDisplaySize(42, 42);
+
       return {
         image: image,
-        name: name,
+        name: data.name,
       };
     });
 
@@ -203,17 +194,16 @@ export default class Menu extends Phaser.Scene {
 
     this.hostTeamsSelector.setPosition(
       60,
-      -calculatePercentage(40, this.game.canvas.height)
+      -calculatePercentage(25, this.game.canvas.height)
     );
-
     // Host Teams Selector
     const rightTeamsSelectorData = Object.entries(
       gameConfig.menuTeams as TeamsData
     ).map(([name, data]) => {
-      const image = this.add.image(0, 0, data.name).setDisplaySize(40, 40);
+      const image = this.add.image(0, 0, data.name).setDisplaySize(42, 42);
       return {
         image: image,
-        name: name,
+        name: data.name,
       };
     });
 
@@ -231,7 +221,7 @@ export default class Menu extends Phaser.Scene {
 
     this.guestTeamsSelector.setPosition(
       this.game.canvas.width - 60,
-      -calculatePercentage(40, this.game.canvas.height)
+      -calculatePercentage(25, this.game.canvas.height)
     );
   }
 
@@ -337,13 +327,6 @@ export default class Menu extends Phaser.Scene {
     )
       .setInteractive()
       .on(Phaser.Input.Events.POINTER_DOWN, () => {
-        const asd = gameConfig.menuTeams as TeamsData;
-        console.log(asd);
-        this.selectedHostTeam = asd["Dinamo Tbilisi"];
-        this.selectedGuestTeam = asd.Liverpool;
-
-        console.log(this.selectedHostTeam, this.selectedGuestTeam);
-
         this.tacticsModal.setVisible(true);
         this.tacticsModal.setTeams(
           this.selectedHostTeam,

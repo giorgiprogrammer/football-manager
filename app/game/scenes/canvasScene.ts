@@ -2,7 +2,7 @@ import { calculatePercentage } from "@/app/utils/math";
 import GamePlay from "./gameplay";
 import { matchData, matchStatsProps } from "@/app/config/matchData";
 import { tournamenrDataConfig } from "../config/tournamentDataConfig";
-import { tournamentManager } from "@/app/core/tournamentsManager/tournametsManager";
+// import { tournamentManager } from "@/app/core/tournamentsManager/tournametsManager";
 import { MatchStatsModal } from "../ui/components/matchStatsModal";
 
 export default class CavnasScene extends Phaser.Scene {
@@ -67,21 +67,21 @@ export default class CavnasScene extends Phaser.Scene {
   }
 
   async addStartModal() {
-    await tournamentManager.init();
-    let division = undefined;
-    switch (tournamenrDataConfig.division) {
-      case 1:
-        division = tournamentManager.division_1;
-        break;
-      case 2:
-        division = tournamentManager.division_2;
-        break;
-      case 3:
-        division = tournamentManager.division_3;
-        break;
-      default:
-        break;
-    }
+    // await tournamentManager.init();
+    // let division = undefined;
+    // switch (tournamenrDataConfig.division) {
+    //   case 1:
+    //     division = tournamentManager.division_1;
+    //     break;
+    //   case 2:
+    //     division = tournamentManager.division_2;
+    //     break;
+    //   case 3:
+    //     division = tournamentManager.division_3;
+    //     break;
+    //   default:
+    //     break;
+    // }
 
     this.startModal = this.add.container(
       this.game.canvas.width / 2,
@@ -114,24 +114,24 @@ export default class CavnasScene extends Phaser.Scene {
       .setOrigin(0, 0.5);
     this.startModal.add(hostTeamName);
 
-    division?.findIndex((team, index) => {
-      if (team.team_name === matchData.hostTeam.name) {
-        const hostTeamPositionText = this.add
-          .text(
-            hostTeamName.x,
-            calculatePercentage(10, this.startModal.getBounds().height),
-            `${index + 1}th`,
-            {
-              fontFamily: "Silkscreen",
-              fontSize: calculatePercentage(1.5, this.game.canvas.width),
-              color: "#EB5344",
-              align: "right",
-            }
-          )
-          .setOrigin(0, 0);
-        this.startModal.add(hostTeamPositionText);
-      }
-    });
+    // division?.findIndex((team, index) => {
+    //   if (team.team_name === matchData.hostTeam.name) {
+    //     const hostTeamPositionText = this.add
+    //       .text(
+    //         hostTeamName.x,
+    //         calculatePercentage(10, this.startModal.getBounds().height),
+    //         `${index + 1}th`,
+    //         {
+    //           fontFamily: "Silkscreen",
+    //           fontSize: calculatePercentage(1.5, this.game.canvas.width),
+    //           color: "#EB5344",
+    //           align: "right",
+    //         }
+    //       )
+    //       .setOrigin(0, 0);
+    //     this.startModal.add(hostTeamPositionText);
+    //   }
+    // });
 
     const guestTeamName = this.add
       .text(
@@ -148,24 +148,24 @@ export default class CavnasScene extends Phaser.Scene {
       .setOrigin(1, 0.5);
     this.startModal.add(guestTeamName);
 
-    division?.findIndex((team, index) => {
-      if (team.team_name === matchData.guestTeam.name) {
-        const guestTeamPositionText = this.add
-          .text(
-            guestTeamName.x,
-            calculatePercentage(10, this.startModal.getBounds().height),
-            `${index + 1}th`,
-            {
-              fontFamily: "Silkscreen",
-              fontSize: calculatePercentage(1.5, this.game.canvas.width),
-              color: "#EB5344",
-              align: "left",
-            }
-          )
-          .setOrigin(1, 0);
-        this.startModal.add(guestTeamPositionText);
-      }
-    });
+    // division?.findIndex((team, index) => {
+    //   if (team.team_name === matchData.guestTeam.name) {
+    //     const guestTeamPositionText = this.add
+    //       .text(
+    //         guestTeamName.x,
+    //         calculatePercentage(10, this.startModal.getBounds().height),
+    //         `${index + 1}th`,
+    //         {
+    //           fontFamily: "Silkscreen",
+    //           fontSize: calculatePercentage(1.5, this.game.canvas.width),
+    //           color: "#EB5344",
+    //           align: "left",
+    //         }
+    //       )
+    //       .setOrigin(1, 0);
+    //     this.startModal.add(guestTeamPositionText);
+    //   }
+    // });
 
     const vsText = this.add
       .text(0, 0, "VS", {
@@ -213,20 +213,20 @@ export default class CavnasScene extends Phaser.Scene {
 
     this.startModal.add(this.startButton);
 
-    const weekText = this.add
-      .text(
-        0,
-        -calculatePercentage(32, this.startModal.getBounds().height),
-        `Week ${tournamenrDataConfig.week}`,
-        {
-          fontFamily: "Silkscreen",
-          fontSize: calculatePercentage(3, this.game.canvas.width),
-          color: "#DAF2E9",
-          align: "center",
-        }
-      )
-      .setOrigin(0.5);
-    this.startModal.add(weekText);
+    // const weekText = this.add
+    //   .text(
+    //     0,
+    //     -calculatePercentage(32, this.startModal.getBounds().height),
+    //     `Week ${tournamenrDataConfig.week}`,
+    //     {
+    //       fontFamily: "Silkscreen",
+    //       fontSize: calculatePercentage(3, this.game.canvas.width),
+    //       color: "#DAF2E9",
+    //       align: "center",
+    //     }
+    //   )
+    //   .setOrigin(0.5);
+    // this.startModal.add(weekText);
   }
 
   openMatchStatsModal(
@@ -300,19 +300,34 @@ export default class CavnasScene extends Phaser.Scene {
         this.game.canvas.width / 2 -
           calculatePercentage(9, this.game.canvas.width),
         calculatePercentage(5, this.game.canvas.height),
-        matchData.hostTeam.logoKey
+        matchData.hostTeam.name
       )
-      .setScale(calculatePercentage(0.05, this.game.canvas.width));
+      .setDisplaySize(
+        calculatePercentage(2, this.game.canvas.width),
+        calculatePercentage(2, this.game.canvas.width)
+      );
     this.topIndicators.add(hostTeamIcon);
+
+    const circle = this.add
+      .graphics()
+      .setPosition(
+        hostTeamIcon.getBounds().centerX,
+        hostTeamIcon.getBounds().centerY
+      )
+      .fillCircle(0, 0, 13);
+    hostTeamIcon.setMask(circle.createGeometryMask());
 
     const guestTeam = this.add
       .image(
         this.game.canvas.width / 2 +
           calculatePercentage(9, this.game.canvas.width),
         calculatePercentage(5, this.game.canvas.height),
-        matchData.guestTeam.logoKey
+        matchData.guestTeam.name
       )
-      .setScale(calculatePercentage(0.05, this.game.canvas.width));
+      .setDisplaySize(
+        calculatePercentage(2, this.game.canvas.width),
+        calculatePercentage(2, this.game.canvas.width)
+      );
     this.topIndicators.add(guestTeam);
 
     this.timerText = this.add
