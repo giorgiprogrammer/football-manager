@@ -10,13 +10,13 @@ export default function WebIndicators() {
   const appContext = useContext(AppContext);
 
   return (
-    <div className=" fixed bottom-0 w-[10%] h-14 flex items-end justify-between">
+    <div className="fixed left-0 bottom-0 w-[10%] h-14 flex items-end justify-between">
       {/* Background */}
       {/* <div className=" absolute bg-slate-950 opacity-90 w-full h-full"></div> */}
 
       {/* Menu Button */}
       {appContext.selectedMenuItem === "" ? (
-        <div>
+        <div className=" w-fit fixed">
           <Hamburger
             color={appContext.menuIsOpen ? "#ffffff" : "#000000"}
             direction="right"
