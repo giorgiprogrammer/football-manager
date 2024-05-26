@@ -9,7 +9,6 @@ import GetUserInformation from "../components/global/getUserInformation";
 import { AppContext } from "../context/appContext";
 import { useRouter } from "next/navigation";
 import { gameConfig } from "./config/gameConfig";
-import { TeamsData } from "../config/initialTeamsData";
 
 let Preload: any;
 let Menu: any;
@@ -93,6 +92,7 @@ export const Game = () => {
   }, [showGetUserInformation]);
 
   const [deviceOrientation, setDeviceOrientation] = useState(() => {
+    if (typeof window === "undefined") return;
     return window.innerWidth > window.innerHeight ? "landscape" : "portrait";
   });
 
@@ -132,6 +132,7 @@ export const Game = () => {
     return () => {
       if (phaserGame) {
         phaserGame.destroy(true, true);
+        window.location.reload();
       }
     };
   }, [phaserGame]);

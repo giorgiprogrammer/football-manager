@@ -1,11 +1,12 @@
 import { Ball } from "../gameObjects/ball";
 import { Stadium } from "../gameObjects/stadium";
 import { Footballer } from "../gameObjects/team/footballer";
+import GamePlay from "../scenes/gameplay";
 import { Match } from "./match";
 
 export class CollisionDetections {
   constructor(
-    public scene: Phaser.Scene,
+    public scene: GamePlay,
     public ball: Ball,
     public stadium: Stadium,
     public match: Match
@@ -16,6 +17,8 @@ export class CollisionDetections {
   init() {
     this.scene.physics.add.collider(this.ball, this.stadium.colliders, () => {
       if (!this.match.isPlaying) return;
+      this.scene.gameManager.match.soundManager.playBorderSound();
+
       this.ball.changeRotation();
     });
     this.scene.physics.add.collider(
@@ -24,6 +27,7 @@ export class CollisionDetections {
       () => {
         if (!this.match.isPlaying) return;
 
+        this.scene.gameManager.match.soundManager.playGoalBorderSound();
         this.ball.changeRotation();
       }
     );
@@ -33,6 +37,7 @@ export class CollisionDetections {
       () => {
         if (!this.match.isPlaying) return;
 
+        this.scene.gameManager.match.soundManager.playGoalBorderSound();
         this.ball.changeRotation();
       }
     );
@@ -73,6 +78,7 @@ export class CollisionDetections {
       this.stadium.leftCornerColliders,
       () => {
         if (!this.match.isPlaying) return;
+        this.scene.gameManager.match.soundManager.playGoalBorderSound();
 
         this.ball.changeRotation();
 
@@ -92,6 +98,7 @@ export class CollisionDetections {
       this.stadium.rightCornerColliders,
       () => {
         if (!this.match.isPlaying) return;
+        this.scene.gameManager.match.soundManager.playGoalBorderSound();
 
         this.ball.changeRotation();
 

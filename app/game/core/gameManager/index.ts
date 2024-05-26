@@ -5,6 +5,7 @@ import { Match } from "../match";
 import { calculatePercentage } from "@/app/utils/math";
 import { insertMatchResult } from "@/app/services/supabase/tournamentApi";
 import { tournamenrDataConfig } from "../../config/tournamentDataConfig";
+import { SoundManager } from "../soundManager";
 
 export class GameManager {
   halfTimerIsPassed = false;
@@ -14,6 +15,8 @@ export class GameManager {
 
   ballPossessionTimeForHostTeam = 0;
   ballPossessionTimeForGuestTeam = 0;
+
+  soundManager!: SoundManager;
 
   constructor(
     public gamePlayScene: GamePlay,
@@ -34,6 +37,8 @@ export class GameManager {
 
     this.addMatchTimer();
     this.addEventListeners();
+
+    this.soundManager = new SoundManager(this.gamePlayScene);
   }
 
   addEventListeners() {
@@ -168,6 +173,7 @@ export class GameManager {
     setTimeout(() => {
       this.gamePlayScene.match.startPlay("host");
       this.canvasScene.timerIsOnn = true;
+      this.soundManager.playMatchStartSound();
     }, 1000);
   }
 
@@ -177,7 +183,10 @@ export class GameManager {
       // this.canvasScene.matchStatsModal.destroy(true);
       // this.match.startPenalties();
       // return;
-      this.startSecondHalf();
+      setTimeout(() => {
+        this.soundManager.playMatchStartSound();
+        this.startSecondHalf();
+      }, 1000);
       return;
     }
 
@@ -199,6 +208,7 @@ export class GameManager {
 
   halfTimeEnd() {
     this.canvasScene.timerIsOnn = false;
+    this.soundManager.playfirstHalfEndSound();
 
     matchStats.guesTeamStats.ballPossession = Math.floor(
       (this.ballPossessionTimeForGuestTeam / 45) * 100

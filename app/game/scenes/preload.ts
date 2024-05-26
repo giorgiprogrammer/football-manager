@@ -12,11 +12,11 @@ export default class Preload extends Phaser.Scene {
   preload() {
     this.load.setPath(`../../game/assets/`);
     // Plugins
-    this.load.plugin(
-      "rexglowfilter2pipelineplugin",
-      "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexglowfilter2pipelineplugin.min.js",
-      true
-    );
+    // this.load.plugin(
+    //   "rexglowfilter2pipelineplugin",
+    //   "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexglowfilter2pipelineplugin.min.js",
+    //   true
+    // );
 
     // Load TeamLogos
     Object.entries(gameConfig.menuTeams as TeamsData).forEach((team) => {
@@ -30,12 +30,22 @@ export default class Preload extends Phaser.Scene {
     // this.load.image("guardiola-default", "image/coachs/guardiola-default.jpg");
     // this.load.image("mourinho-default", "image/coachs/mourinho-default.jpg");
 
-    // //sound Effects
+    // sound Effects
     this.load.audio("passSound", ["sounds/pass.mp3"]);
     this.load.audio("shootSound", ["sounds/shoot.mp3"]);
     this.load.audio("goalSelebrationSound", ["sounds/goalSelebration.mp3"]);
-    this.load.audio("refereeSound", ["sounds/referee.mp3"]);
+    // this.load.audio("refereeSound", ["sounds/referee.mp3"]);
     this.load.audio("fansSound", ["sounds/fans.mp3"]);
+    this.load.audio("matchStart", ["sounds/referee.mp3"]);
+    this.load.audio("firstHalfEnd", ["sounds/first-half-end.mp3"]);
+    this.load.audio("cornerSound", ["sounds/corner.mp3"]);
+    this.load.audio("freeKickSound", ["sounds/free-kick.mp3"]);
+    this.load.audio("goalSound", ["sounds/goal.mp3"]);
+    this.load.audio("goCornerSound", ["sounds/go-corner.mp3"]);
+    this.load.audio("catchBallSound", ["sounds/catch-ball.mp3"]);
+    this.load.audio("isFaulSound", ["sounds/is-faul.mp3"]);
+    this.load.audio("goalBorderSound", ["sounds/goal-border.mp3"]);
+    this.load.audio("borderSound", ["sounds/border.mp3"]);
 
     // //Font
     // // this.load.addFile(new WebFontFile(this.load, "Rubik Mono One"));
@@ -69,6 +79,7 @@ export default class Preload extends Phaser.Scene {
     this.load.image("fanFromBottomSide", "image/ui/fanFromBottomSide.png");
     this.load.image("fanFromTopSide", "image/ui/fanFromTopSide.png");
     this.load.image("fanFromRightSide", "image/ui/fanFromRightSide.png");
+
     // // Nations
     // this.load.image("algeria", "image/teamLogos/nations/Algeria.png");
     // this.load.image("argentina", "image/teamLogos/nations/Argentina.png");

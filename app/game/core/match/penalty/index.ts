@@ -117,6 +117,8 @@ export class Penalty {
   }
 
   shoot(side: "leftSide" | "rightSide") {
+    this.match.soundManager.playShootSound();
+
     if (side === "leftSide") {
       this.match.ball.kick(
         250,

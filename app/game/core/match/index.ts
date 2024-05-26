@@ -11,6 +11,8 @@ import { makeCornerArrangement } from "./corner";
 import { Foul } from "./foul";
 import { Penalty } from "./penalty";
 import { Penalties } from "./penalties";
+import { SoundManager } from "../soundManager";
+import GamePlay from "../../scenes/gameplay";
 
 export class Match {
   eventEmitter: EventEmitter = new EventEmitter();
@@ -35,14 +37,11 @@ export class Match {
 
   ballGoesToCorner = false;
 
-  passSound!: Phaser.Sound.BaseSound;
-  goalSelebration!: Phaser.Sound.BaseSound;
-  refereeSound!: Phaser.Sound.BaseSound;
-  fansSound!: Phaser.Sound.BaseSound;
-
   cameraMotion!: CameraMotion;
 
   foul!: Foul;
+
+  soundManager!: SoundManager;
 
   matchStatus:
     | "firtHalf"
@@ -63,11 +62,10 @@ export class Match {
     this.addGoalEventListener();
     this.addTeams();
     this.createCollisionDetections();
-    this.addSounds();
-
     this.addCamera();
 
-    this.fansSound.play();
+    this.soundManager = new SoundManager(this.scene);
+    this.soundManager.playSurroundingSound();
   }
 
   addCamera() {
@@ -88,6 +86,7 @@ export class Match {
         this.stadium.leftGoalPost.getBounds().centerX
       ) {
         this.isGoal("guest");
+        this.soundManager.playGoalSound();
       }
 
       if (
@@ -95,6 +94,7 @@ export class Match {
         this.stadium.rightGoalPost.getBounds().centerX
       ) {
         this.isGoal("host");
+        this.soundManager.playGoalSound();
       }
     });
   }
@@ -121,19 +121,24 @@ export class Match {
   }
 
   startPlay(teamWithBall: "host" | "guest") {
-    this.refereeSound.play();
-    this.stadium.stopLightAnimations();
-    this.startBallMotion(teamWithBall);
-    this.hostTeam.startGoalKeeperMotion();
-    this.guestTeam.startGoalKeeperMotion();
+    this.soundManager.playMatchStartSound();
 
-    if (teamWithBall === "host") {
-      this.hostTeam.hasBall = true;
-    } else {
-      this.guestTeam.hasBall = true;
-    }
+    setTimeout(() => {
+      this.stadium.stopLightAnimations();
+      this.startBallMotion(teamWithBall);
+      this.hostTeam.startGoalKeeperMotion();
+      this.guestTeam.startGoalKeeperMotion();
 
-    this.isPlaying = true;
+      this.soundManager.playShootSound();
+
+      if (teamWithBall === "host") {
+        this.hostTeam.hasBall = true;
+      } else {
+        this.guestTeam.hasBall = true;
+      }
+
+      this.isPlaying = true;
+    }, 1000);
   }
 
   startBallMotion(ballOwnerTeam: "host" | "guest") {
@@ -186,25 +191,6 @@ export class Match {
     }, 3000);
   }
 
-  addSounds() {
-    this.passSound = this.scene.sound.add("passSound", {
-      volume: 1,
-      loop: false,
-    });
-    this.goalSelebration = this.scene.sound.add("goalSelebrationSound", {
-      volume: 1,
-      loop: false,
-    });
-    this.refereeSound = this.scene.sound.add("refereeSound", {
-      volume: 1,
-      loop: false,
-    });
-    this.fansSound = this.scene.sound.add("fansSound", {
-      volume: 0.08,
-      loop: true,
-    });
-  }
-
   addBall() {
     this.ball = new Ball(
       this.scene,
@@ -249,7 +235,7 @@ export class Match {
 
   createCollisionDetections() {
     this.collisionDetections = new CollisionDetections(
-      this.scene,
+      this.scene as GamePlay,
       this.ball,
       this.stadium,
       this
@@ -285,12 +271,6 @@ export class Match {
   }
 
   finishMatch() {
-    // stop ufter 5 seconds
-    setTimeout(() => {
-      this.fansSound.stop();
-    }, 5000);
-
-    this.refereeSound.play();
     this.ball.reset();
     this.hostTeam.reset();
     this.guestTeam.reset();
@@ -322,6 +302,7 @@ export class Match {
             ? "left"
             : "right";
         this.ball.goToCorner(side, footballer);
+        this.soundManager.playGoCornerSound();
 
         return true;
       }
@@ -331,6 +312,8 @@ export class Match {
   }
 
   startFaulPreperation(whoIsFaul: "host" | "guest") {
+    this.soundManager.playIsFaulSound();
+
     this.isPlaying = false;
     this.ball.stop();
 
@@ -344,6 +327,8 @@ export class Match {
   }
 
   startPenaltyPreperation(whoIsFaul: "host" | "guest") {
+    this.soundManager.playIsFaulSound();
+
     this.isPlaying = false;
     this.ball.stop();
 
@@ -364,12 +349,14 @@ export class Match {
 
     //check penaly
     if (footballer.isPenalty) {
+      this.soundManager.playFreeKickSound();
       this.startPenaltyPreperation(team);
       return;
     }
 
     // check faul
     if (footballer.isFaul) {
+      this.soundManager.playFreeKickSound();
       this.startFaulPreperation(team);
       return;
     }
@@ -396,6 +383,8 @@ export class Match {
       this.guestTeam.stopMotion();
       this.guestTeam.stopFaulBehaviour();
     }
+
+    this.soundManager.playCatchBallSound();
 
     if (this.ballGoesToCorner) return;
     this.nextOperation(team);
@@ -440,6 +429,8 @@ export class Match {
     horizontalSide: "left" | "right",
     verticalSide: "top" | "bottom"
   ) {
+    this.soundManager.playCornerSound();
+
     if (!this.isPlaying) return;
 
     this.hostTeam.stopMotion();

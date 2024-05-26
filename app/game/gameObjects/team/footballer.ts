@@ -8,12 +8,11 @@ import { Stadium } from "../stadium";
 import { Match } from "../../core/match";
 import { TeamTechniqueProperties } from "@/app/config/initialTeamsData";
 import { matchStats } from "@/app/config/matchData";
+import { SoundManager } from "../../core/soundManager";
 
 export class Footballer extends Phaser.Physics.Arcade.Image {
   ball!: Ball;
   controllBall = false;
-  passSound!: Phaser.Sound.BaseSound;
-  shootSound!: Phaser.Sound.BaseSound;
 
   shadow: any;
 
@@ -23,6 +22,8 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
   tweenForFaul!: Phaser.Tweens.Tween;
 
   circle!: Phaser.GameObjects.Arc;
+
+  soundManager!: SoundManager;
 
   constructor(
     scene: Phaser.Scene,
@@ -41,14 +42,7 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
   }
 
   init() {
-    this.passSound = this.scene.sound.add("passSound", {
-      volume: 1,
-      loop: false,
-    });
-    this.shootSound = this.scene.sound.add("shootSound", {
-      volume: 1,
-      loop: false,
-    });
+    this.soundManager = new SoundManager(this.scene);
 
     this.setOrigin(0.5);
     this.setDisplaySize(
@@ -132,7 +126,7 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
 
     const randomY = getRandomNumber(0, 1) === 0 ? y : -y;
 
-    this.passSound.play();
+    this.soundManager.playPassSound();
 
     this.ball.kick(
       interpolate(this.properties.passSpeeed, 140, 260),
@@ -155,7 +149,8 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
       ? matchStats.hostTeamStats.shoots++
       : matchStats.guesTeamStats.shoots++;
 
-    this.shootSound.play();
+    this.soundManager.playShootSound();
+
     this.ball.kick(
       interpolate(this.properties.shootSpeed, 140, 330),
       this.isHost
@@ -175,7 +170,8 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
   }
 
   randomShoot() {
-    this.passSound.play();
+    this.soundManager.playPassSound();
+
     this.ball.kick(
       interpolate(this.properties.passSpeeed, 180, 320),
       this.isHost

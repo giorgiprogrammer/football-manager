@@ -34,7 +34,7 @@ export default function AddNewTeam({
       happy: undefined,
       sad: undefined,
     },
-    selectedForMenu: false,
+    selectedForMenu: team?.selectedForMenu,
   });
 
   const validateImageDimensions = (file: any) => {

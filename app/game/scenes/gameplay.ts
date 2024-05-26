@@ -31,7 +31,7 @@ export default class GamePlay extends Phaser.Scene {
     this.canvasScene = this.scene.get("CanvasScene") as CavnasScene;
     this.gameManager = new GameManager(this, this.canvasScene, this.match);
 
-    this.addMasks();
+    // this.addMasks();
   }
 
   addMasks() {

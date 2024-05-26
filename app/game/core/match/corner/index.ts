@@ -462,6 +462,8 @@ function addCollisions(
     const footballer = b as Footballer;
     attackerFootballerTween.stop();
 
+    match.soundManager.playShootSound();
+
     if (horizontalSide === "right" && verticalSide === "top") {
       ball.kick(200, ball.x + 300, getRandomNumber(ball.y - 50, ball.y + 50));
     }
@@ -486,6 +488,8 @@ function cornerShoot(
   horizontalSide: "left" | "right",
   verticalSide: "top" | "bottom"
 ) {
+  match.soundManager.playShootSound();
+
   setTimeout(() => {
     if (isFinishedCorner) return;
     finishCorner("noGoal", horizontalSide, match);

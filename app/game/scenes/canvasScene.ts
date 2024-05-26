@@ -114,6 +114,19 @@ export default class CavnasScene extends Phaser.Scene {
       .setOrigin(0, 0.5);
     this.startModal.add(hostTeamName);
 
+    const hostTeamIcon = this.add
+      .image(
+        -calculatePercentage(48, this.startModal.getBounds().width),
+        -calculatePercentage(30, this.startModal.getBounds().height),
+        matchData.hostTeam.name
+      )
+      .setDisplaySize(
+        calculatePercentage(8, this.startModal.getBounds().width),
+        calculatePercentage(8, this.startModal.getBounds().width)
+      )
+      .setOrigin(0, 0.5);
+    this.startModal.add(hostTeamIcon);
+
     // division?.findIndex((team, index) => {
     //   if (team.team_name === matchData.hostTeam.name) {
     //     const hostTeamPositionText = this.add
@@ -147,6 +160,19 @@ export default class CavnasScene extends Phaser.Scene {
       )
       .setOrigin(1, 0.5);
     this.startModal.add(guestTeamName);
+
+    const guestTeamIcon = this.add
+      .image(
+        calculatePercentage(48, this.startModal.getBounds().width),
+        calculatePercentage(30, this.startModal.getBounds().height),
+        matchData.guestTeam.name
+      )
+      .setDisplaySize(
+        calculatePercentage(8, this.startModal.getBounds().width),
+        calculatePercentage(8, this.startModal.getBounds().width)
+      )
+      .setOrigin(1, 0.5);
+    this.startModal.add(guestTeamIcon);
 
     // division?.findIndex((team, index) => {
     //   if (team.team_name === matchData.guestTeam.name) {
