@@ -237,7 +237,7 @@ export default class Menu extends Phaser.Scene {
       this.game.canvas.width - 60,
       -calculatePercentage(
         getStyleConfig().menuScene.sleectorsPercentY,
-        this.game.canvas.height
+        this.hostTeamsSelector.getBounds().height
       )
     );
   }
