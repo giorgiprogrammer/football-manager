@@ -46,6 +46,7 @@ export default class Preload extends Phaser.Scene {
     this.load.audio("isFaulSound", ["sounds/is-faul.mp3"]);
     this.load.audio("goalBorderSound", ["sounds/goal-border.mp3"]);
     this.load.audio("borderSound", ["sounds/border.mp3"]);
+    this.load.audio("buttonPressSound", ["sounds/button-press.mp3"]);
 
     // //Font
     // // this.load.addFile(new WebFontFile(this.load, "Rubik Mono One"));

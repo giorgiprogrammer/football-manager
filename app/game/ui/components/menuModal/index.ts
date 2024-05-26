@@ -30,6 +30,8 @@ export default class MenuModal extends Phaser.GameObjects.Container {
       .on("pointerdown", () => {
         this.setVisible(false);
 
+        this.scene.buttonPressSound.play();
+
         this.scene.tacticsModal.hostTeamTacticsWindow.simpleModeWindow?.destroy();
         this.scene.tacticsModal.hostTeamTacticsWindow.modeButtons?.setVisible(
           true

@@ -19,6 +19,8 @@ export const Game = () => {
   const appContext = useContext(AppContext);
   const router = useRouter();
 
+  const audioRef = useRef(null);
+
   const [showGetUserInformation, setShowGetUserInformation] = useState(true);
 
   const searchParams = useSearchParams();
@@ -122,6 +124,11 @@ export const Game = () => {
     } else {
       if (deviceOrientation === "landscape") {
         setShowGame(true);
+        const audioElement = document.getElementById("myAudio");
+        if (audioElement) {
+          //@ts-ignore
+          audioElement.volume = 0.08;
+        }
       } else {
         setShowGame(false);
       }
@@ -157,6 +164,13 @@ export const Game = () => {
           }}
         />
       )}
+
+      <audio
+        id="myAudio"
+        controls
+        src={"/game/assets/sounds/song.mp3"}
+        autoPlay
+      />
     </div>
   );
 };

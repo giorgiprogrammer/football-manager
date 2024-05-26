@@ -2,6 +2,7 @@ import { calculatePercentage } from "@/app/utils/math";
 import { MenuButton } from "../button";
 import { TeamData } from "@/app/config/initialTeamsData";
 import { SimpleModeWindow } from "./components/simpleModeWindow";
+import Menu from "@/app/game/scenes/menu";
 
 export class TacticsWindow extends Phaser.GameObjects.Container {
   modeButtons!: Phaser.GameObjects.Container;
@@ -9,7 +10,7 @@ export class TacticsWindow extends Phaser.GameObjects.Container {
 
   team!: TeamData;
 
-  constructor(scene: Phaser.Scene, x: number, y: number, public side: string) {
+  constructor(public scene: Menu, x: number, y: number, public side: string) {
     super(scene, x, y);
     scene.add.existing(this);
 
@@ -48,6 +49,7 @@ export class TacticsWindow extends Phaser.GameObjects.Container {
       () => {
         this.modeButtons.setVisible(false);
         this.addSimpleModeWindow();
+        this.scene.buttonPressSound.play();
       }
     );
     this.modeButtons.add(simpleModeButton);
@@ -63,6 +65,7 @@ export class TacticsWindow extends Phaser.GameObjects.Container {
       "Details Mode",
       () => {
         this.modeButtons.setVisible(false);
+        this.scene.buttonPressSound.play();
       }
     );
     this.modeButtons.add(detailsdModeButton);

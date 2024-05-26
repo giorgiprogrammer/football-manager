@@ -5,6 +5,7 @@ import { OptionsBar } from "../../../../optionsBar";
 import { matchData } from "@/app/config/matchData";
 import { deepCopy } from "@/app/utils/helperFunctions";
 import { gameConfig } from "@/app/game/config/gameConfig";
+import Menu from "@/app/game/scenes/menu";
 
 export class SimpleModeWindow extends Phaser.GameObjects.Container {
   stadium!: Phaser.GameObjects.Image;
@@ -15,7 +16,7 @@ export class SimpleModeWindow extends Phaser.GameObjects.Container {
   attackColumn!: Phaser.GameObjects.Container;
 
   constructor(
-    scene: Phaser.Scene,
+    public scene: Menu,
     x: number,
     y: number,
     public side: string,
@@ -81,6 +82,7 @@ export class SimpleModeWindow extends Phaser.GameObjects.Container {
       .on("pointerdown", () => {
         this.destroy();
         this.modeButtons.setVisible(true);
+        this.scene.buttonPressSound.play();
       });
     this.add(backButtton);
   }
@@ -114,6 +116,8 @@ export class SimpleModeWindow extends Phaser.GameObjects.Container {
         ? matchData.hostTeam.formationProperties.defence
         : matchData.guestTeam.formationProperties.defence,
       (value: string) => {
+        this.scene.buttonPressSound.play();
+
         if (this.side === "left") {
           matchData.hostTeam.formationProperties.defence =
             value as typeof this.team.formationProperties.defence;
@@ -142,6 +146,8 @@ export class SimpleModeWindow extends Phaser.GameObjects.Container {
         ? matchData.hostTeam.formationProperties.midfield
         : matchData.guestTeam.formationProperties.midfield,
       (value: string) => {
+        this.scene.buttonPressSound.play();
+
         if (this.side === "left") {
           matchData.hostTeam.formationProperties.midfield =
             value as typeof this.team.formationProperties.midfield;
@@ -170,6 +176,8 @@ export class SimpleModeWindow extends Phaser.GameObjects.Container {
         ? matchData.hostTeam.formationProperties.attack
         : matchData.guestTeam.formationProperties.attack,
       (value: string) => {
+        this.scene.buttonPressSound.play();
+
         if (this.side === "left") {
           matchData.hostTeam.formationProperties.attack =
             value as typeof this.team.formationProperties.attack;
@@ -403,6 +411,8 @@ export class SimpleModeWindow extends Phaser.GameObjects.Container {
       .setDisplaySize(40, 40)
       .setInteractive({ cursor: "pointer" })
       .on(Phaser.Input.Events.POINTER_DOWN, () => {
+        this.scene.buttonPressSound.play();
+
         this.defenceColumn.destroy();
         this.centerColumn.destroy();
         this.attackColumn.destroy();
@@ -434,6 +444,8 @@ export class SimpleModeWindow extends Phaser.GameObjects.Container {
       .setDisplaySize(40, 40)
       .setInteractive({ cursor: "pointer" })
       .on(Phaser.Input.Events.POINTER_DOWN, () => {
+        this.scene.buttonPressSound.play();
+
         this.defenceColumn.destroy();
         this.centerColumn.destroy();
         this.attackColumn.destroy();

@@ -36,6 +36,8 @@ export default class Menu extends Phaser.Scene {
 
   backgroundAniamtionEffectImage!: Phaser.GameObjects.Image;
 
+  buttonPressSound!: Phaser.Sound.BaseSound;
+
   constructor() {
     super("Menu");
   }
@@ -49,6 +51,11 @@ export default class Menu extends Phaser.Scene {
     //     this.scene.restart();
     //   }, 1000);
     // });
+
+    this.buttonPressSound = this.sound.add("buttonPressSound", {
+      volume: 0.08,
+      loop: false,
+    });
 
     this.addUI();
 
@@ -320,6 +327,24 @@ export default class Menu extends Phaser.Scene {
         this.settingsButton.setVisible(false);
         this.startButton.setVisible(false);
 
+        const audioElement = document.getElementById("myAudio");
+
+        const interval: NodeJS.Timeout = setInterval(() => {
+          //@ts-ignore
+          if (audioElement.volume > 0.0003) {
+            //@ts-ignore
+            audioElement.volume -= 0.0003;
+          }
+          //@ts-ignore
+          if (audioElement.volume <= -0.0003) {
+            //@ts-ignore
+            audioElement.pause();
+            clearInterval(interval);
+          }
+        });
+
+        this.buttonPressSound.play();
+
         this.add.tween({
           targets: this.backgroundAniamtionEffectImage,
           alpha: 1,
@@ -349,6 +374,7 @@ export default class Menu extends Phaser.Scene {
           this.selectedHostTeam,
           this.selectedGuestTeam
         );
+        this.buttonPressSound.play();
 
         this.settingsButton.setVisible(false);
         this.startButton.setVisible(false);
@@ -373,6 +399,8 @@ export default class Menu extends Phaser.Scene {
         this.settingsButton.setVisible(false);
         this.startButton.setVisible(false);
         this.tacticsButton.setVisible(false);
+
+        this.buttonPressSound.play();
       });
   }
 }

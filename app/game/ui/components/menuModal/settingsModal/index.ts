@@ -22,6 +22,7 @@ export class SettingsModal extends MenuModal {
       ["1 min", "1.5 min", "2 min", "2.5 min", "3 min", "5 min"],
       "2 min",
       (value) => {
+        this.scene.buttonPressSound.play();
         matchData.matchTime = parseFloat(value);
       }
     );
@@ -32,7 +33,10 @@ export class SettingsModal extends MenuModal {
       0,
       -calculatePercentage(5, this.scene.game.canvas.height),
       ["Small", "Medium", "Big", "Mega"],
-      "Medium"
+      "Medium",
+      (value) => {
+        this.scene.buttonPressSound.play();
+      }
     );
     this.add(stadiumOptions);
 
@@ -44,6 +48,7 @@ export class SettingsModal extends MenuModal {
       "classic",
       (value) => {
         matchData.mathMode = value as "classic" | "experimental";
+        this.scene.buttonPressSound.play();
       }
     );
     this.add(playStyleOptions);
@@ -55,6 +60,8 @@ export class SettingsModal extends MenuModal {
       ["With Extra Times", "No Extra Times"],
       "No Extra Times",
       (value) => {
+        this.scene.buttonPressSound.play();
+
         if (value === "With Extra Times") {
           matchData.isExtraTimes = true;
         } else {

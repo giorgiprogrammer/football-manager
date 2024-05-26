@@ -1,5 +1,6 @@
 import { calculatePercentage, isInRange, makeNegative } from "@/app/utils/math";
 import { it } from "node:test";
+import Menu from "../../scenes/menu";
 
 export class Selector extends Phaser.GameObjects.Container {
   forwardArrowButton!: Phaser.GameObjects.Image;
@@ -12,7 +13,7 @@ export class Selector extends Phaser.GameObjects.Container {
   arrowClickIsPossible = true;
 
   constructor(
-    scene: Phaser.Scene,
+    public scene: Menu,
     x: number,
     y: number,
     public items: { image: Phaser.GameObjects.Image; name: string }[],
@@ -102,6 +103,8 @@ export class Selector extends Phaser.GameObjects.Container {
       .setAngle(90)
       .setInteractive({ cursor: "pointer" })
       .on("pointerdown", () => {
+        this.scene.buttonPressSound.play();
+
         this.rotationItems("forward");
       });
     this.add(this.forwardArrowButton);
@@ -125,6 +128,7 @@ export class Selector extends Phaser.GameObjects.Container {
       .setAngle(-90)
       .setInteractive({ cursor: "pointer" })
       .on("pointerdown", () => {
+        this.scene.buttonPressSound.play();
         this.rotationItems("previous");
       });
     this.add(this.previousArrowButton);
