@@ -38,13 +38,13 @@ export default function TeamSettingsModal({
       {/* Main */}
       <div className="w-[90vw] h-[90vh] bg-white z-10 fixed ml-auto mr-auto left-0 right-0 mt-auto mb-auto top-0 bottom-0 rounded-md p-2 overflow-y-scroll ">
         {/* Top Bar */}
-        <div className="flex justify-between ">
-          <h2 className="font-bold text-3xl custom-font-2 text-gray-700 ">
+        <div className="flex flex-col lg:flex-row justify-center lg:justify-between ">
+          <h2 className="font-bold text-3xl text-center lg:text-left custom-font-2 text-gray-700 ">
             {" "}
             Your Teams{" "}
           </h2>
-          <div className="flex items-center gap-4 ">
-            <div className="w-[40px] h-[40px] relative ">
+          <div className="flex items-center gap-1 lg:gap-4 ">
+            <div className=" w-[30px] lg:w-[40px] h-[35px] lg:h-[40px] relative ">
               <Image
                 fill
                 src="/website/images/pageAssets/done.png"
@@ -52,7 +52,7 @@ export default function TeamSettingsModal({
                 alt="youtube-icon"
               />
             </div>
-            <p className="text-xl custom-font-2 text-gray-700">
+            <p className="text-sm lg:text-xl custom-font-2 text-gray-700">
               {" "}
               Teams marked for the selector menu{" "}
             </p>
@@ -62,10 +62,10 @@ export default function TeamSettingsModal({
         <div className="mt-4 flex flex-col gap-[10px]">
           {Object.entries(appContext.userTeams).map((team, index) => {
             return (
-              <div key={"team_" + index}>
-                <div className=" w-fit flex items-center">
+              <div className="" key={"team_" + index}>
+                <div className="flex gap-1 lg:gap-0 w-full lg:w-fit flex-col lg:flex-row items-center">
                   {/* Logo */}
-                  <div className="w-[35px] h-[35px] relative px-2 ">
+                  <div className=" w-[60px] lg:w-[35px] h-[60px] lg:h-[35px] relative px-2 ">
                     <Image
                       key={team[1].logoKey}
                       fill
@@ -77,22 +77,17 @@ export default function TeamSettingsModal({
                     />
                   </div>
                   {/* Name */}
-                  <p className="custom-font-2 font-semibold text-gray-700 px-2 flex items-center h-[35px] ">
+                  <p className="custom-font-2 border lg:border-none w-full lg:w-fit justify-center lg:justify-start font-semibold text-gray-700 px-2 flex items-center h-[35px] ">
                     {team[1].name}
                   </p>
                   {/* Name */}
-                  <p className="custom-font-2 font-semibold text-gray-700 px-2 flex items-center h-[35px] ">
+                  <p className="custom-font-2 border lg:border-none w-full lg:w-fit justify-center lg:justify-start font-semibold text-gray-700 px-2 flex items-center h-[35px] ">
                     Strength : {team[1].strength}
                   </p>
                   <button
                     onClick={() => {
-                      // appContext.setUserTeams((prev) => {
-                      //   const temp = { ...prev };
-                      //   delete temp[team[0]];
-                      //   return temp;
-                      // });
                       if (Object.keys(appContext.userTeams).length <= 10) {
-                        alert(" at least 10 teams must be in the list");
+                        alert("at least 10 teams must be in the list");
                         return;
                       } else {
                         deleteTeam(
@@ -106,7 +101,7 @@ export default function TeamSettingsModal({
                         });
                       }
                     }}
-                    className="custom-font-2 font-semibold px-2 border-2 flex items-center h-[35px] bg-red-700 text-white duration-300 hover:bg-black"
+                    className="custom-font-2 font-semibold w-full lg:w-fit flex justify-center lg:justify-start text-xl lg:text-lg py-5 lg:py-0 xl:px-2 border-2 items-center h-[35px] bg-red-700 text-white duration-300 hover:bg-black"
                   >
                     Delete
                   </button>
@@ -130,7 +125,7 @@ export default function TeamSettingsModal({
                             });
                           });
                     }}
-                    className="custom-font-2 font-semibold px-2 border-2 flex items-center h-[35px] bg-green-800 text-white duration-300 hover:bg-black"
+                    className="custom-font-2 font-semibold w-full lg:w-fit flex justify-center lg:justify-start text-xl lg:text-lg py-5 lg:py-0 lg:px-2 border-2 items-center h-[35px] bg-green-800 text-white duration-300 hover:bg-black"
                   >
                     Update
                   </button>

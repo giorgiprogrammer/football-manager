@@ -35,11 +35,11 @@ export default function SimulatorModal() {
       {/* Right Menu */}
       <div
         className={
-          "w-[25vw] h-screen fixed right-0 hidden sm:flex justify-center items-center "
+          "w-[25vw] h-screen fixed right-0 hidden lg:flex justify-center items-center "
         }
       >
         <CtaButton
-          className="custom-font-2 font-bold text-xl sm:text-lg "
+          className="custom-font-2 font-bold text-xl lg:text-lg "
           onClick={() => {
             if (appContext.userData.isLogin) {
               router.push("/simulator");
@@ -54,12 +54,12 @@ export default function SimulatorModal() {
       {/* Left Menu */}
       <div
         className={
-          "w-[25vw] h-screen fixed left-0 hidden sm:flex justify-center items-center "
+          "w-[25vw] h-screen fixed left-0 hidden lg:flex justify-center items-center "
         }
       >
         {appContext.userData.isLogin ? (
           <CtaButton
-            className="custom-font-2 font-bold text-xl sm:text-lg "
+            className="custom-font-2 font-bold text-xl lg:text-lg "
             onClick={() => {
               logOut();
             }}
@@ -67,7 +67,7 @@ export default function SimulatorModal() {
           />
         ) : (
           <CtaButton
-            className="custom-font-2 font-bold text-xl sm:text-lg "
+            className="custom-font-2 font-bold text-xl lg:text-lg "
             onClick={() => {
               appContext.setOpenAutorizationModal(true);
             }}
@@ -92,13 +92,13 @@ export default function SimulatorModal() {
           />
         </div>
         {/* Text */}
-        <h3 className="custom-font-2 mt-4 text-lg sm:text-sm">
+        <h3 className="custom-font-2 mt-4 text-lg lg:text-sm">
           Maybe you are a YouTuber or someone who has a passion for making
           football content. This simulator is for you!
         </h3>
 
         {/* Youtube Image */}
-        <div className=" w-[100%] sm:w-[50%] min-h-[50%] relative grayscale">
+        <div className=" w-[100%] lg:w-[50%] min-h-[50%] relative grayscale">
           <Image
             fill
             src="/website/images/pageAssets/youtube-icon.png"
@@ -107,7 +107,7 @@ export default function SimulatorModal() {
           />
         </div>
 
-        <h3 className="custom-font-2 mt-4 text-lg sm:text-sm">
+        <h3 className="custom-font-2 mt-4 text-lg lg:text-sm">
           Here you can choose your desired teams, set parameters, then start
           recording your screen and make awesome content for your YouTube
           channel!
@@ -118,7 +118,7 @@ export default function SimulatorModal() {
         </h2>
 
         <div>
-          <h3 className="custom-font-2 mt-4 text-lg sm:text-sm">
+          <h3 className="custom-font-2 mt-4 text-lg lg:text-sm">
             But not only that, you can also create{" "}
             <span className=" text-xl font-bold text-yellow-600">
               TOURNAMENTS
@@ -139,7 +139,7 @@ export default function SimulatorModal() {
           whileInView={{ scale: 0.8, opacity: 1 }}
           initial={{ scale: 0.5, opacity: 0 }}
           className={
-            " w-[100%] min-h-[30%] sm:min-h-[50%] relative " + style.shadow
+            " w-[100%] min-h-[30%] lg:min-h-[50%] relative " + style.shadow
           }
         >
           <Image
@@ -150,7 +150,7 @@ export default function SimulatorModal() {
           />
         </motion.div>
 
-        <p className="custom-font-2 mt-4 text-lg sm:text-sm h-fit">
+        <p className="custom-font-2 mt-4 text-lg lg:text-sm h-fit">
           Here is the{" "}
           <Link
             target="_blank"
@@ -168,7 +168,7 @@ export default function SimulatorModal() {
           How To Start
         </h2>
 
-        <p className="custom-font-2 mt-4 text-lg sm:text-sm h-fit">
+        <p className="custom-font-2 mt-4 text-lg lg:text-sm h-fit">
           while you will start, first at all you need to sign up, then you can
           open the simulator and choose your desired mode.
           <br></br>
@@ -187,7 +187,7 @@ export default function SimulatorModal() {
           whileInView={{ scale: 0.8, opacity: 1 }}
           initial={{ scale: 0.5, opacity: 0 }}
           className={
-            " w-[100%] min-h-[30%] sm:min-h-[50%] relative " + style.shadow
+            " w-[100%] min-h-[30%] lg:min-h-[50%] relative " + style.shadow
           }
         >
           <Image
@@ -199,18 +199,18 @@ export default function SimulatorModal() {
         </motion.div>
 
         <CtaButton
-          className="custom-font-2 text-xl sm:text-lg font-bold mt-7 sm:hidden"
+          className="custom-font-2 text-xl lg:text-lg font-bold mt-7 lg:hidden"
           onClick={() => {
             appContext.setOpenAutorizationModal(true);
           }}
-          label="Sign Up"
+          label="Authentication"
         />
 
         <h2 className=" text-yellow-600 custom-font-2 font-bold text-3xl text-center mt-[100px]">
           what you can set as a parameters
         </h2>
 
-        <p className="custom-font-2 mt-4 text-lg sm:text-sm h-fit">
+        <p className="custom-font-2 mt-4 text-lg lg:text-sm h-fit">
           This is the main concept that makes the simulator more interesting.
           You can set parameters such as:
           <span className="flex justify-center text-start">
@@ -238,8 +238,15 @@ export default function SimulatorModal() {
         </p>
 
         <CtaButton
-          className="custom-font-2 font-bold mt-7 text-xl sm:text-lg "
-          onClick={() => {}}
+          className="custom-font-2 font-bold mt-7 text-xl lg:text-lg "
+          onClick={() => {
+            if (appContext.userData.isLogin) {
+              router.push("/simulator");
+            } else {
+              setWarningMessage("You need to Authentication first!");
+              setShowWarningModal(true);
+            }
+          }}
           label="Open Simulator"
         />
 
@@ -247,7 +254,7 @@ export default function SimulatorModal() {
           A Short History and Future Prospects
         </h2>
 
-        <p className="custom-font-2 mt-4 text-lg sm:text-sm h-fit">
+        <p className="custom-font-2 mt-4 text-lg lg:text-sm h-fit">
           Initially, this project started out very simply. My cousin just wanted
           to make YouTube videos featuring quick matches, mostly between Premier
           League teams.
@@ -259,7 +266,7 @@ export default function SimulatorModal() {
           whileInView={{ scale: 0.8, opacity: 1 }}
           initial={{ scale: 0.5, opacity: 0 }}
           className={
-            " w-[100%] min-h-[30%] sm:min-h-[50%] relative " + style.shadow
+            " w-[100%] min-h-[30%] lg:min-h-[50%] relative " + style.shadow
           }
         >
           <Image
@@ -270,7 +277,7 @@ export default function SimulatorModal() {
           />
         </motion.div>
 
-        <p className="custom-font-2 mt-4 text-lg sm:text-sm h-fit">
+        <p className="custom-font-2 mt-4 text-lg lg:text-sm h-fit">
           It was initially envisioned as a one-time project solely for recording
           videos, not as a full-fledged game or anything of the sort. After the
           first demo version was ready, the idea emerged that it had the
@@ -282,12 +289,12 @@ export default function SimulatorModal() {
           based on FIFA team ratings.
         </p>
 
-        <p className="custom-font-2 mt-4 text-lg sm:text-sm h-fit">
+        <p className="custom-font-2 mt-4 text-lg lg:text-sm h-fit">
           soon I will be adding more features, shaping it to be more suitable
           for content creators on social media platforms
         </p>
 
-        <div className="w-[10%] sm:w-[2%] fixed z-50 left-[90%] sm:left-[25%] bottom-[10%] sm:bottom-[40px]">
+        <div className="w-[10%] lg:w-[2%] fixed z-50 left-[90%] lg:left-[25%] bottom-[10%] lg:bottom-[40px]">
           <MouseScrollIndicator />
         </div>
       </div>

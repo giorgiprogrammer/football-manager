@@ -77,7 +77,7 @@
   padding-bottom: 30px;
 }
 
-@media screen and (min-device-width: 0px) and (max-device-width: 580px) {
+@media screen and (min-device-width: 0px) and (max-device-width: 1024px) {
   .feed {
     width: 100vw;
   }

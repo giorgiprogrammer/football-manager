@@ -31,17 +31,17 @@ export default function SimulatorPage() {
 
       {appContext.userData.isLogin && (
         <Bound className="">
-          <div className=" h-[80vh] relative overflow-y-scroll">
+          <div className="h-[80vh] relative overflow-y-scroll">
             {/* Cups */}
-            <div>
+            <div className="">
               <div>
                 <TextAnimation
                   customOptions={{ colors: ["gray"], fontSize: 40 }}
                   text="Cups"
                 />
               </div>
-              <div className="text-white">
-                <div className="flex custom-font-2 border w-fit">
+              <div className="text-white  flex md:relative flex-col gap-2">
+                <div className="flex flex-col md:flex-row w-full custom-font-2 border md:w-fit">
                   <h2 className="border px-3 py-2">Title : cup 1</h2>
                   <h2 className="border px-3 py-2">Teams : 23</h2>
                   <button className="border px-3 py-2 bg-green-700 text-white font-bold transition-all hover:bg-slate-800 duration-300">
@@ -51,7 +51,7 @@ export default function SimulatorPage() {
                     delete
                   </button>
                 </div>
-                <div className="flex custom-font-2 border w-fit">
+                <div className="flex flex-col md:flex-row w-full custom-font-2 border md:w-fit">
                   <h2 className="border px-3 py-2">Title : cup 1</h2>
                   <h2 className="border px-3 py-2">Teams : 23</h2>
                   <button className="border px-3 py-2 bg-green-700 text-white font-bold transition-all hover:bg-slate-800 duration-300">
@@ -68,7 +68,7 @@ export default function SimulatorPage() {
             </div>
 
             {/* Leagues */}
-            <div className=" text-white">
+            <div className=" mt-5 md:mt-0 text-white">
               <div>
                 <TextAnimation
                   customOptions={{ colors: ["gray"], fontSize: 40 }}
@@ -76,8 +76,8 @@ export default function SimulatorPage() {
                 />
               </div>
               <div>
-                <div className="flex custom-font-2 border w-fit">
-                  <h2 className="border px-3 py-2">Title : League 1</h2>
+                <div className="flex flex-col md:flex-row w-full custom-font-2 border md:w-fit">
+                  <h2 className="border px-3 py-2">Title : cup 1</h2>
                   <h2 className="border px-3 py-2">Teams : 23</h2>
                   <button className="border px-3 py-2 bg-green-700 text-white font-bold transition-all hover:bg-slate-800 duration-300">
                     continue
@@ -86,7 +86,7 @@ export default function SimulatorPage() {
                     delete
                   </button>
                 </div>
-                <div className="flex custom-font-2 border w-fit">
+                <div className="flex flex-col md:flex-row w-full custom-font-2 border md:w-fit">
                   <h2 className="border px-3 py-2">Title : cup 1</h2>
                   <h2 className="border px-3 py-2">Teams : 23</h2>
                   <button className="border px-3 py-2 bg-green-700 text-white font-bold transition-all hover:bg-slate-800 duration-300">

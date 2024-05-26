@@ -34,17 +34,19 @@ export default function AuthorizationModal() {
         <div className="left-0 top-0 fixed z-40 w-screen h-screen bg-black opacity-70 "></div>
       )}
 
-      <div className="flex gap-3">
+      <div className="flex flex-col lg:flex-row gap-3">
         {/* For Sign Up */}
         <div className=" rounded-lg  p-3 flex flex-col justify-center items-center z-20 bg-white ">
-          <h2 className=" custom-font-2 text-3xl font-bold">Sign Up</h2>
+          <h2 className=" custom-font-2 text-4xl lg:text-3xl font-bold">
+            Sign Up
+          </h2>
           {/* Username */}
           <input
             onChange={(event) => {
               setResponse("");
               setUserData({ ...userData, regUsername: event.target.value });
             }}
-            className="border px-2 py-1 mt-4 custom-font-2"
+            className="border text-xl lg:text-lg px-2 py-1 mt-4 custom-font-2"
             placeholder="Username: "
             maxLength={20}
           ></input>
@@ -55,7 +57,7 @@ export default function AuthorizationModal() {
               setUserData({ ...userData, regPassword: event.target.value });
             }}
             type="password"
-            className=" border px-2 py-1 mt-4 custom-font-2"
+            className=" border text-xl lg:text-lg px-2 py-1 mt-4 custom-font-2"
             placeholder="Password: "
             maxLength={20}
           ></input>
@@ -83,14 +85,16 @@ export default function AuthorizationModal() {
 
         {/* For Sign In */}
         <div className=" rounded-lg  p-3 flex flex-col justify-center items-center z-20 bg-white ">
-          <h2 className=" custom-font-2 text-3xl font-bold">Sign In</h2>
+          <h2 className=" custom-font-2 text-4xl lg:text-3xl font-bold">
+            Sign In
+          </h2>
           {/* Username */}
           <input
             onChange={(event) => {
               setResponse("");
               setUserData({ ...userData, logUsername: event.target.value });
             }}
-            className=" border px-2 py-1 mt-4 custom-font-2"
+            className=" border text-xl lg:text-lg px-2 py-1 mt-4 custom-font-2"
             placeholder="Username: "
             maxLength={20}
           ></input>
@@ -101,7 +105,7 @@ export default function AuthorizationModal() {
               setUserData({ ...userData, logPassword: event.target.value });
             }}
             type="password"
-            className="border px-2 py-1 mt-4 custom-font-2"
+            className="border text-xl lg:text-lg px-2 py-1 mt-4 custom-font-2"
             placeholder="Password: "
             maxLength={20}
           ></input>

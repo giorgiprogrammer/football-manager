@@ -71,8 +71,8 @@ export default function AddNewTeam({
   };
 
   return (
-    <div className=" flex flex-col gap-2 w-full">
-      <div className="flex items-center gap-2">
+    <div className="flex flex-col gap-2 w-full">
+      <div className="flex flex-col lg:flex-row items-center  gap-2">
         <h3>Team Name :</h3>
         <input
           maxLength={25}
@@ -87,12 +87,12 @@ export default function AddNewTeam({
             });
           }}
         />
-        <div className="flex gap-2">
+        <div className="flex flex-col lg:flex-row gap-2">
           <h3>Team Logo :</h3>
           <input onChange={handleFileChange} type="file" />
         </div>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex flex-col lg:flex-row items-center gap-2">
         <h3>Team Strength :</h3>
         <input
           onChange={(event) => {
@@ -110,7 +110,7 @@ export default function AddNewTeam({
         />
         <p> * from 800 to 2130 </p>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex  flex-col lg:flex-row items-center gap-2">
         <h3>Default Formation :</h3>
         <select
           onChange={(event) => {
@@ -132,7 +132,7 @@ export default function AddNewTeam({
           <option value="3-5-2">3-5-2</option>
         </select>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex  flex-col lg:flex-row items-center gap-2">
         <h3>Team Color :</h3>
         <input
           onChange={(event) => {
@@ -146,7 +146,7 @@ export default function AddNewTeam({
           name="colorInput"
         />
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex  flex-col lg:flex-row items-center gap-2">
         <h3>Team Secondary Color :</h3>
         <input
           onChange={(event) => {
@@ -160,11 +160,11 @@ export default function AddNewTeam({
           name="colorInput"
         />
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex  flex-col lg:flex-row items-center gap-2">
         <h3>Goal Sound Effect :</h3>
         <input type="file" />
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex  flex-col lg:flex-row items-center gap-2">
         <h3>Coach Name :</h3>
         <input
           type="text"
@@ -180,19 +180,19 @@ export default function AddNewTeam({
           className="border-2 border-gray-400 p-1"
         />
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex flex-col lg:flex-row items-center gap-2">
         <h3>Coach Default Image :</h3>
         <input type="file" />
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex flex-col lg:flex-row items-center gap-2">
         <h3>Coach Happy Image :</h3>
         <input type="file" />
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex flex-col lg:flex-row items-center gap-2">
         <h3>Coach Sad Image :</h3>
         <input type="file" />
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex flex-col lg:flex-row items-center gap-2">
         <h3>Selected For Menu :</h3>
         <select
           onChange={(event) => {
