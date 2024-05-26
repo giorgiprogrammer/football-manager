@@ -351,21 +351,21 @@ export class GameManager {
       this.match.ball.reset();
     }, 1000);
 
-    insertMatchResult(
-      tournamenrDataConfig.guestTeam,
-      tournamenrDataConfig.hostTeam,
-      this.canvasScene.hostScore,
-      this.canvasScene.guestScore,
-      tournamenrDataConfig.division,
-      tournamenrDataConfig.week
-    ).then(
-      (res) => {
-        console.log(res);
-      },
-      (err) => {
-        alert("something went wrong");
-        console.log(err);
-      }
-    );
+    // insertMatchResult(
+    //   tournamenrDataConfig.guestTeam,
+    //   tournamenrDataConfig.hostTeam,
+    //   this.canvasScene.hostScore,
+    //   this.canvasScene.guestScore,
+    //   tournamenrDataConfig.division,
+    //   tournamenrDataConfig.week
+    // ).then(
+    //   (res) => {
+    //     console.log(res);
+    //   },
+    //   (err) => {
+    //     alert("something went wrong");
+    //     console.log(err);
+    //   }
+    // );
   }
 }

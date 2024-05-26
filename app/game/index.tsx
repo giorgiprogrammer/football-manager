@@ -40,13 +40,13 @@ export const Game = () => {
     matchData.matchIsFor = "Cup";
   }
 
-  const canvasContainer = useRef(null);
+  const canvasContainer = useRef<HTMLDivElement>(null);
 
   const [showGame, setShowGame] = useState(false);
+  const [phaserGame, setPhaserGame] = useState<Phaser.Game | null>(null);
 
   useEffect(() => {
-    if (!showGame) return;
-    if (!canvasContainer.current) return;
+    if (!showGame || !canvasContainer.current) return;
 
     // Client-side-only code
     if (typeof window !== "undefined") {
@@ -77,7 +77,12 @@ export const Game = () => {
         backgroundColor: 0x08170f,
         scene: [Preload, Menu, GamePlay, CanvasScene],
       });
-      return () => game?.destroy(true, false);
+      setPhaserGame(game);
+
+      return () => {
+        game.destroy(true, true);
+        setPhaserGame(null);
+      };
     });
   }, [showGame]);
 
@@ -122,6 +127,14 @@ export const Game = () => {
       }
     }
   }, [deviceOrientation]);
+
+  useEffect(() => {
+    return () => {
+      if (phaserGame) {
+        phaserGame.destroy(true, true);
+      }
+    };
+  }, [phaserGame]);
 
   return (
     <div>
