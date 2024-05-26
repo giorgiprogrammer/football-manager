@@ -9,9 +9,10 @@ import { calculatePercentage, mapToPercentageInRange } from "@/app/utils/math";
 import { SettingsModal } from "../ui/components/menuModal/settingsModal";
 import { TacticsModal } from "../ui/components/menuModal/tacticsModal";
 import { deepCopy } from "@/app/utils/helperFunctions";
-import { MatchData, matchData } from "@/app/config/matchData";
+import { matchData } from "@/app/config/matchData";
 import { tournamenrDataConfig } from "../config/tournamentDataConfig";
 import { gameConfig } from "../config/gameConfig";
+import { getStyleConfig } from "../config/styleConfig";
 
 export default class Menu extends Phaser.Scene {
   hostTeamsSelector!: Selector;
@@ -40,14 +41,14 @@ export default class Menu extends Phaser.Scene {
   }
 
   create() {
-    this.scale.on(Phaser.Scale.Events.RESIZE, () => {
-      this.scale.removeAllListeners();
-      setTimeout(() => {
-        this.scale.resize(this.game.canvas.width, this.game.canvas.height);
-        this.renderer.resize(this.game.canvas.width, this.game.canvas.height);
-        this.scene.restart();
-      }, 1000);
-    });
+    // this.scale.on(Phaser.Scale.Events.RESIZE, () => {
+    //   this.scale.removeAllListeners();
+    //   setTimeout(() => {
+    //     this.scale.resize(this.game.canvas.width, this.game.canvas.height);
+    //     this.renderer.resize(this.game.canvas.width, this.game.canvas.height);
+    //     this.scene.restart();
+    //   }, 1000);
+    // });
 
     this.addUI();
 
@@ -173,7 +174,12 @@ export default class Menu extends Phaser.Scene {
     const leftTeamsSelectorData = Object.entries(
       gameConfig.menuTeams as TeamsData
     ).map(([name, data]) => {
-      const image = this.add.image(0, 0, data.name).setDisplaySize(42, 42);
+      const image = this.add
+        .image(0, 0, data.name)
+        .setDisplaySize(
+          calculatePercentage(3.5, this.game.canvas.width),
+          calculatePercentage(3.5, this.game.canvas.width)
+        );
 
       return {
         image: image,
@@ -194,13 +200,21 @@ export default class Menu extends Phaser.Scene {
 
     this.hostTeamsSelector.setPosition(
       60,
-      -calculatePercentage(25, this.game.canvas.height)
+      -calculatePercentage(
+        getStyleConfig().menuScene.sleectorsPercentY,
+        this.hostTeamsSelector.getBounds().height
+      )
     );
     // Host Teams Selector
     const rightTeamsSelectorData = Object.entries(
       gameConfig.menuTeams as TeamsData
     ).map(([name, data]) => {
-      const image = this.add.image(0, 0, data.name).setDisplaySize(42, 42);
+      const image = this.add
+        .image(0, 0, data.name)
+        .setDisplaySize(
+          calculatePercentage(3.5, this.game.canvas.width),
+          calculatePercentage(3.5, this.game.canvas.width)
+        );
       return {
         image: image,
         name: data.name,
@@ -221,7 +235,10 @@ export default class Menu extends Phaser.Scene {
 
     this.guestTeamsSelector.setPosition(
       this.game.canvas.width - 60,
-      -calculatePercentage(25, this.game.canvas.height)
+      -calculatePercentage(
+        getStyleConfig().menuScene.sleectorsPercentY,
+        this.game.canvas.height
+      )
     );
   }
 

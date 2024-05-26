@@ -42,14 +42,10 @@ export const Game = () => {
 
   const canvasContainer = useRef(null);
 
-  useEffect(() => {
-    if (
-      Object.keys(gameConfig.menuTeams).length === 0 &&
-      matchData.matchIsFor === "Quiq Match"
-    ) {
-      router.push("/");
-    }
+  const [showGame, setShowGame] = useState(false);
 
+  useEffect(() => {
+    if (!showGame) return;
     if (!canvasContainer.current) return;
 
     // Client-side-only code
@@ -83,7 +79,7 @@ export const Game = () => {
       });
       return () => game?.destroy(true, false);
     });
-  }, []);
+  }, [showGame]);
 
   useEffect(() => {
     if (!showGetUserInformation && !appContext.userData.isLogin) {
@@ -91,8 +87,55 @@ export const Game = () => {
     }
   }, [showGetUserInformation]);
 
+  const [deviceOrientation, setDeviceOrientation] = useState(() => {
+    return window.innerWidth > window.innerHeight ? "landscape" : "portrait";
+  });
+
+  const handleResize = () => {
+    if (typeof window === "undefined") return;
+    const orientation =
+      window.innerWidth > window.innerHeight ? "landscape" : "portrait";
+    setDeviceOrientation(orientation);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    // Call handleResize initially to set the correct state
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (
+      Object.keys(gameConfig.menuTeams).length === 0 &&
+      matchData.matchIsFor === "Quiq Match"
+    ) {
+      router.push("/");
+    } else {
+      if (deviceOrientation === "landscape") {
+        setShowGame(true);
+      } else {
+        setShowGame(false);
+      }
+    }
+  }, [deviceOrientation]);
+
   return (
-    <div ref={canvasContainer} className={style.canvasContainer}>
+    <div>
+      {/* Game Container */}
+      {deviceOrientation === "portrait" && (
+        <div className="w-full h-screen flex justify-center items-center">
+          <h1 className=" text-black custom-font-2 text-center px-2 text-3xl">
+            Please rotate your device
+          </h1>
+        </div>
+      )}
+      {showGame && (
+        <div ref={canvasContainer} className={style.canvasContainer}></div>
+      )}
       {showGetUserInformation && (
         <GetUserInformation
           callBack={() => {

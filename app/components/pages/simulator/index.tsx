@@ -198,13 +198,23 @@ export default function SimulatorModal() {
           />
         </motion.div>
 
-        <CtaButton
-          className="custom-font-2 text-xl lg:text-lg font-bold mt-7 lg:hidden"
-          onClick={() => {
-            appContext.setOpenAutorizationModal(true);
-          }}
-          label="Authentication"
-        />
+        {appContext.userData.isLogin ? (
+          <CtaButton
+            className="custom-font-2 text-xl lg:text-lg font-bold mt-7 lg:hidden"
+            onClick={() => {
+              logOut();
+            }}
+            label="Log Out"
+          />
+        ) : (
+          <CtaButton
+            className="custom-font-2 text-xl lg:text-lg font-bold mt-7 lg:hidden"
+            onClick={() => {
+              appContext.setOpenAutorizationModal(true);
+            }}
+            label="Authentication"
+          />
+        )}
 
         <h2 className=" text-yellow-600 custom-font-2 font-bold text-3xl text-center mt-[100px]">
           what you can set as a parameters
