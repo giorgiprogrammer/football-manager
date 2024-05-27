@@ -329,21 +329,21 @@ export default class CavnasScene extends Phaser.Scene {
         matchData.hostTeam.name
       )
       .setDisplaySize(
-        calculatePercentage(2, this.game.canvas.width),
-        calculatePercentage(2, this.game.canvas.width)
+        calculatePercentage(2.5, this.game.canvas.width),
+        calculatePercentage(2.5, this.game.canvas.width)
       );
     this.topIndicators.add(hostTeamIcon);
 
-    const circle = this.add
-      .graphics()
-      .setPosition(
-        hostTeamIcon.getBounds().centerX,
-        hostTeamIcon.getBounds().centerY
-      )
-      .fillCircle(0, 0, 13);
-    hostTeamIcon.setMask(circle.createGeometryMask());
+    // const circle = this.add
+    //   .graphics()
+    //   .setPosition(
+    //     hostTeamIcon.getBounds().centerX,
+    //     hostTeamIcon.getBounds().centerY
+    //   )
+    //   .fillCircle(0, 0, 13);
+    // hostTeamIcon.setMask(circle.createGeometryMask());
 
-    const guestTeam = this.add
+    const guestTeamIcon = this.add
       .image(
         this.game.canvas.width / 2 +
           calculatePercentage(9, this.game.canvas.width),
@@ -351,10 +351,10 @@ export default class CavnasScene extends Phaser.Scene {
         matchData.guestTeam.name
       )
       .setDisplaySize(
-        calculatePercentage(2, this.game.canvas.width),
-        calculatePercentage(2, this.game.canvas.width)
+        calculatePercentage(2.5, this.game.canvas.width),
+        calculatePercentage(2.5, this.game.canvas.width)
       );
-    this.topIndicators.add(guestTeam);
+    this.topIndicators.add(guestTeamIcon);
 
     this.timerText = this.add
       .text(

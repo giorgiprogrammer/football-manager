@@ -14,7 +14,8 @@ export default function BottomIndicators() {
   const [showTeamSettings, setShowTeamSettings] = useState(false);
 
   return (
-    <div className="ml-2 left-0 gap-2 bottom-0 fixed w-screen h-[20vh] flex  items-center">
+    // ml-2 left-0 gap-2 bottom-0 fixed w-screen h-[20vh] flex  items-center
+    <div className=" w-screen h-screen flex justify-center items-center absolute top-0 left-0 gap-2">
       <button
         onClick={() => {
           const selectedTeamNumber = Object.keys(appContext.userTeams).filter(
