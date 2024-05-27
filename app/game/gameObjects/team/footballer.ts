@@ -120,8 +120,8 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
 
   makePass(footballer: Footballer, match: Match) {
     const y = getRandomNumber(
-      interpolate(this.properties.passAccuracy, 150, 0),
-      interpolate(this.properties.passAccuracy, 250, 2)
+      interpolate(this.properties.passAccuracy, 50, 0),
+      interpolate(this.properties.passAccuracy, 150, 2)
     );
 
     const randomY = getRandomNumber(0, 1) === 0 ? y : -y;

@@ -500,7 +500,7 @@ function cornerShoot(
     ball.kick(
       200,
       getRandomNumber(
-        match.stadium.leftGoalPost.getBounds().centerX + 50,
+        match.stadium.leftGoalPost.getBounds().centerX + 80,
         match.stadium.leftGoalPost.getBounds().centerX + 250
       ),
       ball.y + match.stadium.stadiumHeight
@@ -512,7 +512,7 @@ function cornerShoot(
     ball.kick(
       200,
       getRandomNumber(
-        match.stadium.leftGoalPost.getBounds().centerX + 50,
+        match.stadium.leftGoalPost.getBounds().centerX + 80,
         match.stadium.leftGoalPost.getBounds().centerX + 250
       ),
       ball.y - match.stadium.stadiumHeight
