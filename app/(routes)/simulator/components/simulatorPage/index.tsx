@@ -31,9 +31,10 @@ export default function SimulatorPage() {
 
       {appContext.userData.isLogin && (
         <Bound className="">
-          <div className="h-[80vh] relative overflow-y-scroll">
+          {/* ეს წაიკითხე ყლეო, overflow-y-scroll არ დაგავიწყდეს ამ დივისთვის დაბლა როა, მერე როცა ლიგებს და თასებს დაამატებ */}
+          <div className="h-[80vh] relative ">
             {/* Cups */}
-            <div className="">
+            {/* <div className="">
               <div>
                 <TextAnimation
                   customOptions={{ colors: ["gray"], fontSize: 40 }}
@@ -65,10 +66,10 @@ export default function SimulatorPage() {
               <button className=" border-2 border-white mt-2 py-2 px-1 text-white custom-font-2 font-bold transition-all duration-300 hover:bg-white hover:text-black  ">
                 Create New One
               </button>
-            </div>
+            </div> */}
 
             {/* Leagues */}
-            <div className=" mt-5 md:mt-0 text-white">
+            {/* <div className=" mt-5 md:mt-0 text-white">
               <div>
                 <TextAnimation
                   customOptions={{ colors: ["gray"], fontSize: 40 }}
@@ -100,7 +101,7 @@ export default function SimulatorPage() {
               <button className=" border-2 border-white mt-2 py-2 px-1 text-white custom-font-2 font-bold transition-all duration-300 hover:bg-white hover:text-black  ">
                 Create New One
               </button>
-            </div>
+            </div> */}
           </div>
           {/* Line */}
           <BottomIndicators />

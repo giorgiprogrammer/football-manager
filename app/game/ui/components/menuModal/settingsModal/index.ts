@@ -45,7 +45,7 @@ export class SettingsModal extends MenuModal {
       0,
       calculatePercentage(15, this.scene.game.canvas.height),
       ["classic", "experimental"],
-      "classic",
+      "experimental",
       (value) => {
         matchData.mathMode = value as "classic" | "experimental";
         this.scene.buttonPressSound.play();

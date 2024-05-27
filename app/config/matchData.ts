@@ -5,7 +5,7 @@ export const matchData: MatchData = {
   hostTeam: initialTeamsData.Arsenal,
   guestTeam: initialTeamsData.Arsenal,
   matchTime: 2,
-  mathMode: "classic",
+  mathMode: "experimental",
   stadiumSize: "small",
   isExtraTimes: false,
   matchIsFor: "Quiq Match",
