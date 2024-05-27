@@ -158,9 +158,9 @@ export class Footballer extends Phaser.Physics.Arcade.Image {
         : this.stadium.leftGoalPost.getBounds().centerX,
       getRandomNumber(
         this.stadium.leftGoalPost.getBounds().centerY -
-          interpolate(this.properties.shootAccuracy, 200, 50),
+          interpolate(this.properties.shootAccuracy, 350, 50),
         this.stadium.leftGoalPost.getBounds().centerY +
-          interpolate(this.properties.shootAccuracy, 200, 50)
+          interpolate(this.properties.shootAccuracy, 350, 50)
       )
     );
     setTimeout(() => {
