@@ -207,6 +207,7 @@ export class Penalties {
   isGoal() {
     this.match.ball.startBlink();
     this.match.ball.stop();
+    this.match.soundManager.playGoalSound();
 
     this.isFinishedPenalty = true;
 
@@ -259,7 +260,7 @@ export class Penalties {
 
     setTimeout(() => {
       this.reset();
-    }, 2000);
+    }, 4000);
   }
 
   reset() {

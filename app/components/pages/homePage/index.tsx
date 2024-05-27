@@ -35,7 +35,12 @@ export default function HomePage() {
           select teams, adjust parameters, and watch the games unfold, seeing
           the results in real-time. Our project is open to contributors.{" "}
           <br></br> <br></br>
-          <span className=" text-[#323438] font-bold text-xl cursor-pointer">
+          <span
+            onClick={() => {
+              window.open("https://github.com/TsotneDarjania/football-manager");
+            }}
+            className=" text-[#323438] font-bold text-xl cursor-pointer"
+          >
             Here
           </span>
           , you can explore the complete concept and documentation.
@@ -43,7 +48,7 @@ export default function HomePage() {
       </Bound>
 
       {appContext.openAutorizationModal && <AuthorizationModal />}
-      <PageModal backgroundColor="#050505" />
+      <PageModal backgroundColor="#071414" />
       <WebIndicators />
     </div>
   );
