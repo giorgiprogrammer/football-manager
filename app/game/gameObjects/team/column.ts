@@ -67,36 +67,48 @@ export class Column extends Phaser.GameObjects.Container {
       if (this.type === "defender") {
         if (this.team.formationProperties.defence === "wide-attack") {
           if (i === 0 || i === this.quantity - 1) {
-            posX = calculatePercentage(2.8, this.stadium.stadiumWidth);
+            posX = this.isHost
+              ? calculatePercentage(2.8, this.stadium.stadiumWidth)
+              : -calculatePercentage(2.8, this.stadium.stadiumWidth);
           }
         }
       }
       if (this.type === "midfielder") {
         if (this.team.formationProperties.midfield === "wide-attack") {
           if (i === 0 || i === this.quantity - 1) {
-            posX = calculatePercentage(2.8, this.stadium.stadiumWidth);
+            posX = this.isHost
+              ? calculatePercentage(2.8, this.stadium.stadiumWidth)
+              : -calculatePercentage(2.8, this.stadium.stadiumWidth);
           }
         }
         if (this.team.formationProperties.midfield === "center-attack") {
           if (i !== 0 && i !== this.quantity - 1) {
-            posX = calculatePercentage(2.8, this.stadium.stadiumWidth);
+            posX = this.isHost
+              ? calculatePercentage(2.8, this.stadium.stadiumWidth)
+              : -calculatePercentage(2.8, this.stadium.stadiumWidth);
           }
         }
         if (this.team.formationProperties.midfield === "center-deffence") {
           if (i !== 0 && i !== this.quantity - 1) {
-            posX = -calculatePercentage(2.8, this.stadium.stadiumWidth);
+            posX = this.isHost
+              ? -calculatePercentage(2.8, this.stadium.stadiumWidth)
+              : calculatePercentage(2.8, this.stadium.stadiumWidth);
           }
         }
         if (this.team.formationProperties.midfield === "wide-deffence") {
           if (i === 0 || i === this.quantity - 1) {
-            posX = -calculatePercentage(2.8, this.stadium.stadiumWidth);
+            posX = this.isHost
+              ? -calculatePercentage(2.8, this.stadium.stadiumWidth)
+              : calculatePercentage(2.8, this.stadium.stadiumWidth);
           }
         }
       }
       if (this.type === "attacker") {
         if (this.team.formationProperties.attack === "center-attack") {
           if (i !== 0 && i !== this.quantity - 1) {
-            posX = calculatePercentage(2.8, this.stadium.stadiumWidth);
+            posX = this.isHost
+              ? calculatePercentage(2.8, this.stadium.stadiumWidth)
+              : -calculatePercentage(2.8, this.stadium.stadiumWidth);
           }
         }
       }
@@ -126,7 +138,7 @@ export class Column extends Phaser.GameObjects.Container {
     if (this.type === "midfielder") {
       if (matchData.mathMode === "classic") {
         const foulChance = getRandomNumber(0, 100);
-        if (foulChance > 80) {
+        if (foulChance > 85) {
           this.footballers[
             getRandomNumber(0, this.footballers.length - 1)
           ].startFaulBehaviour();
@@ -150,7 +162,7 @@ export class Column extends Phaser.GameObjects.Container {
     if (this.type === "defender") {
       if (matchData.mathMode === "classic") {
         const penaltyChange = getRandomNumber(0, 100);
-        if (penaltyChange > 90) {
+        if (penaltyChange > 95) {
           if (this.footballers.length > 3) {
             this.footballers[
               getRandomNumber(

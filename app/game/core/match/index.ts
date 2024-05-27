@@ -296,7 +296,7 @@ export class Match {
       }
 
       const random = getRandomNumber(1, 100);
-      if (random > 70) {
+      if (random > 90) {
         const side =
           footballer.getBounds().x < this.stadium.getBounds().centerX
             ? "left"

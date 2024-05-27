@@ -120,6 +120,7 @@ export class SoundManager {
   }
 
   playFreeKickSound() {
+    this.playCornerSound();
     this.freeKickSound?.play();
   }
 
@@ -137,6 +138,7 @@ export class SoundManager {
   }
 
   playIsFaulSound() {
+    this.playCornerSound();
     this.isFaulSound?.play();
   }
 
