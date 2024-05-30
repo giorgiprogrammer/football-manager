@@ -76,7 +76,7 @@ export class MatchStatsModal extends Phaser.GameObjects.Container {
           );
         })
         .on(Phaser.Input.Events.POINTER_DOWN, () => {
-          document.location.href = "/admin";
+          document.location.href = "/simulator";
         });
       this.add(homeButton);
     } else {

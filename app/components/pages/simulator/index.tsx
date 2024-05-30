@@ -93,43 +93,62 @@ export default function SimulatorModal() {
         </div>
         {/* Text */}
         <h3 className="custom-font-2 mt-4 text-lg lg:text-sm">
-          Maybe you are a YouTuber or someone who has a passion for making
-          football content. This simulator is for you!
+          As the title says, it is a simulator. More specifically, it is a
+          simulator for football matches. Once authorized, you can choose your
+          desired teams, set parameters, and then watch the match unfold.
+          <br></br>
+          <br></br>
+          also you can set a lot of options like, with extra times or not, how
+          many shopuld be match time, define modes like experimental and classic
+          and so on..
+          <br></br>
+          <br></br>
+          trust my experience, if you like footbbal (no soccer), it is realy
+          interesting and funny for watch.
         </h3>
 
+        {/*  Image 3 */}
+        <motion.div
+          transition={{ duration: 0.3 }}
+          whileInView={{ scale: 0.8, opacity: 1 }}
+          initial={{ scale: 0.5, opacity: 0 }}
+          className={
+            " w-[100%] min-h-[30%] lg:min-h-[50%] relative " + style.shadow
+          }
+        >
+          <Image
+            fill
+            src="/website/images/pageAssets/image-3.png"
+            sizes="100vw"
+            alt="youtube-icon"
+          />
+        </motion.div>
+
         {/* Youtube Image */}
-        <div className=" w-[100%] lg:w-[50%] min-h-[50%] relative grayscale">
+        {/* <div className=" w-[100%] lg:w-[50%] min-h-[50%] relative grayscale">
           <Image
             fill
             src="/website/images/pageAssets/youtube-icon.png"
             sizes="100vw"
             alt="youtube-icon"
           />
-        </div>
+        </div> */}
 
-        <h3 className="custom-font-2 mt-4 text-lg lg:text-sm">
+        {/* <h3 className="custom-font-2 mt-4 text-lg lg:text-sm">
           Here you can choose your desired teams, set parameters, then start
           recording your screen and make awesome content for your YouTube
           channel!
-        </h3>
+        </h3> */}
 
-        <h2 className=" text-yellow-600 custom-font-2 font-bold text-3xl text-center mt-[100px]">
-          Tournaments Feature
+        <h2 className=" text-yellow-600 custom-font-2 font-bold text-3xl text-center mt-[50px]">
+          Teams
         </h2>
 
         <div>
           <h3 className="custom-font-2 mt-4 text-lg lg:text-sm">
-            But not only that, you can also create{" "}
-            <span className=" text-xl font-bold text-yellow-600">
-              TOURNAMENTS
-            </span>
-            . In Tournament mode, you can choose 10 teams for each league and
-            generate schedules. This will give you the possibility to create
-            more interesting and{" "}
-            <span className=" text-xl font-bold text-yellow-600">
-              long-term
-            </span>{" "}
-            football content, or simply make it just for fun
+            as e default you have 10 teams, which you can choose for match, but
+            also you have possibilities to add new team, set what you want to be
+            logo, name, parameteres and custtomize how you want.
           </h3>
         </div>
 
@@ -150,9 +169,9 @@ export default function SimulatorModal() {
           />
         </motion.div>
 
-        <p className="custom-font-2 mt-4 text-lg lg:text-sm h-fit">
-          Here is the{" "}
-          <Link
+        {/* <p className="custom-font-2 mt-4 text-lg lg:text-sm h-fit"> */}
+        {/* Here is the{" "} */}
+        {/* <Link
             target="_blank"
             className="font-bold text-blue-500 h-[20vh] underline text-xl cursor-pointer"
             href={"https://www.youtube.com/@Marb1eArena/videos"}
@@ -161,15 +180,15 @@ export default function SimulatorModal() {
           </Link>{" "}
           to our YouTube channel, where you can explore a variety of examples
           showcasing our content. We invite you to browse through the videos and
-          enjoy the diverse range of content we have to offer
-        </p>
+          enjoy the diverse range of content we have to offer */}
+        {/* </p> */}
 
-        <h2 className=" text-yellow-600 custom-font-2 font-bold text-3xl text-center mt-[100px]">
-          How To Start
-        </h2>
+        {/* <h2 className=" text-yellow-600 custom-font-2 font-bold text-3xl text-center mt-[100px]">
+          Teams
+        </h2> */}
 
-        <p className="custom-font-2 mt-4 text-lg lg:text-sm h-fit">
-          while you will start, first at all you need to sign up, then you can
+        {/* <p className="custom-font-2 mt-4 text-lg lg:text-sm h-fit"> */}
+        {/* while you will start, first at all you need to sign up, then you can
           open the simulator and choose your desired mode.
           <br></br>
           1. quiq match
@@ -178,25 +197,8 @@ export default function SimulatorModal() {
           <br></br>
           If you choose a quick match, you will need to fill out a form. You
           will input the names of the first and second teams, set parameters,
-          tactics, and icons before clicking the start button
-        </p>
-
-        {/*  Image 3 */}
-        <motion.div
-          transition={{ duration: 0.3 }}
-          whileInView={{ scale: 0.8, opacity: 1 }}
-          initial={{ scale: 0.5, opacity: 0 }}
-          className={
-            " w-[100%] min-h-[30%] lg:min-h-[50%] relative " + style.shadow
-          }
-        >
-          <Image
-            fill
-            src="/website/images/pageAssets/image-3.png"
-            sizes="100vw"
-            alt="youtube-icon"
-          />
-        </motion.div>
+          tactics, and icons before clicking the start button */}
+        {/* </p> */}
 
         {appContext.userData.isLogin ? (
           <CtaButton
@@ -216,7 +218,7 @@ export default function SimulatorModal() {
           />
         )}
 
-        <h2 className=" text-yellow-600 custom-font-2 font-bold text-3xl text-center mt-[100px]">
+        <h2 className=" text-yellow-600 custom-font-2 font-bold text-3xl text-center mt-[50px]">
           what you can set as a parameters
         </h2>
 
@@ -265,8 +267,8 @@ export default function SimulatorModal() {
         </h2>
 
         <p className="custom-font-2 mt-4 text-lg lg:text-sm h-fit">
-          Initially, this project started out very simply. My cousin just wanted
-          to make YouTube videos featuring quick matches, mostly between Premier
+          Initially, this project started out very simply. We just wanted to
+          make YouTube videos featuring quick matches, mostly between Premier
           League teams.
         </p>
 

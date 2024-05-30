@@ -142,7 +142,7 @@ export default class Menu extends Phaser.Scene {
     this.addTexts();
     this.addButtons();
     this.addTeamSelectors();
-    this.addMatchModeText();
+    // this.addMatchModeText();
 
     this.settingsModal = new SettingsModal(
       this,
@@ -256,7 +256,7 @@ export default class Menu extends Phaser.Scene {
         0,
         this.game.canvas.width,
         this.game.canvas.height,
-        0x08170f
+        0x0c1c24
       )
       .setOrigin(0);
   }
