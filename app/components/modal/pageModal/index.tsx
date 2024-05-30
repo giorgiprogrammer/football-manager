@@ -69,7 +69,7 @@ export function PageModal({ backgroundColor }: { backgroundColor: string }) {
           }}
           className="cursor-pointer hover:text-amber-500 transition-all duration-500 w-fit"
         >
-          For Investors
+          About
         </li>
       </ul>
 

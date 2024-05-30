@@ -82,7 +82,7 @@ export class SimpleModeWindow extends Phaser.GameObjects.Container {
       .on("pointerdown", () => {
         this.destroy();
         this.modeButtons.setVisible(true);
-        this.scene.buttonPressSound.play();
+        this.scene.buttonPressSound?.play();
       });
     this.add(backButtton);
   }
